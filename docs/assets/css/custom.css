@@ -1,20 +1,20 @@
 /* Estilos corporativos Agile611 */
 :root {
-  --md-primary-fg-color: #01003f;
+  --md-primary-fg-color: #057eb5;
   --md-primary-fg-color--light: #057eb5;
-  --md-primary-fg-color--dark: #242424;
-  --md-accent-fg-color: #4cb8c9;
-  --md-accent-fg-color--transparent: rgba(76, 184, 201, 0.15);
-  --md-default-bg-color: #f5f5f5;
+  --md-primary-fg-color--dark: #057eb5;
+  --md-accent-fg-color: #057eb5;
+  --md-accent-fg-color--transparent: rgba(5, 126, 181, 0.12);
+  --md-default-bg-color: #ffffff;
   --md-default-fg-color: #242424;
   --md-default-fg-color--light: #9ca3af;
   --md-code-bg-color: #f5f5f5;
-  --md-code-fg-color: #01003f;
-  --md-footer-bg-color: #01003f;
-  --md-footer-fg-color: #f5f5f5;
+  --md-code-fg-color: #242424;
+  --md-footer-bg-color: #057eb5;
+  --md-footer-fg-color: #ffffff;
   --md-typeset-color: #242424;
   --md-typeset-a-color: #057eb5;
-  --md-shadow-z1: 0 0.2rem 0.5rem rgba(1, 0, 63, 0.15);
+  --md-shadow-z1: 0 0 0 rgba(0, 0, 0, 0);
 }
 
 html {
@@ -22,68 +22,30 @@ html {
 }
 
 body {
-  background: #f5f5f5;
+  background: #ffffff;
   color: #242424;
 }
 
-.md-main {
-  background: #f5f5f5;
-}
-
-.md-content {
-  background: #f5f5f5;
+.md-main,
+.md-content,
+.md-sidebar--primary,
+.md-sidebar--secondary {
+  background: #ffffff;
 }
 
 .md-header,
-.md-tabs {
+.md-tabs,
+.md-footer {
   background: #057eb5;
+  color: #ffffff;
 }
 
 .md-tabs__item--active,
-.md-tabs__item:hover {
-  color: #f5f5f5;
-}
-
-.md-typeset a {
-  color: #057eb5;
-}
-
-.md-typeset a:hover,
-.md-typeset a:focus {
-  color: #00b2e9;
-}
-
-.md-nav__title,
+.md-tabs__item:hover,
+.md-tabs__item,
 .md-nav__link,
-.md-search-result__link {
-  color: #242424;
-}
-
-.md-nav__link--active,
-.md-nav__item .md-nav__link--active,
-.md-tabs__item--active,
-.md-tabs__link--active,
-.md-typeset a:active {
-  color: #00b2e9 !important;
-  font-weight: 700;
-  background: transparent !important;
-  box-shadow: none !important;
-}
-
-.md-nav__link {
-  background: transparent !important;
-  box-shadow: none !important;
-}
-
-.md-nav__item .md-nav__link--active,
-.md-nav__item--active > .md-nav__link,
-.md-nav__item--nested > .md-nav__link--active {
-  background: #ffffff !important;
-  color: #242424 !important;
-  font-weight: 700;
-  box-shadow: none !important;
-}
-
+.md-nav__title,
+.md-search-result__link,
 .md-content h1,
 .md-content h2,
 .md-content h3,
@@ -98,43 +60,54 @@ body {
   color: #242424 !important;
 }
 
-.md-sidebar--primary,
-.md-sidebar--secondary {
-  background: #f5f5f5;
+.md-tabs__item--active,
+.md-tabs__item:hover,
+.md-nav__link--active,
+.md-nav__item .md-nav__link--active,
+.md-nav__item--active > .md-nav__link,
+.md-nav__item--nested > .md-nav__link--active,
+.md-typeset a:active {
+  background: #ffffff !important;
+  color: #242424 !important;
+  box-shadow: none !important;
+  font-weight: 700;
 }
 
-.md-footer {
-  background: #01003f;
-  color: #f5f5f5;
-}
-
-.md-footer-meta {
-  background: #242424;
-}
-
-.md-typeset code {
-  background: rgba(76, 184, 201, 0.08);
-  color: #01003f;
-}
-
+.md-typeset a,
+.md-typeset a:hover,
+.md-typeset a:focus,
 .md-content__button {
   color: #057eb5;
 }
 
+.md-typeset code {
+  background: #f5f5f5;
+  color: #242424;
+}
+
+.md-nav__link,
+.md-nav__link--active,
+.md-nav__item .md-nav__link--active,
+.md-nav__item--active > .md-nav__link,
+.md-nav__item--nested > .md-nav__link--active {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
-    --md-default-bg-color: #242424;
-    --md-default-fg-color: #f5f5f5;
+    --md-default-bg-color: #ffffff;
+    --md-default-fg-color: #242424;
     --md-default-fg-color--light: #9ca3af;
-    --md-typeset-color: #f5f5f5;
-    --md-code-bg-color: #1f2937;
-    --md-code-fg-color: #f5f5f5;
-    --md-footer-bg-color: #01003f;
-    --md-footer-fg-color: #f5f5f5;
+    --md-typeset-color: #242424;
+    --md-code-bg-color: #f5f5f5;
+    --md-code-fg-color: #242424;
+    --md-footer-bg-color: #057eb5;
+    --md-footer-fg-color: #ffffff;
   }
 
   body {
-    background: #242424;
-    color: #f5f5f5;
+    background: #ffffff;
+    color: #242424;
   }
 }
