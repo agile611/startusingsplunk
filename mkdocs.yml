@@ -1,48 +1,167 @@
 site_name: Curso de Splunk
-site_description: Documentación y prácticas del curso de Splunk
-site_author: Guillem Hernandez Sola
-site_url: https://agile611.github.io/startusingsplunk/
+site_description: Curso práctico de Splunk Enterprise en Ubuntu 24.04
+site_author: Equipo de formación
+site_url: https://github.com/agile611/startusingsplunk
 
-repo_name: agile611/startusingsplunk
-repo_url: https://github.com/agile611/startusingsplunk
+repo_name: startusingsplunk
+repo_url: https://agile611.github.io/startusingsplunk/
+
+docs_dir: docs
+site_dir: site
 
 theme:
   name: material
   language: es
-  logo: https://www.agile611.com/wp-content/uploads/2020/09/cropped-logo-header.png
-  font:
-    text: Nunito
-    code: Roboto Mono
+
   features:
+    - navigation.tabs
     - navigation.sections
+    - navigation.expand
     - navigation.top
     - navigation.footer
+    - navigation.indexes
     - content.code.copy
     - content.code.annotate
-    - search.suggest
     - search.highlight
+    - search.suggest
 
-extra_css:
-  - stylesheets/extra.css
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: green
+      accent: light green
+      toggle:
+        icon: material/brightness-7
+        name: Cambiar a modo oscuro
+
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: green
+      accent: light green
+      toggle:
+        icon: material/brightness-4
+        name: Cambiar a modo claro
+
+  icon:
+    logo: material/chart-timeline-variant
+    repo: fontawesome/brands/github
 
 nav:
   - Inicio: index.md
-  - Curso de Splunk:
-      - Introducción: index.md
-      - "1.1 Infraestructura como código": 01-01.md
+
+  - El curso:
+      - Presentación: curso/presentacion.md
+      - Objetivos: curso/objetivos.md
+      - Destinatarios: curso/destinatarios.md
+      - Requisitos: curso/requisitos.md
+      - Agenda: curso/agenda.md
+
+  - Preparación:
+      - Introducción: preparacion/index.md
+      - Requisitos de hardware: preparacion/requisitos-hardware.md
+      - Arquitectura del laboratorio: preparacion/arquitectura-laboratorio.md
+      - Datos del laboratorio: preparacion/datos-laboratorio.md
+      - Comprobaciones previas: preparacion/comprobaciones-previas.md
+
+  - "Sesión 1 · Fundamentos e instalación":
+      - Resumen: sesion-1/index.md
+      - Introducción a Splunk: sesion-1/01-introduccion.md
+      - Conceptos fundamentales: sesion-1/02-conceptos-fundamentales.md
+      - Arquitectura y componentes: sesion-1/03-arquitectura.md
+      - Instalación en Ubuntu: sesion-1/04-instalacion-ubuntu.md
+      - Navegación por Splunk Web: sesion-1/05-splunk-web.md
+      - Ingesta de datos: sesion-1/06-ingesta-datos.md
+      - Gestión de índices: sesion-1/07-indices.md
+      - Laboratorios: sesion-1/08-laboratorios.md
+      - Repaso: sesion-1/09-repaso.md
+
+  - "Sesión 2 · Lenguaje SPL":
+      - Resumen: sesion-2/index.md
+      - Introducción a SPL: sesion-2/01-introduccion-spl.md
+      - Búsquedas básicas: sesion-2/02-busquedas-basicas.md
+      - Gestión del tiempo: sesion-2/03-gestion-tiempo.md
+      - Campos y resultados: sesion-2/04-campos-resultados.md
+      - Filtrado de eventos: sesion-2/05-filtrado.md
+      - Estadísticas: sesion-2/06-estadisticas.md
+      - Eval y funciones: sesion-2/07-eval-funciones.md
+      - Extracción de campos: sesion-2/08-extraccion-campos.md
+      - Comandos avanzados: sesion-2/09-comandos-avanzados.md
+      - Rendimiento: sesion-2/10-rendimiento.md
+      - Laboratorios: sesion-2/11-laboratorios.md
+      - Reto práctico: sesion-2/12-reto.md
+
+  - "Sesión 3 · Dashboards y alertas":
+      - Resumen: sesion-3/index.md
+      - Búsquedas guardadas: sesion-3/01-busquedas-guardadas.md
+      - Reportes: sesion-3/02-reportes.md
+      - Visualizaciones: sesion-3/03-visualizaciones.md
+      - Dashboards: sesion-3/04-dashboards.md
+      - Filtros y tokens: sesion-3/05-filtros-tokens.md
+      - Alertas: sesion-3/06-alertas.md
+      - Administración y seguridad: sesion-3/07-seguridad.md
+      - Laboratorios: sesion-3/08-laboratorios.md
+      - Repaso: sesion-3/09-repaso.md
+
+  - Proyecto final:
+      - Descripción: proyecto/index.md
+      - Caso práctico: proyecto/caso-practico.md
+      - Requisitos: proyecto/requisitos.md
+      - Entregables: proyecto/entregables.md
+      - Evaluación: proyecto/evaluacion.md
+
+  - Referencia:
+      - Introducción: referencia/index.md
+      - Comandos SPL: referencia/comandos-spl.md
+      - Funciones SPL: referencia/funciones-spl.md
+      - Plantillas de consultas: referencia/plantillas-consultas.md
+      - Puertos y directorios: referencia/puertos-directorios.md
+      - Glosario: referencia/glosario.md
+
+  - Solución de problemas:
+      - Introducción: troubleshooting/index.md
+      - Splunk no inicia: troubleshooting/splunk-no-inicia.md
+      - No funciona el acceso web: troubleshooting/acceso-web.md
+      - Los datos no aparecen: troubleshooting/datos-no-aparecen.md
+      - Los campos son incorrectos: troubleshooting/campos-incorrectos.md
+
+  - Recursos:
+      - Datasets: recursos/datasets.md
+      - Enlaces: recursos/enlaces.md
+      - Bibliografía: recursos/bibliografia.md
 
 markdown_extensions:
   - admonition
   - attr_list
   - md_in_html
   - tables
+  - footnotes
+  - def_list
   - toc:
       permalink: true
+      toc_depth: 3
   - pymdownx.details
   - pymdownx.superfences
   - pymdownx.highlight:
       anchor_linenums: true
+      line_spans: __span
   - pymdownx.inlinehilite
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
 
 plugins:
-  - search
+  - search:
+      lang: es
+
+extra_css:
+  - assets/css/custom.css
+
+extra_javascript:
+  - assets/js/custom.js
+
+copyright: >
+  Material del curso de Splunk.

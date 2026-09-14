@@ -1,0 +1,2 @@
+index=main sourcetype=access_* status=200
+index=main sourcetype=access_* | stats count by status
