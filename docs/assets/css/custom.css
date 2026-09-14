@@ -26,6 +26,14 @@ body {
   color: #242424;
 }
 
+.md-main {
+  background: #f5f5f5;
+}
+
+.md-content {
+  background: #f5f5f5;
+}
+
 .md-header,
 .md-tabs {
   background: #057eb5;
