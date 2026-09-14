@@ -40,7 +40,8 @@ body {
   color: #057eb5;
 }
 
-.md-typeset a:hover {
+.md-typeset a:hover,
+.md-typeset a:focus {
   color: #00b2e9;
 }
 
@@ -48,6 +49,15 @@ body {
 .md-nav__link,
 .md-search-result__link {
   color: #242424;
+}
+
+.md-nav__link--active,
+.md-nav__item .md-nav__link--active,
+.md-tabs__item--active,
+.md-tabs__link--active,
+.md-typeset a:active {
+  color: #00b2e9 !important;
+  font-weight: 700;
 }
 
 .md-sidebar--primary,
