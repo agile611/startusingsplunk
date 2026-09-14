@@ -28,7 +28,7 @@ body {
 
 .md-header,
 .md-tabs {
-  background: linear-gradient(90deg, #01003f 0%, #057eb5 100%);
+  background: #057eb5;
 }
 
 .md-tabs__item--active,
