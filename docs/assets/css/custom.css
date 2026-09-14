@@ -33,6 +33,12 @@ body {
   background: #ffffff;
 }
 
+.md-sidebar__scrollwrap {
+  background: #f5f5f5 !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+
 .md-header,
 .md-tabs,
 .md-footer {
@@ -112,7 +118,7 @@ body {
 @media (prefers-color-scheme: dark) {
   :root {
     --md-default-bg-color: #ffffff;
-    --md-default-fg-color: #ffffff;
+    --md-default-fg-color: #242424;
     --md-default-fg-color--light: #9ca3af;
     --md-typeset-color: #242424;
     --md-code-bg-color: #f5f5f5;
