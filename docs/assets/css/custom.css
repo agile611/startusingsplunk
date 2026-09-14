@@ -7,7 +7,7 @@
   --md-accent-fg-color--transparent: rgba(5, 126, 181, 0.12);
   --md-default-bg-color: #ffffff;
   --md-default-fg-color: #242424;
-  --md-default-fg-color--light: #9ca3af;
+  --md-default-fg-color--light: #f5f5f5;
   --md-code-bg-color: #f5f5f5;
   --md-code-fg-color: #242424;
   --md-footer-bg-color: #057eb5;
@@ -93,6 +93,35 @@ body {
   color: #242424;
 }
 
+.admonition {
+  background-color: #f5f5f5;
+}
+
+.md-typeset table,
+.md-typeset table th,
+.md-typeset table td {
+  background-color: #f5f5f5 !important;
+}
+
+.md-typeset__table {
+  background-color: transparent !important;
+}
+
+.md-typeset table {
+  border: 1px solid #499497;
+  border-collapse: collapse;
+}
+
+.md-typeset table th,
+.md-typeset table td {
+  border: 1px solid #499497;
+}
+
+.md-typeset blockquote,
+.md-typeset blockquote * {
+  color: #242424 !important;
+}
+
 .md-nav__link,
 .md-nav__link--active,
 .md-nav__item .md-nav__link--active,
@@ -125,7 +154,7 @@ body {
   :root {
     --md-default-bg-color: #ffffff;
     --md-default-fg-color: #242424;
-    --md-default-fg-color--light: #9ca3af;
+    --md-default-fg-color--light: #f5f5f5;
     --md-typeset-color: #242424;
     --md-code-bg-color: #f5f5f5;
     --md-code-fg-color: #242424;
