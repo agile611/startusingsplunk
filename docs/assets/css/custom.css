@@ -66,6 +66,8 @@ body {
 .md-typeset a:active {
   color: #00b2e9 !important;
   font-weight: 700;
+  background: transparent !important;
+  box-shadow: none !important;
 }
 
 .md-nav__link {
@@ -76,9 +78,10 @@ body {
 .md-nav__item .md-nav__link--active,
 .md-nav__item--active > .md-nav__link,
 .md-nav__item--nested > .md-nav__link--active {
-  background: transparent !important;
+  background: #ffffff !important;
   color: #242424 !important;
   font-weight: 700;
+  box-shadow: none !important;
 }
 
 .md-content h1,
