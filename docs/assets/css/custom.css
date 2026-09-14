@@ -68,6 +68,19 @@ body {
   font-weight: 700;
 }
 
+.md-nav__link {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.md-nav__item .md-nav__link--active,
+.md-nav__item--active > .md-nav__link,
+.md-nav__item--nested > .md-nav__link--active {
+  background: transparent !important;
+  color: #242424 !important;
+  font-weight: 700;
+}
+
 .md-sidebar--primary,
 .md-sidebar--secondary {
   background: #f5f5f5;
