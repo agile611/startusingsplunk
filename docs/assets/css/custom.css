@@ -96,6 +96,19 @@ body {
   box-shadow: none !important;
 }
 
+.md-tabs__link,
+.md-tabs__link:hover,
+.md-tabs__link:focus,
+.md-tabs__link:active,
+.md-tabs__link:visited,
+.md-nav__title,
+.md-nav__title:hover,
+.md-nav__title:focus,
+.md-nav__title:active,
+.md-nav__title:visited {
+  color: #f5f5f5 !important;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --md-default-bg-color: #ffffff;
