@@ -29,7 +29,7 @@ nav:
   - Inicio: index.md
   - Curso de Splunk:
       - Introducción: index.md
-      - "1.1 Infraestructura como código": 01-01-introduccion-iac.md
+      - "1.1 Infraestructura como código": 01-01.md
 
 markdown_extensions:
   - admonition
