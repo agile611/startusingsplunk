@@ -12,6 +12,11 @@ site_dir: site
 theme:
   name: material
   language: es
+  logo: https://www.agile611.com/wp-content/uploads/2020/09/cropped-logo-header.png
+  favicon: https://www.agile611.com/wp-content/uploads/2020/09/cropped-logo-header.png
+  font:
+    text: Nunito
+    code: Nunito
 
   features:
     - navigation.tabs
@@ -28,16 +33,16 @@ theme:
   palette:
     - media: "(prefers-color-scheme: light)"
       scheme: default
-      primary: green
-      accent: light green
+      primary: custom
+      accent: custom
       toggle:
         icon: material/brightness-7
         name: Cambiar a modo oscuro
 
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
-      primary: green
-      accent: light green
+      primary: custom
+      accent: custom
       toggle:
         icon: material/brightness-4
         name: Cambiar a modo claro
@@ -164,4 +169,4 @@ extra_javascript:
   - assets/js/custom.js
 
 copyright: >
-  Material del curso de Splunk.
+  Licencia CC BY-SA 4.0. Compartir y adaptar con atribución.
