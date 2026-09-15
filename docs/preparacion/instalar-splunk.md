@@ -128,8 +128,7 @@ Como alternativa, descarga el paquete directamente desde la terminal:
 
 ```bash
 cd ~/Descargas/splunk-10.4.3
-wget -O splunk-10.4.3-4174a2deda5d-linux-amd64.deb \
-  https://download.splunk.com/products/splunk/releases/10.4.3/linux/splunk-10.4.3-4174a2deda5d-linux-amd64.deb
+wget https://download.splunk.com/products/splunk/releases/10.4.3/linux/splunk-10.4.3-4174a2deda5d-linux-amd64.deb
 ```
 
 El trial de 60 días es suficiente para realizar el curso completo. Comprueba
@@ -214,12 +213,36 @@ Durante `dpkg -i` puede aparecer un mensaje parecido a este:
 find: '/opt/splunk/lib/python3.7/site-packages': No existe el archivo o el directorio
 ```
 
-En esta instalación no significa que falte Python 3.7 en Ubuntu. Splunk
-Enterprise incluye sus propios componentes de Python y esa línea procede de una
-comprobación interna que busca una ruta antigua. Si el proceso termina con
-`complete` y `splunk version` muestra 10.4.3, la instalación del paquete ha
-finalizado correctamente. No crees la carpeta manualmente ni instales Python
-3.7 para solucionar este aviso.
+### ¿Hay que instalar Python 3.7?
+
+**No. No es necesario instalar Python 3.7 en Ubuntu para corregir este
+mensaje.** Splunk Enterprise 10.4.3 incluye sus propios componentes de Python y
+no utiliza el Python del sistema para esta comprobación. La ruta
+`/opt/splunk/lib/python3.7/site-packages` pertenece a una comprobación interna
+del instalador que puede buscar una ruta antigua que no exista.
+
+No hagas ninguna de estas acciones:
+
+- No instales Python 3.7 manualmente.
+- No cambies la versión de Python de Ubuntu.
+- No crees `/opt/splunk/lib/python3.7/site-packages` a mano.
+- No instales paquetes Python con `pip` dentro de `/opt/splunk`.
+
+Comprueba simplemente si la instalación terminó correctamente:
+
+```bash
+sudo /opt/splunk/bin/splunk version
+```
+
+Si muestra `Splunk 10.4.3` y `dpkg` terminó con `complete`, el aviso no bloquea
+la instalación y puedes continuar con el primer arranque:
+
+```bash
+sudo /opt/splunk/bin/splunk start --accept-license
+```
+
+Si `splunk version` falla o el proceso de `dpkg` terminó con un error distinto,
+revisa ese error concreto antes de instalar nada adicional.
 
 ### Resolver dependencias
 
