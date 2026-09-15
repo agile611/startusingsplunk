@@ -13,7 +13,7 @@ theme:
   name: material
   language: es
   logo: https://www.agile611.com/wp-content/uploads/2020/09/Negativo.png
-  favicon: https://www.agile611.com/wp-content/uploads/2020/09/Negativo.png
+  favicon: https://www.agile611.com/wp-content/uploads/2019/07/cropped-agile611-1-e1563910774746-1-32x32.png
   font:
     text: Nunito
     code: Nunito
@@ -168,4 +168,4 @@ extra_css:
 extra_javascript:
   - assets/js/custom.js
 
-copyright: "© Agile611 · Licencia CC BY-NC 4.0 · Guillem Hernández Sola · [https://www.agile611.com](https://www.agile611.com)"
+copyright: "© Agile611 · Licencia CC BY-NC 4.0 · Guillem Hernández Sola"
