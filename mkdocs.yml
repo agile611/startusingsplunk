@@ -67,7 +67,7 @@ nav:
       - Arquitectura del laboratorio: preparacion/arquitectura-laboratorio.md
       - Datos del laboratorio: preparacion/datos-laboratorio.md
       - Comprobaciones previas: preparacion/comprobaciones-previas.md
-      - Instalación de Splunk: preparacion/instalacion-splunk.md
+      - Instalación de Splunk: preparacion/instalar-splunk.md
 
   - "Fundamentos e instalación":
       - Resumen: sesion-1/index.md
