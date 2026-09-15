@@ -38,6 +38,18 @@ El resultado de `uname -m` debe ser `x86_64`.
    **64-bit**.
 4. Guarda el archivo en el directorio `Descargas` de Ubuntu.
 
+También puedes descargar directamente el paquete desde este enlace:
+
+[Splunk Enterprise 10.4.3 para Linux amd64](https://download.splunk.com/products/splunk/releases/10.4.3/linux/splunk-10.4.3-4174a2deda5d-linux-amd64.deb)
+
+O desde la terminal:
+
+```bash
+cd ~/Descargas
+wget -O splunk-10.4.3-4174a2deda5d-linux-amd64.deb \
+  https://download.splunk.com/products/splunk/releases/10.4.3/linux/splunk-10.4.3-4174a2deda5d-linux-amd64.deb
+```
+
 El nombre exacto del archivo puede variar. Comprueba que el paquete existe:
 
 ```bash

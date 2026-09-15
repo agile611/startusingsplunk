@@ -6,6 +6,17 @@ El procedimiento parte de una máquina preparada y termina con Splunk Web
 disponible, el servicio configurado para iniciarse automáticamente y una serie
 de comprobaciones que permiten validar la instalación.
 
+Está escrita para seguirla paso a paso. Las líneas que aparecen dentro de un
+bloque como el siguiente son comandos que se ejecutan en la terminal:
+
+```bash
+comando-que-se-debe-ejecutar
+```
+
+Los mensajes que muestra Splunk, por ejemplo `Checking prerequisites...` o
+`Splunk web interface is at ...`, son información de salida. No deben copiarse
+de nuevo en la terminal como si fueran comandos.
+
 La instalación se realiza en un único nodo. En esta topología la misma
 instancia proporciona el servicio principal de Splunk, el indexer, el search
 head, el almacenamiento local y Splunk Web.
@@ -100,6 +111,10 @@ que está orientado a playbooks y automatización de respuesta ante incidentes.
 SOAR no sustituye a Splunk Enterprise para las prácticas de índices, ingesta,
 SPL y dashboards.
 
+También puedes utilizar directamente este enlace al paquete Linux amd64:
+
+[Descargar Splunk Enterprise 10.4.3 para Linux amd64](https://download.splunk.com/products/splunk/releases/10.4.3/linux/splunk-10.4.3-4174a2deda5d-linux-amd64.deb)
+
 1. Abre el portal oficial de descargas de Splunk.
 2. Inicia sesión con tu cuenta.
 3. Selecciona **Splunk Enterprise**.
@@ -108,6 +123,14 @@ SPL y dashboards.
 6. Selecciona el paquete **`.deb`** para arquitectura **64-bit**.
 7. Acepta las condiciones de licencia si el portal las solicita.
 8. Descarga el archivo en `~/Descargas/splunk-10.4.3`.
+
+Como alternativa, descarga el paquete directamente desde la terminal:
+
+```bash
+cd ~/Descargas/splunk-10.4.3
+wget -O splunk-10.4.3-4174a2deda5d-linux-amd64.deb \
+  https://download.splunk.com/products/splunk/releases/10.4.3/linux/splunk-10.4.3-4174a2deda5d-linux-amd64.deb
+```
 
 El trial de 60 días es suficiente para realizar el curso completo. Comprueba
 la fecha de activación y planifica las prácticas dentro de ese periodo. La
@@ -185,6 +208,19 @@ sudo /opt/splunk/bin/splunk version
 
 La versión mostrada debe ser **10.4.3**.
 
+Durante `dpkg -i` puede aparecer un mensaje parecido a este:
+
+```text
+find: '/opt/splunk/lib/python3.7/site-packages': No existe el archivo o el directorio
+```
+
+En esta instalación no significa que falte Python 3.7 en Ubuntu. Splunk
+Enterprise incluye sus propios componentes de Python y esa línea procede de una
+comprobación interna que busca una ruta antigua. Si el proceso termina con
+`complete` y `splunk version` muestra 10.4.3, la instalación del paquete ha
+finalizado correctamente. No crees la carpeta manualmente ni instales Python
+3.7 para solucionar este aviso.
+
 ### Resolver dependencias
 
 Si `dpkg` informa de dependencias pendientes, ejecuta:
@@ -241,6 +277,41 @@ Debe mostrar `splunk:splunk`. Si la instalación ya creó el usuario o el
 paquete utiliza una configuración de permisos diferente, conserva el usuario
 indicado por el instalador y no cambies permisos de forma indiscriminada.
 
+### Si Splunk se inició como `root`
+
+Si ejecutas `/opt/splunk/bin/splunk start` como `root`, Splunk puede mostrar:
+
+```text
+Running Splunk Enterprise as root is deprecated and will be removed in a future release.
+```
+
+No es un error inmediato, pero no es la configuración recomendada. Para una
+prueba puntual puedes iniciar explícitamente como `root`:
+
+```bash
+sudo /opt/splunk/bin/splunk start --run-as-root
+```
+
+Para el curso es mejor utilizar el usuario de servicio `splunk`. Si ya se ha
+iniciado una vez como `root`, detén primero la instancia, asigna la instalación
+al usuario de servicio y vuelve a iniciarla:
+
+```bash
+sudo /opt/splunk/bin/splunk stop --run-as-root
+sudo chown -R splunk:splunk /opt/splunk
+sudo -u splunk /opt/splunk/bin/splunk start
+```
+
+Comprueba el resultado:
+
+```bash
+sudo -u splunk /opt/splunk/bin/splunk status
+```
+
+No mezcles en cada comando un usuario diferente. Si se inicia como `root`, se
+debe utilizar `--run-as-root`; si se inicia como `splunk`, se debe mantener ese
+usuario en `start`, `stop` y `status`.
+
 ## 7. Primer inicio y aceptación de licencia
 
 Inicia Splunk por primera vez con la cuenta de servicio. El primer arranque
@@ -258,6 +329,21 @@ Durante el proceso:
 4. Confirma la contraseña.
 5. Espera a que termine la inicialización de Splunk Web.
 
+La contraseña debe tener al menos **8 caracteres ASCII imprimibles**. Los
+caracteres no aparecen mientras se escriben, y eso es normal. Puedes utilizar,
+por ejemplo, una contraseña de laboratorio que cumpla ese mínimo, pero no la
+guardes en el repositorio ni la compartas en documentos públicos.
+
+Si aparece:
+
+```text
+ERROR: Password did not meet complexity requirements.
+```
+
+vuelve a introducir una contraseña de 8 o más caracteres ASCII imprimibles.
+Una contraseña vacía, con menos de 8 caracteres o con caracteres no válidos no
+será aceptada.
+
 La cuenta de Splunk es independiente de la cuenta de Ubuntu. No guardes la
 contraseña en este repositorio ni en documentos públicos del curso.
 
@@ -269,6 +355,12 @@ sudo -u splunk /opt/splunk/bin/splunk status
 
 Si el servicio ya está iniciado, no ejecutes repetidamente `start`; utiliza
 `status` para comprobarlo.
+
+Un primer arranque correcto puede mostrar mensajes como `writing RSA key`,
+`New certs have been generated` y `Splunk web interface is at ...`. Son pasos
+normales de creación de certificados e inicialización. Lo importante es que el
+comando termine sin un error fatal y que `status` indique que `splunkd` está en
+ejecución.
 
 ## 8. Acceder a Splunk Web
 
@@ -363,6 +455,21 @@ También puedes revisar el log principal si hay dudas:
 
 ```bash
 sudo tail -n 50 /opt/splunk/var/log/splunk/splunkd.log
+```
+
+Una salida correcta puede incluir:
+
+```text
+Splunk 10.4.3 (build 4174a2deda5d)
+The Splunk web interface is at http://NOMBRE_O_IP:8000
+```
+
+Si `splunkd is not running`, no significa necesariamente que haya que
+reinstalar. Revisa primero el log y el usuario con el que se inició:
+
+```bash
+sudo -u splunk /opt/splunk/bin/splunk status
+sudo tail -n 100 /opt/splunk/var/log/splunk/splunkd.log
 ```
 
 ## 12. Preparar el laboratorio

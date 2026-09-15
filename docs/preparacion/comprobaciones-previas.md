@@ -64,6 +64,19 @@ sudo /opt/splunk/bin/splunk status
 sudo ss -ltnp | grep -E ':8000|:8089|:9997'
 ```
 
+Si la instalación se realizó como `root`, el comando de estado debe incluir
+`--run-as-root`:
+
+```bash
+sudo /opt/splunk/bin/splunk status --run-as-root
+```
+
+Si la instalación ya se ha cambiado al usuario de servicio, utiliza:
+
+```bash
+sudo -u splunk /opt/splunk/bin/splunk status
+```
+
 El resultado esperado es Splunk Enterprise 10.4.3 en ejecución y los puertos
 8000 y 8089 escuchando. El puerto 9997 solo debe aparecer si se ha configurado
 un Universal Forwarder.
@@ -87,6 +100,10 @@ Inicia sesión con la cuenta administrativa creada durante el primer arranque.
 - [ ] Splunk Web responde en el puerto 8000.
 - [ ] El archivo `eventos_web.csv` está disponible.
 - [ ] El índice `curso` está creado o preparado para la ingesta.
+
+El aviso sobre `/opt/splunk/lib/python3.7/site-packages` durante la instalación
+no impide continuar si `dpkg` termina con `complete` y `splunk version` muestra
+10.4.3. No instales Python 3.7 solo por ese mensaje.
 
 ## Si una comprobación falla
 
