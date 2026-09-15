@@ -6,7 +6,7 @@ explicaciones breves con ejercicios realizados sobre una instancia local para
 que cada concepto se pueda comprobar inmediatamente.
 
 El entorno de referencia del curso es una instalación manual de **Splunk
-Enterprise 10.0.1** sobre **Ubuntu 24.04.5 LTS**. La instancia se ejecuta como
+Enterprise 10.4.3** sobre **Ubuntu 24.04.5 LTS**. La instancia se ejecuta como
 un laboratorio mononodo: el mismo equipo proporciona la recepción de datos, la
 indexación, las búsquedas y Splunk Web.
 

@@ -13,7 +13,7 @@ El curso tiene una duración total de **18 horas**, distribuidas en
 Al finalizar la formación podrás:
 
 - Comprender la arquitectura básica de Splunk.
-- Instalar Splunk Enterprise en Ubuntu 24.04.
+- Instalar Splunk Enterprise 10.4.3 en Ubuntu 24.04.5 LTS.
 - Incorporar archivos y logs.
 - Crear y administrar índices.
 - Realizar búsquedas mediante SPL.
@@ -44,7 +44,8 @@ Cada sesión combina:
 
 !!! info "Entorno del curso"
 	Los laboratorios están diseñados para ejecutarse sobre una máquina
-	con **Ubuntu 24.04** y una instancia local de Splunk Enterprise.
+	con **Ubuntu 24.04.5 LTS** y una instancia local de **Splunk Enterprise
+	10.4.3**. La descarga oficial ofrece un trial gratuito de 60 días.
 
 ## Acceso rápido
 

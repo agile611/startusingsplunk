@@ -7,7 +7,7 @@ permite investigarlos mediante búsquedas, tablas, gráficos, dashboards y
 alertas.
 
 En este curso trabajaremos con una instalación local de **Splunk Enterprise
-10.0.1** sobre **Ubuntu 24.04.5 LTS**. La instalación se realizará manualmente
+10.4.3** sobre **Ubuntu 24.04.5 LTS**. La instalación se realizará manualmente
 con el paquete `.deb`, tal como se explica en [Instalación en Ubuntu](04-instalacion-ubuntu.md).
 
 ## Objetivos de esta introducción
@@ -93,7 +93,7 @@ La sesión sigue un recorrido práctico y acumulativo:
 1. Preparar Ubuntu y comprobar los requisitos.
 2. Comprender eventos, campos, fuentes e índices.
 3. Revisar la arquitectura de Splunk.
-4. Instalar manualmente Splunk Enterprise 10.0.1.
+4. Instalar manualmente Splunk Enterprise 10.4.3.
 5. Acceder a Splunk Web y verificar la instancia.
 6. Crear o utilizar el índice de laboratorio `curso`.
 7. Incorporar datos de prueba.
@@ -123,6 +123,6 @@ ha producido el problema: ¿el dato llegó?, ¿se indexó?, ¿se está buscando 
 
 Splunk Enterprise centraliza datos de máquina y los convierte en información
 consultable. En nuestro laboratorio se ejecutará como una instalación local
-mononodo en Ubuntu 24.04.5 LTS, con Splunk Enterprise 10.0.1 instalado de forma
+mononodo en Ubuntu 24.04.5 LTS, con Splunk Enterprise 10.4.3 instalado de forma
 manual. A partir de aquí, los conceptos de eventos, campos, índices y búsquedas
 serán la base de todas las prácticas.

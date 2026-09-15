@@ -9,7 +9,7 @@ El laboratorio del curso utiliza una arquitectura **mononodo**:
 
 ```text
 Ubuntu 24.04.5 LTS
-└── Splunk Enterprise 10.0.1
+└── Splunk Enterprise 10.4.3
 		├── Recepción de datos
 		├── Procesamiento e indexación
 		├── Almacenamiento
@@ -128,7 +128,7 @@ La máquina preparada para el curso cumple simultáneamente varias funciones:
 | Función | Implementación en el laboratorio |
 |---|---|
 | Sistema operativo | Ubuntu 24.04.5 LTS |
-| Producto | Splunk Enterprise 10.0.1 |
+| Producto | Splunk Enterprise 10.4.3 |
 | Interfaz | Splunk Web en el puerto 8000 |
 | Administración | API y servicio en el puerto 8089 |
 | Almacenamiento | Índice local `curso` |

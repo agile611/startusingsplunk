@@ -2,7 +2,7 @@
 
 El laboratorio utiliza una arquitectura **mononodo** para que todas las
 prácticas puedan realizarse en una única máquina con **Ubuntu 24.04.5 LTS**.
-Sobre ella se instala manualmente **Splunk Enterprise 10.0.1**, que reúne las
+Sobre ella se instala manualmente **Splunk Enterprise 10.4.3**, que reúne las
 funciones necesarias para recibir, indexar, buscar y presentar los datos.
 
 Esta topología no representa un despliegue de producción completo, pero permite
@@ -70,7 +70,7 @@ La topología se crea mediante la [guía de instalación manual en
 Ubuntu](../sesion-1/04-instalacion-ubuntu.md). Al finalizar esa guía deben
 cumplirse estas condiciones:
 
-- La versión mostrada por `splunk version` es 10.0.1.
+- La versión mostrada por `splunk version` es 10.4.3.
 - `splunk status` indica que el servicio está ejecutándose.
 - Splunk Web responde en `http://localhost:8000`.
 - La cuenta administrativa local permite iniciar sesión.

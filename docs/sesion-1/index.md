@@ -7,7 +7,7 @@ recibe, procesa, indexa y presenta los datos.
 
 - Comprender los conceptos fundamentales de Splunk.
 - Reconocer sus componentes principales.
-- Instalar Splunk Enterprise en Ubuntu 24.04.
+- Instalar Splunk Enterprise 10.4.3 en Ubuntu 24.04.5 LTS.
 - Utilizar Splunk Web.
 - Crear un índice.
 - Incorporar datos de laboratorio.

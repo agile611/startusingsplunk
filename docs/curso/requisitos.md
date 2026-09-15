@@ -1,7 +1,7 @@
 # Requisitos
 
 Antes de comenzar, prepara una máquina con **Ubuntu 24.04.5 LTS**. El curso
-utiliza una instalación manual de **Splunk Enterprise 10.0.1** mediante un
+utiliza una instalación manual de **Splunk Enterprise 10.4.3** mediante un
 paquete `.deb` para arquitectura de 64 bits.
 
 ## Requisitos técnicos
@@ -13,6 +13,8 @@ paquete `.deb` para arquitectura de 64 bits.
 - Al menos 20 GB libres para Splunk y los datos del laboratorio.
 - Conexión a Internet para descargar el instalador y consultar la
   documentación oficial.
+- Acceso a la [página oficial de descarga de Splunk Enterprise](https://www.splunk.com/en_us/download/splunk-enterprise.html),
+  que ofrece un trial gratuito de 60 días.
 - Cuenta de Splunk con acceso al portal de descargas.
 - Usuario con permisos `sudo`.
 - Navegador web actualizado.
@@ -56,7 +58,8 @@ automático está en [Instalación en Ubuntu](../sesion-1/04-instalacion-ubuntu.
 
 ## Material del curso
 
-- Paquete de Splunk Enterprise 10.0.1 para Linux `.deb`.
+- Paquete de Splunk Enterprise 10.4.3 para Linux `.deb`, descargado durante el
+  trial gratuito de 60 días.
 - Archivos CSV y otros datos de laboratorio.
 - Credenciales administrativas creadas durante el primer arranque.
 - Documentación del curso y acceso a la terminal de Ubuntu.

@@ -3,7 +3,7 @@
 Los datos del laboratorio están preparados para practicar la ingesta, la
 extracción de campos, las estadísticas, las visualizaciones y las alertas sin
 utilizar información sensible de producción. Se cargan en la instancia local
-de **Splunk Enterprise 10.0.1** y se consultan principalmente desde el índice
+de **Splunk Enterprise 10.4.3** y se consultan principalmente desde el índice
 `curso`.
 
 ## Tipos de datos

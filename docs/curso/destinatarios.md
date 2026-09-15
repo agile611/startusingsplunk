@@ -3,7 +3,7 @@
 Este curso está dirigido a profesionales que necesitan convertir registros y
 datos operativos en búsquedas, indicadores y decisiones. El enfoque es
 práctico y está pensado para trabajar con una instancia local de Splunk
-Enterprise 10.0.1 sobre Ubuntu 24.04.5 LTS.
+Enterprise 10.4.3 sobre Ubuntu 24.04.5 LTS.
 
 ## Público recomendado
 

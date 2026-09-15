@@ -1,7 +1,7 @@
-# Instalación de Splunk Enterprise 10.0.1
+# Instalación de Splunk Enterprise 10.4.3
 
 Esta guía describe la instalación manual completa de **Splunk Enterprise
-10.0.1** sobre **Ubuntu 24.04.5 LTS** en una máquina de laboratorio de 64 bits.
+10.4.3** sobre **Ubuntu 24.04.5 LTS** en una máquina de laboratorio de 64 bits.
 El procedimiento parte de una máquina preparada y termina con Splunk Web
 disponible, el servicio configurado para iniciarse automáticamente y una serie
 de comprobaciones que permiten validar la instalación.
@@ -14,7 +14,7 @@ head, el almacenamiento local y Splunk Web.
 
 Al terminar, se deben cumplir estas condiciones:
 
-- Splunk Enterprise 10.0.1 está instalado en `/opt/splunk`.
+- Splunk Enterprise 10.4.3 está instalado en `/opt/splunk`.
 - Ubuntu reconoce la arquitectura `x86_64`.
 - El servicio principal de Splunk está iniciado.
 - Splunk Web responde en `http://localhost:8000`.
@@ -80,8 +80,8 @@ Crea un directorio local para guardar el paquete. Así se separa el instalador
 de los archivos de datos que se utilizarán posteriormente:
 
 ```bash
-mkdir -p ~/Descargas/splunk-10.0.1
-cd ~/Descargas/splunk-10.0.1
+mkdir -p ~/Descargas/splunk-10.4.3
+cd ~/Descargas/splunk-10.4.3
 ```
 
 Si Ubuntu utiliza nombres de directorio en inglés, usa `~/Downloads` en lugar
@@ -89,25 +89,37 @@ de `~/Descargas`.
 
 ## 3. Descargar Splunk Enterprise
 
-La descarga se realiza desde el portal oficial de Splunk. El instalador
-requiere normalmente una cuenta de Splunk y la aceptación de las condiciones de
-descarga.
+La descarga se realiza desde la página oficial de [Splunk Enterprise](https://www.splunk.com/en_us/download/splunk-enterprise.html).
+La página ofrece un **trial gratuito de 60 días**, sin necesidad de introducir
+una tarjeta de crédito. Durante el registro puede solicitar una cuenta y una
+dirección de correo corporativa o profesional.
+
+Este enlace descarga **Splunk Enterprise**, que es el producto necesario para
+este curso. No debe confundirse con [Splunk SOAR](https://www.splunk.com/en_us/download/soar-free-trial.html),
+que está orientado a playbooks y automatización de respuesta ante incidentes.
+SOAR no sustituye a Splunk Enterprise para las prácticas de índices, ingesta,
+SPL y dashboards.
 
 1. Abre el portal oficial de descargas de Splunk.
 2. Inicia sesión con tu cuenta.
 3. Selecciona **Splunk Enterprise**.
-4. Selecciona la versión **10.0.1**.
+4. Selecciona la versión **10.4.3**.
 5. Selecciona **Linux** como sistema operativo.
 6. Selecciona el paquete **`.deb`** para arquitectura **64-bit**.
 7. Acepta las condiciones de licencia si el portal las solicita.
-8. Descarga el archivo en `~/Descargas/splunk-10.0.1`.
+8. Descarga el archivo en `~/Descargas/splunk-10.4.3`.
+
+El trial de 60 días es suficiente para realizar el curso completo. Comprueba
+la fecha de activación y planifica las prácticas dentro de ese periodo. La
+licencia y las condiciones concretas mostradas por Splunk durante el registro
+son las que prevalecen sobre esta guía.
 
 El nombre exacto puede incluir el número de compilación. Por eso, no conviene
 escribir manualmente un nombre supuesto en los comandos siguientes. Comprueba
 qué archivo se ha descargado:
 
 ```bash
-cd ~/Descargas/splunk-10.0.1
+cd ~/Descargas/splunk-10.4.3
 ls -lh
 ```
 
@@ -128,7 +140,7 @@ No instales un archivo descargado incompleto o alterado. Calcula su suma
 SHA-256:
 
 ```bash
-cd ~/Descargas/splunk-10.0.1
+cd ~/Descargas/splunk-10.4.3
 sha256sum splunk-*.deb
 ```
 
@@ -154,7 +166,7 @@ stat -c '%n %s bytes' splunk-*.deb
 Desde el directorio donde está el instalador, ejecuta:
 
 ```bash
-cd ~/Descargas/splunk-10.0.1
+cd ~/Descargas/splunk-10.4.3
 sudo dpkg -i splunk-*.deb
 ```
 
@@ -171,7 +183,7 @@ ls -ld /opt/splunk
 sudo /opt/splunk/bin/splunk version
 ```
 
-La versión mostrada debe ser **10.0.1**.
+La versión mostrada debe ser **10.4.3**.
 
 ### Resolver dependencias
 
@@ -184,7 +196,7 @@ sudo apt --fix-broken install -y
 Después completa la instalación del paquete y vuelve a comprobar la versión:
 
 ```bash
-cd ~/Descargas/splunk-10.0.1
+cd ~/Descargas/splunk-10.4.3
 sudo dpkg -i splunk-*.deb
 sudo /opt/splunk/bin/splunk version
 ```
@@ -342,7 +354,7 @@ curl -I http://localhost:8000
 
 El resultado esperado es:
 
-- Versión `10.0.1`.
+- Versión `10.4.3`.
 - Estado `splunkd` en ejecución.
 - Respuesta HTTP del puerto 8000.
 - Acceso correcto a Splunk Web desde el navegador.
@@ -378,10 +390,10 @@ Comprueba el directorio actual y el nombre real del paquete:
 
 ```bash
 pwd
-ls -lh ~/Descargas/splunk-10.0.1
+ls -lh ~/Descargas/splunk-10.4.3
 ```
 
-### La versión no es 10.0.1
+### La versión no es 10.4.3
 
 Es posible que se haya descargado otra versión o que el comando se esté
 ejecutando sobre otra instalación. Comprueba:

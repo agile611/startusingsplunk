@@ -3,7 +3,7 @@
 ## Objetivos generales
 
 - Comprender el modelo de datos y la arquitectura de Splunk Enterprise.
-- Instalar y poner en funcionamiento Splunk Enterprise 10.0.1 en Ubuntu
+- Instalar y poner en funcionamiento Splunk Enterprise 10.4.3 en Ubuntu
   24.04.5 LTS.
 - Ingerir datos de laboratorio y comprobar que quedan disponibles en el índice
   `curso`.

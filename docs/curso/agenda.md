@@ -1,7 +1,7 @@
 # Agenda del curso
 
 El curso se desarrolla en **tres sesiones de seis horas** y sigue un recorrido
-práctico sobre una instancia mononodo de **Splunk Enterprise 10.0.1** instalada
+práctico sobre una instancia mononodo de **Splunk Enterprise 10.4.3** instalada
 manualmente en **Ubuntu 24.04.5 LTS**.
 
 ## Sesión 1: fundamentos, instalación e ingestión

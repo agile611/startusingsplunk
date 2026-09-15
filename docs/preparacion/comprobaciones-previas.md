@@ -47,7 +47,7 @@ paquete y acceder a `http://localhost:8000` desde el navegador de Ubuntu.
 Confirma que tienes:
 
 - Acceso al portal de descargas de Splunk.
-- El paquete Splunk Enterprise 10.0.1 para Linux `.deb`.
+- El paquete Splunk Enterprise 10.4.3 para Linux `.deb`.
 - El archivo [eventos_web.csv](../downloads/eventos_web.csv).
 - Las [consultas SPL de referencia](../downloads/consultas-spl.txt).
 - Las credenciales que crearás durante el primer inicio.
@@ -64,7 +64,7 @@ sudo /opt/splunk/bin/splunk status
 sudo ss -ltnp | grep -E ':8000|:8089|:9997'
 ```
 
-El resultado esperado es Splunk Enterprise 10.0.1 en ejecución y los puertos
+El resultado esperado es Splunk Enterprise 10.4.3 en ejecución y los puertos
 8000 y 8089 escuchando. El puerto 9997 solo debe aparecer si se ha configurado
 un Universal Forwarder.
 
@@ -82,7 +82,7 @@ Inicia sesión con la cuenta administrativa creada durante el primer arranque.
 - [ ] La arquitectura es `x86_64`.
 - [ ] Los recursos y el espacio cumplen las recomendaciones.
 - [ ] El usuario puede ejecutar comandos con `sudo`.
-- [ ] El paquete `.deb` de Splunk Enterprise 10.0.1 está disponible.
+- [ ] El paquete `.deb` de Splunk Enterprise 10.4.3 está disponible.
 - [ ] El servicio Splunk está iniciado.
 - [ ] Splunk Web responde en el puerto 8000.
 - [ ] El archivo `eventos_web.csv` está disponible.

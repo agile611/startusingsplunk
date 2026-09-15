@@ -1,6 +1,6 @@
 # Requisitos de hardware
 
-La máquina del laboratorio ejecutará Splunk Enterprise 10.0.1, Splunk Web y
+La máquina del laboratorio ejecutará Splunk Enterprise 10.4.3, Splunk Web y
 los datos de práctica en el mismo nodo. Por ello, los recursos deben cubrir
 tanto el sistema operativo como el servicio de Splunk y el almacenamiento de
 los índices.

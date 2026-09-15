@@ -1,12 +1,12 @@
 # 4. Instalación en Ubuntu
 
-Esta guía describe una instalación manual de **Splunk Enterprise 10.0.1**
+Esta guía describe una instalación manual de **Splunk Enterprise 10.4.3**
 sobre **Ubuntu 24.04.5 LTS**. Se utiliza una versión fija para que todos los
 participantes trabajen con los mismos menús, comandos y comportamiento durante
 el curso.
 
 Para el procedimiento completo de descarga, verificación, instalación y
-configuración, consulta la [guía detallada de instalación](../preparacion/instalar-splunk-10-0-1.md).
+configuración, consulta la [guía detallada de instalación](../preparacion/instalar-splunk-10-4-3.md).
 
 ## Requisitos previos
 
@@ -33,7 +33,7 @@ El resultado de `uname -m` debe ser `x86_64`.
 ## Descarga manual del instalador
 
 1. Accede al portal oficial de descargas de Splunk.
-2. Selecciona **Splunk Enterprise 10.0.1**.
+2. Selecciona **Splunk Enterprise 10.4.3**.
 3. Descarga el paquete para **Linux**, formato **`.deb`** y arquitectura
    **64-bit**.
 4. Guarda el archivo en el directorio `Descargas` de Ubuntu.
@@ -53,7 +53,7 @@ adapta el comando `cd` y el nombre del archivo a tu instalación.
 Antes de instalarlo, calcula la suma SHA-256 del paquete:
 
 ```bash
-sha256sum splunk-10.0.1-*.deb
+sha256sum splunk-10.4.3-*.deb
 ```
 
 Compara el resultado con la suma publicada por Splunk para ese mismo archivo.
@@ -64,7 +64,7 @@ No continúes si la suma no coincide o si la descarga está incompleta.
 Instala el paquete descargado con `dpkg`:
 
 ```bash
-sudo dpkg -i splunk-10.0.1-*.deb
+sudo dpkg -i splunk-10.4.3-*.deb
 ```
 
 Comprueba que el directorio de instalación se ha creado correctamente:
@@ -74,14 +74,14 @@ ls -ld /opt/splunk
 sudo /opt/splunk/bin/splunk version
 ```
 
-La salida debe indicar Splunk Enterprise 10.0.1.
+La salida debe indicar Splunk Enterprise 10.4.3.
 
 Si `dpkg` informa de dependencias pendientes, corrígelas y repite la
 comprobación:
 
 ```bash
 sudo apt --fix-broken install -y
-sudo dpkg -i splunk-10.0.1-*.deb
+sudo dpkg -i splunk-10.4.3-*.deb
 ```
 
 ## Primer inicio y licencia
@@ -166,7 +166,7 @@ No abras el puerto `9997` si el laboratorio no utiliza un Universal Forwarder.
 La instalación se considera correcta cuando se cumplen todas estas
 condiciones:
 
-- `splunk version` muestra la versión 10.0.1.
+- `splunk version` muestra la versión 10.4.3.
 - `splunk status` indica que Splunk está ejecutándose.
 - Splunk Web responde en el puerto 8000.
 - Es posible iniciar sesión con la cuenta administrativa creada durante el

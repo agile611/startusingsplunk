@@ -5,7 +5,7 @@ archivo de log, un evento indexado y un resultado de búsqueda están
 relacionados, pero no son el mismo objeto.
 
 Esta página utiliza el entorno del curso como referencia: **Splunk Enterprise
-10.0.1**, instalado manualmente en **Ubuntu 24.04.5 LTS**, con los datos de
+10.4.3**, instalado manualmente en **Ubuntu 24.04.5 LTS**, con los datos de
 prácticas almacenados en el índice `curso`.
 
 ## Datos de máquina
