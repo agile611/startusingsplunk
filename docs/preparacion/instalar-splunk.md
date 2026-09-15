@@ -467,7 +467,7 @@ Inicia Splunk por primera vez con la cuenta de servicio. El primer arranque
 solicitará crear las credenciales administrativas de Splunk:
 
 ```bash
-sudo -u splunk /opt/splunk/bin/splunk start --accept-license
+root@terraform00:~/Descargas/splunk-10.4.3# /opt/splunk/bin/splunk start --accept-license --run-as-root
 ```
 
 Durante el proceso:
