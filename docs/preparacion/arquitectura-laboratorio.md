@@ -67,7 +67,7 @@ validar la ingesta también hay que comprobar que los eventos aparecen en
 ## Relación con la instalación
 
 La topología se crea mediante la [guía de instalación manual en
-Ubuntu](04-instalacion-ubuntu.md). Al finalizar esa guía deben
+Ubuntu](instalacion-ubuntu.md). Al finalizar esa guía deben
 cumplirse estas condiciones:
 
 - La versión mostrada por `splunk version` es 10.4.3.
@@ -85,5 +85,5 @@ Fuentes -> Universal Forwarders -> Indexers -> Search Heads -> Usuarios
 ```
 
 El curso presenta estos componentes conceptualmente en [Arquitectura y
-componentes](03-arquitectura.md), pero las prácticas se ejecutan en
+componentes](arquitectura.md), pero las prácticas se ejecutan en
 el nodo único descrito aquí.

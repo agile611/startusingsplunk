@@ -793,5 +793,5 @@ Consulta [Los datos no aparecen](../troubleshooting/datos-no-aparecen.md).
 - [Requisitos de hardware](requisitos-hardware.md).
 - [Arquitectura del laboratorio](arquitectura-laboratorio.md).
 - [Comprobaciones previas](comprobaciones-previas.md).
-- [Instalación en Ubuntu](04-instalacion-ubuntu.md).
+- [Instalación en Ubuntu](instalacion-ubuntu.md).
 - [Datos del laboratorio](datos-laboratorio.md).

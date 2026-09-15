@@ -35,7 +35,7 @@ uname -m
 
 El resultado de `uname -m` debe ser `x86_64`. La arquitectura se corresponde
 con el paquete `.deb` de Linux de 64 bits utilizado en la [instalación manual
-de Splunk](04-instalacion-ubuntu.md).
+de Splunk](instalacion-ubuntu.md).
 
 ## Almacenamiento
 
