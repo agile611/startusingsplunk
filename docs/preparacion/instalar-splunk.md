@@ -363,7 +363,86 @@ No mezcles en cada comando un usuario diferente. Si se inicia como `root`, se
 debe utilizar `--run-as-root`; si se inicia como `splunk`, se debe mantener ese
 usuario en `start`, `stop` y `status`.
 
-## 8. Primer inicio y aceptación de licencia
+## 8. Comprobar y corregir el requisito AVX
+
+Durante la instalación o una actualización de Splunk puede aparecer este
+error:
+
+```text
+CPU missing required AVX instruction set for Intel processors
+splunk-preinstall upgrade check failed
+dpkg: error al procesar el archivo ... (--install)
+```
+
+Esto significa que Ubuntu no está viendo la instrucción **AVX** del procesador.
+Splunk Enterprise 10.4.3 necesita AVX. No es un problema de Python ni se
+soluciona instalando Python 3.7.
+
+### Comprobar si Ubuntu ve AVX
+
+Ejecuta:
+
+```bash
+lscpu | grep -iE 'Model name|Flags'
+grep -wo avx /proc/cpuinfo | sort -u
+```
+
+Si el segundo comando no muestra `avx`, la máquina virtual no está exponiendo
+esa capacidad a Ubuntu. Si aparece `avx`, revisa también que el procesador no
+esté siendo limitado por la configuración del hipervisor.
+
+### Activar AVX en la máquina virtual
+
+Apaga completamente la máquina virtual y configura un tipo de CPU que exponga
+las capacidades del procesador físico:
+
+- En **KVM/QEMU/libvirt**, utiliza el modo `host-passthrough`.
+- En **Proxmox**, selecciona el tipo de CPU `host`.
+- En **VMware**, habilita la exposición de las instrucciones de CPU del host.
+- En **VirtualBox**, utiliza un perfil de procesador moderno y confirma que el
+  procesador físico soporta AVX.
+- En **Terraform**, configura el recurso de la máquina virtual según el
+  proveedor para exponer la CPU del host.
+
+No basta con reiniciar Ubuntu si el hipervisor conserva la configuración
+antigua. Apaga la máquina virtual por completo, cambia el tipo de CPU y vuelve
+a encenderla.
+
+Después comprueba de nuevo:
+
+```bash
+lscpu | grep -i avx
+```
+
+La salida debe incluir `avx` en las flags del procesador.
+
+### Repetir la instalación después de corregir AVX
+
+Si `dpkg` terminó con un error, no continúes con el arranque hasta completar
+la configuración del paquete:
+
+```bash
+cd ~/Descargas/splunk-10.4.3
+dpkg --configure -a
+dpkg -i splunk-10.4.3-4174a2deda5d-linux-amd64.deb
+/opt/splunk/bin/splunk version
+```
+
+La salida debe mostrar Splunk Enterprise 10.4.3 y no debe volver a aparecer el
+fallo de `splunk-preinstall`.
+
+No utilices esta variable para saltarte la comprobación:
+
+```bash
+SPLUNK_SKIP_PREINSTALL_CPU_CHECKS_CORRUPTING_DATA_IF_UNSUPPORTED=1
+```
+
+El nombre de la variable ya advierte del riesgo: forzar la instalación en una
+CPU no compatible puede provocar errores o corrupción de datos. Solo debe
+considerarse en una prueba temporal cuando se haya confirmado que el
+procesador sí soporta AVX.
+
+## 9. Primer inicio y aceptación de licencia
 
 Inicia Splunk por primera vez con la cuenta de servicio. El primer arranque
 solicitará crear las credenciales administrativas de Splunk:
@@ -413,7 +492,7 @@ normales de creación de certificados e inicialización. Lo importante es que el
 comando termine sin un error fatal y que `status` indique que `splunkd` está en
 ejecución.
 
-## 9. Acceder a Splunk Web
+## 10. Acceder a Splunk Web
 
 En el navegador de la misma máquina abre:
 
@@ -438,7 +517,7 @@ http://DIRECCION_IP_DE_UBUNTU:8000
 No publiques Splunk Web en Internet sin configurar adecuadamente firewall,
 TLS, autenticación y controles de acceso.
 
-## 10. Configurar el inicio automático
+## 11. Configurar el inicio automático
 
 Configura el arranque automático usando el usuario de servicio `splunk`:
 
@@ -466,7 +545,7 @@ Si no se inicia automáticamente, revisa el mensaje mostrado por
 `enable boot-start`, el estado del servicio y los logs de Ubuntu antes de
 repetir la configuración.
 
-## 11. Comprobar puertos
+## 12. Comprobar puertos
 
 La instalación utiliza estos puertos:
 
@@ -485,7 +564,7 @@ sudo ss -ltnp | grep -E ':8000|:8089|:9997'
 En el laboratorio básico deben aparecer 8000 y 8089. El puerto 9997 no es
 necesario para cargar el CSV local y no debe abrirse sin una razón concreta.
 
-## 12. Validación funcional
+## 13. Validación funcional
 
 Ejecuta las comprobaciones siguientes:
 
@@ -523,7 +602,7 @@ sudo -u splunk /opt/splunk/bin/splunk status
 sudo tail -n 100 /opt/splunk/var/log/splunk/splunkd.log
 ```
 
-## 13. Preparar el laboratorio
+## 14. Preparar el laboratorio
 
 Una vez validada la instalación:
 
