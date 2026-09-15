@@ -5,7 +5,7 @@ el laboratorio. El entorno de referencia es una instalación manual de
 **Splunk Enterprise 10.0.1** sobre **Ubuntu 24.04.5 LTS**, ejecutada como un
 laboratorio mononodo.
 
-Completa esta preparación antes de seguir la [sesión 1](../sesion-1/index.md).
+Haremos esta preparación durante la [sesión 1](../sesion-1/index.md).
 Si todavía no tienes la máquina preparada, consulta primero los [requisitos
 generales del curso](../curso/requisitos.md).
 
