@@ -21,6 +21,25 @@ La instalación se realiza en un único nodo. En esta topología la misma
 instancia proporciona el servicio principal de Splunk, el indexer, el search
 head, el almacenamiento local y Splunk Web.
 
+## Orden de instalación
+
+Sigue los apartados en este orden. No intentes iniciar Splunk antes de que la
+instalación del paquete haya terminado correctamente:
+
+1. Comprobar Ubuntu, la arquitectura, la memoria y el espacio disponible.
+2. Descargar el paquete `.deb` de Splunk Enterprise 10.4.3.
+3. Verificar el archivo descargado.
+4. Entrar como `root` con `sudo su`.
+5. Instalar el paquete con `dpkg -i`.
+6. Crear o preparar el usuario de servicio `splunk`.
+7. Confirmar que el procesador expone AVX si el precheck lo solicita.
+8. Aceptar la licencia y crear la cuenta administradora.
+9. Comprobar Splunk Web y configurar el inicio automático.
+10. Validar los puertos y preparar el índice `curso`.
+
+Las líneas que comienzan por `root@...#` o `curso@...$` son prompts de ejemplo.
+No se escriben en la terminal; solo se escribe el comando que aparece después.
+
 ## Resultado esperado
 
 Al terminar, se deben cumplir estas condiciones:
@@ -619,7 +638,103 @@ index=curso
 
 La configuración del índice se explica en [Gestión de índices](../sesion-1/07-indices.md).
 
-## Problemas frecuentes
+## 15. Errores y soluciones
+
+Esta sección reúne los errores que pueden aparecer durante esta instalación:
+
+| Error o síntoma | Causa habitual | Solución |
+|---|---|---|
+| `dpkg-reconfigure ... no está instalado` | Se ha usado un archivo `.deb` como si fuera un paquete ya instalado. | Usar `dpkg -i archivo.deb`. |
+| `CPU missing required AVX` | La máquina virtual no expone AVX o el procesador no lo soporta. | Activar `host-passthrough` o CPU `host`, apagar y encender la VM, y repetir la instalación. |
+| Aviso sobre `python3.7/site-packages` | Comprobación interna de una ruta antigua. | No instalar Python 3.7; comprobar la versión de Splunk. |
+| `Password did not meet complexity requirements` | La contraseña tiene menos de 8 caracteres ASCII imprimibles. | Introducir una contraseña válida y confirmarla. |
+| `splunkd is not running` | Splunk no se ha iniciado, se ha usado otro usuario o hay un error en la configuración. | Revisar `status`, permisos, puertos y `splunkd.log`. |
+| Mensajes como `Please`, `Copying` o `writing` aparecen como comandos. | Se ha pegado la salida de Splunk en la terminal. | Ejecutar solo los comandos de los bloques `bash`. |
+| `Running Splunk Enterprise as root is deprecated` | Splunk se ha iniciado como `root`. | Migrar la propiedad a `splunk` y ejecutar el servicio con ese usuario. |
+| `rm -rf /opt/splunk/*` | Se ha borrado manualmente el contenido de la instalación. | No repetirlo; revisar el estado del paquete y restaurar una copia si existe. |
+
+Antes de aplicar una solución, conserva el mensaje completo del error. No
+borres `/opt/splunk` ni reinstales a ciegas: primero identifica si el problema
+está en la CPU, el paquete, los permisos, la contraseña, los puertos o el
+servicio.
+
+### `dpkg-reconfigure` indica que el paquete no está instalado
+
+`dpkg-reconfigure` no instala un archivo `.deb`. Este comando solo reconfigura
+un paquete que ya está registrado como instalado en la base de datos de `dpkg`.
+Por eso, este comando es incorrecto para instalar Splunk:
+
+```bash
+dpkg-reconfigure splunk-10.4.3-4174a2deda5d-linux-amd64.deb
+```
+
+El nombre del archivo descargado es un archivo, no el nombre del paquete
+instalado. Para consultar el contenido del archivo utiliza:
+
+```bash
+dpkg --info splunk-10.4.3-4174a2deda5d-linux-amd64.deb
+```
+
+Para instalarlo o repetir la instalación utiliza `dpkg -i`:
+
+```bash
+cd ~/Descargas/splunk-10.4.3
+dpkg -i splunk-10.4.3-4174a2deda5d-linux-amd64.deb
+```
+
+Después comprueba si el paquete está registrado:
+
+```bash
+dpkg-query -W -f='${Status} ${Version}\n' splunk
+```
+
+Una instalación correcta debe mostrar `install ok installed` y la versión
+`10.4.3`.
+
+### El precheck de CPU falla y falta AVX
+
+Si aparece:
+
+```text
+CPU Info upgrade precheck FAILED
+CPU missing required AVX instruction set for Intel processors
+splunk-preinstall upgrade check failed
+```
+
+la instalación o actualización se ha detenido porque Ubuntu no ve la
+instrucción AVX. Sigue la sección [Comprobar y corregir el requisito AVX](#8-comprobar-y-corregir-el-requisito-avx)
+antes de volver a ejecutar `dpkg -i`.
+
+No intentes resolverlo con `dpkg-reconfigure`, Python 3.7 ni borrando archivos
+de `/opt/splunk`. Hay que exponer AVX desde la configuración del hipervisor o
+utilizar una máquina cuyo procesador sea compatible.
+
+### No borrar `/opt/splunk/*` como solución
+
+Este comando es destructivo:
+
+```bash
+rm -rf /opt/splunk/*
+```
+
+No lo utilices como procedimiento normal. Puede eliminar configuraciones,
+índices, credenciales, certificados, aplicaciones y datos del laboratorio. En
+una actualización fallida, el paquete puede seguir registrado en `dpkg` aunque
+la instalación no haya terminado correctamente; borrar el contenido no corrige
+el requisito AVX.
+
+Si ya se ha ejecutado, no vuelvas a lanzar comandos destructivos. Conserva la
+salida del error y comprueba primero el estado del paquete:
+
+```bash
+dpkg-query -W -f='${Status} ${Version}\n' splunk
+dpkg -s splunk
+```
+
+Si los datos son importantes, detén el trabajo y restaura `/opt/splunk` desde
+una copia de seguridad. Si es un laboratorio recién creado y no hay datos que
+conservar, corrige primero AVX y consulta el procedimiento de desinstalación y
+reinstalación de la distribución antes de eliminar nada más.
 
 ### `dpkg` no encuentra el archivo
 
