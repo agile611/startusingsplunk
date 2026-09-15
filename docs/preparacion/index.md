@@ -19,7 +19,7 @@ generales del curso](../curso/requisitos.md).
    reglas para cargar los archivos.
 4. [Comprobaciones previas](comprobaciones-previas.md): lista de validaciones
    antes de instalar y comenzar las prácticas.
-5. [Instalación de Splunk Enterprise 10.4.3](instalar-splunk-10-4-3.md): guía
+5. [Instalación de Splunk Enterprise 10.4.3](instalar-splunk.md): guía
    completa de descarga, instalación y validación del trial de 60 días.
 
 ## Orden recomendado
@@ -28,7 +28,7 @@ generales del curso](../curso/requisitos.md).
 2. Comprende la topología en [Arquitectura del laboratorio](arquitectura-laboratorio.md).
 3. Revisa los archivos disponibles en [Datos del laboratorio](datos-laboratorio.md).
 4. Ejecuta la lista de [Comprobaciones previas](comprobaciones-previas.md).
-5. Realiza la [instalación detallada de Splunk Enterprise](instalar-splunk-10-4-3.md).
+5. Realiza la [instalación detallada de Splunk Enterprise](instalar-splunk.md).
 6. Continúa con la [navegación por Splunk Web](../sesion-1/05-splunk-web.md) y la
    [ingesta de datos](../sesion-1/06-ingesta-datos.md).
 
