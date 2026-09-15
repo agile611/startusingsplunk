@@ -1,6 +1,8 @@
 # Agenda del curso
 
-El curso se desarrolla en **tres sesiones de seis horas**.
+El curso se desarrolla en **tres sesiones de seis horas** y sigue un recorrido
+práctico sobre una instancia mononodo de **Splunk Enterprise 10.0.1** instalada
+manualmente en **Ubuntu 24.04.5 LTS**.
 
 ## Sesión 1: fundamentos, instalación e ingestión
 
@@ -25,6 +27,10 @@ Al terminar la sesión podrás:
 - Crear un índice.
 - Incorporar un archivo CSV.
 - Validar los datos indexados.
+
+La instalación se realiza con el paquete `.deb`, se verifica la versión y se
+comprueba el acceso a Splunk Web en el puerto `8000`. Los datos de prácticas se
+organizan en el índice `curso`.
 
 ## Sesión 2: búsquedas y lenguaje SPL
 
@@ -51,6 +57,9 @@ Al terminar la sesión podrás:
 - Extraer campos mediante `rex`.
 - Optimizar búsquedas básicas.
 
+Las búsquedas se ejecutan inicialmente sobre `index=curso` y se validan
+utilizando los campos y timestamps reconocidos durante la ingesta.
+
 ## Sesión 3: reportes, dashboards y alertas
 
 | Bloque | Duración |
@@ -74,3 +83,18 @@ Al terminar la sesión podrás:
 - Añadir filtros interactivos.
 - Configurar alertas.
 - Presentar una solución de monitorización.
+
+El resultado final combina una búsqueda, una visualización o dashboard y una
+alerta justificadas a partir de los datos de laboratorio.
+
+## Secuencia de trabajo
+
+Cada sesión conecta con la siguiente:
+
+1. **Sesión 1:** preparar Ubuntu, instalar Splunk, ingerir datos y validar el
+   índice `curso`.
+2. **Sesión 2:** buscar y transformar esos eventos mediante SPL.
+3. **Sesión 3:** convertir las búsquedas en reportes, dashboards y alertas.
+
+La distribución temporal es orientativa. Las comprobaciones de instalación y
+la validación de datos tienen prioridad sobre avanzar a un bloque posterior.
