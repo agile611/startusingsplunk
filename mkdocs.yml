@@ -67,8 +67,8 @@ nav:
       - Arquitectura del laboratorio: preparacion/arquitectura-laboratorio.md
       - Datos del laboratorio: preparacion/datos-laboratorio.md
       - Comprobaciones previas: preparacion/comprobaciones-previas.md
-      - Arquitectura y componentes: preparacion/03-arquitectura.md
-      - Instalación en Ubuntu: preparacion/04-instalacion-ubuntu.md
+      - Arquitectura y componentes: preparacion/arquitectura.md
+      - Instalación en Ubuntu: preparacion/instalacion-ubuntu.md
       - Instalación de Splunk: preparacion/instalar-splunk.md
 
   - "Fundamentos e ingestión":
