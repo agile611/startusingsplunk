@@ -32,7 +32,7 @@ El resultado de `uname -m` debe ser `x86_64`.
 1. Accede al portal oficial de descargas de Splunk.
 2. Selecciona **Splunk Enterprise 10.0.1**.
 3. Descarga el paquete para **Linux**, formato **`.deb`** y arquitectura
-	**64-bit**.
+   **64-bit**.
 4. Guarda el archivo en el directorio `Descargas` de Ubuntu.
 
 El nombre exacto del archivo puede variar. Comprueba que el paquete existe:
@@ -167,7 +167,7 @@ condiciones:
 - `splunk status` indica que Splunk está ejecutándose.
 - Splunk Web responde en el puerto 8000.
 - Es posible iniciar sesión con la cuenta administrativa creada durante el
-	primer arranque.
+  primer arranque.
 - El servicio vuelve a iniciarse después de reiniciar Ubuntu.
 
 ## Problemas habituales
