@@ -1,0 +1,433 @@
+# Instalación de Splunk Enterprise 10.0.1
+
+Esta guía describe la instalación manual completa de **Splunk Enterprise
+10.0.1** sobre **Ubuntu 24.04.5 LTS** en una máquina de laboratorio de 64 bits.
+El procedimiento parte de una máquina preparada y termina con Splunk Web
+disponible, el servicio configurado para iniciarse automáticamente y una serie
+de comprobaciones que permiten validar la instalación.
+
+La instalación se realiza en un único nodo. En esta topología la misma
+instancia proporciona el servicio principal de Splunk, el indexer, el search
+head, el almacenamiento local y Splunk Web.
+
+## Resultado esperado
+
+Al terminar, se deben cumplir estas condiciones:
+
+- Splunk Enterprise 10.0.1 está instalado en `/opt/splunk`.
+- Ubuntu reconoce la arquitectura `x86_64`.
+- El servicio principal de Splunk está iniciado.
+- Splunk Web responde en `http://localhost:8000`.
+- La cuenta administrativa local permite iniciar sesión.
+- El servicio se inicia automáticamente después de reiniciar Ubuntu.
+- El entorno está preparado para crear el índice `curso` e ingerir los datos
+  del laboratorio.
+
+## 1. Requisitos previos
+
+Antes de descargar el instalador, confirma que la máquina cumple los requisitos
+descritos en [Requisitos de hardware](requisitos-hardware.md) y en los
+[requisitos generales del curso](../curso/requisitos.md).
+
+### Recursos recomendados
+
+- Ubuntu 24.04.5 LTS actualizado.
+- Arquitectura de 64 bits (`x86_64` o `amd64`).
+- Al menos 4 núcleos de CPU.
+- 16 GB de RAM recomendados.
+- Al menos 20 GB libres para Splunk y los datos iniciales.
+- Conexión a Internet para descargar el paquete.
+- Usuario con permisos `sudo`.
+- Navegador web actualizado.
+
+### Comprobar Ubuntu
+
+Ejecuta los siguientes comandos:
+
+```bash
+uname -m
+lsb_release -a
+nproc
+free -h
+df -h /
+```
+
+El resultado de `uname -m` debe ser `x86_64`. Comprueba que `df -h /` muestra
+espacio libre suficiente antes de comenzar. Splunk necesita espacio no solo
+para instalar el producto, sino también para guardar índices, logs internos y
+los datos del laboratorio.
+
+Actualiza los paquetes del sistema:
+
+```bash
+sudo apt update
+sudo apt upgrade -y
+```
+
+Reinicia Ubuntu si la actualización instala un kernel o componentes que lo
+requieran:
+
+```bash
+sudo reboot
+```
+
+Después de reiniciar, vuelve a abrir una terminal y repite las comprobaciones
+de arquitectura, memoria y espacio.
+
+## 2. Preparar el directorio de descarga
+
+Crea un directorio local para guardar el paquete. Así se separa el instalador
+de los archivos de datos que se utilizarán posteriormente:
+
+```bash
+mkdir -p ~/Descargas/splunk-10.0.1
+cd ~/Descargas/splunk-10.0.1
+```
+
+Si Ubuntu utiliza nombres de directorio en inglés, usa `~/Downloads` en lugar
+de `~/Descargas`.
+
+## 3. Descargar Splunk Enterprise
+
+La descarga se realiza desde el portal oficial de Splunk. El instalador
+requiere normalmente una cuenta de Splunk y la aceptación de las condiciones de
+descarga.
+
+1. Abre el portal oficial de descargas de Splunk.
+2. Inicia sesión con tu cuenta.
+3. Selecciona **Splunk Enterprise**.
+4. Selecciona la versión **10.0.1**.
+5. Selecciona **Linux** como sistema operativo.
+6. Selecciona el paquete **`.deb`** para arquitectura **64-bit**.
+7. Acepta las condiciones de licencia si el portal las solicita.
+8. Descarga el archivo en `~/Descargas/splunk-10.0.1`.
+
+El nombre exacto puede incluir el número de compilación. Por eso, no conviene
+escribir manualmente un nombre supuesto en los comandos siguientes. Comprueba
+qué archivo se ha descargado:
+
+```bash
+cd ~/Descargas/splunk-10.0.1
+ls -lh
+```
+
+Debe aparecer un único paquete `.deb` de Splunk Enterprise. Comprueba también
+que el archivo es un paquete Debian válido:
+
+```bash
+dpkg-deb --info splunk-*.deb | sed -n '1,20p'
+```
+
+La salida debe identificar el paquete de Splunk para Linux de 64 bits. Si no
+aparece ningún archivo, revisa la carpeta de descargas o mueve el instalador a
+la ruta indicada antes de continuar.
+
+## 4. Verificar la descarga
+
+No instales un archivo descargado incompleto o alterado. Calcula su suma
+SHA-256:
+
+```bash
+cd ~/Descargas/splunk-10.0.1
+sha256sum splunk-*.deb
+```
+
+Compara el valor mostrado con la suma SHA-256 publicada por Splunk para la
+misma versión, sistema operativo, arquitectura y archivo. La comparación solo
+es válida si coinciden todos esos datos.
+
+Si la suma no coincide:
+
+1. Elimina el archivo incompleto.
+2. Descarga de nuevo el paquete desde el portal oficial.
+3. Calcula otra vez la suma.
+4. No continúes hasta obtener una coincidencia.
+
+Para comprobar que el archivo no está vacío:
+
+```bash
+stat -c '%n %s bytes' splunk-*.deb
+```
+
+## 5. Instalar el paquete `.deb`
+
+Desde el directorio donde está el instalador, ejecuta:
+
+```bash
+cd ~/Descargas/splunk-10.0.1
+sudo dpkg -i splunk-*.deb
+```
+
+El instalador coloca Splunk en:
+
+```text
+/opt/splunk
+```
+
+Comprueba que la carpeta existe y que el binario responde:
+
+```bash
+ls -ld /opt/splunk
+sudo /opt/splunk/bin/splunk version
+```
+
+La versión mostrada debe ser **10.0.1**.
+
+### Resolver dependencias
+
+Si `dpkg` informa de dependencias pendientes, ejecuta:
+
+```bash
+sudo apt --fix-broken install -y
+```
+
+Después completa la instalación del paquete y vuelve a comprobar la versión:
+
+```bash
+cd ~/Descargas/splunk-10.0.1
+sudo dpkg -i splunk-*.deb
+sudo /opt/splunk/bin/splunk version
+```
+
+No borres `/opt/splunk` para resolver un error de dependencias. Primero revisa
+el mensaje de `dpkg` y el estado de los paquetes:
+
+```bash
+dpkg --print-architecture
+dpkg -l | grep -i splunk
+```
+
+## 6. Preparar el usuario del servicio
+
+Splunk no debe ejecutarse habitualmente con una cuenta administrativa de
+Ubuntu. Comprueba si existe el usuario de servicio `splunk`:
+
+```bash
+getent passwd splunk
+```
+
+Si el comando no devuelve ninguna línea, créalo como usuario del sistema sin
+acceso interactivo:
+
+```bash
+sudo useradd --system --home-dir /opt/splunk --shell /usr/sbin/nologin splunk
+```
+
+Asigna la propiedad de la instalación a ese usuario:
+
+```bash
+sudo chown -R splunk:splunk /opt/splunk
+```
+
+Comprueba la propiedad principal:
+
+```bash
+stat -c '%U:%G %n' /opt/splunk
+```
+
+Debe mostrar `splunk:splunk`. Si la instalación ya creó el usuario o el
+paquete utiliza una configuración de permisos diferente, conserva el usuario
+indicado por el instalador y no cambies permisos de forma indiscriminada.
+
+## 7. Primer inicio y aceptación de licencia
+
+Inicia Splunk por primera vez con la cuenta de servicio. El primer arranque
+solicitará crear las credenciales administrativas de Splunk:
+
+```bash
+sudo -u splunk /opt/splunk/bin/splunk start --accept-license
+```
+
+Durante el proceso:
+
+1. Lee y acepta la licencia cuando se solicite.
+2. Escribe un nombre de usuario administrador.
+3. Escribe una contraseña robusta.
+4. Confirma la contraseña.
+5. Espera a que termine la inicialización de Splunk Web.
+
+La cuenta de Splunk es independiente de la cuenta de Ubuntu. No guardes la
+contraseña en este repositorio ni en documentos públicos del curso.
+
+Comprueba el estado del servicio:
+
+```bash
+sudo -u splunk /opt/splunk/bin/splunk status
+```
+
+Si el servicio ya está iniciado, no ejecutes repetidamente `start`; utiliza
+`status` para comprobarlo.
+
+## 8. Acceder a Splunk Web
+
+En el navegador de la misma máquina abre:
+
+```text
+http://localhost:8000
+```
+
+Inicia sesión con el usuario y la contraseña creados en el primer arranque.
+
+Si accedes desde otro equipo de la red, consulta la dirección IP de Ubuntu:
+
+```bash
+hostname -I
+```
+
+Después utiliza:
+
+```text
+http://DIRECCION_IP_DE_UBUNTU:8000
+```
+
+No publiques Splunk Web en Internet sin configurar adecuadamente firewall,
+TLS, autenticación y controles de acceso.
+
+## 9. Configurar el inicio automático
+
+Configura el arranque automático usando el usuario de servicio `splunk`:
+
+```bash
+sudo /opt/splunk/bin/splunk enable boot-start -user splunk
+```
+
+Comprueba que el comando termina sin errores. Dependiendo de la versión y de la
+configuración de Ubuntu, Splunk puede crear una unidad de servicio o integrar
+el arranque mediante el mecanismo soportado por el paquete.
+
+Reinicia la máquina para validar el arranque real:
+
+```bash
+sudo reboot
+```
+
+Después del reinicio, espera unos segundos y comprueba:
+
+```bash
+sudo -u splunk /opt/splunk/bin/splunk status
+```
+
+Si no se inicia automáticamente, revisa el mensaje mostrado por
+`enable boot-start`, el estado del servicio y los logs de Ubuntu antes de
+repetir la configuración.
+
+## 10. Comprobar puertos
+
+La instalación utiliza estos puertos:
+
+| Puerto | Uso | Cuándo es necesario |
+|---:|---|---|
+| 8000 | Splunk Web | Siempre que se utilice la interfaz web. |
+| 8089 | API y administración de `splunkd` | Funcionamiento interno de Splunk. |
+| 9997 | Entrada TCP desde Universal Forwarder | Solo si se configura un forwarder. |
+
+Comprueba los puertos en escucha:
+
+```bash
+sudo ss -ltnp | grep -E ':8000|:8089|:9997'
+```
+
+En el laboratorio básico deben aparecer 8000 y 8089. El puerto 9997 no es
+necesario para cargar el CSV local y no debe abrirse sin una razón concreta.
+
+## 11. Validación funcional
+
+Ejecuta las comprobaciones siguientes:
+
+```bash
+sudo /opt/splunk/bin/splunk version
+sudo -u splunk /opt/splunk/bin/splunk status
+curl -I http://localhost:8000
+```
+
+El resultado esperado es:
+
+- Versión `10.0.1`.
+- Estado `splunkd` en ejecución.
+- Respuesta HTTP del puerto 8000.
+- Acceso correcto a Splunk Web desde el navegador.
+
+También puedes revisar el log principal si hay dudas:
+
+```bash
+sudo tail -n 50 /opt/splunk/var/log/splunk/splunkd.log
+```
+
+## 12. Preparar el laboratorio
+
+Una vez validada la instalación:
+
+1. Consulta los [datos del laboratorio](datos-laboratorio.md).
+2. Revisa el archivo [`eventos_web.csv`](../downloads/eventos_web.csv).
+3. Sigue la guía de [Ingesta de datos](../sesion-1/06-ingesta-datos.md).
+4. Carga los eventos en el índice `curso`.
+5. Valida la carga con:
+
+```spl
+index=curso
+| stats count by sourcetype
+```
+
+La configuración del índice se explica en [Gestión de índices](../sesion-1/07-indices.md).
+
+## Problemas frecuentes
+
+### `dpkg` no encuentra el archivo
+
+Comprueba el directorio actual y el nombre real del paquete:
+
+```bash
+pwd
+ls -lh ~/Descargas/splunk-10.0.1
+```
+
+### La versión no es 10.0.1
+
+Es posible que se haya descargado otra versión o que el comando se esté
+ejecutando sobre otra instalación. Comprueba:
+
+```bash
+sudo /opt/splunk/bin/splunk version
+dpkg -l | grep -i splunk
+```
+
+No mezcles paquetes de distintas versiones durante la práctica.
+
+### Splunk Web no responde
+
+Comprueba estado, puertos y log:
+
+```bash
+sudo -u splunk /opt/splunk/bin/splunk status
+sudo ss -ltnp | grep -E ':8000|:8089'
+sudo tail -n 50 /opt/splunk/var/log/splunk/splunkd.log
+```
+
+Consulta también [No funciona el acceso web](../troubleshooting/acceso-web.md).
+
+### El servicio no arranca después de reiniciar
+
+Revisa que el usuario de servicio exista y que el arranque automático se haya
+habilitado con el mismo usuario:
+
+```bash
+getent passwd splunk
+sudo /opt/splunk/bin/splunk status
+```
+
+Consulta [Splunk no inicia](../troubleshooting/splunk-no-inicia.md) antes de
+reinstalar.
+
+### Los eventos no aparecen
+
+La instalación puede estar correcta aunque la ingesta tenga un problema.
+Comprueba el índice, el intervalo temporal, el `sourcetype` y los permisos.
+Consulta [Los datos no aparecen](../troubleshooting/datos-no-aparecen.md).
+
+## Referencias del procedimiento
+
+- [Requisitos de hardware](requisitos-hardware.md).
+- [Arquitectura del laboratorio](arquitectura-laboratorio.md).
+- [Comprobaciones previas](comprobaciones-previas.md).
+- [Instalación en Ubuntu de la sesión 1](../sesion-1/04-instalacion-ubuntu.md).
+- [Datos del laboratorio](datos-laboratorio.md).

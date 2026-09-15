@@ -19,6 +19,8 @@ generales del curso](../curso/requisitos.md).
    reglas para cargar los archivos.
 4. [Comprobaciones previas](comprobaciones-previas.md): lista de validaciones
    antes de instalar y comenzar las prácticas.
+5. [Instalación de Splunk Enterprise 10.0.1](instalar-splunk-10-0-1.md): guía
+   completa de descarga, instalación y validación.
 
 ## Orden recomendado
 
@@ -26,7 +28,7 @@ generales del curso](../curso/requisitos.md).
 2. Comprende la topología en [Arquitectura del laboratorio](arquitectura-laboratorio.md).
 3. Revisa los archivos disponibles en [Datos del laboratorio](datos-laboratorio.md).
 4. Ejecuta la lista de [Comprobaciones previas](comprobaciones-previas.md).
-5. Realiza la [instalación manual en Ubuntu](../sesion-1/04-instalacion-ubuntu.md).
+5. Realiza la [instalación detallada de Splunk Enterprise](instalar-splunk-10-0-1.md).
 6. Continúa con la [navegación por Splunk Web](../sesion-1/05-splunk-web.md) y la
    [ingesta de datos](../sesion-1/06-ingesta-datos.md).
 

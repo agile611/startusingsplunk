@@ -5,6 +5,9 @@ sobre **Ubuntu 24.04.5 LTS**. Se utiliza una versión fija para que todos los
 participantes trabajen con los mismos menús, comandos y comportamiento durante
 el curso.
 
+Para el procedimiento completo de descarga, verificación, instalación y
+configuración, consulta la [guía detallada de instalación](../preparacion/instalar-splunk-10-0-1.md).
+
 ## Requisitos previos
 
 Antes de comenzar, comprueba lo siguiente:
