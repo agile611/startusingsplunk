@@ -6,7 +6,7 @@ participantes trabajen con los mismos menús, comandos y comportamiento durante
 el curso.
 
 Para el procedimiento completo de descarga, verificación, instalación y
-configuración, consulta la [guía detallada de instalación](../preparacion/instalar-splunk-10-4-3.md).
+configuración, consulta la [guía detallada de instalación](../preparacion/instalar-splunk.md).
 
 ## Requisitos previos
 
