@@ -67,14 +67,14 @@ nav:
       - Arquitectura del laboratorio: preparacion/arquitectura-laboratorio.md
       - Datos del laboratorio: preparacion/datos-laboratorio.md
       - Comprobaciones previas: preparacion/comprobaciones-previas.md
+      - Arquitectura y componentes: preparacion/03-arquitectura.md
+      - Instalación en Ubuntu: preparacion/04-instalacion-ubuntu.md
       - Instalación de Splunk: preparacion/instalar-splunk.md
 
-  - "Fundamentos e instalación":
+  - "Fundamentos e ingestión":
       - Resumen: sesion-1/index.md
       - Introducción a Splunk: sesion-1/01-introduccion.md
       - Conceptos fundamentales: sesion-1/02-conceptos-fundamentales.md
-      - Arquitectura y componentes: sesion-1/03-arquitectura.md
-      - Instalación en Ubuntu: sesion-1/04-instalacion-ubuntu.md
       - Navegación por Splunk Web: sesion-1/05-splunk-web.md
       - Ingesta de datos: sesion-1/06-ingesta-datos.md
       - Gestión de índices: sesion-1/07-indices.md

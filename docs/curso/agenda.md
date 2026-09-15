@@ -4,16 +4,16 @@ El curso se desarrolla en **tres sesiones de seis horas** y sigue un recorrido
 práctico sobre una instancia mononodo de **Splunk Enterprise 10.4.3** instalada
 manualmente en **Ubuntu 24.04.5 LTS**.
 
-## Sesión 1: fundamentos, instalación e ingestión
+## Sesión 1: fundamentos e ingestión
 
 | Bloque | Duración |
 |---|---:|
 | Presentación e introducción a Splunk | 45 minutos |
 | Conceptos fundamentales | 45 minutos |
-| Arquitectura y componentes | 60 minutos |
-| Instalación en Ubuntu | 90 minutos |
+| Preparación, arquitectura y componentes | 60 minutos |
+| Ingesta de datos e índices | 90 minutos |
 | Navegación por Splunk Web | 30 minutos |
-| Ingesta de datos e índices | 60 minutos |
+| Búsquedas iniciales y validación | 60 minutos |
 | Laboratorio y repaso | 30 minutos |
 
 ### Resultados de aprendizaje
@@ -22,15 +22,15 @@ Al terminar la sesión podrás:
 
 - Explicar qué es un evento en Splunk.
 - Identificar los principales componentes.
-- Instalar e iniciar Splunk Enterprise.
+- Verificar una instalación de Splunk Enterprise preparada previamente.
 - Acceder a Splunk Web.
 - Crear un índice.
 - Incorporar un archivo CSV.
 - Validar los datos indexados.
 
-La instalación se realiza con el paquete `.deb`, se verifica la versión y se
-comprueba el acceso a Splunk Web en el puerto `8000`. Los datos de prácticas se
-organizan en el índice `curso`.
+La instalación se realiza antes de la sesión, dentro del bloque [Preparación](../preparacion/index.md),
+con el paquete `.deb`. Durante la sesión se verifica la versión, el acceso a
+Splunk Web en el puerto `8000` y la disponibilidad del índice `curso`.
 
 ## Sesión 2: búsquedas y lenguaje SPL
 

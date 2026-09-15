@@ -8,7 +8,7 @@ alertas.
 
 En este curso trabajaremos con una instalación local de **Splunk Enterprise
 10.4.3** sobre **Ubuntu 24.04.5 LTS**. La instalación se realizará manualmente
-con el paquete `.deb`, tal como se explica en [Instalación en Ubuntu](04-instalacion-ubuntu.md).
+con el paquete `.deb`, tal como se explica en [Instalación en Ubuntu](../preparacion/04-instalacion-ubuntu.md).
 
 ## Objetivos de esta introducción
 

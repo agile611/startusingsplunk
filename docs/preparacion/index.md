@@ -5,7 +5,7 @@ el laboratorio. El entorno de referencia es una instalación manual de
 **Splunk Enterprise 10.4.3** sobre **Ubuntu 24.04.5 LTS**, ejecutada como un
 laboratorio mononodo.
 
-Haremos esta preparación durante la [sesión 1](../sesion-1/index.md).
+Completa esta preparación antes de comenzar la [sesión 1](../sesion-1/index.md).
 Si todavía no tienes la máquina preparada, consulta primero los [requisitos
 generales del curso](../curso/requisitos.md).
 
@@ -19,7 +19,11 @@ generales del curso](../curso/requisitos.md).
    reglas para cargar los archivos.
 4. [Comprobaciones previas](comprobaciones-previas.md): lista de validaciones
    antes de instalar y comenzar las prácticas.
-5. [Instalación de Splunk Enterprise 10.4.3](instalar-splunk.md): guía
+5. [Arquitectura y componentes](arquitectura.md): componentes principales
+   de la instancia mononodo.
+6. [Instalación en Ubuntu](instalacion-ubuntu.md): resumen del proceso de
+   instalación y enlace a la guía detallada.
+7. [Instalación de Splunk Enterprise 10.4.3](instalar-splunk.md): guía
    completa de descarga, instalación y validación del trial de 60 días.
 
 ## Orden recomendado
@@ -28,8 +32,9 @@ generales del curso](../curso/requisitos.md).
 2. Comprende la topología en [Arquitectura del laboratorio](arquitectura-laboratorio.md).
 3. Revisa los archivos disponibles en [Datos del laboratorio](datos-laboratorio.md).
 4. Ejecuta la lista de [Comprobaciones previas](comprobaciones-previas.md).
-5. Realiza la [instalación detallada de Splunk Enterprise](instalar-splunk.md).
-6. Continúa con la [navegación por Splunk Web](../sesion-1/05-splunk-web.md) y la
+5. Consulta el resumen de [instalación en Ubuntu](instalacion-ubuntu.md).
+6. Realiza la [instalación detallada de Splunk Enterprise](instalar-splunk.md).
+7. Continúa con la [navegación por Splunk Web](../sesion-1/05-splunk-web.md) y la
    [ingesta de datos](../sesion-1/06-ingesta-datos.md).
 
 ## Criterio de preparación completada

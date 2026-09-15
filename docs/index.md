@@ -27,7 +27,7 @@ Al finalizar la formación podrás:
 
 | Sesión | Contenido | Duración |
 |---|---|---:|
-| Sesión 1 | Fundamentos, instalación e ingestión | 6 horas |
+| Sesión 1 | Fundamentos e ingestión | 6 horas |
 | Sesión 2 | Búsquedas, comandos y funciones SPL | 6 horas |
 | Sesión 3 | Reportes, dashboards, alertas y proyecto | 6 horas |
 
