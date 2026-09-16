@@ -105,16 +105,11 @@ las siguientes sesiones con estructura y criterio.
 
 ## Referencias útiles para reforzar lo aprendido
 
-- Documentación general de Splunk:
-  https://docs.splunk.com/Documentation/Splunk
-- Búsqueda y uso de Splunk Web:
-  https://docs.splunk.com/Documentation/Splunk/latest/User/UsingSplunkWeb
-- Documentación de ingesta y fuentes:
-  https://docs.splunk.com/Documentation/Splunk/latest/Data/Whatissource
-- Documentación sobre índices:
-  https://docs.splunk.com/Documentation/Splunk/latest/Indexer/Aboutindexes
-- Administración general:
-  https://docs.splunk.com/Documentation/Splunk/latest/Admin/Welcome-to-Admin
+- [Documentación general de Splunk](https://docs.splunk.com/Documentation/Splunk)
+- [Búsqueda y uso de Splunk Web](https://docs.splunk.com/Documentation/Splunk/latest/User/UsingSplunkWeb)
+- [Documentación de ingesta y fuentes](https://docs.splunk.com/Documentation/Splunk/latest/Data/Whatissource)
+- [Documentación sobre índices](https://docs.splunk.com/Documentation/Splunk/latest/Indexer/Aboutindexes)
+- [Administración general](https://docs.splunk.com/Documentation/Splunk/latest/Admin/Welcome-to-Admin)
 
 También conviene recorrer otra vez estas páginas del curso:
 

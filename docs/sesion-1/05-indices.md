@@ -151,14 +151,10 @@ En un entorno real, el administrador debe revisar estos aspectos con frecuencia.
 Para ampliar la administración de índices en Splunk, estas referencias oficiales
 son útiles:
 
-- Documentación sobre índices:
-  https://docs.splunk.com/Documentation/Splunk/latest/Indexer/Aboutindexes
-- Conceptos de indexación y almacenamiento:
-  https://docs.splunk.com/Documentation/Splunk/latest/Indexer/Howindexingworks
-- Administración general:
-  https://docs.splunk.com/Documentation/Splunk/latest/Admin/Welcome-to-Admin
-- Guía de configuración y mantenimiento:
-  https://docs.splunk.com/Documentation/Splunk/latest/Admin/Configurationoverview
+- [Documentación sobre índices](https://docs.splunk.com/Documentation/Splunk/latest/Indexer/Aboutindexes)
+- [Conceptos de indexación y almacenamiento](https://docs.splunk.com/Documentation/Splunk/latest/Indexer/Howindexingworks)
+- [Administración general](https://docs.splunk.com/Documentation/Splunk/latest/Admin/Welcome-to-Admin)
+- [Guía de configuración y mantenimiento](https://docs.splunk.com/Documentation/Splunk/latest/Admin/Configurationoverview)
 
 También puedes relacionar esta parte con:
 
