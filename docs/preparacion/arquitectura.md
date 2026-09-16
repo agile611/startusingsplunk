@@ -321,16 +321,11 @@ de almacenamiento.
 Para ampliar la teoría y contrastar la práctica del curso, estas son
 referencias oficiales de Splunk útiles:
 
-- Documentación de Splunk sobre indexers:
-  https://docs.splunk.com/Documentation/Splunk/latest/Indexer/Aboutindexers
-- Documentación sobre search heads:
-  https://docs.splunk.com/Documentation/Splunk/latest/Search/Aboutsearchheads
-- Documentación sobre forwarders:
-  https://docs.splunk.com/Documentation/Splunk/latest/Forwarding/Aboutforwarding
-- Visión general de configuración de Splunk:
-  https://docs.splunk.com/Documentation/Splunk/latest/Admin/Configurationoverview
-- Guía de administración general:
-  https://docs.splunk.com/Documentation/Splunk/latest/Admin/Welcome-to-Admin
+- [Documentación de Splunk sobre indexers](https://docs.splunk.com/Documentation/Splunk/latest/Indexer/Aboutindexers)
+- [Documentación sobre search heads](https://docs.splunk.com/Documentation/Splunk/latest/Search/Aboutsearchheads)
+- [Documentación sobre forwarders](https://docs.splunk.com/Documentation/Splunk/latest/Forwarding/Aboutforwarding)
+- [Visión general de configuración de Splunk](https://docs.splunk.com/Documentation/Splunk/latest/Admin/Configurationoverview)
+- [Guía de administración general](https://docs.splunk.com/Documentation/Splunk/latest/Admin/Welcome-to-Admin)
 
 Además de la documentación oficial, el curso sigue una progresión práctica que
 irá conectando estos conceptos con:
