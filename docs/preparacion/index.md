@@ -32,7 +32,7 @@ generales del curso](../curso/requisitos.md).
 4. Ejecuta la lista de [Comprobaciones previas](comprobaciones-previas.md).
 5. Realiza la [instalación detallada de Splunk Enterprise](instalar-splunk.md).
 6. Continúa con la [navegación por Splunk Web](../sesion-1/03-splunk-web.md) y la
-   [ingesta de datos](../sesion-1/04-splunk-web.md).
+   [ingesta de datos](../sesion-1/04-ingesta-datos.md).
 
 ## Criterio de preparación completada
 

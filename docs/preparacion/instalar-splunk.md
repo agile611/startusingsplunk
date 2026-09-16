@@ -627,7 +627,7 @@ Una vez validada la instalación:
 
 1. Consulta los [datos del laboratorio](datos-laboratorio.md).
 2. Revisa el archivo [`eventos_web.csv`](../downloads/eventos_web.csv).
-3. Sigue la guía de [Ingesta de datos](../sesion-1/04-splunk-web.md).
+3. Sigue la guía de [Ingesta de datos](../sesion-1/04-ingesta-datos.md).
 4. Carga los eventos en el índice `curso`.
 5. Valida la carga con:
 

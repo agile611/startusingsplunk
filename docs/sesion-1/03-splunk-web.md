@@ -206,7 +206,7 @@ También puedes relacionar este documento con:
 - [Conceptos fundamentales](02-conceptos-fundamentales.md)
 - [Arquitectura del laboratorio](../preparacion/arquitectura-laboratorio.md)
 - [Datos del laboratorio](../preparacion/datos-laboratorio.md)
-- [Ingesta de datos](04-splunk-web.md)
+- [Ingesta de datos](04-ingesta-datos.md)
 
 ## Resumen
 

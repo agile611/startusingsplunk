@@ -22,8 +22,8 @@ monitorización reutilizables.
 5. [Filtros y tokens](05-filtros-tokens.md)
 6. [Alertas](06-alertas.md)
 7. [Administración y seguridad](07-seguridad.md)
-8. [Laboratorios](06-laboratorios.md)
-9. [Repaso](07-repaso.md)
+8. [Laboratorios](08-laboratorios.md)
+9. [Repaso](09-repaso.md)
 
 ## Dashboard que construiremos
 

@@ -91,7 +91,7 @@ También es recomendable revisar antes de cargar:
 5. Ejecuta una búsqueda de validación.
 6. Continúa con las estadísticas y visualizaciones.
 
-La guía práctica de carga se encuentra en [Ingesta de datos](../sesion-1/04-splunk-web.md).
+La guía práctica de carga se encuentra en [Ingesta de datos](../sesion-1/04-ingesta-datos.md).
 
 En la práctica, el flujo no termina cuando el archivo aparece en Splunk. Lo
 crítico es comprobar que el evento se ha normalizado bien, que el tiempo es
@@ -173,7 +173,7 @@ son referencias útiles:
 
 También puedes relacionar este contenido con el resto del curso:
 
-- [Ingesta de datos](../sesion-1/04-splunk-web.md)
+- [Ingesta de datos](../sesion-1/04-ingesta-datos.md)
 - [Gestión de índices](../sesion-1/05-indices.md)
 - [Búsquedas básicas](../sesion-2/02-busquedas-basicas.md)
 - [Los datos no aparecen](../troubleshooting/datos-no-aparecen.md)

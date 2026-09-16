@@ -273,7 +273,7 @@ También conviene relacionar este archivo con el resto del curso:
 - [Introducción](01-introduccion.md)
 - [Arquitectura del laboratorio](../preparacion/arquitectura-laboratorio.md)
 - [Datos del laboratorio](../preparacion/datos-laboratorio.md)
-- [Ingesta de datos](04-splunk-web.md)
+- [Ingesta de datos](04-ingesta-datos.md)
 - [Gestión de índices](05-indices.md)
 
 ## Resumen de conceptos
