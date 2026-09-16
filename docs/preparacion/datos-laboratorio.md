@@ -166,14 +166,10 @@ mirando el mismo punto varias veces sin diagnosticar bien la causa.
 Para ampliar el contexto de la ingesta y el uso de datasets de laboratorio, estas
 son referencias útiles:
 
-- Documentación de Splunk sobre entradas de datos:
-  https://docs.splunk.com/Documentation/Splunk/latest/Data/Whatissource
-- Documentación sobre índices y almacenamientos:
-  https://docs.splunk.com/Documentation/Splunk/latest/Indexer/Aboutindexes
-- Guía sobre `sourcetype` y campos:
-  https://docs.splunk.com/Documentation/Splunk/latest/Data/Configurecustomsourcetypes
-- Manual de administración de Splunk:
-  https://docs.splunk.com/Documentation/Splunk/latest/Admin/Welcome-to-Admin
+- [Documentación de Splunk sobre entradas de datos](https://docs.splunk.com/Documentation/Splunk/latest/Data/Whatissource)
+- [Documentación sobre índices y almacenamientos](https://docs.splunk.com/Documentation/Splunk/latest/Indexer/Aboutindexes)
+- [Guía sobre `sourcetype` y campos](https://docs.splunk.com/Documentation/Splunk/latest/Data/Configurecustomsourcetypes)
+- [Manual de administración de Splunk](https://docs.splunk.com/Documentation/Splunk/latest/Admin/Welcome-to-Admin)
 
 También puedes relacionar este contenido con el resto del curso:
 
