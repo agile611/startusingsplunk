@@ -64,12 +64,11 @@ nav:
   - Preparación:
       - Introducción: preparacion/index.md
       - Requisitos de hardware: preparacion/requisitos-hardware.md
+      - Comprobaciones previas: preparacion/comprobaciones-previas.md
+      - Instalación de Splunk: preparacion/instalar-splunk.md
+      - Arquitectura y componentes: preparacion/arquitectura.md
       - Arquitectura del laboratorio: preparacion/arquitectura-laboratorio.md
       - Datos del laboratorio: preparacion/datos-laboratorio.md
-      - Comprobaciones previas: preparacion/comprobaciones-previas.md
-      - Arquitectura y componentes: preparacion/arquitectura.md
-      - Instalación en Ubuntu: preparacion/instalacion-ubuntu.md
-      - Instalación de Splunk: preparacion/instalar-splunk.md
 
   - "Fundamentos e ingestión":
       - Resumen: sesion-1/index.md

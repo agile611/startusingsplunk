@@ -13,18 +13,16 @@ generales del curso](../curso/requisitos.md).
 
 1. [Requisitos de hardware](requisitos-hardware.md): recursos mínimos y
    recomendaciones para una máquina física o virtual.
-2. [Arquitectura del laboratorio](arquitectura-laboratorio.md): componentes,
-   puertos y recorrido de los datos.
-3. [Datos del laboratorio](datos-laboratorio.md): datasets, índice de destino y
-   reglas para cargar los archivos.
-4. [Comprobaciones previas](comprobaciones-previas.md): lista de validaciones
+2. [Comprobaciones previas](comprobaciones-previas.md): lista de validaciones
    antes de instalar y comenzar las prácticas.
-5. [Arquitectura y componentes](arquitectura.md): componentes principales
+3. [Arquitectura y componentes](arquitectura.md): componentes principales
    de la instancia mononodo.
-6. [Instalación en Ubuntu](instalacion-ubuntu.md): resumen del proceso de
-   instalación y enlace a la guía detallada.
-7. [Instalación de Splunk Enterprise 10.4.3](instalar-splunk.md): guía
+4. [Instalación de Splunk Enterprise 10.4.3](instalar-splunk.md): guía
    completa de descarga, instalación y validación del trial de 60 días.
+5. [Arquitectura del laboratorio](arquitectura-laboratorio.md): componentes,
+   puertos y recorrido de los datos.
+6. [Datos del laboratorio](datos-laboratorio.md): datasets, índice de destino y
+   reglas para cargar los archivos.
 
 ## Orden recomendado
 
