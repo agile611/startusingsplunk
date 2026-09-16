@@ -75,7 +75,7 @@ nav:
       - Introducción a Splunk: sesion-1/01-introduccion.md
       - Conceptos fundamentales: sesion-1/02-conceptos-fundamentales.md
       - Navegación por Splunk Web: sesion-1/03-splunk-web.md
-      - Ingesta de datos: sesion-1/04-splunk-web.md
+      - Ingesta de datos: sesion-1/04-ingesta-datos.md
       - Gestión de índices: sesion-1/05-indices.md
       - Laboratorios: sesion-1/06-laboratorios.md
       - Repaso: sesion-1/07-repaso.md
