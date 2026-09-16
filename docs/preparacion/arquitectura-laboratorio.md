@@ -95,7 +95,7 @@ Este flujo puede dividirse también en diagnósticos prácticos:
 Esta forma de pensar es especialmente útil cuando un evento no aparece y la
 respuesta no es “reinstalar Splunk”, sino comprobar la etapa exacta donde falla.
 
-El flujo completo se practica en [Ingesta de datos](../sesion-1/06-ingesta-datos.md)
+El flujo completo se practica en [Ingesta de datos](../sesion-1/04-splunk-web.md)
 y se consulta con las técnicas de [Búsquedas básicas](../sesion-2/02-busquedas-basicas.md).
 
 ## Puertos
@@ -185,7 +185,7 @@ referencias oficiales de Splunk:
 
 También es útil relacionar este documento con el resto del curso:
 
-- [Ingesta de datos](../sesion-1/06-ingesta-datos.md)
+- [Ingesta de datos](../sesion-1/04-splunk-web.md)
 - [Búsquedas básicas](../sesion-2/02-busquedas-basicas.md)
 - [Arquitectura y componentes](arquitectura.md)
 - [Instalar Splunk en Ubuntu](instalar-splunk.md)

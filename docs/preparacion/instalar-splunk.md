@@ -627,7 +627,7 @@ Una vez validada la instalación:
 
 1. Consulta los [datos del laboratorio](datos-laboratorio.md).
 2. Revisa el archivo [`eventos_web.csv`](../downloads/eventos_web.csv).
-3. Sigue la guía de [Ingesta de datos](../sesion-1/06-ingesta-datos.md).
+3. Sigue la guía de [Ingesta de datos](../sesion-1/04-splunk-web.md).
 4. Carga los eventos en el índice `curso`.
 5. Valida la carga con:
 
@@ -636,7 +636,7 @@ index=curso
 | stats count by sourcetype
 ```
 
-La configuración del índice se explica en [Gestión de índices](../sesion-1/07-indices.md).
+La configuración del índice se explica en [Gestión de índices](../sesion-1/05-indices.md).
 
 ## 15. Errores y soluciones
 

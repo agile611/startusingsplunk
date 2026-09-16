@@ -210,7 +210,7 @@ También te puede resultar útil conectar esta parte con otros contenidos:
 - [Introducción](01-introduccion.md)
 - [Conceptos fundamentales](02-conceptos-fundamentales.md)
 - [Splunk Web](03-splunk-web.md)
-- [Gestión de índices](07-indices.md)
+- [Gestión de índices](05-indices.md)
 - [Datos del laboratorio](../preparacion/datos-laboratorio.md)
 
 ## Resumen

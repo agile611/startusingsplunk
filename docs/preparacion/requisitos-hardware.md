@@ -56,7 +56,7 @@ du -sh /opt/splunk 2>/dev/null
 ```
 
 No borres manualmente subdirectorios de `/opt/splunk`. La administración de
-índices y retención se estudia en [Gestión de índices](../sesion-1/07-indices.md).
+índices y retención se estudia en [Gestión de índices](../sesion-1/05-indices.md).
 
 ## Red y puertos
 

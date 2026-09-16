@@ -213,8 +213,8 @@ También conviene enlazar esta sesión con el resto del curso:
 - [Instalación de Splunk](../preparacion/instalar-splunk.md)
 - [Arquitectura del laboratorio](../preparacion/arquitectura-laboratorio.md)
 - [Datos del laboratorio](../preparacion/datos-laboratorio.md)
-- [Ingesta de datos](../sesion-1/06-ingesta-datos.md)
-- [Gestión de índices](../sesion-1/07-indices.md)
+- [Ingesta de datos](../sesion-1/04-splunk-web.md)
+- [Gestión de índices](../sesion-1/05-indices.md)
 
 ## Resumen
 

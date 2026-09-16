@@ -74,11 +74,11 @@ nav:
       - Resumen: sesion-1/index.md
       - Introducción a Splunk: sesion-1/01-introduccion.md
       - Conceptos fundamentales: sesion-1/02-conceptos-fundamentales.md
-      - Navegación por Splunk Web: sesion-1/05-splunk-web.md
-      - Ingesta de datos: sesion-1/06-ingesta-datos.md
-      - Gestión de índices: sesion-1/07-indices.md
-      - Laboratorios: sesion-1/08-laboratorios.md
-      - Repaso: sesion-1/09-repaso.md
+      - Navegación por Splunk Web: sesion-1/03-splunk-web.md
+      - Ingesta de datos: sesion-1/04-splunk-web.md
+      - Gestión de índices: sesion-1/05-indices.md
+      - Laboratorios: sesion-1/06-laboratorios.md
+      - Repaso: sesion-1/07-repaso.md
 
   - "Lenguaje SPL":
       - Resumen: sesion-2/index.md
@@ -104,8 +104,8 @@ nav:
       - Filtros y tokens: sesion-3/05-filtros-tokens.md
       - Alertas: sesion-3/06-alertas.md
       - Administración y seguridad: sesion-3/07-seguridad.md
-      - Laboratorios: sesion-3/08-laboratorios.md
-      - Repaso: sesion-3/09-repaso.md
+      - Laboratorios: sesion-3/06-laboratorios.md
+      - Repaso: sesion-3/07-repaso.md
 
   - Proyecto final:
       - Descripción: proyecto/index.md
