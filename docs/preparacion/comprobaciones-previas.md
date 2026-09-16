@@ -1,6 +1,6 @@
 # Comprobaciones previas
 
-Antes de iniciar la [instalación manual](instalacion-ubuntu.md),
+Antes de iniciar la [instalación manual](instalar-splunk.md),
 valida el sistema operativo, los recursos, la conectividad y los materiales.
 Estas comprobaciones evitan confundir un problema de Ubuntu con un problema de
 Splunk o de los datos ingeridos.

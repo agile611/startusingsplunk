@@ -54,7 +54,7 @@ sudo apt update
 
 Ten preparado un navegador para abrir `http://localhost:8000` después de la
 instalación. La guía completa de instalación, verificación, puertos y arranque
-automático está en [Instalación en Ubuntu](../preparacion/instalacion-ubuntu.md).
+automático está en [Instalación en Splunk](../preparacion/instalar-splunk.md).
 
 ## Material del curso
 

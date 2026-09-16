@@ -67,7 +67,7 @@ validar la ingesta también hay que comprobar que los eventos aparecen en
 ## Relación con la instalación
 
 La topología se crea mediante la [guía de instalación manual en
-Ubuntu](instalacion-ubuntu.md). Al finalizar esa guía deben
+Ubuntu](instalar-splunk.md). Al finalizar esa guía deben
 cumplirse estas condiciones:
 
 - La versión mostrada por `splunk version` es 10.4.3.
