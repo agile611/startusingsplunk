@@ -110,7 +110,7 @@ operativo de menor privilegio.
 
 ---
 
-# 2. Metodología de trabajo
+## 2. Metodología de trabajo
 
 Cada bloque sigue el ciclo:
 
