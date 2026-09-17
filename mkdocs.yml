@@ -1,10 +1,10 @@
 site_name: Curso de Splunk
 site_description: Curso práctico de Splunk Enterprise 10.4.3 en Ubuntu 24.04.5 LTS
 site_author: Equipo de formación
-site_url: https://github.com/agile611/startusingsplunk
 
-repo_name: startusingsplunk
-repo_url: https://agile611.github.io/startusingsplunk/
+site_url: https://agile611.github.io/startusingsplunk/
+repo_name: agile611/startusingsplunk
+repo_url: https://github.com/agile611/startusingsplunk
 
 docs_dir: docs
 site_dir: site
@@ -12,8 +12,10 @@ site_dir: site
 theme:
   name: material
   language: es
+
   logo: https://www.agile611.com/wp-content/uploads/2020/09/Negativo.png
   favicon: https://www.agile611.com/wp-content/uploads/2019/07/cropped-agile611-1-e1563910774746-1-32x32.png
+
   font:
     text: Nunito
     code: Nunito
@@ -70,7 +72,7 @@ nav:
       - Arquitectura del laboratorio: preparacion/arquitectura-laboratorio.md
       - Datos del laboratorio: preparacion/datos-laboratorio.md
 
-  - "Fundamentos e ingestión":
+  - Fundamentos e ingestión:
       - Resumen: sesion-1/index.md
       - Introducción a Splunk: sesion-1/01-introduccion.md
       - Conceptos fundamentales: sesion-1/02-conceptos-fundamentales.md
@@ -80,7 +82,7 @@ nav:
       - Laboratorios: sesion-1/06-laboratorios.md
       - Repaso: sesion-1/07-repaso.md
 
-  - "Lenguaje SPL":
+  - Lenguaje SPL:
       - Resumen: sesion-2/index.md
       - Introducción a SPL: sesion-2/01-introduccion-spl.md
       - Búsquedas básicas: sesion-2/02-busquedas-basicas.md
@@ -95,7 +97,7 @@ nav:
       - Laboratorios: sesion-2/11-laboratorios.md
       - Reto práctico: sesion-2/12-reto.md
 
-  - "Dashboards y alertas":
+  - Dashboards y alertas:
       - Resumen: sesion-3/index.md
       - Búsquedas guardadas: sesion-3/01-busquedas-guardadas.md
       - Reportes: sesion-3/02-reportes.md
@@ -141,26 +143,34 @@ markdown_extensions:
   - tables
   - footnotes
   - def_list
+
   - toc:
       permalink: true
       toc_depth: 3
+
   - pymdownx.details
   - pymdownx.superfences
+
   - pymdownx.highlight:
       anchor_linenums: true
       line_spans: __span
+
   - pymdownx.inlinehilite
+
   - pymdownx.tabbed:
       alternate_style: true
+
   - pymdownx.tasklist:
       custom_checkbox: true
+
   - pymdownx.emoji:
       emoji_index: !!python/name:material.extensions.emoji.twemoji
       emoji_generator: !!python/name:material.extensions.emoji.to_svg
 
 plugins:
   - search:
-      lang: es
+      lang:
+        - es
 
 extra_css:
   - assets/css/custom.css

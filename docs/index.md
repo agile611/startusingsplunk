@@ -1388,7 +1388,7 @@ Al terminar deberías poder:
 - [Preparar el laboratorio](preparacion/index.md)
 - [Requisitos](preparacion/requisitos.md)
 - [Instalación](preparacion/instalacion.md)
-- [Puertos y directorios](preparacion/puertos-directorios.md)
+- [Puertos y directorios](referencia/puertos-directorios.md)
 - [Datasets](preparacion/datasets.md)
 - [Comenzar la sesión 1](sesion-1/index.md)
 - [Comenzar la sesión 2](sesion-2/index.md)

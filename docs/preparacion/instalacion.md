@@ -793,5 +793,5 @@ Consulta [Los datos no aparecen](../troubleshooting/datos-no-aparecen.md).
 - [Requisitos de hardware](requisitos-hardware.md).
 - [Arquitectura del laboratorio](arquitectura-laboratorio.md).
 - [Comprobaciones previas](comprobaciones-previas.md).
-- [Instalación de Splunk](instalar-splunk.md).
+- [Instalación de Splunk](instalacion.md).
 - [Datos del laboratorio](datos-laboratorio.md).

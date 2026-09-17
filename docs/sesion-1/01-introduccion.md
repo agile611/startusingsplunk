@@ -8,7 +8,7 @@ alertas.
 
 En este curso trabajaremos con una instalación local de **Splunk Enterprise
 10.4.3** sobre **Ubuntu 24.04.5 LTS**. La instalación se realizará manualmente
-con el paquete `.deb`, tal como se explica en [Instalación de Splunk](../preparacion/instalar-splunk.md).
+con el paquete `.deb`, tal como se explica en [Instalación de Splunk](../preparacion/instalacion.md).
 
 Si ya tienes Splunk instalado y tienes permisos de administrador, esta primera
 página debe leerse como una guía de preparación para operar con criterio y no
@@ -210,7 +210,7 @@ documentación oficial de Splunk, estas son referencias útiles:
 
 También conviene enlazar esta sesión con el resto del curso:
 
-- [Instalación de Splunk](../preparacion/instalar-splunk.md)
+- [Instalación de Splunk](../preparacion/instalacion.md)
 - [Arquitectura del laboratorio](../preparacion/arquitectura-laboratorio.md)
 - [Datos del laboratorio](../preparacion/datos-laboratorio.md)
 - [Ingesta de datos](04-ingesta-datos.md)

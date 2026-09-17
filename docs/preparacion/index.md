@@ -17,7 +17,7 @@ generales del curso](../curso/requisitos.md).
    antes de instalar y comenzar las prácticas.
 3. [Arquitectura y componentes](arquitectura.md): componentes principales
    de la instancia mononodo.
-4. [Instalación de Splunk Enterprise 10.4.3](instalar-splunk.md): guía
+4. [Instalación de Splunk Enterprise 10.4.3](instalacion.md): guía
    completa de descarga, instalación y validación del trial de 60 días.
 5. [Arquitectura del laboratorio](arquitectura-laboratorio.md): componentes,
    puertos y recorrido de los datos.
@@ -30,7 +30,7 @@ generales del curso](../curso/requisitos.md).
 2. Comprende la topología en [Arquitectura del laboratorio](arquitectura-laboratorio.md).
 3. Revisa los archivos disponibles en [Datos del laboratorio](datos-laboratorio.md).
 4. Ejecuta la lista de [Comprobaciones previas](comprobaciones-previas.md).
-5. Realiza la [instalación detallada de Splunk Enterprise](instalar-splunk.md).
+5. Realiza la [instalación detallada de Splunk Enterprise](instalacion.md).
 6. Continúa con la [navegación por Splunk Web](../sesion-1/03-splunk-web.md) y la
    [ingesta de datos](../sesion-1/04-ingesta-datos.md).
 
