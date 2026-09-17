@@ -47,7 +47,7 @@ Decisión operativa
 
 ---
 
-# 1. Requisitos previos
+## 1. Requisitos previos
 
 Antes de comenzar la primera sesión, el asistente debe disponer de:
 
@@ -61,7 +61,7 @@ Antes de comenzar la primera sesión, el asistente debe disponer de:
 - navegador web actualizado;
 - acceso local al puerto `8000`.
 
-## 1.1 Comprobaciones previas
+### 1.1 Comprobaciones previas
 
 En Ubuntu:
 
@@ -89,7 +89,7 @@ El acceso habitual es:
 http://localhost:8000
 ```
 
-## 1.2 Nota sobre los permisos
+### 1.2 Nota sobre los permisos
 
 El rol `admin` permite administrar objetos y configuraciones dentro de Splunk,
 pero no sustituye automáticamente los permisos de Ubuntu.
