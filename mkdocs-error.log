@@ -1,0 +1,318 @@
+DEBUG   -  Loading configuration file: /Users/guillemhernandezsola/code/startusingsplunk/mkdocs.yml
+
+[31m │  ⚠  Warning from the Material for MkDocs team[0m
+[31m │[0m
+[31m │[0m  MkDocs 2.0, the underlying framework of Material for MkDocs,
+[31m │[0m  will introduce backward-incompatible changes, including:
+[31m │[0m
+[31m │  × [0mAll plugins will stop working – the plugin system has been removed
+[31m │  × [0mAll theme overrides will break – the theming system has been rewritten
+[31m │  × [0mNo migration path exists – existing projects cannot be upgraded
+[31m │  × [0mClosed contribution model – community members can't report bugs
+[31m │  × [0mCurrently unlicensed – unsuitable for production use
+[31m │[0m
+[31m │[0m  Our full analysis:
+[31m │[0m
+[31m │[0m  [4mhttps://squidfunk.github.io/mkdocs-material/blog/2026/02/18/mkdocs-2.0/[0m
+[0m
+DEBUG   -  Loaded theme configuration for 'material' from '/Users/guillemhernandezsola/code/startusingsplunk/docs/.venv/lib/python3.14/site-packages/material/templates/mkdocs_theme.yml': {'language': 'en', 'direction': None, 'features': [], 'font': {'text': 'Roboto', 'code': 'Roboto Mono'}, 'icon': None, 'favicon': 'assets/images/favicon.png', 'static_templates': ['404.html']}
+DEBUG   -  Config value 'config_file_path' = '/Users/guillemhernandezsola/code/startusingsplunk/mkdocs.yml'
+DEBUG   -  Config value 'site_name' = 'Curso de Splunk'
+DEBUG   -  Config value 'nav' = [{'Inicio': 'index.md'}, {'El curso': [{'Presentación': 'curso/presentacion.md'}, {'Objetivos': 'curso/objetivos.md'}, {'Destinatarios': 'curso/destinatarios.md'}, {'Requisitos': 'curso/requisitos.md'}, {'Agenda': 'curso/agenda.md'}]}, {'Preparación': [{'Introducción': 'preparacion/index.md'}, {'Requisitos de hardware': 'preparacion/requisitos-hardware.md'}, {'Comprobaciones previas': 'preparacion/comprobaciones-previas.md'}, {'Instalación de Splunk': 'preparacion/instalar-splunk.md'}, {'Arquitectura y componentes': 'preparacion/arquitectura.md'}, {'Arquitectura del laboratorio': 'preparacion/arquitectura-laboratorio.md'}, {'Datos del laboratorio': 'preparacion/datos-laboratorio.md'}]}, {'Fundamentos e ingestión': [{'Resumen': 'sesion-1/index.md'}, {'Introducción a Splunk': 'sesion-1/01-introduccion.md'}, {'Conceptos fundamentales': 'sesion-1/02-conceptos-fundamentales.md'}, {'Navegación por Splunk Web': 'sesion-1/03-splunk-web.md'}, {'Ingesta de datos': 'sesion-1/04-ingesta-datos.md'}, {'Gestión de índices': 'sesion-1/05-indices.md'}, {'Laboratorios': 'sesion-1/06-laboratorios.md'}, {'Repaso': 'sesion-1/07-repaso.md'}]}, {'Lenguaje SPL': [{'Resumen': 'sesion-2/index.md'}, {'Introducción a SPL': 'sesion-2/01-introduccion-spl.md'}, {'Búsquedas básicas': 'sesion-2/02-busquedas-basicas.md'}, {'Gestión del tiempo': 'sesion-2/03-gestion-tiempo.md'}, {'Campos y resultados': 'sesion-2/04-campos-resultados.md'}, {'Filtrado de eventos': 'sesion-2/05-filtrado.md'}, {'Estadísticas': 'sesion-2/06-estadisticas.md'}, {'Eval y funciones': 'sesion-2/07-eval-funciones.md'}, {'Extracción de campos': 'sesion-2/08-extraccion-campos.md'}, {'Comandos avanzados': 'sesion-2/09-comandos-avanzados.md'}, {'Rendimiento': 'sesion-2/10-rendimiento.md'}, {'Laboratorios': 'sesion-2/11-laboratorios.md'}, {'Reto práctico': 'sesion-2/12-reto.md'}]}, {'Dashboards y alertas': [{'Resumen': 'sesion-3/index.md'}, {'Búsquedas guardadas': 'sesion-3/01-busquedas-guardadas.md'}, {'Reportes': 'sesion-3/02-reportes.md'}, {'Visualizaciones': 'sesion-3/03-visualizaciones.md'}, {'Dashboards': 'sesion-3/04-dashboards.md'}, {'Filtros y tokens': 'sesion-3/05-filtros-tokens.md'}, {'Alertas': 'sesion-3/06-alertas.md'}, {'Administración y seguridad': 'sesion-3/07-seguridad.md'}, {'Laboratorios': 'sesion-3/08-laboratorios.md'}, {'Repaso': 'sesion-3/09-repaso.md'}]}, {'Proyecto final': [{'Descripción': 'proyecto/index.md'}, {'Caso práctico': 'proyecto/caso-practico.md'}, {'Requisitos': 'proyecto/requisitos.md'}, {'Entregables': 'proyecto/entregables.md'}, {'Evaluación': 'proyecto/evaluacion.md'}]}, {'Referencia': [{'Introducción': 'referencia/index.md'}, {'Comandos SPL': 'referencia/comandos-spl.md'}, {'Funciones SPL': 'referencia/funciones-spl.md'}, {'Plantillas de consultas': 'referencia/plantillas-consultas.md'}, {'Puertos y directorios': 'referencia/puertos-directorios.md'}, {'Glosario': 'referencia/glosario.md'}]}, {'Solución de problemas': [{'Introducción': 'troubleshooting/index.md'}, {'Splunk no inicia': 'troubleshooting/splunk-no-inicia.md'}, {'No funciona el acceso web': 'troubleshooting/acceso-web.md'}, {'Los datos no aparecen': 'troubleshooting/datos-no-aparecen.md'}, {'Los campos son incorrectos': 'troubleshooting/campos-incorrectos.md'}]}, {'Recursos': [{'Datasets': 'recursos/datasets.md'}, {'Enlaces': 'recursos/enlaces.md'}, {'Bibliografía': 'recursos/bibliografia.md'}]}]
+DEBUG   -  Config value 'pages' = None
+DEBUG   -  Config value 'exclude_docs' = None
+DEBUG   -  Config value 'draft_docs' = None
+DEBUG   -  Config value 'not_in_nav' = None
+DEBUG   -  Config value 'site_url' = 'https://agile611.github.io/startusingsplunk/'
+DEBUG   -  Config value 'site_description' = 'Curso práctico de Splunk Enterprise 10.4.3 en Ubuntu 24.04.5 LTS'
+DEBUG   -  Config value 'site_author' = 'Equipo de formación'
+DEBUG   -  Config value 'theme' = Theme(name='material', dirs=['/Users/guillemhernandezsola/code/startusingsplunk/docs/.venv/lib/python3.14/site-packages/material/templates', '/Users/guillemhernandezsola/code/startusingsplunk/docs/.venv/lib/python3.14/site-packages/mkdocs/templates'], static_templates={'404.html', 'sitemap.xml'}, name='material', locale=Locale('en'), language='es', direction=None, features=['navigation.tabs', 'navigation.sections', 'navigation.expand', 'navigation.top', 'navigation.footer', 'navigation.indexes', 'content.code.copy', 'content.code.annotate', 'search.highlight', 'search.suggest'], font={'text': 'Nunito', 'code': 'Nunito'}, icon={'logo': 'material/chart-timeline-variant', 'repo': 'fontawesome/brands/github'}, favicon='https://www.agile611.com/wp-content/uploads/2019/07/cropped-agile611-1-e1563910774746-1-32x32.png', logo='https://www.agile611.com/wp-content/uploads/2020/09/Negativo.png', palette=[{'media': '(prefers-color-scheme: light)', 'scheme': 'default', 'primary': 'custom', 'accent': 'custom', 'toggle': {'icon': 'material/brightness-7', 'name': 'Cambiar a modo oscuro'}}, {'media': '(prefers-color-scheme: dark)', 'scheme': 'slate', 'primary': 'custom', 'accent': 'custom', 'toggle': {'icon': 'material/brightness-4', 'name': 'Cambiar a modo claro'}}])
+DEBUG   -  Config value 'docs_dir' = '/Users/guillemhernandezsola/code/startusingsplunk/docs'
+DEBUG   -  Config value 'site_dir' = '/Users/guillemhernandezsola/code/startusingsplunk/site'
+DEBUG   -  Config value 'copyright' = '© Agile611 · Licencia CC BY-NC 4.0 · Guillem Hernández Sola'
+DEBUG   -  Config value 'google_analytics' = None
+DEBUG   -  Config value 'dev_addr' = _IpAddressValue(host='127.0.0.1', port=8000)
+DEBUG   -  Config value 'use_directory_urls' = True
+DEBUG   -  Config value 'repo_url' = 'https://github.com/agile611/startusingsplunk'
+DEBUG   -  Config value 'repo_name' = 'agile611/startusingsplunk'
+DEBUG   -  Config value 'edit_uri_template' = None
+DEBUG   -  Config value 'edit_uri' = 'edit/master/docs/'
+DEBUG   -  Config value 'extra_css' = ['assets/css/custom.css']
+DEBUG   -  Config value 'extra_javascript' = ['assets/js/custom.js']
+DEBUG   -  Config value 'extra_templates' = []
+DEBUG   -  Config value 'markdown_extensions' = ['toc', 'tables', 'fenced_code', 'admonition', 'attr_list', 'md_in_html', 'footnotes', 'def_list', 'pymdownx.details', 'pymdownx.superfences', 'pymdownx.highlight', 'pymdownx.inlinehilite', 'pymdownx.tabbed', 'pymdownx.tasklist', 'pymdownx.emoji']
+DEBUG   -  Config value 'mdx_configs' = {'toc': {'permalink': True, 'toc_depth': 3}, 'pymdownx.highlight': {'anchor_linenums': True, 'line_spans': '__span'}, 'pymdownx.tabbed': {'alternate_style': True}, 'pymdownx.tasklist': {'custom_checkbox': True}, 'pymdownx.emoji': {'emoji_index': <function twemoji at 0x106c06770>, 'emoji_generator': <function to_svg at 0x106f041a0>}}
+DEBUG   -  Config value 'strict' = True
+DEBUG   -  Config value 'remote_branch' = 'gh-pages'
+DEBUG   -  Config value 'remote_name' = 'origin'
+DEBUG   -  Config value 'extra' = {}
+DEBUG   -  Config value 'plugins' = {'material/search': <material.plugins.search.plugin.SearchPlugin object at 0x10716f4d0>}
+DEBUG   -  Config value 'hooks' = {}
+DEBUG   -  Config value 'watch' = []
+DEBUG   -  Config value 'validation' = {'nav': {'omitted_files': 20, 'not_found': 30, 'absolute_links': 20}, 'links': {'not_found': 30, 'absolute_links': 20, 'unrecognized_links': 20, 'anchors': 20}}
+DEBUG   -  Running `startup` event from plugin 'material/search'
+DEBUG   -  Running `config` event from plugin 'material/search'
+DEBUG   -  Looking for translations for locale 'en'
+DEBUG   -  No translations found here: '/Users/guillemhernandezsola/code/startusingsplunk/docs/.venv/lib/python3.14/site-packages/mkdocs/templates/locales'
+DEBUG   -  No translations found here: '/Users/guillemhernandezsola/code/startusingsplunk/docs/.venv/lib/python3.14/site-packages/material/templates/locales'
+DEBUG   -  Looking for translations for locale 'en'
+DEBUG   -  No translations found here: '/Users/guillemhernandezsola/code/startusingsplunk/docs/.venv/lib/python3.14/site-packages/mkdocs/templates/locales'
+DEBUG   -  No translations found here: '/Users/guillemhernandezsola/code/startusingsplunk/docs/.venv/lib/python3.14/site-packages/material/templates/locales'
+INFO    -  Cleaning site directory
+INFO    -  Building documentation to directory: /Users/guillemhernandezsola/code/startusingsplunk/site
+DEBUG   -  Looking for translations for locale 'en'
+DEBUG   -  No translations found here: '/Users/guillemhernandezsola/code/startusingsplunk/docs/.venv/lib/python3.14/site-packages/mkdocs/templates/locales'
+DEBUG   -  No translations found here: '/Users/guillemhernandezsola/code/startusingsplunk/docs/.venv/lib/python3.14/site-packages/material/templates/locales'
+INFO    -  The following pages exist in the docs directory, but are not included in the "nav" configuration:
+  - preparacion/datasets.md
+  - preparacion/instalacion.md
+WARNING -  A reference to 'preparacion/instalar-splunk.md' is included in the 'nav' configuration, which is not found in the documentation files.
+DEBUG   -  Reading markdown pages.
+DEBUG   -  Reading: index.md
+WARNING -  Doc file 'index.md' contains a link 'preparacion/requisitos.md', but the target is not found among documentation files.
+DEBUG   -  Reading: curso/agenda.md
+DEBUG   -  Reading: curso/destinatarios.md
+DEBUG   -  Reading: curso/objetivos.md
+DEBUG   -  Reading: curso/presentacion.md
+DEBUG   -  Reading: curso/requisitos.md
+DEBUG   -  Reading: preparacion/index.md
+DEBUG   -  Reading: preparacion/arquitectura-laboratorio.md
+DEBUG   -  Reading: preparacion/arquitectura.md
+DEBUG   -  Reading: preparacion/comprobaciones-previas.md
+DEBUG   -  Reading: preparacion/datasets.md
+DEBUG   -  Reading: preparacion/datos-laboratorio.md
+DEBUG   -  Reading: preparacion/instalacion.md
+DEBUG   -  Reading: preparacion/requisitos-hardware.md
+DEBUG   -  Reading: proyecto/index.md
+DEBUG   -  Reading: proyecto/caso-practico.md
+DEBUG   -  Reading: proyecto/entregables.md
+DEBUG   -  Reading: proyecto/evaluacion.md
+DEBUG   -  Reading: proyecto/requisitos.md
+DEBUG   -  Reading: recursos/bibliografia.md
+DEBUG   -  Reading: recursos/datasets.md
+DEBUG   -  Reading: recursos/enlaces.md
+DEBUG   -  Reading: referencia/index.md
+DEBUG   -  Reading: referencia/comandos-spl.md
+DEBUG   -  Reading: referencia/funciones-spl.md
+DEBUG   -  Reading: referencia/glosario.md
+DEBUG   -  Reading: referencia/plantillas-consultas.md
+DEBUG   -  Reading: referencia/puertos-directorios.md
+DEBUG   -  Reading: sesion-1/index.md
+DEBUG   -  Reading: sesion-1/01-introduccion.md
+DEBUG   -  Reading: sesion-1/02-conceptos-fundamentales.md
+DEBUG   -  Reading: sesion-1/03-splunk-web.md
+DEBUG   -  Reading: sesion-1/04-ingesta-datos.md
+DEBUG   -  Reading: sesion-1/05-indices.md
+DEBUG   -  Reading: sesion-1/06-laboratorios.md
+DEBUG   -  Reading: sesion-1/07-repaso.md
+DEBUG   -  Reading: sesion-2/index.md
+DEBUG   -  Reading: sesion-2/01-introduccion-spl.md
+DEBUG   -  Reading: sesion-2/02-busquedas-basicas.md
+DEBUG   -  Reading: sesion-2/03-gestion-tiempo.md
+DEBUG   -  Reading: sesion-2/04-campos-resultados.md
+DEBUG   -  Reading: sesion-2/05-filtrado.md
+DEBUG   -  Reading: sesion-2/06-estadisticas.md
+DEBUG   -  Reading: sesion-2/07-eval-funciones.md
+DEBUG   -  Reading: sesion-2/08-extraccion-campos.md
+DEBUG   -  Reading: sesion-2/09-comandos-avanzados.md
+DEBUG   -  Reading: sesion-2/10-rendimiento.md
+DEBUG   -  Reading: sesion-2/11-laboratorios.md
+DEBUG   -  Reading: sesion-2/12-reto.md
+DEBUG   -  Reading: sesion-3/index.md
+DEBUG   -  Reading: sesion-3/01-busquedas-guardadas.md
+DEBUG   -  Reading: sesion-3/02-reportes.md
+DEBUG   -  Reading: sesion-3/03-visualizaciones.md
+DEBUG   -  Reading: sesion-3/04-dashboards.md
+DEBUG   -  Reading: sesion-3/05-filtros-tokens.md
+DEBUG   -  Reading: sesion-3/06-alertas.md
+DEBUG   -  Reading: sesion-3/07-seguridad.md
+DEBUG   -  Reading: sesion-3/08-laboratorios.md
+DEBUG   -  Reading: sesion-3/09-repaso.md
+DEBUG   -  Reading: troubleshooting/index.md
+DEBUG   -  Reading: troubleshooting/acceso-web.md
+DEBUG   -  Reading: troubleshooting/campos-incorrectos.md
+DEBUG   -  Reading: troubleshooting/datos-no-aparecen.md
+DEBUG   -  Reading: troubleshooting/splunk-no-inicia.md
+DEBUG   -  Copying static assets.
+DEBUG   -  Copying media file: 'assets/css/custom.css'
+DEBUG   -  Copying media file: 'assets/js/custom.js'
+DEBUG   -  Copying media file: 'downloads/consultas-spl.txt'
+DEBUG   -  Copying media file: 'downloads/eventos_web.csv'
+DEBUG   -  Copying media file: 'assets/images/favicon.png'
+DEBUG   -  Copying media file: 'assets/javascripts/bundle.d7400e89.min.js'
+DEBUG   -  Copying media file: 'assets/javascripts/bundle.d7400e89.min.js.map'
+DEBUG   -  Copying media file: 'assets/javascripts/lunr/min/lunr.ar.min.js'
+DEBUG   -  Copying media file: 'assets/javascripts/lunr/min/lunr.da.min.js'
+DEBUG   -  Copying media file: 'assets/javascripts/lunr/min/lunr.de.min.js'
+DEBUG   -  Copying media file: 'assets/javascripts/lunr/min/lunr.du.min.js'
+DEBUG   -  Copying media file: 'assets/javascripts/lunr/min/lunr.el.min.js'
+DEBUG   -  Copying media file: 'assets/javascripts/lunr/min/lunr.es.min.js'
+DEBUG   -  Copying media file: 'assets/javascripts/lunr/min/lunr.fi.min.js'
+DEBUG   -  Copying media file: 'assets/javascripts/lunr/min/lunr.fr.min.js'
+DEBUG   -  Copying media file: 'assets/javascripts/lunr/min/lunr.he.min.js'
+DEBUG   -  Copying media file: 'assets/javascripts/lunr/min/lunr.hi.min.js'
+DEBUG   -  Copying media file: 'assets/javascripts/lunr/min/lunr.hu.min.js'
+DEBUG   -  Copying media file: 'assets/javascripts/lunr/min/lunr.hy.min.js'
+DEBUG   -  Copying media file: 'assets/javascripts/lunr/min/lunr.it.min.js'
+DEBUG   -  Copying media file: 'assets/javascripts/lunr/min/lunr.ja.min.js'
+DEBUG   -  Copying media file: 'assets/javascripts/lunr/min/lunr.jp.min.js'
+DEBUG   -  Copying media file: 'assets/javascripts/lunr/min/lunr.kn.min.js'
+DEBUG   -  Copying media file: 'assets/javascripts/lunr/min/lunr.ko.min.js'
+DEBUG   -  Copying media file: 'assets/javascripts/lunr/min/lunr.multi.min.js'
+DEBUG   -  Copying media file: 'assets/javascripts/lunr/min/lunr.nl.min.js'
+DEBUG   -  Copying media file: 'assets/javascripts/lunr/min/lunr.no.min.js'
+DEBUG   -  Copying media file: 'assets/javascripts/lunr/min/lunr.pt.min.js'
+DEBUG   -  Copying media file: 'assets/javascripts/lunr/min/lunr.ro.min.js'
+DEBUG   -  Copying media file: 'assets/javascripts/lunr/min/lunr.ru.min.js'
+DEBUG   -  Copying media file: 'assets/javascripts/lunr/min/lunr.sa.min.js'
+DEBUG   -  Copying media file: 'assets/javascripts/lunr/min/lunr.stemmer.support.min.js'
+DEBUG   -  Copying media file: 'assets/javascripts/lunr/min/lunr.sv.min.js'
+DEBUG   -  Copying media file: 'assets/javascripts/lunr/min/lunr.ta.min.js'
+DEBUG   -  Copying media file: 'assets/javascripts/lunr/min/lunr.te.min.js'
+DEBUG   -  Copying media file: 'assets/javascripts/lunr/min/lunr.th.min.js'
+DEBUG   -  Copying media file: 'assets/javascripts/lunr/min/lunr.tr.min.js'
+DEBUG   -  Copying media file: 'assets/javascripts/lunr/min/lunr.vi.min.js'
+DEBUG   -  Copying media file: 'assets/javascripts/lunr/min/lunr.zh.min.js'
+DEBUG   -  Copying media file: 'assets/javascripts/lunr/tinyseg.js'
+DEBUG   -  Copying media file: 'assets/javascripts/lunr/wordcut.js'
+DEBUG   -  Copying media file: 'assets/javascripts/workers/search.2c215733.min.js'
+DEBUG   -  Copying media file: 'assets/javascripts/workers/search.2c215733.min.js.map'
+DEBUG   -  Copying media file: 'assets/stylesheets/main.ec1eaa64.min.css'
+DEBUG   -  Copying media file: 'assets/stylesheets/main.ec1eaa64.min.css.map'
+DEBUG   -  Copying media file: 'assets/stylesheets/palette.ab4e12ef.min.css'
+DEBUG   -  Copying media file: 'assets/stylesheets/palette.ab4e12ef.min.css.map'
+DEBUG   -  Building theme template: 404.html
+DEBUG   -  Building theme template: sitemap.xml
+DEBUG   -  Gzipping template: sitemap.xml
+DEBUG   -  Building markdown pages.
+DEBUG   -  Building page index.md
+DEBUG   -  Running `page_context` event from plugin 'material/search'
+DEBUG   -  Building page curso/agenda.md
+DEBUG   -  Running `page_context` event from plugin 'material/search'
+DEBUG   -  Building page curso/destinatarios.md
+DEBUG   -  Running `page_context` event from plugin 'material/search'
+DEBUG   -  Building page curso/objetivos.md
+DEBUG   -  Running `page_context` event from plugin 'material/search'
+DEBUG   -  Building page curso/presentacion.md
+DEBUG   -  Running `page_context` event from plugin 'material/search'
+DEBUG   -  Building page curso/requisitos.md
+DEBUG   -  Running `page_context` event from plugin 'material/search'
+DEBUG   -  Building page preparacion/index.md
+DEBUG   -  Running `page_context` event from plugin 'material/search'
+DEBUG   -  Building page preparacion/arquitectura-laboratorio.md
+DEBUG   -  Running `page_context` event from plugin 'material/search'
+DEBUG   -  Building page preparacion/arquitectura.md
+DEBUG   -  Running `page_context` event from plugin 'material/search'
+DEBUG   -  Building page preparacion/comprobaciones-previas.md
+DEBUG   -  Running `page_context` event from plugin 'material/search'
+DEBUG   -  Building page preparacion/datasets.md
+DEBUG   -  Running `page_context` event from plugin 'material/search'
+DEBUG   -  Building page preparacion/datos-laboratorio.md
+DEBUG   -  Running `page_context` event from plugin 'material/search'
+DEBUG   -  Building page preparacion/instalacion.md
+DEBUG   -  Running `page_context` event from plugin 'material/search'
+DEBUG   -  Building page preparacion/requisitos-hardware.md
+DEBUG   -  Running `page_context` event from plugin 'material/search'
+DEBUG   -  Building page proyecto/index.md
+DEBUG   -  Running `page_context` event from plugin 'material/search'
+DEBUG   -  Building page proyecto/caso-practico.md
+DEBUG   -  Running `page_context` event from plugin 'material/search'
+DEBUG   -  Building page proyecto/entregables.md
+DEBUG   -  Running `page_context` event from plugin 'material/search'
+DEBUG   -  Building page proyecto/evaluacion.md
+DEBUG   -  Running `page_context` event from plugin 'material/search'
+DEBUG   -  Building page proyecto/requisitos.md
+DEBUG   -  Running `page_context` event from plugin 'material/search'
+DEBUG   -  Building page recursos/bibliografia.md
+DEBUG   -  Running `page_context` event from plugin 'material/search'
+DEBUG   -  Building page recursos/datasets.md
+DEBUG   -  Running `page_context` event from plugin 'material/search'
+DEBUG   -  Building page recursos/enlaces.md
+DEBUG   -  Running `page_context` event from plugin 'material/search'
+DEBUG   -  Building page referencia/index.md
+DEBUG   -  Running `page_context` event from plugin 'material/search'
+DEBUG   -  Building page referencia/comandos-spl.md
+DEBUG   -  Running `page_context` event from plugin 'material/search'
+DEBUG   -  Building page referencia/funciones-spl.md
+DEBUG   -  Running `page_context` event from plugin 'material/search'
+DEBUG   -  Building page referencia/glosario.md
+DEBUG   -  Running `page_context` event from plugin 'material/search'
+DEBUG   -  Building page referencia/plantillas-consultas.md
+DEBUG   -  Running `page_context` event from plugin 'material/search'
+DEBUG   -  Building page referencia/puertos-directorios.md
+DEBUG   -  Running `page_context` event from plugin 'material/search'
+DEBUG   -  Building page sesion-1/index.md
+DEBUG   -  Running `page_context` event from plugin 'material/search'
+DEBUG   -  Building page sesion-1/01-introduccion.md
+DEBUG   -  Running `page_context` event from plugin 'material/search'
+DEBUG   -  Building page sesion-1/02-conceptos-fundamentales.md
+DEBUG   -  Running `page_context` event from plugin 'material/search'
+DEBUG   -  Building page sesion-1/03-splunk-web.md
+DEBUG   -  Running `page_context` event from plugin 'material/search'
+DEBUG   -  Building page sesion-1/04-ingesta-datos.md
+DEBUG   -  Running `page_context` event from plugin 'material/search'
+DEBUG   -  Building page sesion-1/05-indices.md
+DEBUG   -  Running `page_context` event from plugin 'material/search'
+DEBUG   -  Building page sesion-1/06-laboratorios.md
+DEBUG   -  Running `page_context` event from plugin 'material/search'
+DEBUG   -  Building page sesion-1/07-repaso.md
+DEBUG   -  Running `page_context` event from plugin 'material/search'
+DEBUG   -  Building page sesion-2/index.md
+DEBUG   -  Running `page_context` event from plugin 'material/search'
+DEBUG   -  Building page sesion-2/01-introduccion-spl.md
+DEBUG   -  Running `page_context` event from plugin 'material/search'
+DEBUG   -  Building page sesion-2/02-busquedas-basicas.md
+DEBUG   -  Running `page_context` event from plugin 'material/search'
+DEBUG   -  Building page sesion-2/03-gestion-tiempo.md
+DEBUG   -  Running `page_context` event from plugin 'material/search'
+DEBUG   -  Building page sesion-2/04-campos-resultados.md
+DEBUG   -  Running `page_context` event from plugin 'material/search'
+DEBUG   -  Building page sesion-2/05-filtrado.md
+DEBUG   -  Running `page_context` event from plugin 'material/search'
+DEBUG   -  Building page sesion-2/06-estadisticas.md
+DEBUG   -  Running `page_context` event from plugin 'material/search'
+DEBUG   -  Building page sesion-2/07-eval-funciones.md
+DEBUG   -  Running `page_context` event from plugin 'material/search'
+DEBUG   -  Building page sesion-2/08-extraccion-campos.md
+DEBUG   -  Running `page_context` event from plugin 'material/search'
+DEBUG   -  Building page sesion-2/09-comandos-avanzados.md
+DEBUG   -  Running `page_context` event from plugin 'material/search'
+DEBUG   -  Building page sesion-2/10-rendimiento.md
+DEBUG   -  Running `page_context` event from plugin 'material/search'
+DEBUG   -  Building page sesion-2/11-laboratorios.md
+DEBUG   -  Running `page_context` event from plugin 'material/search'
+DEBUG   -  Building page sesion-2/12-reto.md
+DEBUG   -  Running `page_context` event from plugin 'material/search'
+DEBUG   -  Building page sesion-3/index.md
+DEBUG   -  Running `page_context` event from plugin 'material/search'
+DEBUG   -  Building page sesion-3/01-busquedas-guardadas.md
+DEBUG   -  Running `page_context` event from plugin 'material/search'
+DEBUG   -  Building page sesion-3/02-reportes.md
+DEBUG   -  Running `page_context` event from plugin 'material/search'
+DEBUG   -  Building page sesion-3/03-visualizaciones.md
+DEBUG   -  Running `page_context` event from plugin 'material/search'
+DEBUG   -  Building page sesion-3/04-dashboards.md
+DEBUG   -  Running `page_context` event from plugin 'material/search'
+DEBUG   -  Building page sesion-3/05-filtros-tokens.md
+DEBUG   -  Running `page_context` event from plugin 'material/search'
+DEBUG   -  Building page sesion-3/06-alertas.md
+DEBUG   -  Running `page_context` event from plugin 'material/search'
+DEBUG   -  Building page sesion-3/07-seguridad.md
+DEBUG   -  Running `page_context` event from plugin 'material/search'
+DEBUG   -  Building page sesion-3/08-laboratorios.md
+DEBUG   -  Running `page_context` event from plugin 'material/search'
+DEBUG   -  Building page sesion-3/09-repaso.md
+DEBUG   -  Running `page_context` event from plugin 'material/search'
+DEBUG   -  Building page troubleshooting/index.md
+DEBUG   -  Running `page_context` event from plugin 'material/search'
+DEBUG   -  Building page troubleshooting/acceso-web.md
+DEBUG   -  Running `page_context` event from plugin 'material/search'
+DEBUG   -  Building page troubleshooting/campos-incorrectos.md
+DEBUG   -  Running `page_context` event from plugin 'material/search'
+DEBUG   -  Building page troubleshooting/datos-no-aparecen.md
+DEBUG   -  Running `page_context` event from plugin 'material/search'
+DEBUG   -  Building page troubleshooting/splunk-no-inicia.md
+DEBUG   -  Running `page_context` event from plugin 'material/search'
+DEBUG   -  Running `post_build` event from plugin 'material/search'
+
+Aborted with 2 warnings in strict mode!

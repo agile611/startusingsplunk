@@ -67,7 +67,7 @@ nav:
       - Introducción: preparacion/index.md
       - Requisitos de hardware: preparacion/requisitos-hardware.md
       - Comprobaciones previas: preparacion/comprobaciones-previas.md
-      - Instalación de Splunk: preparacion/instalar-splunk.md
+      - Instalación de Splunk: preparacion/instalacion.md
       - Arquitectura y componentes: preparacion/arquitectura.md
       - Arquitectura del laboratorio: preparacion/arquitectura-laboratorio.md
       - Datos del laboratorio: preparacion/datos-laboratorio.md

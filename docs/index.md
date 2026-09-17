@@ -1386,10 +1386,10 @@ Al terminar deberías poder:
 # 20. Acceso rápido
 
 - [Preparar el laboratorio](preparacion/index.md)
-- [Requisitos](preparacion/requisitos.md)
+- [Requisitos](curso/requisitos.md)
 - [Instalación](preparacion/instalacion.md)
 - [Puertos y directorios](referencia/puertos-directorios.md)
-- [Datasets](preparacion/datasets.md)
+- [Datasets](recursos/datasets.md)
 - [Comenzar la sesión 1](sesion-1/index.md)
 - [Comenzar la sesión 2](sesion-2/index.md)
 - [Comenzar la sesión 3](sesion-3/index.md)
