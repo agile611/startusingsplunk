@@ -706,6 +706,14 @@ fuentes oficiales:
 
 [Descarga de Splunk Enterprise](https://www.splunk.com/en_us/download/splunk-enterprise.html)
 
+!!! warning "Descarga directa del instalador para Debian / Ubuntu"
+
+    Comprueba que la URL corresponde a la versión y arquitectura correctas.
+
+    ```bash
+    wget https://download.splunk.com/products/splunk/releases/10.4.3/linux/splunk-10.4.3-4174a2deda5d-linux-amd64.deb
+    ```
+
 El acceso al instalador puede requerir:
 
 - una cuenta de Splunk;
@@ -908,38 +916,3 @@ separado.
 - [Systemd en Ubuntu](https://documentation.ubuntu.com/server/explanation/systemd/)
 - [Roles y capacidades de Splunk](https://docs.splunk.com/Documentation/Splunk/latest/Security/Rolesandcapabilities)
 - [Usuarios y roles](https://docs.splunk.com/Documentation/Splunk/latest/Security/Aboutusersandroles)
-
----
-
-# 19. Resultado esperado
-
-Al completar estos requisitos, el asistente debe disponer de una plataforma
-preparada para comenzar las prácticas:
-
-```text
-Ubuntu validado
-    +
-Splunk Enterprise operativo
-    +
-Splunk Web accesible
-    +
-Usuario admin validado
-    +
-Índice curso disponible
-    +
-Datos de laboratorio comprobados
-```
-
-La preparación se considera completa cuando el asistente puede ejecutar esta
-búsqueda y obtener un resultado coherente:
-
-```spl
-index=curso earliest=0 latest=now
-| stats
-    count as total_eventos
-    earliest(_time) as primer_evento
-    latest(_time) as ultimo_evento
-```
-
-A partir de ese punto, el curso puede avanzar hacia la ingesta, el lenguaje SPL,
-los dashboards, las alertas y el proyecto final.

@@ -11,26 +11,6 @@ El enfoque es práctico. Las actividades se realizan sobre una instancia local d
 curso
 ```
 
-El asistente trabajará con el flujo completo:
-
-```text
-Fuente de datos
-    ↓
-Entrada
-    ↓
-Ingesta
-    ↓
-Índice
-    ↓
-Eventos y campos
-    ↓
-Búsqueda SPL
-    ↓
-Estadística o visualización
-    ↓
-Reporte, dashboard o alerta
-```
-
 El curso parte de una instalación funcional de Splunk Enterprise. Por tanto, el
 tiempo de aprendizaje se dedica principalmente a:
 
@@ -630,104 +610,7 @@ Sí proporciona una base sólida para continuar con esos contenidos.
 
 ---
 
-# 13. Preparación individual
-
-Antes de la primera sesión, cada asistente debería poder responder:
-
-- ¿Dónde está instalado Splunk?
-- ¿Qué versión está instalada?
-- ¿Cómo compruebo el estado de `Splunkd`?
-- ¿Cómo accedo a Splunk Web?
-- ¿Qué puerto utiliza Splunk Web?
-- ¿Qué índice se utilizará?
-- ¿Dónde está el dataset?
-- ¿Qué usuario utilizaré?
-- ¿Tengo permisos de Ubuntu o solo de Splunk?
-- ¿Qué hago si no aparecen eventos?
-
-Si alguna respuesta no está clara, debe resolverse durante la preparación del
-laboratorio y no durante la construcción del dashboard final.
-
----
-
-# 14. Autoevaluación inicial
-
-Marca cada afirmación como:
-
-- **Sí**: puedo hacerlo sin ayuda;
-- **Parcialmente**: necesito una explicación;
-- **No**: todavía no lo sé hacer.
-
-| Competencia | Sí | Parcialmente | No |
-|---|:---:|:---:|:---:|
-| Acceder a Splunk Web | [ ] | [ ] | [ ] |
-| Consultar la versión | [ ] | [ ] | [ ] |
-| Revisar el estado del servicio | [ ] | [ ] | [ ] |
-| Explicar qué es un índice | [ ] | [ ] | [ ] |
-| Explicar qué es un evento | [ ] | [ ] | [ ] |
-| Buscar por índice | [ ] | [ ] | [ ] |
-| Utilizar un rango temporal | [ ] | [ ] | [ ] |
-| Utilizar `stats` | [ ] | [ ] | [ ] |
-| Utilizar `timechart` | [ ] | [ ] | [ ] |
-| Crear un dashboard | [ ] | [ ] | [ ] |
-| Configurar una alerta | [ ] | [ ] | [ ] |
-| Diagnosticar datos ausentes | [ ] | [ ] | [ ] |
-| Diferenciar `admin` de `sudo` | [ ] | [ ] | [ ] |
-
-Esta autoevaluación no es un examen. Sirve para identificar qué aspectos
-necesitan más atención.
-
----
-
-# 15. Evidencias de aprendizaje
-
-Durante el curso, el participante deberá conservar:
-
-## Entorno
-
-- [ ] versión de Splunk;
-- [ ] versión de Ubuntu;
-- [ ] estado del servicio;
-- [ ] prueba de Splunk Web;
-- [ ] puertos;
-- [ ] recursos básicos.
-
-## Datos
-
-- [ ] índice `curso`;
-- [ ] entrada de datos;
-- [ ] `source`;
-- [ ] `sourcetype`;
-- [ ] `host`;
-- [ ] número de eventos;
-- [ ] primer y último timestamp;
-- [ ] campos disponibles;
-- [ ] muestra de `_raw`.
-
-## Análisis
-
-- [ ] búsqueda total;
-- [ ] búsqueda por código HTTP;
-- [ ] errores por URI;
-- [ ] estadísticas por host;
-- [ ] serie temporal;
-- [ ] porcentaje de error;
-- [ ] interpretación de resultados.
-
-## Objetos
-
-- [ ] búsqueda guardada;
-- [ ] reporte;
-- [ ] visualización;
-- [ ] dashboard;
-- [ ] filtro;
-- [ ] alerta;
-- [ ] permisos;
-- [ ] prueba con el usuario correspondiente.
-
----
-
-# 16. Relación con las secciones del curso
+# 13. Relación con las secciones del curso
 
 Los destinatarios utilizarán especialmente estos documentos:
 
@@ -750,7 +633,7 @@ Los destinatarios utilizarán especialmente estos documentos:
 
 ---
 
-# 17. Referencias oficiales
+# 14. Referencias oficiales
 
 ## Splunk Enterprise
 
@@ -798,62 +681,3 @@ Los destinatarios utilizarán especialmente estos documentos:
 - [Ubuntu Server Documentation](https://documentation.ubuntu.com/server/)
 - [Systemd en Ubuntu](https://documentation.ubuntu.com/server/explanation/systemd/)
 - [Firewall en Ubuntu](https://documentation.ubuntu.com/server/how-to/security/firewalls/)
-
----
-
-# 18. Perfil de salida
-
-Al finalizar el curso, el asistente podrá trabajar con una instancia básica de
-Splunk Enterprise y será capaz de:
-
-- validar el estado de la plataforma;
-- comprender el modelo de datos;
-- localizar eventos;
-- analizar campos;
-- crear búsquedas SPL;
-- interpretar resultados;
-- crear reportes;
-- construir dashboards;
-- configurar alertas;
-- revisar permisos;
-- diagnosticar problemas habituales;
-- documentar limitaciones;
-- presentar una solución de monitorización reproducible.
-
-El resultado esperado no es únicamente conocer la interfaz de Splunk. El
-participante debe poder explicar el recorrido completo desde el dato original
-hasta la decisión operativa.
-
-```text
-Dato original
-    ↓
-Evento indexado
-    ↓
-Campo validado
-    ↓
-Búsqueda reproducible
-    ↓
-Métrica interpretada
-    ↓
-Visualización
-    ↓
-Alerta o acción
-```
-```
-
-## Nota importante sobre permisos
-
-En el documento se mantiene la distinción entre:
-
-```text
-admin en Splunk
-```
-
-y:
-
-```text
-sudo en Ubuntu
-```
-
-Esto evitará que los asistentes interpreten que un rol administrativo dentro de
-Splunk permite automáticamente ejecutar comandos del sistema operativo.
