@@ -168,3 +168,77 @@ body {
     color: #242424;
   }
 }
+
+/* =========================================================
+   Tabla de contenidos lateral
+   ========================================================= */
+
+/* Mantener visible la barra secundaria en pantallas grandes */
+@media screen and (min-width: 76.25em) {
+  .md-sidebar--secondary {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    width: 15rem;
+  }
+
+  .md-sidebar--secondary .md-sidebar__scrollwrap {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  .md-sidebar--secondary .md-nav {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  .md-sidebar--secondary .md-nav__list {
+    display: block !important;
+  }
+
+  .md-sidebar--secondary .md-nav__item {
+    display: block !important;
+  }
+
+  .md-sidebar--secondary .md-nav__link {
+    display: block !important;
+    color: #242424 !important;
+  }
+
+  .md-sidebar--secondary .md-nav__link:hover,
+  .md-sidebar--secondary .md-nav__link--active {
+    color: #057eb5 !important;
+  }
+
+  .md-sidebar--secondary .md-nav__title {
+    background: #057eb5 !important;
+    color: #ffffff !important;
+    font-weight: 700;
+  }
+}
+
+/* Enlaces internos de la tabla de contenidos */
+.md-sidebar--secondary .md-nav__link {
+  color: #242424 !important;
+}
+
+.md-sidebar--secondary .md-nav__link:hover {
+  color: #057eb5 !important;
+}
+
+.md-sidebar--secondary .md-nav__link--active {
+  color: #057eb5 !important;
+  font-weight: 700;
+}
+
+/* Permalink de los encabezados */
+.md-typeset .headerlink {
+  color: #057eb5 !important;
+}
+
+/* Evitar que el contenido tape visualmente la tabla */
+.md-sidebar--secondary {
+  z-index: 1;
+}
