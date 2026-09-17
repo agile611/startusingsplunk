@@ -153,7 +153,7 @@ resultados. También hay que comprobar que:
 
 ---
 
-# 3. Sesión 1: fundamentos e ingestión
+## 3. Sesión 1: fundamentos e ingestión
 
 **Duración total: 6 horas**
 
@@ -161,7 +161,7 @@ La primera sesión establece la base operativa del curso. Se comprueba la
 instalación, se revisa la arquitectura, se ingieren datos y se valida el índice
 `curso`.
 
-## 3.1 Distribución temporal
+### 3.1 Distribución temporal
 
 | Bloque | Duración |
 |---|---:|
@@ -176,7 +176,7 @@ instalación, se revisa la arquitectura, se ingieren datos y se valida el índic
 
 ---
 
-## 3.2 Bloque 1: presentación e introducción a Splunk
+### 3.2 Bloque 1: presentación e introducción a Splunk
 
 **Duración: 45 minutos**
 
@@ -212,7 +212,7 @@ El asistente debe confirmar que:
 
 ---
 
-## 3.3 Bloque 2: conceptos fundamentales
+### 3.3 Bloque 2: conceptos fundamentales
 
 **Duración: 45 minutos**
 
@@ -257,7 +257,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## 3.4 Bloque 3: preparación, arquitectura y componentes
+### 3.4 Bloque 3: preparación, arquitectura y componentes
 
 **Duración: 60 minutos**
 
@@ -320,7 +320,7 @@ El asistente debe documentar:
 
 ---
 
-## 3.5 Bloque 4: ingesta de datos e índices
+### 3.5 Bloque 4: ingesta de datos e índices
 
 **Duración: 90 minutos**
 
@@ -407,7 +407,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## 3.6 Bloque 5: navegación por Splunk Web
+### 3.6 Bloque 5: navegación por Splunk Web
 
 **Duración: 30 minutos**
 
@@ -464,7 +464,7 @@ También debe identificar si el problema está en:
 
 ---
 
-## 3.7 Bloque 6: búsquedas iniciales y validación
+### 3.7 Bloque 6: búsquedas iniciales y validación
 
 **Duración: 60 minutos**
 
@@ -522,7 +522,7 @@ El asistente debe entregar una tabla con:
 
 ---
 
-## 3.8 Bloque 7: laboratorio y repaso
+### 3.8 Bloque 7: laboratorio y repaso
 
 **Duración: 30 minutos**
 
