@@ -96,7 +96,7 @@ con logs de aplicación, base de datos o infraestructura.
 
 ---
 
-## 1. Validación del entorno y la ingesta — 15 puntos
+## 1. Validación del entorno y la ingesta (15 puntos)
 
 Esta sección evalúa que el participante pueda demostrar que los datos existen,
 están en el índice esperado y tienen metadatos razonables.
@@ -204,7 +204,7 @@ completa de esta sección si demuestra que:
 
 ---
 
-## 2. Calidad de las búsquedas SPL — 20 puntos
+## 2. Calidad de las búsquedas SPL (20 puntos)
 
 Esta sección evalúa si las búsquedas responden a preguntas concretas y si pueden
 ser reutilizadas por otra persona.
@@ -357,7 +357,7 @@ Se consideran errores importantes:
 
 ---
 
-## 3. Reportes y visualizaciones — 10 puntos
+## 3. Reportes y visualizaciones (10 puntos)
 
 Esta sección evalúa si el participante selecciona una salida adecuada para la
 pregunta que desea responder.
@@ -449,7 +449,7 @@ una valoración alta.
 
 ---
 
-## 4. Dashboard — 20 puntos
+## 4. Dashboard (20 puntos)
 
 El dashboard debe presentar la información en un orden útil para operaciones.
 
@@ -621,7 +621,7 @@ No existe dashboard funcional o no puede demostrarse su relación con el proyect
 
 ---
 
-## 5. Filtros y tokens — 10 puntos
+## 5. Filtros y tokens (10 puntos)
 
 Esta sección evalúa si el dashboard permite cambiar el contexto de análisis sin
 editar manualmente las consultas.
@@ -727,7 +727,7 @@ Un token únicamente cambia el valor que recibe una consulta. No concede acceso 
 
 ---
 
-## 6. Alerta — 10 puntos
+## 6. Alerta (10 puntos
 
 La alerta debe detectar cinco o más respuestas HTTP `500` durante una ventana de
 cinco minutos.
@@ -844,7 +844,7 @@ Documenta:
 
 ---
 
-## 7. Seguridad y permisos — 5 puntos
+## 7. Seguridad y permisos (5 puntos)
 
 Esta sección evalúa si el participante entiende que tener rol `admin` es útil para
 el laboratorio, pero no debe ser el modelo de producción.
@@ -911,7 +911,7 @@ el laboratorio, pero no debe ser el modelo de producción.
 
 ---
 
-## 8. Documentación y explicación — 10 puntos
+## 8. Documentación y explicación (10 puntos)
 
 La documentación debe permitir que otra persona reproduzca el proyecto.
 
@@ -1341,8 +1341,3 @@ La ausencia de IP o latencia no impide superar el proyecto si:
 - [Users and roles](https://docs.splunk.com/Documentation/Splunk/latest/Security/Aboutusersandroles)
 - [Knowledge objects](https://docs.splunk.com/Documentation/Splunk/latest/Knowledge/Aboutknowledgeobjects)
 - [Splunk Reports](https://docs.splunk.com/Documentation/Splunk/latest/Report/Reportsintro)
-
-Las referencias oficiales complementan la evaluación, pero no sustituyen la
-evidencia práctica. La puntuación debe basarse en el comportamiento real de la
-solución, la calidad de las búsquedas y la capacidad del participante para explicar
-sus decisiones.
