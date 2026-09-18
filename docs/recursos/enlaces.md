@@ -14,7 +14,7 @@ realizadas en la instancia del laboratorio.
 
 ---
 
-## 1. Información del entorno de referencia
+#### 1. Información del entorno de referencia
 
 El laboratorio utiliza como referencia:
 
@@ -42,12 +42,12 @@ laboratorio.
 
 ---
 
-# 2. Documentación oficial de Splunk
+## 2. Documentación oficial de Splunk
 
 La documentación oficial de Splunk debe ser la primera fuente de consulta para
 resolver dudas sobre configuración, SPL, dashboards, alertas y permisos.
 
-## Splunk Enterprise Documentation
+#### Splunk Enterprise Documentation
 
 Documentación general del producto.
 
@@ -67,20 +67,20 @@ Incluye información sobre:
 
 - [Splunk Enterprise Documentation](https://docs.splunk.com/Documentation/Splunk)
 
-## Splunk Help
+#### Splunk Help
 
 Portal de ayuda con documentación organizada por producto, versión y área
 funcional.
 
 - [Splunk Help](https://help.splunk.com/)
 
-## Splunk Enterprise 10.4
+#### Splunk Enterprise 10.4
 
 Página de referencia de la documentación correspondiente a la rama 10.4.
 
 - [Splunk Enterprise 10.4 Documentation](https://help.splunk.com/en/splunk-enterprise)
 
-## Notas de versión
+#### Notas de versión
 
 Antes de aplicar una configuración, revisa las notas de versión si sospechas que
 existe una diferencia de comportamiento entre versiones.
@@ -99,12 +99,12 @@ Las notas de versión pueden incluir información sobre:
 
 ---
 
-# 3. Búsqueda y lenguaje SPL
+## 3. Búsqueda y lenguaje SPL
 
 Estas referencias son esenciales para las prácticas de búsqueda, cálculo de
 métricas y creación de resultados para dashboards.
 
-## Search Manual
+#### Search Manual
 
 Manual general sobre búsquedas en Splunk.
 
@@ -120,7 +120,7 @@ Utilízalo para comprender:
 - cómo se utilizan campos;
 - cómo se investigan eventos.
 
-## Search Reference
+#### Search Reference
 
 Referencia técnica de comandos, funciones y operadores SPL.
 
@@ -148,7 +148,7 @@ Resulta especialmente útil para consultar:
 - `lookup`;
 - `fieldsummary`.
 
-## Comando `stats`
+#### Comando `stats`
 
 - [`stats`](https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/Stats)
 
@@ -177,7 +177,7 @@ index=curso earliest=0 latest=now
     dc(uri) as uri_distintas
 ```
 
-## Comando `eval`
+#### Comando `eval`
 
 - [`eval`](https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/Eval)
 
@@ -201,7 +201,7 @@ index=curso earliest=0 latest=now
 )
 ```
 
-## Comando `where`
+#### Comando `where`
 
 - [`where`](https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/Where)
 
@@ -215,7 +215,7 @@ index=curso earliest=0 latest=now
 
 `where` resulta especialmente útil después de crear un campo calculado.
 
-## Comando `timechart`
+#### Comando `timechart`
 
 - [`timechart`](https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/Timechart)
 
@@ -235,7 +235,7 @@ index=curso earliest=0 latest=now
 | timechart span=1m count by resultado
 ```
 
-## Comando `fieldsummary`
+#### Comando `fieldsummary`
 
 - [`fieldsummary`](https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/Fieldsummary)
 
@@ -249,7 +249,7 @@ index=curso earliest=0 latest=now
 Utiliza esta búsqueda cuando no conozcas los nombres reales de los campos del
 dataset.
 
-## Búsqueda optimizada
+#### Búsqueda optimizada
 
 - [Search Optimization](https://docs.splunk.com/Documentation/Splunk/latest/Search/Aboutsearchoptimization)
 
@@ -267,11 +267,11 @@ Buenas prácticas:
 
 ---
 
-# 4. Ingesta y entrada de datos
+## 4. Ingesta y entrada de datos
 
 Estas referencias ayudan a entender cómo se incorporan eventos a Splunk.
 
-## Get Data In
+#### Get Data In
 
 - [Get Data In](https://docs.splunk.com/Documentation/Splunk/latest/Get started/Getdatain)
 
@@ -285,7 +285,7 @@ Utiliza esta referencia para estudiar:
 - selección de `sourcetype`;
 - revisión de la vista previa.
 
-## How Splunk Processes Data
+#### How Splunk Processes Data
 
 - [How Splunk Processes Data](https://docs.splunk.com/Documentation/Splunk/latest/Data/HowSplunkprocessesdata)
 
@@ -306,7 +306,7 @@ Búsqueda
 Esta referencia resulta útil para diagnosticar por qué un archivo existe en
 Ubuntu, pero todavía no aparece en Splunk.
 
-## Monitor Files and Directories
+#### Monitor Files and Directories
 
 - [Monitor Files and Directories](https://docs.splunk.com/Documentation/Splunk/latest/Data/Monitorfilesanddirectories)
 
@@ -333,7 +333,7 @@ ls -ld /var/log/splunk-curso
 ls -l /var/log/splunk-curso/eventos_web.csv
 ```
 
-## Source Types
+#### Source Types
 
 - [About Source Types](https://docs.splunk.com/Documentation/Splunk/latest/Data/ABoutsourcetypes)
 
@@ -356,7 +356,7 @@ El nombre debe ser consistente entre:
 - dashboards;
 - alertas.
 
-## Inputs
+#### Inputs
 
 - [Inputs.conf](https://help.splunk.com/en/data-management/splunk-enterprise-admin-manual/10.4/configuration-file-reference/10.4.0-configuration-file-reference/inputs.conf)
 
@@ -384,9 +384,9 @@ No modifiques una configuración de producción sin revisar previamente:
 
 ---
 
-# 5. Índices y almacenamiento
+## 5. Índices y almacenamiento
 
-## About Indexes
+#### About Indexes
 
 - [About Indexes](https://docs.splunk.com/Documentation/Splunk/latest/Indexer/Aboutindexes)
 
@@ -401,7 +401,7 @@ Utiliza esta referencia para comprender:
 - configuración general;
 - diferencias entre índices internos y de datos.
 
-## Indexes.conf
+#### Indexes.conf
 
 - [Indexes.conf](https://help.splunk.com/en/data-management/splunk-enterprise-admin-manual/10.4/configuration-file-reference/10.4.0-configuration-file-reference/indexes.conf)
 
@@ -415,7 +415,7 @@ Ejemplo de consulta para revisar el índice:
 | table title disabled totalEventCount currentDBSizeMB
 ```
 
-## Buenas prácticas para el índice del curso
+#### Buenas prácticas para el índice del curso
 
 Utiliza un índice específico:
 
@@ -436,7 +436,7 @@ Documenta:
 - `sourcetypes`;
 - usuarios autorizados.
 
-## Consultar varios índices
+#### Consultar varios índices
 
 Durante el troubleshooting puede utilizarse:
 
@@ -448,15 +448,15 @@ No utilices esta consulta como búsqueda normal de los dashboards del proyecto.
 
 ---
 
-# 6. Dashboards y visualizaciones
+## 6. Dashboards y visualizaciones
 
-## Dashboards
+#### Dashboards
 
 - [Splunk Dashboards](https://docs.splunk.com/Documentation/Splunk/latest/Viz/Aboutthismanual)
 
 Referencia general para trabajar con dashboards y visualizaciones.
 
-## Dashboard Studio
+#### Dashboard Studio
 
 - [Dashboard Studio](https://docs.splunk.com/Documentation/Splunk/latest/DashStudio/IntroFrame)
 
@@ -473,13 +473,13 @@ Utilízalo para estudiar:
 - visualizaciones;
 - interacción entre componentes.
 
-## Classic Dashboards
+#### Classic Dashboards
 
 - [Classic Dashboards](https://docs.splunk.com/Documentation/Splunk/latest/Viz/PanelreferenceforSimplifiedXML)
 
 Referencia útil si el laboratorio utiliza dashboards clásicos o XML simplificado.
 
-## Selección de visualizaciones
+#### Selección de visualizaciones
 
 | Necesidad | Visualización recomendada |
 |---|---|
@@ -494,7 +494,7 @@ Referencia útil si el laboratorio utiliza dashboards clásicos o XML simplifica
 | Latencia por URI | Tabla o barras |
 | Comparación entre métricas | Gráfico combinado |
 
-## Ejemplo de panel de errores por código
+#### Ejemplo de panel de errores por código
 
 ```spl
 index=curso earliest=$time.earliest$ latest=$time.latest$
@@ -503,7 +503,7 @@ index=curso earliest=$time.earliest$ latest=$time.latest$
 | sort status_num
 ```
 
-## Ejemplo de panel temporal
+#### Ejemplo de panel temporal
 
 ```spl
 index=curso earliest=$time.earliest$ latest=$time.latest$
@@ -515,7 +515,7 @@ index=curso earliest=$time.earliest$ latest=$time.latest$
 La sintaxis exacta de los tokens depende del tipo de dashboard. Comprueba el
 formato utilizado por la instancia.
 
-## Buenas prácticas para dashboards
+#### Buenas prácticas para dashboards
 
 Un dashboard debe:
 
@@ -533,15 +533,15 @@ Un dashboard debe:
 
 ---
 
-# 7. Alertas
+## 7. Alertas
 
-## About Alerts
+#### About Alerts
 
 - [About Alerts](https://docs.splunk.com/Documentation/Splunk/latest/Alert/Aboutalerts)
 
 Referencia principal para crear, configurar y administrar alertas.
 
-## Ejemplo de alerta del proyecto
+#### Ejemplo de alerta del proyecto
 
 ```spl
 index=curso earliest=-5m latest=now
@@ -556,7 +556,7 @@ La condición es:
 Cinco o más respuestas HTTP 500 durante los últimos cinco minutos.
 ```
 
-## Elementos que deben documentarse
+#### Elementos que deben documentarse
 
 - nombre;
 - propietario;
@@ -571,7 +571,7 @@ Cinco o más respuestas HTTP 500 durante los últimos cinco minutos.
 - resultado de la prueba;
 - actuación posterior.
 
-## Prueba histórica
+#### Prueba histórica
 
 ```spl
 index=curso earliest="01/01/2026:00:00:00"
@@ -585,7 +585,7 @@ Esta búsqueda valida la lógica sobre datos históricos.
 
 No debe presentarse como una prueba de funcionamiento en tiempo real.
 
-## Alertas y permisos
+#### Alertas y permisos
 
 - [Alert Permissions](https://help.splunk.com/en/splunk-enterprise/alert-and-respond/alerting-manual/9.0/manage-alert-and-alert-action-permissions)
 
@@ -600,9 +600,9 @@ Los permisos y capacidades determinan quién puede:
 
 ---
 
-# 8. Usuarios, roles y seguridad
+## 8. Usuarios, roles y seguridad
 
-## Role-Based User Access
+#### Role-Based User Access
 
 - [About Configuring Role-Based User Access](https://help.splunk.com/en/splunk-enterprise/administer/manage-users-and-security/10.4/manage-splunk-platform-users-and-roles/about-configuring-role-based-user-access)
 
@@ -614,15 +614,15 @@ Esta referencia explica cómo controlar el acceso a:
 - recursos de la plataforma;
 - objetos de conocimiento.
 
-## Users and Roles
+#### Users and Roles
 
 - [Users and Roles](https://docs.splunk.com/Documentation/Splunk/latest/Security/Aboutusersandroles)
 
-## Define Roles and Capabilities
+#### Define Roles and Capabilities
 
 - [Define Roles with Capabilities](https://help.splunk.com/en/splunk-enterprise/administer/manage-users-and-security/10.0/manage-splunk-platform-users-and-roles/define-roles-on-the-splunk-platform-with-capabilities)
 
-## Knowledge Objects
+#### Knowledge Objects
 
 - [Knowledge Objects](https://docs.splunk.com/Documentation/Splunk/latest/Knowledge/Aboutknowledgeobjects)
 
@@ -637,7 +637,7 @@ Los siguientes objetos deben tratarse como objetos de conocimiento:
 - campos calculados;
 - event types.
 
-## Principio de mínimo privilegio
+#### Principio de mínimo privilegio
 
 En producción:
 
@@ -649,14 +649,14 @@ En producción:
 - las alertas deben tener responsables;
 - la modificación de dashboards debe estar controlada.
 
-## Revisar el contexto del usuario
+#### Revisar el contexto del usuario
 
 ```spl
 | rest /services/authentication/current-context
 | table username roles
 ```
 
-## Revisar objetos compartidos
+#### Revisar objetos compartidos
 
 La compartición de un dashboard o reporte debe documentarse junto con:
 
@@ -669,9 +669,9 @@ La compartición de un dashboard o reporte debe documentarse junto con:
 
 ---
 
-# 9. API REST de Splunk
+## 9. API REST de Splunk
 
-## Splunk REST API Reference
+#### Splunk REST API Reference
 
 - [Splunk REST API Reference](https://docs.splunk.com/Documentation/Splunk/latest/RESTREF/RESTprolog)
 
@@ -687,21 +687,21 @@ La API REST puede utilizarse para consultar:
 - configuración;
 - estado de la plataforma.
 
-## Revisar entradas monitorizadas
+#### Revisar entradas monitorizadas
 
 ```spl
 | rest /services/data/inputs/monitor
 | table eai:acl.app path index sourcetype disabled
 ```
 
-## Revisar índices
+#### Revisar índices
 
 ```spl
 | rest /services/data/indexes
 | table title disabled totalEventCount currentDBSizeMB
 ```
 
-## Revisar el usuario actual
+#### Revisar el usuario actual
 
 ```spl
 | rest /services/authentication/current-context
@@ -722,55 +722,55 @@ capturas o scripts compartidos.
 
 ---
 
-# 10. Sistema operativo Ubuntu
+## 10. Sistema operativo Ubuntu
 
-## Ubuntu Server Documentation
+#### Ubuntu Server Documentation
 
 - [Ubuntu Server Documentation](https://documentation.ubuntu.com/server/)
 
-## Systemd
+#### Systemd
 
 - [Ubuntu Systemd](https://documentation.ubuntu.com/server/explanation/systemd/)
 
-## Comandos utilizados en el laboratorio
+#### Comandos utilizados en el laboratorio
 
-### Estado del servicio
+###### Estado del servicio
 
 ```bash
 sudo systemctl status Splunkd
 ```
 
-### Estado mediante Splunk
+###### Estado mediante Splunk
 
 ```bash
 sudo /opt/splunk/bin/splunk status
 ```
 
-### Versión instalada
+###### Versión instalada
 
 ```bash
 /opt/splunk/bin/splunk version
 ```
 
-### Puertos abiertos
+###### Puertos abiertos
 
 ```bash
 sudo ss -lntp | grep -E '8000|8089|9997'
 ```
 
-### Permisos de una ruta
+###### Permisos de una ruta
 
 ```bash
 ls -ld /var/log/splunk-curso
 ```
 
-### Permisos de un archivo
+###### Permisos de un archivo
 
 ```bash
 ls -l /var/log/splunk-curso/eventos_web.csv
 ```
 
-## Qué comprobar en Ubuntu
+#### Qué comprobar en Ubuntu
 
 Cuando Splunk no ingiere un archivo, revisa:
 
@@ -787,13 +787,13 @@ Cuando Splunk no ingiere un archivo, revisa:
 
 ---
 
-# 11. Troubleshooting
+## 11. Troubleshooting
 
-## Índice de troubleshooting
+#### Índice de troubleshooting
 
 - [Splunk Troubleshooting](https://docs.splunk.com/Documentation/Splunk/latest/Troubleshooting/Aboutthismanual)
 
-## Diagnóstico mediante `_internal`
+#### Diagnóstico mediante `_internal`
 
 ```spl
 index=_internal earliest=-30m latest=now
@@ -802,7 +802,7 @@ index=_internal earliest=-30m latest=now
 | sort - _time
 ```
 
-## Problema: no aparecen eventos
+#### Problema: no aparecen eventos
 
 Consulta inicial:
 
@@ -825,7 +825,7 @@ index=curso earliest=0 latest=now
 | fieldsummary
 ```
 
-## Problema: el archivo existe, pero no aparece en Splunk
+#### Problema: el archivo existe, pero no aparece en Splunk
 
 Revisa:
 
@@ -841,7 +841,7 @@ Después consulta:
 | table path index sourcetype disabled
 ```
 
-## Problema: el timestamp no se reconoce
+#### Problema: el timestamp no se reconoce
 
 Revisa:
 
@@ -858,7 +858,7 @@ index=curso earliest=0 latest=now
 | head 20
 ```
 
-## Problema: el campo no existe
+#### Problema: el campo no existe
 
 Ejecuta:
 
@@ -875,7 +875,7 @@ index=curso earliest=0 latest=now
 | head 20
 ```
 
-## Problema: la alerta no se dispara
+#### Problema: la alerta no se dispara
 
 Comprueba:
 
@@ -900,12 +900,12 @@ index=curso earliest=-5m latest=now
 
 ---
 
-# 12. Observabilidad y monitorización web
+## 12. Observabilidad y monitorización web
 
 Splunk permite analizar eventos, pero una monitorización completa de una aplicación
 web suele combinar logs, métricas, trazas y disponibilidad.
 
-## Temas externos recomendados
+#### Temas externos recomendados
 
 Busca documentación y artículos sobre:
 
@@ -922,7 +922,7 @@ Busca documentación y artículos sobre:
 - gestión de incidentes;
 - detección de anomalías.
 
-## Indicadores habituales
+#### Indicadores habituales
 
 Una aplicación web puede observarse mediante:
 
@@ -938,7 +938,7 @@ Una aplicación web puede observarse mediante:
 - tiempos de respuesta;
 - tamaño de respuesta.
 
-## Relación con el proyecto
+#### Relación con el proyecto
 
 El proyecto trabaja principalmente con:
 
@@ -962,12 +962,12 @@ No debes confundir:
 
 ---
 
-# 13. Recursos externos recomendados
+## 13. Recursos externos recomendados
 
 Los recursos externos pueden complementar la documentación oficial, pero deben
 utilizarse con criterio.
 
-## Tipos de recursos útiles
+#### Tipos de recursos útiles
 
 - documentación oficial de Ubuntu;
 - documentación del servidor web;
@@ -980,7 +980,7 @@ utilizarse con criterio.
 - artículos sobre detección de anomalías;
 - documentación de seguridad.
 
-## Criterios para seleccionar un recurso externo
+#### Criterios para seleccionar un recurso externo
 
 Comprueba:
 
@@ -1004,10 +1004,10 @@ Evita utilizar como única fuente:
 - contenido que no pueda reproducirse;
 - configuraciones copiadas sin comprobar.
 
-## Cómo registrar un recurso externo
+#### Cómo registrar un recurso externo
 
 ```markdown
-## Nombre del recurso
+#### Nombre del recurso
 
 - Tipo: artículo, libro, guía o documentación
 - Autor:
@@ -1020,10 +1020,10 @@ Evita utilizar como única fuente:
 - Observaciones:
 ```
 
-## Ejemplo
+#### Ejemplo
 
 ```markdown
-## Guía sobre monitorización de aplicaciones web
+#### Guía sobre monitorización de aplicaciones web
 
 - Tipo: artículo técnico
 - Autor: ____________________
@@ -1038,60 +1038,60 @@ Evita utilizar como única fuente:
 
 ---
 
-# 14. Enlaces organizados por actividad
+## 14. Enlaces organizados por actividad
 
-## Actividad: preparar el entorno
+#### Actividad: preparar el entorno
 
 - [Splunk Enterprise Documentation](https://docs.splunk.com/Documentation/Splunk)
 - [Ubuntu Server Documentation](https://documentation.ubuntu.com/server/)
 - [Ubuntu Systemd](https://documentation.ubuntu.com/server/explanation/systemd/)
 
-## Actividad: crear o revisar un índice
+#### Actividad: crear o revisar un índice
 
 - [About Indexes](https://docs.splunk.com/Documentation/Splunk/latest/Indexer/Aboutindexes)
 - [Indexes.conf](https://help.splunk.com/en/data-management/splunk-enterprise-admin-manual/10.4/configuration-file-reference/10.4.0-configuration-file-reference/indexes.conf)
 
-## Actividad: ingerir un CSV
+#### Actividad: ingerir un CSV
 
 - [Get Data In](https://docs.splunk.com/Documentation/Splunk/latest/Get started/Getdatain)
 - [Monitor Files and Directories](https://docs.splunk.com/Documentation/Splunk/latest/Data/Monitorfilesanddirectories)
 - [Inputs.conf](https://help.splunk.com/en/data-management/splunk-enterprise-admin-manual/10.4/configuration-file-reference/10.4.0-configuration-file-reference/inputs.conf)
 
-## Actividad: explorar datos
+#### Actividad: explorar datos
 
 - [Search Manual](https://docs.splunk.com/Documentation/Splunk/latest/Search/Aboutthesearchapp)
 - [Search Reference](https://docs.splunk.com/Documentation/Splunk/latest/SearchReference)
 - [`fieldsummary`](https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/Fieldsummary)
 
-## Actividad: escribir SPL
+#### Actividad: escribir SPL
 
 - [`stats`](https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/Stats)
 - [`eval`](https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/Eval)
 - [`where`](https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/Where)
 - [`timechart`](https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/Timechart)
 
-## Actividad: crear dashboards
+#### Actividad: crear dashboards
 
 - [Splunk Dashboards](https://docs.splunk.com/Documentation/Splunk/latest/Viz/Aboutthismanual)
 - [Dashboard Studio](https://docs.splunk.com/Documentation/Splunk/latest/DashStudio/IntroFrame)
 - [Classic Dashboards](https://docs.splunk.com/Documentation/Splunk/latest/Viz/PanelreferenceforSimplifiedXML)
 
-## Actividad: crear alertas
+#### Actividad: crear alertas
 
 - [About Alerts](https://docs.splunk.com/Documentation/Splunk/latest/Alert/Aboutalerts)
 - [Alert Permissions](https://help.splunk.com/en/splunk-enterprise/alert-and-respond/alerting-manual/9.0/manage-alert-and-alert-action-permissions)
 
-## Actividad: revisar permisos
+#### Actividad: revisar permisos
 
 - [Role-Based User Access](https://help.splunk.com/en/splunk-enterprise/administer/manage-users-and-security/10.4/manage-splunk-platform-users-and-roles/about-configuring-role-based-user-access)
 - [Users and Roles](https://docs.splunk.com/Documentation/Splunk/latest/Security/Aboutusersandroles)
 - [Knowledge Objects](https://docs.splunk.com/Documentation/Splunk/latest/Knowledge/Aboutknowledgeobjects)
 
-## Actividad: consultar la API
+#### Actividad: consultar la API
 
 - [Splunk REST API Reference](https://docs.splunk.com/Documentation/Splunk/latest/RESTREF/RESTprolog)
 
-## Actividad: diagnosticar errores
+#### Actividad: diagnosticar errores
 
 - [Splunk Troubleshooting](https://docs.splunk.com/Documentation/Splunk/latest/Troubleshooting/Aboutthismanual)
 - [Search Optimization](https://docs.splunk.com/Documentation/Splunk/latest/Search/Aboutsearchoptimization)
@@ -1099,11 +1099,11 @@ Evita utilizar como única fuente:
 
 ---
 
-# 15. Ejemplos prácticos de uso de los enlaces
+## 15. Ejemplos prácticos de uso de los enlaces
 
-## Ejemplo 1: no aparecen datos
+#### Ejemplo 1: no aparecen datos
 
-### Situación
+###### Situación
 
 El asistente ejecuta:
 
@@ -1113,14 +1113,14 @@ index=curso earliest=-15m latest=now
 
 y no obtiene resultados.
 
-### Enlaces que debe consultar
+###### Enlaces que debe consultar
 
 1. documentación de búsqueda;
 2. documentación de entradas;
 3. documentación de índices;
 4. documentación de troubleshooting.
 
-### Secuencia práctica
+###### Secuencia práctica
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1143,7 +1143,7 @@ index=_internal earliest=-30m latest=now
 | sort - _time
 ```
 
-### Conclusión esperada
+###### Conclusión esperada
 
 El asistente debe diferenciar entre:
 
@@ -1157,13 +1157,13 @@ El asistente debe diferenciar entre:
 
 ---
 
-## Ejemplo 2: el dashboard muestra paneles vacíos
+#### Ejemplo 2: el dashboard muestra paneles vacíos
 
-### Situación
+###### Situación
 
 El dashboard se abre, pero varios paneles no muestran datos.
 
-### Comprobaciones
+###### Comprobaciones
 
 1. ejecutar la búsqueda del panel fuera del dashboard;
 2. sustituir temporalmente los tokens por valores fijos;
@@ -1173,34 +1173,34 @@ El dashboard se abre, pero varios paneles no muestran datos.
 6. probar el usuario final;
 7. comprobar permisos de la búsqueda guardada.
 
-### Consulta base
+###### Consulta base
 
 ```spl
 index=curso earliest=0 latest=now
 | stats count
 ```
 
-### Consulta de campos
+###### Consulta de campos
 
 ```spl
 index=curso earliest=0 latest=now
 | fieldsummary
 ```
 
-### Conclusión esperada
+###### Conclusión esperada
 
 No debe modificarse el layout antes de comprobar que las consultas funcionan
 fuera del dashboard.
 
 ---
 
-## Ejemplo 3: la alerta no se activa
+#### Ejemplo 3: la alerta no se activa
 
-### Situación
+###### Situación
 
 La alerta de cinco errores HTTP `500` no se dispara.
 
-### Consulta de prueba
+###### Consulta de prueba
 
 ```spl
 index=curso earliest=-5m latest=now
@@ -1209,7 +1209,7 @@ index=curso earliest=-5m latest=now
 | stats count as errores_500
 ```
 
-### Comprobaciones
+###### Comprobaciones
 
 - ¿Hay eventos nuevos?
 - ¿El timestamp está dentro de los últimos cinco minutos?
@@ -1220,7 +1220,7 @@ index=curso earliest=-5m latest=now
 - ¿Existe throttling?
 - ¿La acción está configurada?
 
-### Documentación esperada
+###### Documentación esperada
 
 La entrega debe indicar si la alerta:
 
@@ -1232,9 +1232,9 @@ La entrega debe indicar si la alerta:
 
 ---
 
-## Ejemplo 4: falta el campo de IP
+#### Ejemplo 4: falta el campo de IP
 
-### Situación
+###### Situación
 
 El proyecto solicita identificar la IP con más errores, pero el dataset solo
 contiene:
@@ -1243,14 +1243,14 @@ contiene:
 timestamp,host,method,status,uri
 ```
 
-### Consulta
+###### Consulta
 
 ```spl
 index=curso earliest=0 latest=now
 | fieldsummary
 ```
 
-### Decisión correcta
+###### Decisión correcta
 
 Documentar:
 
@@ -1258,7 +1258,7 @@ Documentar:
 > análisis fiable por cliente. Se utiliza un análisis alternativo por host y se
 > propone añadir `clientip` en una futura versión de la fuente.
 
-### Consulta alternativa
+###### Consulta alternativa
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1270,7 +1270,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-# 16. Cómo citar los enlaces en los entregables
+## 16. Cómo citar los enlaces en los entregables
 
 Cuando una fuente se utilice para justificar una decisión, registra:
 
@@ -1280,7 +1280,7 @@ Cuando una fuente se utilice para justificar una decisión, registra:
 - parte del proyecto relacionada;
 - fecha de consulta.
 
-## Ejemplo
+#### Ejemplo
 
 ```markdown
 La configuración de la entrada de monitorización se basó en la documentación
@@ -1292,7 +1292,7 @@ Referencia:
 - Consultada el: ____________________
 ```
 
-## No sustituir la prueba por una referencia
+#### No sustituir la prueba por una referencia
 
 La documentación explica cómo debería funcionar una capacidad.
 
@@ -1309,9 +1309,9 @@ Por ejemplo:
 
 ---
 
-# 17. Lista de comprobación de enlaces
+## 17. Lista de comprobación de enlaces
 
-## Documentación oficial
+#### Documentación oficial
 
 - [ ] Se ha consultado la documentación general de Splunk.
 - [ ] Se ha consultado Search Manual.
@@ -1324,7 +1324,7 @@ Por ejemplo:
 - [ ] Se ha consultado la documentación de REST si se utilizó la API.
 - [ ] Se ha consultado la documentación de Ubuntu si se modificó el sistema.
 
-## Compatibilidad
+#### Compatibilidad
 
 - [ ] El enlace corresponde con el producto utilizado.
 - [ ] La versión está documentada.
@@ -1332,7 +1332,7 @@ Por ejemplo:
 - [ ] Se han comprobado los ejemplos en el laboratorio.
 - [ ] No se han copiado configuraciones sin validarlas.
 
-## Entrega
+#### Entrega
 
 - [ ] Las fuentes utilizadas están identificadas.
 - [ ] Los enlaces se pueden abrir.
@@ -1345,7 +1345,7 @@ Por ejemplo:
 
 ---
 
-# 18. Referencias oficiales principales
+## 18. Referencias oficiales principales
 
 - [Splunk Enterprise Documentation](https://docs.splunk.com/Documentation/Splunk)
 - [Splunk Search Manual](https://docs.splunk.com/Documentation/Splunk/latest/Search/Aboutthesearchapp)
