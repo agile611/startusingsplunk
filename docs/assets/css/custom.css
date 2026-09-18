@@ -1,27 +1,53 @@
-/* Estilos corporativos Agile611 */
+/* =========================================================
+   Estilos corporativos Agile611
+   Curso de Splunk
+   ========================================================= */
+
+/* ---------------------------------------------------------
+   Variables de Material for MkDocs
+   --------------------------------------------------------- */
+
 :root {
   --md-primary-fg-color: #057eb5;
   --md-primary-fg-color--light: #057eb5;
-  --md-primary-fg-color--dark: #057eb5;
+  --md-primary-fg-color--dark: #045f89;
+
   --md-accent-fg-color: #057eb5;
   --md-accent-fg-color--transparent: rgba(5, 126, 181, 0.12);
+
   --md-default-bg-color: #ffffff;
   --md-default-fg-color: #242424;
   --md-default-fg-color--light: #f5f5f5;
+
   --md-code-bg-color: #f5f5f5;
   --md-code-fg-color: #242424;
+
   --md-footer-bg-color: #057eb5;
   --md-footer-fg-color: #ffffff;
+
   --md-typeset-color: #242424;
   --md-typeset-a-color: #057eb5;
+
   --md-shadow-z1: 0 0 0 rgba(0, 0, 0, 0);
+
+  /*
+   * Anchuras de las columnas laterales.
+   * La columna central ocupará el espacio restante.
+   */
+  --md-sidebar-width: 12rem;
+  --md-sidebar-width--secondary: 15rem;
 }
+
+/* ---------------------------------------------------------
+   Configuración general
+   --------------------------------------------------------- */
 
 html {
   font-family: "Nunito", sans-serif;
 }
 
 body {
+  margin: 0;
   background: #ffffff;
   color: #242424;
 }
@@ -33,11 +59,16 @@ body {
   background: #ffffff;
 }
 
-.md-sidebar__scrollwrap {
-  background: #f5f5f5 !important;
-  background-image: none !important;
-  box-shadow: none !important;
+/* El contenido central debe poder encogerse dentro de la cuadrícula */
+.md-content {
+  min-width: 0;
+  max-width: none;
+  overflow-wrap: break-word;
 }
+
+/* ---------------------------------------------------------
+   Cabecera, pestañas y pie
+   --------------------------------------------------------- */
 
 .md-header,
 .md-tabs,
@@ -46,40 +77,183 @@ body {
   color: #f5f5f5;
 }
 
+.md-header__title,
+.md-header__topic,
+.md-tabs__link,
 .md-tabs__item,
 .md-tabs__item:hover,
-.md-tabs__item--active,
-.md-nav__link,
-.md-nav__title,
-.md-search-result__link,
-.md-content h1,
-.md-content h2,
-.md-content h3,
-.md-content h4,
-.md-content h5,
-.md-content h6,
-.md-content p,
-.md-content li,
-.md-content strong,
-.md-content em,
-.md-content span {
+.md-tabs__item--active {
+  color: #f5f5f5 !important;
+}
+
+.md-tabs__link:hover,
+.md-tabs__link--active {
+  color: #ffffff !important;
+}
+
+/* ---------------------------------------------------------
+   Navegación izquierda
+   --------------------------------------------------------- */
+
+.md-sidebar--primary .md-sidebar__scrollwrap {
+  background: #f5f5f5 !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+
+.md-sidebar--primary .md-nav__title {
+  background: #057eb5 !important;
+  background-image: none !important;
+  color: #ffffff !important;
+  box-shadow: none !important;
+}
+
+.md-sidebar--primary .md-nav__title span {
+  color: #ffffff !important;
+}
+
+.md-sidebar--primary .md-nav__link {
   color: #242424 !important;
 }
 
-.md-tabs__item,
-.md-tabs__item:hover,
-.md-tabs__item--active,
-.md-nav__link--active,
-.md-nav__item .md-nav__link--active,
-.md-nav__item--active > .md-nav__link,
-.md-nav__item--nested > .md-nav__link--active,
-.md-typeset a:active,
-.md-typeset a:visited {
+.md-sidebar--primary .md-nav__link:hover,
+.md-sidebar--primary .md-nav__link--active,
+.md-sidebar--primary .md-nav__item--active > .md-nav__link {
   background: transparent !important;
   color: #057eb5 !important;
   box-shadow: none !important;
   font-weight: 700;
 }
+
+/* ---------------------------------------------------------
+   Tabla de contenidos derecha
+   --------------------------------------------------------- */
+
+.md-sidebar--secondary {
+  min-width: 0 !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  overflow: visible !important;
+  z-index: auto !important;
+}
+
+.md-sidebar--secondary .md-sidebar__scrollwrap {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  background: #ffffff !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  box-sizing: border-box !important;
+  overflow-x: hidden !important;
+}
+
+.md-sidebar--secondary .md-sidebar__inner,
+.md-sidebar--secondary .md-nav,
+.md-sidebar--secondary .md-nav__list {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  box-sizing: border-box !important;
+}
+
+/*
+ * Título "Tabla de contenidos".
+ * Ocupa toda la anchura real de la columna derecha,
+ * pero no invade la columna central.
+ */
+.md-sidebar--secondary .md-nav__title {
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+
+  margin: 0 !important;
+  padding: 0.55rem 0.75rem !important;
+
+  box-sizing: border-box !important;
+  background: #057eb5 !important;
+  background-image: none !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  box-shadow: none !important;
+}
+
+.md-sidebar--secondary .md-nav__title span {
+  color: #ffffff !important;
+}
+
+/* Enlaces del índice derecho */
+.md-sidebar--secondary .md-nav__item,
+.md-sidebar--secondary .md-nav__link {
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.md-sidebar--secondary .md-nav__link {
+  display: block !important;
+  color: #242424 !important;
+  overflow-wrap: break-word;
+}
+
+.md-sidebar--secondary .md-nav__link:hover,
+.md-sidebar--secondary .md-nav__link--active {
+  color: #057eb5 !important;
+  font-weight: 700;
+}
+
+/* ---------------------------------------------------------
+   Cuadrícula principal de Material for MkDocs
+   --------------------------------------------------------- */
+
+/*
+ * Solo se modifica la cuadrícula en escritorio.
+ *
+ * Estructura:
+ *
+ * navegación izquierda | contenido principal | TOC derecha
+ *
+ * La columna central usa minmax(0, 1fr), lo que evita que
+ * la columna derecha la tape.
+ */
+@media screen and (min-width: 76.25em) {
+  .md-grid {
+    display: grid !important;
+    grid-template-columns:
+      minmax(0, var(--md-sidebar-width))
+      minmax(0, 1fr)
+      minmax(0, var(--md-sidebar-width--secondary));
+    column-gap: 1rem;
+    width: 100%;
+    max-width: 76rem;
+    box-sizing: border-box;
+  }
+
+  .md-sidebar--primary,
+  .md-sidebar--secondary,
+  .md-content {
+    min-width: 0 !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .md-sidebar--primary,
+  .md-sidebar--secondary {
+    position: relative !important;
+    width: auto !important;
+    overflow: visible !important;
+  }
+
+  .md-sidebar--secondary {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+}
+
+/* ---------------------------------------------------------
+   Enlaces y contenido Markdown
+   --------------------------------------------------------- */
 
 .md-typeset a,
 .md-typeset a:hover,
@@ -88,15 +262,68 @@ body {
   color: #057eb5;
 }
 
+.md-typeset a:visited {
+  color: #057eb5;
+}
+
+.md-typeset .headerlink {
+  color: #057eb5 !important;
+}
+
+.md-typeset h1,
+.md-typeset h2,
+.md-typeset h3,
+.md-typeset h4,
+.md-typeset h5,
+.md-typeset h6,
+.md-content h1,
+.md-content h2,
+.md-content h3,
+.md-content h4,
+.md-content h5,
+.md-content h6 {
+  color: #242424 !important;
+}
+
+.md-content p,
+.md-content li,
+.md-content strong,
+.md-content em {
+  color: #242424;
+}
+
+/* ---------------------------------------------------------
+   Código
+   --------------------------------------------------------- */
+
 .md-typeset code {
   background: #f5f5f5;
   color: #242424;
 }
 
+.md-typeset pre {
+  background: #f5f5f5;
+}
+
+/* ---------------------------------------------------------
+   Admonitions
+   --------------------------------------------------------- */
+
 .admonition {
   --md-admonition-bg-color: #f5f5f5;
   background-color: #f5f5f5 !important;
+  color: #242424 !important;
 }
+
+.admonition p,
+.admonition li,
+.admonition strong {
+  color: #242424 !important;
+}
+
+/* ---------------------------------------------------------
+   Tablas
+   --------------------------------------------------------- */
 
 .md-typeset table,
 .md-typeset table th,
@@ -109,6 +336,7 @@ body {
 }
 
 .md-typeset table {
+  width: 100%;
   border: 1px solid #499497;
   border-collapse: collapse;
 }
@@ -116,41 +344,51 @@ body {
 .md-typeset table th,
 .md-typeset table td {
   border: 1px solid #499497;
+  color: #242424 !important;
 }
+
+/* ---------------------------------------------------------
+   Citas
+   --------------------------------------------------------- */
 
 .md-typeset blockquote,
 .md-typeset blockquote * {
   color: #242424 !important;
 }
 
-.md-nav__link,
-.md-nav__link--active,
-.md-nav__item .md-nav__link--active,
-.md-nav__item--active > .md-nav__link,
-.md-nav__item--nested > .md-nav__link--active {
-  background: transparent !important;
-  box-shadow: none !important;
+/* ---------------------------------------------------------
+   Responsive
+   --------------------------------------------------------- */
+
+/*
+ * En pantallas pequeñas Material gestiona las barras laterales
+ * mediante sus propios paneles y menús.
+ */
+@media screen and (max-width: 76.24em) {
+  .md-grid {
+    display: block;
+    max-width: 100%;
+  }
+
+  .md-sidebar--secondary {
+    width: auto !important;
+    max-width: 100% !important;
+  }
+
+  .md-sidebar--secondary .md-nav__title {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
 }
 
-.md-tabs__link,
-.md-tabs__link:hover,
-.md-tabs__link:focus,
-.md-tabs__link:active,
-.md-tabs__link:visited,
-.md-nav__title,
-.md-nav__title:hover,
-.md-nav__title:focus,
-.md-nav__title:active,
-.md-nav__title:visited {
-  color: #f5f5f5 !important;
-}
+/* ---------------------------------------------------------
+   Compatibilidad con modo oscuro del sistema
+   --------------------------------------------------------- */
 
-.md-nav__title {
-  background: #057eb5 !important;
-  background-image: none !important;
-  box-shadow: none !important;
-}
-
+/*
+ * Se mantiene el diseño claro también cuando el sistema operativo
+ * utiliza el modo oscuro, tal como estaba definido en tu diseño.
+ */
 @media (prefers-color-scheme: dark) {
   :root {
     --md-default-bg-color: #ffffff;
@@ -167,119 +405,19 @@ body {
     background: #ffffff;
     color: #242424;
   }
-}
 
-/* =========================================================
-   Tabla de contenidos lateral
-   ========================================================= */
-
-/* Mantener visible la barra secundaria en pantallas grandes */
-@media screen and (min-width: 76.25em) {
+  .md-main,
+  .md-content,
+  .md-sidebar--primary,
   .md-sidebar--secondary {
-    display: block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    width: 15rem;
+    background: #ffffff;
+  }
+
+  .md-sidebar--primary .md-sidebar__scrollwrap {
+    background: #f5f5f5 !important;
   }
 
   .md-sidebar--secondary .md-sidebar__scrollwrap {
-    display: block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-  }
-
-  .md-sidebar--secondary .md-nav {
-    display: block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-  }
-
-  .md-sidebar--secondary .md-nav__list {
-    display: block !important;
-  }
-
-  .md-sidebar--secondary .md-nav__item {
-    display: block !important;
-  }
-
-  .md-sidebar--secondary .md-nav__link {
-    display: block !important;
-    color: #242424 !important;
-  }
-
-  .md-sidebar--secondary .md-nav__link:hover,
-  .md-sidebar--secondary .md-nav__link--active {
-    color: #057eb5 !important;
-  }
-
-  .md-sidebar--secondary .md-nav__title {
-    background: #057eb5 !important;
-    color: #ffffff !important;
-    font-weight: 700;
-  }
-}
-
-/* Enlaces internos de la tabla de contenidos */
-.md-sidebar--secondary .md-nav__link {
-  color: #242424 !important;
-}
-
-.md-sidebar--secondary .md-nav__link:hover {
-  color: #057eb5 !important;
-}
-
-.md-sidebar--secondary .md-nav__link--active {
-  color: #057eb5 !important;
-  font-weight: 700;
-}
-
-/* Permalink de los encabezados */
-.md-typeset .headerlink {
-  color: #057eb5 !important;
-}
-
-/* Evitar que el contenido tape visualmente la tabla */
-.md-sidebar--secondary {
-  z-index: 1;
-}
-
-/* =========================================================
-   Tabla de contenidos: título a todo el ancho de la columna
-   ========================================================= */
-
-@media screen and (min-width: 76.25em) {
-  /* Ancho completo de la columna secundaria */
-  .md-sidebar--secondary,
-  .md-sidebar--secondary .md-sidebar__scrollwrap,
-  .md-sidebar--secondary .md-sidebar__inner,
-  .md-sidebar--secondary .md-nav {
-    width: 100% !important;
-    max-width: none !important;
-    box-sizing: border-box;
-  }
-
-  /* Bloque azul de "Tabla de contenidos" */
-  .md-sidebar--secondary .md-nav__title {
-    display: block !important;
-    width: 100% !important;
-    max-width: none !important;
-    min-width: 100% !important;
-    box-sizing: border-box !important;
-
-    margin: 0 !important;
-    background: #057eb5 !important;
-    color: #ffffff !important;
-  }
-
-  /* Texto del título */
-  .md-sidebar--secondary .md-nav__title,
-  .md-sidebar--secondary .md-nav__title span {
-    color: #ffffff !important;
-  }
-
-  /* Enlaces de la tabla de contenidos */
-  .md-sidebar--secondary .md-nav__list {
-    width: 100% !important;
-    box-sizing: border-box;
+    background: #ffffff !important;
   }
 }
