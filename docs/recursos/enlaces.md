@@ -14,7 +14,7 @@ realizadas en la instancia del laboratorio.
 
 ---
 
-#### 1. Información del entorno de referencia
+## 1. Información del entorno de referencia
 
 El laboratorio utiliza como referencia:
 
