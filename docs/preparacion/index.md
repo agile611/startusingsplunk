@@ -32,7 +32,7 @@ Si todavía no tienes la máquina preparada, consulta primero los
 
 ---
 
-# 1. Objetivo de esta sección
+## 1. Objetivo de esta sección
 
 Al terminar la preparación debes poder responder afirmativamente a estas
 preguntas:
@@ -75,11 +75,11 @@ Búsquedas SPL
 
 ---
 
-# 2. Requisitos de permisos
+## 2. Requisitos de permisos
 
 Durante el laboratorio se utilizan dos niveles de permisos diferentes.
 
-## 2.1 Permisos dentro de Splunk
+#### 2.1 Permisos dentro de Splunk
 
 El usuario con rol `admin` podrá realizar, según la configuración de la
 instancia, actividades como:
@@ -93,7 +93,7 @@ instancia, actividades como:
 - revisar usuarios y roles;
 - administrar objetos de conocimiento.
 
-## 2.2 Permisos en Ubuntu
+#### 2.2 Permisos en Ubuntu
 
 El rol `admin` de Splunk no concede automáticamente permisos administrativos
 sobre Ubuntu.
@@ -126,7 +126,7 @@ rol operativo que los utilizará.
 
 ---
 
-# 3. Temas
+## 3. Temas
 
 1. [Requisitos de hardware](requisitos-hardware.md): recursos mínimos y
    recomendaciones para una máquina física o virtual.
@@ -143,7 +143,7 @@ rol operativo que los utilizará.
 
 ---
 
-# 4. Orden recomendado
+## 4. Orden recomendado
 
 Sigue este orden para evitar problemas difíciles de diagnosticar:
 
@@ -171,11 +171,11 @@ resultados incorrectos con una apariencia muy convincente.
 
 ---
 
-# 5. Comprobaciones de Ubuntu
+## 5. Comprobaciones de Ubuntu
 
 Ejecuta estas comprobaciones desde una terminal.
 
-## 5.1 Arquitectura
+#### 5.1 Arquitectura
 
 ```bash
 uname -m
@@ -199,7 +199,7 @@ El resultado esperado es:
 amd64
 ```
 
-## 5.2 Versión del sistema operativo
+#### 5.2 Versión del sistema operativo
 
 ```bash
 lsb_release -a
@@ -213,7 +213,7 @@ cat /etc/os-release
 
 Comprueba que el sistema corresponde a Ubuntu 24.04 LTS.
 
-## 5.3 CPU
+#### 5.3 CPU
 
 ```bash
 nproc
@@ -225,7 +225,7 @@ Información ampliada:
 lscpu
 ```
 
-## 5.4 Memoria
+#### 5.4 Memoria
 
 ```bash
 free -h
@@ -239,7 +239,7 @@ La memoria debe ser suficiente para ejecutar simultáneamente:
 - las herramientas de terminal;
 - los datos del laboratorio.
 
-## 5.5 Espacio de disco
+#### 5.5 Espacio de disco
 
 ```bash
 df -h /
@@ -261,7 +261,7 @@ Un sistema puede tener espacio libre y, aun así, quedarse sin inodos. Para un
 laboratorio pequeño no suele ser un problema, pero conviene conocer la
 comprobación.
 
-## 5.6 Fecha y zona horaria
+#### 5.6 Fecha y zona horaria
 
 ```bash
 timedatectl
@@ -285,9 +285,9 @@ La hora del sistema puede afectar a:
 
 ---
 
-# 6. Comprobaciones de Splunk Enterprise
+## 6. Comprobaciones de Splunk Enterprise
 
-## 6.1 Consultar la versión
+#### 6.1 Consultar la versión
 
 La ruta habitual de instalación es:
 
@@ -307,7 +307,7 @@ Documenta la versión obtenida. Para este curso se utiliza como referencia:
 Splunk Enterprise 10.4.3
 ```
 
-## 6.2 Comprobar el servicio
+#### 6.2 Comprobar el servicio
 
 Si Splunk está integrado con `systemd`:
 
@@ -325,7 +325,7 @@ El nombre exacto de la unidad puede variar. Si `Splunkd` no existe como
 servicio de `systemd`, utiliza el comando propio de Splunk y revisa la
 configuración de arranque.
 
-## 6.3 Comprobar el proceso
+#### 6.3 Comprobar el proceso
 
 ```bash
 ps aux | grep '[s]plunkd'
@@ -333,7 +333,7 @@ ps aux | grep '[s]plunkd'
 
 El resultado debe mostrar el proceso principal de Splunk.
 
-## 6.4 Comprobar los puertos
+#### 6.4 Comprobar los puertos
 
 ```bash
 sudo ss -ltnp | grep -E ':8000|:8089'
@@ -351,7 +351,7 @@ Los puertos habituales son:
 La configuración del laboratorio puede utilizar puertos diferentes. Si no
 aparece el puerto `8000`, consulta la configuración de la instancia.
 
-## 6.5 Comprobar Splunk Web
+#### 6.5 Comprobar Splunk Web
 
 Desde la propia máquina:
 
@@ -383,7 +383,7 @@ sesión funciona correctamente.
 
 ---
 
-# 7. Validar el usuario administrativo
+## 7. Validar el usuario administrativo
 
 Inicia sesión en Splunk Web con el usuario de laboratorio y ejecuta:
 
@@ -407,7 +407,7 @@ Settings → Access controls → Users
 La ubicación exacta de los menús puede variar ligeramente según la versión y
 la configuración de Splunk Web.
 
-## 7.1 Prueba funcional
+#### 7.1 Prueba funcional
 
 Ejecuta:
 
@@ -427,7 +427,7 @@ de búsquedas funciona.
 
 ---
 
-# 8. Validar el índice `curso`
+## 8. Validar el índice `curso`
 
 El índice principal del laboratorio es:
 
@@ -435,7 +435,7 @@ El índice principal del laboratorio es:
 curso
 ```
 
-## 8.1 Comprobar que el índice existe
+#### 8.1 Comprobar que el índice existe
 
 ```spl
 | rest /services/data/indexes
@@ -449,14 +449,14 @@ Comprueba especialmente:
 - que no está deshabilitado;
 - que contiene eventos, si ya se han ingerido datos.
 
-## 8.2 Comprobar el número de eventos
+#### 8.2 Comprobar el número de eventos
 
 ```spl
 index=curso earliest=0 latest=now
 | stats count as total_eventos
 ```
 
-## 8.3 Localizar el intervalo temporal
+#### 8.3 Localizar el intervalo temporal
 
 ```spl
 index=curso earliest=0 latest=now
@@ -466,7 +466,7 @@ index=curso earliest=0 latest=now
     latest(_time) as ultimo_evento
 ```
 
-## 8.4 Revisar metadatos
+#### 8.4 Revisar metadatos
 
 ```spl
 index=curso earliest=0 latest=now
@@ -474,7 +474,7 @@ index=curso earliest=0 latest=now
 | sort - count
 ```
 
-## 8.5 Revisar eventos individuales
+#### 8.5 Revisar eventos individuales
 
 ```spl
 index=curso earliest=0 latest=now
@@ -493,7 +493,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-# 9. Validar los campos
+## 9. Validar los campos
 
 Ejecuta:
 
@@ -546,7 +546,7 @@ Revisar los campos antes de crear una consulta evita errores como:
 
 ---
 
-# 10. Validar el rango temporal
+## 10. Validar el rango temporal
 
 Los datos de laboratorio pueden ser históricos. Por eso esta búsqueda puede
 devolver cero resultados:
@@ -597,7 +597,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-# 11. Revisar los datos del laboratorio
+## 11. Revisar los datos del laboratorio
 
 Consulta:
 
@@ -650,7 +650,7 @@ duplicadas pueden alterar:
 
 ---
 
-# 12. Primera búsqueda completa
+## 12. Primera búsqueda completa
 
 Cuando Splunk Web y el índice estén disponibles, ejecuta:
 
@@ -674,7 +674,7 @@ Esta búsqueda valida simultáneamente:
 El resultado debe documentarse con el siguiente formato:
 
 ```markdown
-## Validación inicial
+#### Validación inicial
 
 - Índice: curso
 - Usuario:
@@ -690,7 +690,7 @@ El resultado debe documentarse con el siguiente formato:
 
 ---
 
-# 13. Flujo de diagnóstico
+## 13. Flujo de diagnóstico
 
 Si una práctica no funciona, sigue este orden:
 
@@ -722,7 +722,7 @@ No modifiques varias capas al mismo tiempo. Si cambias la entrada, el índice, e
 timestamp y la búsqueda a la vez, será difícil saber qué corrección ha
 resuelto el problema.
 
-## 13.1 Splunk no inicia
+#### 13.1 Splunk no inicia
 
 Consulta:
 
@@ -734,7 +734,7 @@ Ejecuta:
 sudo systemctl status Splunkd --no-pager
 ```
 
-## 13.2 Splunk Web no responde
+#### 13.2 Splunk Web no responde
 
 Consulta:
 
@@ -750,7 +750,7 @@ curl -I http://127.0.0.1:8000
 sudo ss -ltnp | grep ':8000'
 ```
 
-## 13.3 No aparecen eventos
+#### 13.3 No aparecen eventos
 
 Consulta:
 
@@ -771,7 +771,7 @@ Después comprueba el índice:
 | table title disabled totalEventCount
 ```
 
-## 13.4 Los campos son incorrectos
+#### 13.4 Los campos son incorrectos
 
 Consulta:
 
@@ -794,11 +794,11 @@ index=curso earliest=0 latest=now
 
 ---
 
-# 14. Criterio de preparación completada
+## 14. Criterio de preparación completada
 
 Puedes comenzar el laboratorio cuando se cumplan todos estos puntos.
 
-## Sistema operativo
+#### Sistema operativo
 
 - [ ] Ubuntu está instalado.
 - [ ] La arquitectura es `x86_64` o `amd64`.
@@ -809,7 +809,7 @@ Puedes comenzar el laboratorio cuando se cumplan todos estos puntos.
 - [ ] Puedes abrir una terminal.
 - [ ] Puedes ejecutar `sudo`, si es necesario.
 
-## Splunk Enterprise
+#### Splunk Enterprise
 
 - [ ] Splunk Enterprise está instalado.
 - [ ] La versión está documentada.
@@ -820,7 +820,7 @@ Puedes comenzar el laboratorio cuando se cumplan todos estos puntos.
 - [ ] Puedes iniciar sesión.
 - [ ] Tu usuario tiene el rol `admin`.
 
-## Datos
+#### Datos
 
 - [ ] El índice `curso` existe.
 - [ ] El índice no está deshabilitado.
@@ -833,7 +833,7 @@ Puedes comenzar el laboratorio cuando se cumplan todos estos puntos.
 - [ ] El rango temporal real está identificado.
 - [ ] No se han creado duplicados accidentalmente.
 
-## Prácticas
+#### Prácticas
 
 - [ ] La búsqueda `makeresults` funciona.
 - [ ] Una búsqueda sobre `index=curso` funciona.
@@ -845,24 +845,24 @@ Puedes comenzar el laboratorio cuando se cumplan todos estos puntos.
 
 ---
 
-# 15. Orden recomendado para la primera práctica
+## 15. Orden recomendado para la primera práctica
 
 Utiliza exactamente esta secuencia:
 
-## Paso 1: comprobar Splunk Web
+#### Paso 1: comprobar Splunk Web
 
 ```text
 http://localhost:8000
 ```
 
-## Paso 2: ejecutar una búsqueda mínima
+#### Paso 2: ejecutar una búsqueda mínima
 
 ```spl
 | makeresults
 | eval estado="OK"
 ```
 
-## Paso 3: comprobar el índice
+#### Paso 3: comprobar el índice
 
 ```spl
 | rest /services/data/indexes
@@ -870,28 +870,28 @@ http://localhost:8000
 | table title disabled totalEventCount
 ```
 
-## Paso 4: localizar eventos
+#### Paso 4: localizar eventos
 
 ```spl
 index=curso earliest=0 latest=now
 | stats count
 ```
 
-## Paso 5: localizar el intervalo temporal
+#### Paso 5: localizar el intervalo temporal
 
 ```spl
 index=curso earliest=0 latest=now
 | stats earliest(_time) latest(_time)
 ```
 
-## Paso 6: revisar los campos
+#### Paso 6: revisar los campos
 
 ```spl
 index=curso earliest=0 latest=now
 | fieldsummary
 ```
 
-## Paso 7: revisar eventos individuales
+#### Paso 7: revisar eventos individuales
 
 ```spl
 index=curso earliest=0 latest=now
@@ -903,7 +903,7 @@ Cuando todos estos pasos funcionen, puedes comenzar la Sesión 1.
 
 ---
 
-# 16. Referencias internas
+## 16. Referencias internas
 
 - [Requisitos de hardware](requisitos-hardware.md)
 - [Comprobaciones previas](comprobaciones-previas.md)
@@ -923,16 +923,16 @@ Cuando todos estos pasos funcionen, puedes comenzar la Sesión 1.
 
 ---
 
-# 17. Referencias oficiales
+## 17. Referencias oficiales
 
-## Splunk Enterprise
+#### Splunk Enterprise
 
 - [Documentación de Splunk Enterprise](https://docs.splunk.com/Documentation/Splunk)
 - [Splunk Enterprise Help](https://help.splunk.com/en/splunk-enterprise)
 - [Notas de versión](https://docs.splunk.com/Documentation/Splunk/latest/ReleaseNotes)
 - [Página oficial de descarga](https://www.splunk.com/en_us/download/splunk-enterprise.html)
 
-## Datos, fuentes e índices
+#### Datos, fuentes e índices
 
 - [Cómo procesa Splunk los datos](https://docs.splunk.com/Documentation/Splunk/latest/Data/HowSplunkprocessesdata)
 - [Fuentes de datos](https://docs.splunk.com/Documentation/Splunk/latest/Data/Whatissource)
@@ -942,7 +942,7 @@ Cuando todos estos pasos funcionen, puedes comenzar la Sesión 1.
 - [`indexes.conf`](https://docs.splunk.com/Documentation/Splunk/latest/Admin/Indexesconf)
 - [`props.conf`](https://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf)
 
-## Búsquedas SPL
+#### Búsquedas SPL
 
 - [Search Manual](https://docs.splunk.com/Documentation/Splunk/latest/Search/WhatsInThisManual)
 - [Search Reference](https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/Overview)
@@ -951,7 +951,7 @@ Cuando todos estos pasos funcionen, puedes comenzar la Sesión 1.
 - [`fieldsummary`](https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/Fieldsummary)
 - [`eval`](https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/Eval)
 
-## Ubuntu
+#### Ubuntu
 
 - [Ubuntu Server Documentation](https://documentation.ubuntu.com/server/)
 - [Systemd en Ubuntu](https://documentation.ubuntu.com/server/explanation/systemd/)
@@ -959,7 +959,7 @@ Cuando todos estos pasos funcionen, puedes comenzar la Sesión 1.
 
 ---
 
-# 18. Resultado final
+## 18. Resultado final
 
 La preparación está completada cuando dispones de esta cadena funcional:
 

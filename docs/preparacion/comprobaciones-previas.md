@@ -34,7 +34,7 @@ La instalación manual completa se encuentra en
 
 ---
 
-# 1. Objetivos de la comprobación
+## 1. Objetivos de la comprobación
 
 Al finalizar esta validación debes poder confirmar:
 
@@ -57,7 +57,7 @@ comprobaciones básicas falla.
 
 ---
 
-# 2. Sistema operativo y recursos
+## 2. Sistema operativo y recursos
 
 Ejecuta los siguientes comandos desde una terminal de Ubuntu:
 
@@ -85,7 +85,7 @@ df -h /
 df -i /
 ```
 
-## 2.1 Resultados esperados
+#### 2.1 Resultados esperados
 
 Comprueba que:
 
@@ -99,7 +99,7 @@ Comprueba que:
 La información detallada sobre los recursos está disponible en
 [Requisitos de hardware](requisitos-hardware.md).
 
-## 2.2 Comprobar la arquitectura de paquetes
+#### 2.2 Comprobar la arquitectura de paquetes
 
 ```bash
 dpkg --print-architecture
@@ -116,7 +116,7 @@ por el laboratorio.
 
 ---
 
-# 3. Fecha, hora y zona horaria
+## 3. Fecha, hora y zona horaria
 
 Splunk utiliza la información temporal para ordenar eventos, aplicar filtros y
 ejecutar alertas.
@@ -144,7 +144,7 @@ Una hora incorrecta puede provocar que:
 
 ---
 
-# 4. Red y conectividad
+## 4. Red y conectividad
 
 Comprueba la configuración de red:
 
@@ -175,7 +175,7 @@ sudo apt update
 Este comando no instala paquetes. Actualiza la información local de los
 repositorios configurados.
 
-## 4.1 Acceso local
+#### 4.1 Acceso local
 
 Si trabajarás desde la misma máquina, Splunk Web debe estar disponible en:
 
@@ -189,7 +189,7 @@ También puedes utilizar:
 http://127.0.0.1:8000
 ```
 
-## 4.2 Acceso remoto
+#### 4.2 Acceso remoto
 
 Si el navegador se encuentra en otro equipo, utiliza la dirección IP de Ubuntu:
 
@@ -210,7 +210,7 @@ Utiliza una red controlada, acceso local o una VPN autorizada.
 
 ---
 
-# 5. Permisos del sistema operativo
+## 5. Permisos del sistema operativo
 
 Comprueba que tu usuario puede utilizar `sudo`:
 
@@ -245,7 +245,7 @@ administrativos sobre Ubuntu.
 
 ---
 
-# 6. Materiales del laboratorio
+## 6. Materiales del laboratorio
 
 Confirma que tienes disponibles:
 
@@ -264,7 +264,7 @@ Los materiales principales son:
 - [consultas SPL de referencia](../downloads/consultas-spl.txt);
 - [Datos del laboratorio](datos-laboratorio.md).
 
-## 6.1 Comprobar el archivo CSV
+#### 6.1 Comprobar el archivo CSV
 
 Si el archivo está disponible en `docs/downloads`, puedes revisarlo desde la
 raíz del proyecto:
@@ -305,7 +305,7 @@ indexado. Una carga duplicada puede alterar los resultados de:
 
 ---
 
-# 7. Comprobar la instalación de Splunk
+## 7. Comprobar la instalación de Splunk
 
 La ruta habitual de instalación es:
 
@@ -338,7 +338,7 @@ puedes ejecutar:
 /opt/splunk/bin/splunk version
 ```
 
-## 7.1 Comprobar el espacio utilizado
+#### 7.1 Comprobar el espacio utilizado
 
 ```bash
 sudo du -sh /opt/splunk 2>/dev/null
@@ -349,11 +349,11 @@ directa puede producir pérdida de datos o problemas de arranque.
 
 ---
 
-# 8. Comprobar el servicio Splunk
+## 8. Comprobar el servicio Splunk
 
 El método depende de cómo se haya configurado la instalación.
 
-## 8.1 Instalación gestionada por `systemd`
+#### 8.1 Instalación gestionada por `systemd`
 
 ```bash
 sudo systemctl status Splunkd --no-pager
@@ -365,7 +365,7 @@ Para comprobar si se inicia automáticamente:
 sudo systemctl is-enabled Splunkd
 ```
 
-## 8.2 Instalación gestionada por el comando de Splunk
+#### 8.2 Instalación gestionada por el comando de Splunk
 
 ```bash
 sudo /opt/splunk/bin/splunk status
@@ -388,7 +388,7 @@ instancia. No ejecutes indistintamente comandos con usuarios diferentes, porque
 puedes obtener errores de permisos o crear archivos con propietarios
 inadecuados.
 
-## 8.3 Comprobar el proceso
+#### 8.3 Comprobar el proceso
 
 ```bash
 ps aux | grep '[s]plunkd'
@@ -398,7 +398,7 @@ Debe aparecer el proceso principal `splunkd`.
 
 ---
 
-# 9. Comprobar los puertos
+## 9. Comprobar los puertos
 
 Consulta los puertos habituales:
 
@@ -425,7 +425,7 @@ El puerto `8088` no tiene que aparecer si no se utiliza HTTP Event Collector.
 
 ---
 
-# 10. Comprobar Splunk Web
+## 10. Comprobar Splunk Web
 
 Desde Ubuntu ejecuta:
 
@@ -461,7 +461,7 @@ firewall antes de modificar la configuración de Splunk.
 
 ---
 
-# 11. Validar el usuario `admin` en Splunk
+## 11. Validar el usuario `admin` en Splunk
 
 Desde Splunk Web, abre **Search & Reporting** y ejecuta:
 
@@ -485,7 +485,7 @@ Settings → Access controls → Users
 La ubicación exacta de los menús puede variar ligeramente según la versión y la
 configuración de Splunk Web.
 
-## 11.1 Prueba básica de búsqueda
+#### 11.1 Prueba básica de búsqueda
 
 Ejecuta:
 
@@ -499,7 +499,7 @@ búsqueda y Splunk Web funcionan.
 
 ---
 
-# 12. Comprobar el índice `curso`
+## 12. Comprobar el índice `curso`
 
 El curso utiliza principalmente el índice:
 
@@ -507,7 +507,7 @@ El curso utiliza principalmente el índice:
 curso
 ```
 
-## 12.1 Comprobar si existe
+#### 12.1 Comprobar si existe
 
 ```spl
 | rest /services/data/indexes
@@ -522,7 +522,7 @@ Comprueba:
 - que el contador de eventos es coherente;
 - que el tamaño del índice no es inesperado.
 
-## 12.2 Si el índice todavía no existe
+#### 12.2 Si el índice todavía no existe
 
 No crees un índice nuevo sin revisar primero:
 
@@ -542,7 +542,7 @@ búsquedas no devuelvan resultados.
 
 ---
 
-# 13. Comprobar los eventos
+## 13. Comprobar los eventos
 
 Ejecuta una búsqueda amplia durante la validación inicial:
 
@@ -560,7 +560,7 @@ Esta consulta permite conocer:
 - fecha del primer evento;
 - fecha del último evento.
 
-## 13.1 Revisar los metadatos
+#### 13.1 Revisar los metadatos
 
 ```spl
 index=curso earliest=0 latest=now
@@ -568,7 +568,7 @@ index=curso earliest=0 latest=now
 | sort - count
 ```
 
-## 13.2 Revisar eventos individuales
+#### 13.2 Revisar eventos individuales
 
 ```spl
 index=curso earliest=0 latest=now
@@ -585,7 +585,7 @@ index=curso earliest=0 latest=now
 | head 20
 ```
 
-## 13.3 Revisar los campos disponibles
+#### 13.3 Revisar los campos disponibles
 
 ```spl
 index=curso earliest=0 latest=now
@@ -619,7 +619,7 @@ limitación del dataset.
 
 ---
 
-# 14. Comprobar el rango temporal
+## 14. Comprobar el rango temporal
 
 Los eventos pueden ser históricos aunque se hayan indexado recientemente.
 
@@ -663,11 +663,11 @@ index=curso earliest=0 latest=now
 
 ---
 
-# 15. Comprobación completa de aceptación
+## 15. Comprobación completa de aceptación
 
 Ejecuta la siguiente secuencia.
 
-## Paso 1: comprobar el sistema
+#### Paso 1: comprobar el sistema
 
 ```bash
 uname -m
@@ -676,7 +676,7 @@ free -h
 df -h /
 ```
 
-## Paso 2: comprobar Splunk
+#### Paso 2: comprobar Splunk
 
 ```bash
 sudo /opt/splunk/bin/splunk version
@@ -685,26 +685,26 @@ sudo /opt/splunk/bin/splunk status
 
 Utiliza `--run-as-root` o `sudo -u splunk` si corresponde a tu instalación.
 
-## Paso 3: comprobar los puertos
+#### Paso 3: comprobar los puertos
 
 ```bash
 sudo ss -ltnp | grep -E ':8000|:8089'
 ```
 
-## Paso 4: comprobar Splunk Web
+#### Paso 4: comprobar Splunk Web
 
 ```bash
 curl -I http://127.0.0.1:8000
 ```
 
-## Paso 5: comprobar el motor de búsqueda
+#### Paso 5: comprobar el motor de búsqueda
 
 ```spl
 | makeresults
 | eval estado="OK"
 ```
 
-## Paso 6: comprobar el índice
+#### Paso 6: comprobar el índice
 
 ```spl
 | rest /services/data/indexes
@@ -712,7 +712,7 @@ curl -I http://127.0.0.1:8000
 | table title disabled totalEventCount
 ```
 
-## Paso 7: comprobar los datos
+#### Paso 7: comprobar los datos
 
 ```spl
 index=curso earliest=0 latest=now
@@ -722,7 +722,7 @@ index=curso earliest=0 latest=now
     latest(_time) as ultimo_evento
 ```
 
-## Paso 8: comprobar los campos
+#### Paso 8: comprobar los campos
 
 ```spl
 index=curso earliest=0 latest=now
@@ -731,9 +731,9 @@ index=curso earliest=0 latest=now
 
 ---
 
-# 16. Checklist final
+## 16. Checklist final
 
-## Sistema operativo
+#### Sistema operativo
 
 - [ ] Ubuntu 24.04.5 LTS está instalado.
 - [ ] La arquitectura es `x86_64`.
@@ -744,7 +744,7 @@ index=curso earliest=0 latest=now
 - [ ] La fecha y la zona horaria son correctas.
 - [ ] El usuario puede ejecutar comandos con `sudo`.
 
-## Splunk Enterprise
+#### Splunk Enterprise
 
 - [ ] Splunk Enterprise está instalado.
 - [ ] La versión instalada está documentada.
@@ -755,7 +755,7 @@ index=curso earliest=0 latest=now
 - [ ] El usuario puede iniciar sesión.
 - [ ] El usuario tiene el rol `admin`.
 
-## Datos
+#### Datos
 
 - [ ] El archivo `eventos_web.csv` está disponible.
 - [ ] El archivo ha sido revisado antes de cargarlo.
@@ -766,7 +766,7 @@ index=curso earliest=0 latest=now
 - [ ] Se han revisado los campos disponibles.
 - [ ] No se han creado duplicados por cargas repetidas.
 
-## Laboratorio
+#### Laboratorio
 
 - [ ] La búsqueda `makeresults` funciona.
 - [ ] Una búsqueda sobre `index=curso` funciona.
@@ -777,7 +777,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-# 17. Mensajes de instalación que no bloquean el laboratorio
+## 17. Mensajes de instalación que no bloquean el laboratorio
 
 Durante la instalación o la ejecución de Splunk pueden aparecer avisos
 relacionados con rutas internas de Python, por ejemplo:
@@ -804,11 +804,11 @@ documentación oficial.
 
 ---
 
-# 18. Si una comprobación falla
+## 18. Si una comprobación falla
 
 No continúes con la ingesta hasta resolver el problema básico.
 
-## Splunk no inicia
+#### Splunk no inicia
 
 Revisa:
 
@@ -824,7 +824,7 @@ sudo systemctl status Splunkd --no-pager
 sudo /opt/splunk/bin/splunk status
 ```
 
-## Splunk Web no responde
+#### Splunk Web no responde
 
 Revisa:
 
@@ -840,7 +840,7 @@ curl -I http://127.0.0.1:8000
 sudo ss -ltnp | grep ':8000'
 ```
 
-## No aparecen eventos
+#### No aparecen eventos
 
 Revisa:
 
@@ -861,7 +861,7 @@ Después comprueba el índice:
 | table title disabled totalEventCount
 ```
 
-## Los campos no son correctos
+#### Los campos no son correctos
 
 Revisa:
 
@@ -890,14 +890,14 @@ index=curso earliest=0 latest=now
 
 ---
 
-# 19. Registro de resultados
+## 19. Registro de resultados
 
 Documenta los resultados de la preparación utilizando esta plantilla:
 
 ```markdown
-## Registro de comprobaciones previas
+#### Registro de comprobaciones previas
 
-### Sistema
+###### Sistema
 
 - Sistema operativo:
 - Arquitectura:
@@ -906,7 +906,7 @@ Documenta los resultados de la preparación utilizando esta plantilla:
 - Espacio libre:
 - Zona horaria:
 
-### Splunk
+###### Splunk
 
 - Versión:
 - Ruta de instalación:
@@ -915,14 +915,14 @@ Documenta los resultados de la preparación utilizando esta plantilla:
 - Puerto web:
 - Management port:
 
-### Usuario
+###### Usuario
 
 - Usuario de Splunk:
 - Rol:
 - Usuario de Ubuntu:
 - Permisos `sudo`:
 
-### Datos
+###### Datos
 
 - Índice:
 - Total de eventos:
@@ -933,7 +933,7 @@ Documenta los resultados de la preparación utilizando esta plantilla:
 - Host:
 - Campos principales:
 
-### Observaciones
+###### Observaciones
 
 -
 ```
@@ -943,7 +943,7 @@ prácticas.
 
 ---
 
-# 20. Criterio para comenzar el curso
+## 20. Criterio para comenzar el curso
 
 La preparación está completada cuando:
 
@@ -986,23 +986,23 @@ A partir de ese momento puedes continuar con:
 
 ---
 
-# 21. Referencias oficiales
+## 21. Referencias oficiales
 
-## Splunk Enterprise
+#### Splunk Enterprise
 
 - [Documentación de Splunk Enterprise](https://docs.splunk.com/Documentation/Splunk)
 - [Splunk Enterprise Help](https://help.splunk.com/en/splunk-enterprise)
 - [Notas de versión](https://docs.splunk.com/Documentation/Splunk/latest/ReleaseNotes)
 - [Requisitos del sistema](https://docs.splunk.com/Documentation/Splunk/latest/Installation/Systemrequirements)
 
-## Servicio y administración
+#### Servicio y administración
 
 - [Administración de Splunk Enterprise](https://docs.splunk.com/Documentation/Splunk/latest/Admin/Aboutconfigurationfiles)
 - [Usuarios y roles](https://docs.splunk.com/Documentation/Splunk/latest/Security/Aboutusersandroles)
 - [Roles y capacidades](https://docs.splunk.com/Documentation/Splunk/latest/Security/Rolesandcapabilities)
 - [Puertos de Splunk](https://docs.splunk.com/Documentation/Splunk/latest/InheritedDeployment/Ports)
 
-## Datos e índices
+#### Datos e índices
 
 - [Cómo procesa Splunk los datos](https://docs.splunk.com/Documentation/Splunk/latest/Data/HowSplunkprocessesdata)
 - [Índices](https://docs.splunk.com/Documentation/Splunk/latest/Indexer/Aboutindexes)
@@ -1010,7 +1010,7 @@ A partir de ese momento puedes continuar con:
 - [`indexes.conf`](https://docs.splunk.com/Documentation/Splunk/latest/Admin/Indexesconf)
 - [Referencia de `props.conf`](https://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf)
 
-## Ubuntu
+#### Ubuntu
 
 - [Ubuntu Server Documentation](https://documentation.ubuntu.com/server/)
 - [Systemd en Ubuntu](https://documentation.ubuntu.com/server/explanation/systemd/)
@@ -1019,7 +1019,7 @@ A partir de ese momento puedes continuar con:
 
 ---
 
-# 22. Resumen
+## 22. Resumen
 
 Las comprobaciones previas no terminan al confirmar que Splunk está instalado.
 La plataforma debe estar operativa y los datos deben ser verificables.

@@ -18,7 +18,7 @@ Splunk, el navegador y el almacenamiento de los índices.
 
 ---
 
-# 1. Perfil del laboratorio
+## 1. Perfil del laboratorio
 
 El curso utiliza una arquitectura mononodo:
 
@@ -51,7 +51,7 @@ forwarders o mecanismos de alta disponibilidad.
 
 ---
 
-# 2. Recomendaciones de recursos
+## 2. Recomendaciones de recursos
 
 | Recurso | Recomendación para el laboratorio | Observaciones |
 |---|---:|---|
@@ -78,7 +78,7 @@ El consumo real depende de:
 
 ---
 
-# 3. CPU
+## 3. CPU
 
 Se recomiendan al menos cuatro núcleos de CPU:
 
@@ -97,7 +97,7 @@ Splunk puede utilizar CPU para:
 - comprimir y mantener datos;
 - realizar tareas internas.
 
-## 3.1 Comprobar la CPU
+#### 3.1 Comprobar la CPU
 
 Ejecuta:
 
@@ -119,7 +119,7 @@ Comprueba especialmente:
 - frecuencia;
 - virtualización, si se utiliza una máquina virtual.
 
-## 3.2 Interpretación para el laboratorio
+#### 3.2 Interpretación para el laboratorio
 
 | Resultado | Interpretación |
 |---:|---|
@@ -132,7 +132,7 @@ influyen la velocidad del disco, la memoria disponible y el volumen de datos.
 
 ---
 
-# 4. Memoria RAM
+## 4. Memoria RAM
 
 Se recomiendan:
 
@@ -151,7 +151,7 @@ La memoria se utiliza entre otros componentes por:
 - scripts;
 - herramientas de diagnóstico.
 
-## 4.1 Comprobar la memoria
+#### 4.1 Comprobar la memoria
 
 ```bash
 free -h
@@ -170,7 +170,7 @@ Revisa especialmente:
 - memoria utilizada;
 - swap disponible.
 
-## 4.2 Interpretación
+#### 4.2 Interpretación
 
 | Memoria | Uso recomendado |
 |---:|---|
@@ -181,7 +181,7 @@ Revisa especialmente:
 La memoria disponible puede disminuir durante búsquedas o actualizaciones del
 dashboard. No evalúes el sistema únicamente justo después de iniciar Ubuntu.
 
-## 4.3 Swap
+#### 4.3 Swap
 
 Comprueba si existe swap:
 
@@ -195,7 +195,7 @@ un rendimiento muy bajo, especialmente durante búsquedas o tareas de indexació
 
 ---
 
-# 5. Almacenamiento
+## 5. Almacenamiento
 
 Splunk utiliza disco para almacenar:
 
@@ -219,7 +219,7 @@ El consumo aumenta con:
 - búsquedas concurrentes;
 - cantidad de aplicaciones y objetos.
 
-## 5.1 Espacio recomendado
+#### 5.1 Espacio recomendado
 
 Para el laboratorio se recomienda:
 
@@ -239,13 +239,13 @@ Esta cifra debe interpretarse como espacio inicial para:
 No conviene dejar la partición al límite. Reserva espacio adicional si se van a
 cargar varios datasets o repetir muchas prácticas de ingesta.
 
-## 5.2 Comprobar el espacio de la partición raíz
+#### 5.2 Comprobar el espacio de la partición raíz
 
 ```bash
 df -h /
 ```
 
-## 5.3 Comprobar `/opt`
+#### 5.3 Comprobar `/opt`
 
 La instalación habitual se encuentra en `/opt/splunk`:
 
@@ -256,7 +256,7 @@ df -h /opt
 Si `/opt` pertenece a la misma partición que `/`, las dos salidas pueden ser
 similares.
 
-## 5.4 Comprobar el uso de Splunk
+#### 5.4 Comprobar el uso de Splunk
 
 ```bash
 sudo du -sh /opt/splunk 2>/dev/null
@@ -270,7 +270,7 @@ sudo du -h -d 1 /opt/splunk 2>/dev/null | sort -h
 
 El tiempo de ejecución de este comando puede aumentar si hay muchos datos.
 
-## 5.5 Comprobar inodos
+#### 5.5 Comprobar inodos
 
 ```bash
 df -i /
@@ -279,7 +279,7 @@ df -i /
 Un sistema puede tener espacio libre en gigabytes y, aun así, quedarse sin
 inodos. Esto puede impedir crear nuevos archivos.
 
-## 5.6 Disco recomendado
+#### 5.6 Disco recomendado
 
 Un SSD es preferible a un disco mecánico porque mejora:
 
@@ -289,7 +289,7 @@ Un SSD es preferible a un disco mecánico porque mejora:
 - la ejecución de búsquedas;
 - la respuesta de Splunk Web.
 
-## 5.7 No eliminar archivos manualmente
+#### 5.7 No eliminar archivos manualmente
 
 No borres manualmente subdirectorios de:
 
@@ -315,7 +315,7 @@ Consulta:
 
 ---
 
-# 6. Sistema de archivos
+## 6. Sistema de archivos
 
 Comprueba el tipo de sistema de archivos:
 
@@ -353,7 +353,7 @@ máquina virtual.
 
 ---
 
-# 7. Máquina física o virtual
+## 7. Máquina física o virtual
 
 El laboratorio puede ejecutarse en:
 
@@ -362,7 +362,7 @@ El laboratorio puede ejecutarse en:
 - un servidor Ubuntu;
 - un entorno de laboratorio.
 
-## 7.1 Máquina virtual
+#### 7.1 Máquina virtual
 
 Si utilizas una máquina virtual:
 
@@ -375,7 +375,7 @@ Si utilizas una máquina virtual:
 - comprueba el modo de red;
 - verifica el acceso al puerto `8000`.
 
-## 7.2 Modos de red
+#### 7.2 Modos de red
 
 | Modo | Acceso habitual |
 |---|---|
@@ -404,7 +404,7 @@ En ese segundo caso, revisa:
 - reglas de la máquina virtual;
 - dirección de escucha de Splunk Web.
 
-## 7.3 Comprobar la dirección IP
+#### 7.3 Comprobar la dirección IP
 
 ```bash
 ip addr
@@ -418,9 +418,9 @@ ip route
 
 ---
 
-# 8. Arquitectura y compatibilidad
+## 8. Arquitectura y compatibilidad
 
-## 8.1 Comprobar la arquitectura
+#### 8.1 Comprobar la arquitectura
 
 ```bash
 uname -m
@@ -446,7 +446,7 @@ amd64
 
 La arquitectura debe ser compatible con el paquete `.deb` utilizado en el curso.
 
-## 8.2 Comprobar la versión de Ubuntu
+#### 8.2 Comprobar la versión de Ubuntu
 
 ```bash
 cat /etc/os-release
@@ -470,7 +470,7 @@ el laboratorio del curso.
 
 ---
 
-# 9. Red y puertos
+## 9. Red y puertos
 
 Los puertos principales de una instalación mononodo son:
 
@@ -481,7 +481,7 @@ Los puertos principales de una instalación mononodo son:
 | `9997` | Recepción desde Universal Forwarder | Solo si se configura |
 | `8088` | HTTP Event Collector | Solo si se configura |
 
-## 9.1 Comprobar puertos
+#### 9.1 Comprobar puertos
 
 ```bash
 sudo ss -ltnp | grep -E ':8000|:8089|:9997|:8088'
@@ -493,7 +493,7 @@ Para comprobar únicamente Splunk Web:
 sudo ss -ltnp | grep ':8000'
 ```
 
-## 9.2 Comprobar Splunk Web
+#### 9.2 Comprobar Splunk Web
 
 ```bash
 curl -I http://127.0.0.1:8000
@@ -505,7 +505,7 @@ Después abre:
 http://localhost:8000
 ```
 
-## 9.3 Acceso remoto
+#### 9.3 Acceso remoto
 
 Si accedes desde otro equipo, utiliza:
 
@@ -518,7 +518,7 @@ El puerto `8000` debe estar permitido entre el equipo cliente y Ubuntu.
 No expongas Splunk Web directamente a Internet para realizar este laboratorio.
 Utiliza una red controlada, VPN o acceso local.
 
-## 9.4 Firewall
+#### 9.4 Firewall
 
 Si el firewall está activo:
 
@@ -532,7 +532,7 @@ acuerdo con la política de tu entorno.
 
 ---
 
-# 10. Recursos cuando Splunk ya está instalado
+## 10. Recursos cuando Splunk ya está instalado
 
 Si Splunk Enterprise ya está instalado, no es necesario descargar de nuevo el
 paquete. Centra la comprobación en:
@@ -546,19 +546,19 @@ paquete. Centra la comprobación en:
 7. datos;
 8. almacenamiento.
 
-## 10.1 Comprobar la versión
+#### 10.1 Comprobar la versión
 
 ```bash
 /opt/splunk/bin/splunk version
 ```
 
-## 10.2 Comprobar el servicio
+#### 10.2 Comprobar el servicio
 
 ```bash
 sudo systemctl status Splunkd --no-pager
 ```
 
-## 10.3 Comprobar el espacio
+#### 10.3 Comprobar el espacio
 
 ```bash
 df -h /
@@ -568,7 +568,7 @@ df -h /
 sudo du -sh /opt/splunk 2>/dev/null
 ```
 
-## 10.4 Comprobar el índice
+#### 10.4 Comprobar el índice
 
 ```spl
 | rest /services/data/indexes
@@ -576,7 +576,7 @@ sudo du -sh /opt/splunk 2>/dev/null
 | table title disabled totalEventCount currentDBSizeMB
 ```
 
-## 10.5 Comprobar eventos
+#### 10.5 Comprobar eventos
 
 ```spl
 index=curso earliest=0 latest=now
@@ -588,12 +588,12 @@ index=curso earliest=0 latest=now
 
 ---
 
-# 11. Comprobación del rendimiento inicial
+## 11. Comprobación del rendimiento inicial
 
 Estas comprobaciones no sustituyen una prueba de rendimiento formal, pero
 permiten detectar problemas evidentes.
 
-## 11.1 Carga del sistema
+#### 11.1 Carga del sistema
 
 ```bash
 uptime
@@ -617,21 +617,21 @@ Observa:
 - procesos de Splunk;
 - uso de swap.
 
-## 11.2 Prueba de búsqueda básica
+#### 11.2 Prueba de búsqueda básica
 
 ```spl
 | makeresults
 | eval estado="OK"
 ```
 
-## 11.3 Prueba sobre el índice
+#### 11.3 Prueba sobre el índice
 
 ```spl
 index=curso earliest=0 latest=now
 | stats count
 ```
 
-## 11.4 Interpretación
+#### 11.4 Interpretación
 
 Una búsqueda lenta puede deberse a:
 
@@ -654,7 +654,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-# 12. Comprobaciones de fecha y hora
+## 12. Comprobaciones de fecha y hora
 
 La configuración temporal es importante para Splunk y para las alertas.
 
@@ -702,18 +702,18 @@ index=curso earliest=0 latest=now
 
 ---
 
-# 13. Criterios de aceptación del hardware
+## 13. Criterios de aceptación del hardware
 
 La máquina cumple los requisitos del laboratorio cuando:
 
-## CPU y memoria
+#### CPU y memoria
 
 - [ ] Tiene al menos 4 núcleos.
 - [ ] Tiene 16 GB de RAM recomendados o una configuración suficiente para las prácticas.
 - [ ] No utiliza swap de forma constante.
 - [ ] La carga del sistema es razonable.
 
-## Almacenamiento
+#### Almacenamiento
 
 - [ ] Hay al menos 20 GB libres como punto de partida.
 - [ ] La partición de `/opt/splunk` tiene espacio suficiente.
@@ -721,7 +721,7 @@ La máquina cumple los requisitos del laboratorio cuando:
 - [ ] Se han revisado los inodos.
 - [ ] No se han borrado manualmente archivos de Splunk.
 
-## Sistema
+#### Sistema
 
 - [ ] La arquitectura es `x86_64` o `amd64`.
 - [ ] Ubuntu es compatible con el laboratorio.
@@ -729,7 +729,7 @@ La máquina cumple los requisitos del laboratorio cuando:
 - [ ] La red funciona.
 - [ ] El usuario puede ejecutar las comprobaciones necesarias.
 
-## Splunk
+#### Splunk
 
 - [ ] Splunk Enterprise está instalado.
 - [ ] La versión está documentada.
@@ -742,7 +742,7 @@ La máquina cumple los requisitos del laboratorio cuando:
 
 ---
 
-# 14. Lista de comprobación rápida
+## 14. Lista de comprobación rápida
 
 Ejecuta:
 
@@ -793,9 +793,9 @@ index=curso earliest=0 latest=now
 
 ---
 
-# 15. Problemas frecuentes
+## 15. Problemas frecuentes
 
-## 15.1 Hay poco espacio en disco
+#### 15.1 Hay poco espacio en disco
 
 Comprueba:
 
@@ -812,7 +812,7 @@ sudo du -h -d 1 /opt/splunk 2>/dev/null | sort -h
 No elimines carpetas de índices manualmente. Revisa la retención y la
 configuración siguiendo la documentación de Splunk.
 
-## 15.2 Splunk utiliza demasiada memoria
+#### 15.2 Splunk utiliza demasiada memoria
 
 Comprueba:
 
@@ -831,7 +831,7 @@ Reduce durante el laboratorio:
 - dashboards con muchos paneles;
 - cargas repetidas del mismo dataset.
 
-## 15.3 El navegador no puede abrir Splunk Web
+#### 15.3 El navegador no puede abrir Splunk Web
 
 Comprueba:
 
@@ -849,7 +849,7 @@ Consulta:
 
 [Acceso web](../troubleshooting/acceso-web.md)
 
-## 15.4 La máquina virtual funciona lentamente
+#### 15.4 La máquina virtual funciona lentamente
 
 Comprueba:
 
@@ -861,7 +861,7 @@ Comprueba:
 - sobreasignación de recursos;
 - consumo de swap.
 
-## 15.5 Las búsquedas no devuelven eventos
+#### 15.5 Las búsquedas no devuelven eventos
 
 Primero utiliza:
 
@@ -883,7 +883,7 @@ Consulta:
 
 ---
 
-# 16. Referencias del curso
+## 16. Referencias del curso
 
 - [Preparación del laboratorio](index.md)
 - [Comprobaciones previas](comprobaciones-previas.md)
@@ -899,30 +899,30 @@ Consulta:
 
 ---
 
-# 17. Referencias oficiales
+## 17. Referencias oficiales
 
-## Splunk Enterprise
+#### Splunk Enterprise
 
 - [Documentación de Splunk Enterprise](https://docs.splunk.com/Documentation/Splunk)
 - [Splunk Enterprise Help](https://help.splunk.com/en/splunk-enterprise)
 - [Notas de versión](https://docs.splunk.com/Documentation/Splunk/latest/ReleaseNotes)
 - [Requisitos de plataforma](https://docs.splunk.com/Documentation/Splunk/latest/Installation/Systemrequirements)
 
-## Almacenamiento e índices
+#### Almacenamiento e índices
 
 - [Índices de Splunk](https://docs.splunk.com/Documentation/Splunk/latest/Indexer/Aboutindexes)
 - [`indexes.conf`](https://docs.splunk.com/Documentation/Splunk/latest/Admin/Indexesconf)
 - [Gestión del almacenamiento](https://docs.splunk.com/Documentation/Splunk/latest/Indexer/Manageindexes)
 - [Retención de datos](https://docs.splunk.com/Documentation/Splunk/latest/Indexer/Setaretentionpolicy)
 
-## Búsqueda y rendimiento
+#### Búsqueda y rendimiento
 
 - [Search Manual](https://docs.splunk.com/Documentation/Splunk/latest/Search/WhatsInThisManual)
 - [Search Reference](https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/Overview)
 - [Job Inspector](https://docs.splunk.com/Documentation/Splunk/latest/Search/Viewsearchjobproperties)
 - [Buenas prácticas de búsqueda](https://docs.splunk.com/Documentation/Splunk/latest/Search/Specifytimemodifiersinyoursearch)
 
-## Ubuntu
+#### Ubuntu
 
 - [Ubuntu Server Documentation](https://documentation.ubuntu.com/server/)
 - [Systemd en Ubuntu](https://documentation.ubuntu.com/server/explanation/systemd/)
@@ -931,7 +931,7 @@ Consulta:
 
 ---
 
-# 18. Resumen
+## 18. Resumen
 
 La máquina está preparada desde el punto de vista de recursos cuando:
 

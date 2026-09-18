@@ -44,7 +44,7 @@ asistente debe comprobar que:
 
 ---
 
-# 1. Objetivos de aprendizaje
+## 1. Objetivos de aprendizaje
 
 Al trabajar con los datasets del curso, el asistente aprenderá a:
 
@@ -68,7 +68,7 @@ Splunk los datos originales en información consultable.
 
 ---
 
-# 2. Dataset principal
+## 2. Dataset principal
 
 El dataset principal del laboratorio es:
 
@@ -95,7 +95,7 @@ eventos después de cargarlos.
 
 ---
 
-# 3. Archivos disponibles
+## 3. Archivos disponibles
 
 El repositorio incluye los siguientes recursos:
 
@@ -134,11 +134,11 @@ El valor de `source` depende de cómo se haya configurado la entrada.
 
 ---
 
-# 4. Revisión del archivo antes de ingerirlo
+## 4. Revisión del archivo antes de ingerirlo
 
 Antes de cargar el archivo, revísalo desde Ubuntu.
 
-## 4.1 Comprobar que existe
+#### 4.1 Comprobar que existe
 
 Desde la raíz del proyecto:
 
@@ -146,13 +146,13 @@ Desde la raíz del proyecto:
 ls -lh docs/downloads/eventos_web.csv
 ```
 
-## 4.2 Identificar el tipo de archivo
+#### 4.2 Identificar el tipo de archivo
 
 ```bash
 file docs/downloads/eventos_web.csv
 ```
 
-## 4.3 Comprobar el número de líneas
+#### 4.3 Comprobar el número de líneas
 
 ```bash
 wc -l docs/downloads/eventos_web.csv
@@ -161,7 +161,7 @@ wc -l docs/downloads/eventos_web.csv
 El número de líneas incluye normalmente la cabecera. Por tanto, no debe
 interpretarse automáticamente como el número exacto de eventos indexados.
 
-## 4.4 Revisar la cabecera y algunas filas
+#### 4.4 Revisar la cabecera y algunas filas
 
 ```bash
 head -n 5 docs/downloads/eventos_web.csv
@@ -178,7 +178,7 @@ Comprueba:
 - campos duplicados;
 - datos sensibles.
 
-## 4.5 Revisar las últimas líneas
+#### 4.5 Revisar las últimas líneas
 
 ```bash
 tail -n 5 docs/downloads/eventos_web.csv
@@ -191,7 +191,7 @@ Esto ayuda a detectar:
 - registros truncados;
 - problemas al final del archivo.
 
-## 4.6 Buscar líneas vacías
+#### 4.6 Buscar líneas vacías
 
 ```bash
 grep -n '^$' docs/downloads/eventos_web.csv
@@ -202,7 +202,7 @@ cargar el archivo.
 
 ---
 
-# 5. Seguridad y datos sensibles
+## 5. Seguridad y datos sensibles
 
 Los datasets del curso están diseñados para utilizarse en un entorno
 didáctico. Aun así, aplica estas reglas:
@@ -230,7 +230,7 @@ búsqueda.
 
 ---
 
-# 6. Índice de destino
+## 6. Índice de destino
 
 El índice recomendado para todas las prácticas es:
 
@@ -260,7 +260,7 @@ Comprueba especialmente:
 - que el contador de eventos es coherente;
 - que el tamaño utilizado no crece de forma inesperada.
 
-## 6.1 Crear el índice
+#### 6.1 Crear el índice
 
 Si el índice no existe, créalo desde Splunk Web:
 
@@ -284,11 +284,11 @@ para crear carpetas o modificar archivos en Ubuntu.
 
 ---
 
-# 7. Estrategias de ingesta
+## 7. Estrategias de ingesta
 
 El archivo puede cargarse mediante varios métodos.
 
-## 7.1 Upload desde Splunk Web
+#### 7.1 Upload desde Splunk Web
 
 Es el método más sencillo para una práctica inicial.
 
@@ -309,7 +309,7 @@ Después:
 7. completa la carga;
 8. ejecuta una búsqueda de validación.
 
-## 7.2 Monitor de archivo
+#### 7.2 Monitor de archivo
 
 El método `Monitor` resulta más apropiado para simular una entrada persistente.
 
@@ -329,7 +329,7 @@ La configuración debe definir:
 - comportamiento ante archivos existentes;
 - permisos de lectura.
 
-## 7.3 Carga desde configuración
+#### 7.3 Carga desde configuración
 
 En un entorno administrado, la entrada puede configurarse mediante una app de
 Splunk y archivos como:
@@ -347,7 +347,7 @@ Consulta la guía de:
 
 ---
 
-# 8. Consideraciones sobre el CSV
+## 8. Consideraciones sobre el CSV
 
 Un CSV no es automáticamente un evento por fila en todas las situaciones. La
 forma en que Splunk interpreta el archivo depende de:
@@ -376,7 +376,7 @@ eventos.
 
 ---
 
-# 9. Timestamp y tiempo de los eventos
+## 9. Timestamp y tiempo de los eventos
 
 El timestamp es una de las comprobaciones más importantes.
 
@@ -407,7 +407,7 @@ No deben confundirse:
 - `_time`: tiempo interno que Splunk asigna al evento;
 - `_indextime`: momento en que Splunk indexa el evento.
 
-## 9.1 Comprobar el intervalo temporal
+#### 9.1 Comprobar el intervalo temporal
 
 ```spl
 index=curso earliest=0 latest=now
@@ -417,7 +417,7 @@ index=curso earliest=0 latest=now
     latest(_time) as ultimo_evento
 ```
 
-## 9.2 Comparar tiempo del evento e ingesta
+#### 9.2 Comparar tiempo del evento e ingesta
 
 ```spl
 index=curso earliest=0 latest=now
@@ -433,7 +433,7 @@ index=curso earliest=0 latest=now
 | head 20
 ```
 
-## 9.3 Dataset histórico
+#### 9.3 Dataset histórico
 
 Si los eventos son históricos, esta búsqueda puede no devolver resultados:
 
@@ -453,19 +453,19 @@ Después selecciona un rango temporal que contenga los eventos reales.
 
 ---
 
-# 10. Validación de la ingesta
+## 10. Validación de la ingesta
 
 Después de cargar el archivo, no continúes directamente con un dashboard.
 Primero valida el resultado.
 
-## 10.1 Comprobar si hay eventos
+#### 10.1 Comprobar si hay eventos
 
 ```spl
 index=curso earliest=0 latest=now
 | stats count as total_eventos
 ```
 
-## 10.2 Revisar metadatos
+#### 10.2 Revisar metadatos
 
 ```spl
 index=curso earliest=0 latest=now
@@ -473,7 +473,7 @@ index=curso earliest=0 latest=now
 | sort - count
 ```
 
-## 10.3 Revisar eventos individuales
+#### 10.3 Revisar eventos individuales
 
 ```spl
 index=curso earliest=0 latest=now
@@ -491,14 +491,14 @@ index=curso earliest=0 latest=now
 | head 20
 ```
 
-## 10.4 Revisar campos
+#### 10.4 Revisar campos
 
 ```spl
 index=curso earliest=0 latest=now
 | fieldsummary
 ```
 
-## 10.5 Revisar valores de campos principales
+#### 10.5 Revisar valores de campos principales
 
 ```spl
 index=curso earliest=0 latest=now
@@ -510,7 +510,7 @@ index=curso earliest=0 latest=now
     dc(uri) as uris_distintas
 ```
 
-## 10.6 Comprobar valores vacíos
+#### 10.6 Comprobar valores vacíos
 
 ```spl
 index=curso earliest=0 latest=now
@@ -527,11 +527,11 @@ conviene revisar cada campo por separado.
 
 ---
 
-# 11. Validación de `host`, `source` y `sourcetype`
+## 11. Validación de `host`, `source` y `sourcetype`
 
 Estos metadatos ayudan a identificar el origen y el tipo de los eventos.
 
-## 11.1 `host`
+#### 11.1 `host`
 
 Representa normalmente el equipo o contexto asociado al evento.
 
@@ -541,7 +541,7 @@ index=curso earliest=0 latest=now
 | sort - count
 ```
 
-## 11.2 `source`
+#### 11.2 `source`
 
 Representa el origen del dato, normalmente el archivo, entrada o endpoint que
 lo produjo.
@@ -555,7 +555,7 @@ index=curso earliest=0 latest=now
 El valor de `source` puede incluir una ruta completa. No supongas que siempre
 coincidirá con la ruta del repositorio.
 
-## 11.3 `sourcetype`
+#### 11.3 `sourcetype`
 
 Ayuda a describir la estructura y el tipo de los eventos.
 
@@ -575,7 +575,7 @@ Un `sourcetype` incorrecto puede provocar:
 
 ---
 
-# 12. Validación de tipos de datos
+## 12. Validación de tipos de datos
 
 Los valores procedentes de un CSV pueden llegar a Splunk como texto. Por ejemplo,
 `status` puede aparecer como:
@@ -593,7 +593,7 @@ index=curso earliest=0 latest=now
 | sort status_num
 ```
 
-## 12.1 Distribución de códigos HTTP
+#### 12.1 Distribución de códigos HTTP
 
 ```spl
 index=curso earliest=0 latest=now
@@ -602,7 +602,7 @@ index=curso earliest=0 latest=now
 | sort status_num
 ```
 
-## 12.2 Clasificación de respuestas
+#### 12.2 Clasificación de respuestas
 
 ```spl
 index=curso earliest=0 latest=now
@@ -623,17 +623,17 @@ las condiciones de las búsquedas.
 
 ---
 
-# 13. Búsquedas iniciales
+## 13. Búsquedas iniciales
 
 Estas consultas sirven como punto de partida.
 
-## 13.1 Consultar eventos
+#### 13.1 Consultar eventos
 
 ```spl
 index=curso earliest=0 latest=now
 ```
 
-## 13.2 Limitar la muestra
+#### 13.2 Limitar la muestra
 
 ```spl
 index=curso earliest=0 latest=now
@@ -641,7 +641,7 @@ index=curso earliest=0 latest=now
 | head 20
 ```
 
-## 13.3 Eventos por `sourcetype`
+#### 13.3 Eventos por `sourcetype`
 
 ```spl
 index=curso earliest=0 latest=now
@@ -649,7 +649,7 @@ index=curso earliest=0 latest=now
 | sort - count
 ```
 
-## 13.4 Eventos por host y source
+#### 13.4 Eventos por host y source
 
 ```spl
 index=curso earliest=0 latest=now
@@ -657,7 +657,7 @@ index=curso earliest=0 latest=now
 | sort - count
 ```
 
-## 13.5 Eventos por código HTTP
+#### 13.5 Eventos por código HTTP
 
 ```spl
 index=curso earliest=0 latest=now
@@ -666,7 +666,7 @@ index=curso earliest=0 latest=now
 | sort status_num
 ```
 
-## 13.6 Eventos por método HTTP
+#### 13.6 Eventos por método HTTP
 
 ```spl
 index=curso earliest=0 latest=now
@@ -674,7 +674,7 @@ index=curso earliest=0 latest=now
 | sort - count
 ```
 
-## 13.7 URI más solicitadas
+#### 13.7 URI más solicitadas
 
 ```spl
 index=curso earliest=0 latest=now
@@ -683,7 +683,7 @@ index=curso earliest=0 latest=now
 | head 10
 ```
 
-## 13.8 URI con errores
+#### 13.8 URI con errores
 
 ```spl
 index=curso earliest=0 latest=now
@@ -694,7 +694,7 @@ index=curso earliest=0 latest=now
 | head 10
 ```
 
-## 13.9 Evolución temporal
+#### 13.9 Evolución temporal
 
 ```spl
 index=curso earliest=0 latest=now
@@ -712,9 +712,9 @@ La granularidad debe corresponder al periodo real de los datos.
 
 ---
 
-# 14. Métricas prácticas
+## 14. Métricas prácticas
 
-## 14.1 Porcentaje de errores
+#### 14.1 Porcentaje de errores
 
 ```spl
 index=curso earliest=0 latest=now
@@ -725,7 +725,7 @@ index=curso earliest=0 latest=now
 | eval porcentaje_error=round((errores/total)*100, 2)
 ```
 
-## 14.2 Porcentaje de errores por URI
+#### 14.2 Porcentaje de errores por URI
 
 ```spl
 index=curso earliest=0 latest=now
@@ -738,7 +738,7 @@ index=curso earliest=0 latest=now
 | sort - porcentaje_error
 ```
 
-## 14.3 Hosts con mayor volumen
+#### 14.3 Hosts con mayor volumen
 
 ```spl
 index=curso earliest=0 latest=now
@@ -746,7 +746,7 @@ index=curso earliest=0 latest=now
 | sort - eventos
 ```
 
-## 14.4 Métodos y códigos de respuesta
+#### 14.4 Métodos y códigos de respuesta
 
 ```spl
 index=curso earliest=0 latest=now
@@ -755,7 +755,7 @@ index=curso earliest=0 latest=now
 | sort - count
 ```
 
-## 14.5 Alertas potenciales
+#### 14.5 Alertas potenciales
 
 Antes de crear una alerta, prueba primero la búsqueda:
 
@@ -771,12 +771,12 @@ condición. Después puedes configurar la alerta desde Splunk Web.
 
 ---
 
-# 15. Control de duplicados
+## 15. Control de duplicados
 
 La carga repetida del mismo archivo puede producir eventos duplicados. Esto
 altera los resultados de las prácticas.
 
-## 15.1 Revisar posibles duplicados
+#### 15.1 Revisar posibles duplicados
 
 Si el archivo tiene un identificador único, utilízalo:
 
@@ -807,7 +807,7 @@ Esta consulta no demuestra por sí sola que todos los resultados sean
 duplicados: dos peticiones legítimas pueden tener los mismos valores. Utilízala
 como indicio y contrástala con `_raw`, `_time` y el archivo original.
 
-## 15.2 Buenas prácticas
+#### 15.2 Buenas prácticas
 
 - registra cuándo se cargó el archivo;
 - utiliza una carpeta de entrada controlada;
@@ -818,7 +818,7 @@ como indicio y contrástala con `_raw`, `_time` y el archivo original.
 
 ---
 
-# 16. Comparar archivo y eventos indexados
+## 16. Comparar archivo y eventos indexados
 
 Cuando el número de eventos no coincide con el número de filas del archivo,
 investiga antes de continuar.
@@ -853,7 +853,7 @@ procesamiento.
 
 ---
 
-# 17. Criterios de validación antes de continuar
+## 17. Criterios de validación antes de continuar
 
 Antes de pasar a estadísticas, dashboards o alertas, confirma:
 
@@ -876,12 +876,12 @@ responder a la pregunta planteada y ser coherente con el archivo original.
 
 ---
 
-# 18. Registro de la ingesta
+## 18. Registro de la ingesta
 
 Documenta cada carga mediante una plantilla como esta:
 
 ```markdown
-## Registro de ingesta
+#### Registro de ingesta
 
 - Archivo:
 - Fecha de carga:
@@ -910,9 +910,9 @@ Este registro es especialmente útil cuando:
 
 ---
 
-# 19. Problemas frecuentes
+## 19. Problemas frecuentes
 
-## 19.1 No aparecen eventos
+#### 19.1 No aparecen eventos
 
 Ejecuta:
 
@@ -935,7 +935,7 @@ Consulta:
 
 [Los datos no aparecen](../troubleshooting/datos-no-aparecen.md)
 
-## 19.2 Solo aparecen eventos recientes o ninguno
+#### 19.2 Solo aparecen eventos recientes o ninguno
 
 El dataset puede ser histórico. Utiliza:
 
@@ -946,7 +946,7 @@ index=curso earliest=0 latest=now
 
 Después selecciona un rango temporal adecuado.
 
-## 19.3 El timestamp es incorrecto
+#### 19.3 El timestamp es incorrecto
 
 Revisa:
 
@@ -957,7 +957,7 @@ Revisa:
 - campo utilizado como timestamp;
 - valores de `_time` y `_indextime`.
 
-## 19.4 Los campos no se extraen
+#### 19.4 Los campos no se extraen
 
 Comprueba:
 
@@ -977,7 +977,7 @@ index=curso earliest=0 latest=now
 Si los datos están en `_raw`, pero no aparecen como campos, revisa la
 configuración de extracción.
 
-## 19.5 Varias filas se convierten en un evento
+#### 19.5 Varias filas se convierten en un evento
 
 Revisa:
 
@@ -987,7 +987,7 @@ Revisa:
 - opción de eventos multilínea;
 - contenido entre comillas.
 
-## 19.6 El número de eventos es demasiado alto
+#### 19.6 El número de eventos es demasiado alto
 
 Posibles causas:
 
@@ -1005,7 +1005,7 @@ index=curso earliest=0 latest=now
 | sort - count
 ```
 
-## 19.7 La búsqueda por `status` no funciona correctamente
+#### 19.7 La búsqueda por `status` no funciona correctamente
 
 Convierte el valor:
 
@@ -1017,7 +1017,7 @@ Después utiliza `status_num` en las comparaciones.
 
 ---
 
-# 20. Buenas prácticas para los asistentes
+## 20. Buenas prácticas para los asistentes
 
 - conserva el archivo original;
 - trabaja con una copia cuando sea necesario;
@@ -1041,7 +1041,7 @@ llamativa. El dashboard puede esperar; el dato bien entendido, no tanto.
 
 ---
 
-# 21. Referencias del curso
+## 21. Referencias del curso
 
 - [Preparación del laboratorio](index.md)
 - [Requisitos de hardware](requisitos-hardware.md)
@@ -1061,9 +1061,9 @@ llamativa. El dashboard puede esperar; el dato bien entendido, no tanto.
 
 ---
 
-# 22. Referencias oficiales
+## 22. Referencias oficiales
 
-## Datos e ingesta
+#### Datos e ingesta
 
 - [Cómo procesa Splunk los datos](https://docs.splunk.com/Documentation/Splunk/latest/Data/HowSplunkprocessesdata)
 - [Fuentes de datos](https://docs.splunk.com/Documentation/Splunk/latest/Data/Whatissource)
@@ -1073,13 +1073,13 @@ llamativa. El dashboard puede esperar; el dato bien entendido, no tanto.
 - [Configuración de `props.conf`](https://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf)
 - [Configuración de `transforms.conf`](https://docs.splunk.com/Documentation/Splunk/latest/Admin/Transformsconf)
 
-## Índices
+#### Índices
 
 - [Acerca de los índices](https://docs.splunk.com/Documentation/Splunk/latest/Indexer/Aboutindexes)
 - [Configuración de `indexes.conf`](https://docs.splunk.com/Documentation/Splunk/latest/Admin/Indexesconf)
 - [Administración de índices](https://docs.splunk.com/Documentation/Splunk/latest/Indexer/Manageindexes)
 
-## Búsquedas SPL
+#### Búsquedas SPL
 
 - [Search Manual](https://docs.splunk.com/Documentation/Splunk/latest/Search/WhatsInThisManual)
 - [Search Reference](https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/Overview)
@@ -1091,7 +1091,7 @@ llamativa. El dashboard puede esperar; el dato bien entendido, no tanto.
 - [`tonumber`](https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/Tonumber)
 - [Modificadores temporales](https://docs.splunk.com/Documentation/Splunk/latest/Search/Specifytimemodifiersinyoursearch)
 
-## Administración y seguridad
+#### Administración y seguridad
 
 - [Manual de administración](https://docs.splunk.com/Documentation/Splunk/latest/Admin/Welcome-to-Admin)
 - [Usuarios y roles](https://docs.splunk.com/Documentation/Splunk/latest/Security/Aboutusersandroles)
@@ -1100,7 +1100,7 @@ llamativa. El dashboard puede esperar; el dato bien entendido, no tanto.
 
 ---
 
-# 23. Resultado esperado
+## 23. Resultado esperado
 
 El dataset está correctamente preparado cuando se puede demostrar la siguiente
 cadena:
@@ -1148,7 +1148,7 @@ Si el evento está bien ingerido, el resto del análisis resulta mucho más
 sencillo y, sobre todo, reproducible.
 ```
 
-## Observación importante sobre el contenido original
+#### Observación importante sobre el contenido original
 
 El archivo menciona varios tipos de datos:
 
