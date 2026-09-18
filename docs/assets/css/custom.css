@@ -242,3 +242,44 @@ body {
 .md-sidebar--secondary {
   z-index: 1;
 }
+
+/* =========================================================
+   Tabla de contenidos: título a todo el ancho de la columna
+   ========================================================= */
+
+@media screen and (min-width: 76.25em) {
+  /* Ancho completo de la columna secundaria */
+  .md-sidebar--secondary,
+  .md-sidebar--secondary .md-sidebar__scrollwrap,
+  .md-sidebar--secondary .md-sidebar__inner,
+  .md-sidebar--secondary .md-nav {
+    width: 100% !important;
+    max-width: none !important;
+    box-sizing: border-box;
+  }
+
+  /* Bloque azul de "Tabla de contenidos" */
+  .md-sidebar--secondary .md-nav__title {
+    display: block !important;
+    width: 100% !important;
+    max-width: none !important;
+    min-width: 100% !important;
+    box-sizing: border-box !important;
+
+    margin: 0 !important;
+    background: #057eb5 !important;
+    color: #ffffff !important;
+  }
+
+  /* Texto del título */
+  .md-sidebar--secondary .md-nav__title,
+  .md-sidebar--secondary .md-nav__title span {
+    color: #ffffff !important;
+  }
+
+  /* Enlaces de la tabla de contenidos */
+  .md-sidebar--secondary .md-nav__list {
+    width: 100% !important;
+    box-sizing: border-box;
+  }
+}
