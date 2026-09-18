@@ -20,7 +20,7 @@ El proyecto se evalúa sobre una puntuación total de **100 puntos**.
 
 ---
 
-## Principios de evaluación
+#### Principios de evaluación
 
 La solución debe demostrar este flujo:
 
@@ -56,7 +56,7 @@ Se valorará especialmente que el participante pueda distinguir entre:
 - una conclusión demostrada;
 - una recomendación de investigación.
 
-### Ejemplo
+###### Ejemplo
 
 Observación:
 
@@ -80,7 +80,7 @@ con logs de aplicación, base de datos o infraestructura.
 
 ---
 
-## Puntuación total
+#### Puntuación total
 
 | Área | Puntos |
 |---|---:|
@@ -96,21 +96,21 @@ con logs de aplicación, base de datos o infraestructura.
 
 ---
 
-# 1. Validación del entorno y la ingesta — 15 puntos
+## 1. Validación del entorno y la ingesta — 15 puntos
 
 Esta sección evalúa que el participante pueda demostrar que los datos existen,
 están en el índice esperado y tienen metadatos razonables.
 
-## Evidencias mínimas esperadas
+#### Evidencias mínimas esperadas
 
-### Existencia de eventos
+###### Existencia de eventos
 
 ```spl
 index=curso earliest=0 latest=now
 | stats count as eventos
 ```
 
-### Metadatos de origen
+###### Metadatos de origen
 
 ```spl
 index=curso earliest=0 latest=now
@@ -118,7 +118,7 @@ index=curso earliest=0 latest=now
 | sort - count
 ```
 
-### Rango temporal
+###### Rango temporal
 
 ```spl
 index=curso earliest=0 latest=now
@@ -127,14 +127,14 @@ index=curso earliest=0 latest=now
 | eval fin=strftime(fin, "%Y-%m-%d %H:%M:%S")
 ```
 
-### Campos disponibles
+###### Campos disponibles
 
 ```spl
 index=curso earliest=0 latest=now
 | fieldsummary
 ```
 
-### Revisión de eventos
+###### Revisión de eventos
 
 ```spl
 index=curso earliest=0 latest=now
@@ -142,7 +142,7 @@ index=curso earliest=0 latest=now
 | head 20
 ```
 
-## 15 puntos
+#### 15 puntos
 
 El participante:
 
@@ -157,7 +157,7 @@ El participante:
 - sabe describir el flujo desde la fuente hasta la búsqueda;
 - puede diagnosticar qué revisar si una consulta devuelve cero resultados.
 
-## 10 puntos
+#### 10 puntos
 
 Los eventos están disponibles, pero:
 
@@ -167,7 +167,7 @@ Los eventos están disponibles, pero:
 - no se documentan todos los campos disponibles;
 - no se explica completamente el flujo de ingesta.
 
-## 5 puntos
+#### 5 puntos
 
 La ingesta funciona parcialmente, pero:
 
@@ -177,21 +177,21 @@ La ingesta funciona parcialmente, pero:
 - existen dudas sobre la calidad de los metadatos;
 - la solución funciona, pero el participante no puede explicar bien por qué.
 
-## 0 puntos
+#### 0 puntos
 
 - No existen eventos consultables.
 - No se puede demostrar que el dataset haya sido ingerido.
 - El participante no identifica el índice.
 - No puede explicar qué fuente se está utilizando.
 
-## Criterios adicionales
+#### Criterios adicionales
 
 No se penalizará que el dataset no contenga IP o latencia, siempre que esa ausencia
 esté documentada correctamente.
 
 Sí se penalizará presentar como válidos análisis que dependen de campos inexistentes.
 
-### Ejemplo
+###### Ejemplo
 
 Si el dataset no tiene `clientip`, el participante puede obtener la puntuación
 completa de esta sección si demuestra que:
@@ -204,12 +204,12 @@ completa de esta sección si demuestra que:
 
 ---
 
-# 2. Calidad de las búsquedas SPL — 20 puntos
+## 2. Calidad de las búsquedas SPL — 20 puntos
 
 Esta sección evalúa si las búsquedas responden a preguntas concretas y si pueden
 ser reutilizadas por otra persona.
 
-## Se valorará que las consultas:
+#### Se valorará que las consultas:
 
 - utilicen el índice explícitamente;
 - definan el periodo temporal;
@@ -224,7 +224,7 @@ ser reutilizadas por otra persona.
 - eviten comandos innecesariamente costosos;
 - indiquen sus limitaciones.
 
-## Requisitos mínimos
+#### Requisitos mínimos
 
 El participante debe entregar al menos cinco búsquedas SPL documentadas.
 
@@ -236,14 +236,14 @@ Se recomienda que incluyan:
 4. errores HTTP `500`;
 5. evolución temporal.
 
-## Búsqueda de volumen
+#### Búsqueda de volumen
 
 ```spl
 index=curso earliest=0 latest=now
 | stats count as total_peticiones
 ```
 
-## Búsqueda de porcentaje de error
+#### Búsqueda de porcentaje de error
 
 ```spl
 index=curso earliest=0 latest=now
@@ -257,7 +257,7 @@ index=curso earliest=0 latest=now
 )
 ```
 
-## Búsqueda de errores por URI
+#### Búsqueda de errores por URI
 
 ```spl
 index=curso earliest=0 latest=now
@@ -268,7 +268,7 @@ index=curso earliest=0 latest=now
 | head 10
 ```
 
-## Búsqueda de errores HTTP 500
+#### Búsqueda de errores HTTP 500
 
 ```spl
 index=curso earliest=0 latest=now
@@ -278,7 +278,7 @@ index=curso earliest=0 latest=now
 | sort - errores_500
 ```
 
-## Búsqueda de evolución temporal
+#### Búsqueda de evolución temporal
 
 ```spl
 index=curso earliest=0 latest=now
@@ -287,9 +287,9 @@ index=curso earliest=0 latest=now
 | timechart span=1m count by clase
 ```
 
-## Niveles de valoración
+#### Niveles de valoración
 
-### 20 puntos: excelente
+###### 20 puntos: excelente
 
 Las búsquedas:
 
@@ -304,7 +304,7 @@ Las búsquedas:
 - tienen un coste razonable;
 - incluyen limitaciones cuando procede.
 
-### 15 puntos: correcto
+###### 15 puntos: correcto
 
 Las búsquedas funcionan y responden a las preguntas principales, pero presentan
 alguna carencia menor:
@@ -315,7 +315,7 @@ alguna carencia menor:
 - faltan pequeñas mejoras de legibilidad;
 - alguna búsqueda podría optimizarse.
 
-### 10 puntos: básico
+###### 10 puntos: básico
 
 Las consultas devuelven resultados, pero:
 
@@ -326,7 +326,7 @@ Las consultas devuelven resultados, pero:
 - no explican las limitaciones;
 - dependen excesivamente de valores concretos del laboratorio.
 
-### 5 puntos: insuficiente
+###### 5 puntos: insuficiente
 
 Hay búsquedas, pero:
 
@@ -336,12 +336,12 @@ Hay búsquedas, pero:
 - no se puede explicar qué responde cada consulta;
 - las búsquedas no son reproducibles.
 
-### 0 puntos
+###### 0 puntos
 
 No se entregan búsquedas funcionales o no se puede demostrar que respondan a
 preguntas sobre los datos.
 
-## Errores frecuentes
+#### Errores frecuentes
 
 Se consideran errores importantes:
 
@@ -357,12 +357,12 @@ Se consideran errores importantes:
 
 ---
 
-# 3. Reportes y visualizaciones — 10 puntos
+## 3. Reportes y visualizaciones — 10 puntos
 
 Esta sección evalúa si el participante selecciona una salida adecuada para la
 pregunta que desea responder.
 
-## Se valorará:
+#### Se valorará:
 
 - elección correcta de la visualización;
 - nombre claro;
@@ -375,7 +375,7 @@ pregunta que desea responder.
 - documentación de la frecuencia;
 - explicación de la acción que facilita tomar.
 
-## Ejemplos de selección
+#### Ejemplos de selección
 
 | Necesidad | Salida adecuada |
 |---|---|
@@ -388,7 +388,7 @@ pregunta que desea responder.
 | Comparar errores por host | Barras o tabla |
 | Ver distribución temporal | Línea o columnas |
 
-## Reporte de errores por URI
+#### Reporte de errores por URI
 
 Consulta de ejemplo:
 
@@ -403,7 +403,7 @@ index=curso earliest=0 latest=now
 
 La salida recomendada es una tabla o un ranking de barras.
 
-## Reporte de evolución
+#### Reporte de evolución
 
 ```spl
 index=curso earliest=0 latest=now
@@ -414,9 +414,9 @@ index=curso earliest=0 latest=now
 
 La salida recomendada es un gráfico temporal.
 
-## Niveles de valoración
+#### Niveles de valoración
 
-### 10 puntos: excelente
+###### 10 puntos: excelente
 
 - Cada visualización responde a una pregunta concreta.
 - Las consultas están validadas.
@@ -426,19 +426,19 @@ La salida recomendada es un gráfico temporal.
 - Se explica qué decisión facilita cada reporte.
 - No se utilizan gráficos decorativos o confusos.
 
-### 7 puntos: correcto
+###### 7 puntos: correcto
 
 - Las visualizaciones son adecuadas.
 - Los reportes funcionan.
 - Falta documentar algún aspecto de la audiencia, frecuencia o interpretación.
 
-### 4 puntos: básico
+###### 4 puntos: básico
 
 - Los reportes funcionan, pero la selección de gráficos es poco justificada.
 - Hay títulos ambiguos.
 - La relación con las preguntas operativas no está clara.
 
-### 0 puntos
+###### 0 puntos
 
 - Los reportes no funcionan.
 - Las visualizaciones no corresponden a los resultados.
@@ -449,11 +449,11 @@ una valoración alta.
 
 ---
 
-# 4. Dashboard — 20 puntos
+## 4. Dashboard — 20 puntos
 
 El dashboard debe presentar la información en un orden útil para operaciones.
 
-## Debe incluir:
+#### Debe incluir:
 
 - al menos seis paneles;
 - títulos claros;
@@ -465,7 +465,7 @@ El dashboard debe presentar la información en un orden útil para operaciones.
 - descripción de la finalidad;
 - consultas disponibles en la entrega.
 
-## Paneles mínimos
+#### Paneles mínimos
 
 1. Total de peticiones.
 2. Total de errores.
@@ -474,7 +474,7 @@ El dashboard debe presentar la información en un orden útil para operaciones.
 5. IP con más errores o host con más errores si no hay IP.
 6. URL más lentas o URI con más errores si no hay latencia.
 
-## Orden recomendado
+#### Orden recomendado
 
 1. Resumen de peticiones.
 2. Resumen de errores.
@@ -485,16 +485,16 @@ El dashboard debe presentar la información en un orden útil para operaciones.
 7. Latencia, si existe.
 8. Eventos recientes.
 
-## Ejemplos de paneles
+#### Ejemplos de paneles
 
-### Total de peticiones
+###### Total de peticiones
 
 ```spl
 index=curso earliest=0 latest=now
 | stats count as peticiones
 ```
 
-### Total de errores
+###### Total de errores
 
 ```spl
 index=curso earliest=0 latest=now
@@ -502,7 +502,7 @@ index=curso earliest=0 latest=now
 | stats count(eval(status_num>=400)) as errores
 ```
 
-### Porcentaje de error
+###### Porcentaje de error
 
 ```spl
 index=curso earliest=0 latest=now
@@ -517,14 +517,14 @@ index=curso earliest=0 latest=now
 )
 ```
 
-### Peticiones por minuto
+###### Peticiones por minuto
 
 ```spl
 index=curso earliest=0 latest=now
 | timechart span=1m count as peticiones
 ```
 
-### Errores por código HTTP
+###### Errores por código HTTP
 
 ```spl
 index=curso earliest=0 latest=now
@@ -533,7 +533,7 @@ index=curso earliest=0 latest=now
 | sort status_num
 ```
 
-### Host con más errores
+###### Host con más errores
 
 ```spl
 index=curso earliest=0 latest=now
@@ -544,7 +544,7 @@ index=curso earliest=0 latest=now
 | head 10
 ```
 
-### URI con más errores
+###### URI con más errores
 
 ```spl
 index=curso earliest=0 latest=now
@@ -555,7 +555,7 @@ index=curso earliest=0 latest=now
 | head 10
 ```
 
-### URL con mayor latencia
+###### URL con mayor latencia
 
 Solo si existe un campo de duración:
 
@@ -572,7 +572,7 @@ index=curso earliest=0 latest=now
 | head 10
 ```
 
-## Evaluación por niveles
+#### Evaluación por niveles
 
 | Nivel | Características |
 |---|---|
@@ -581,7 +581,7 @@ index=curso earliest=0 latest=now
 | Básico | Tiene paneles, pero falta orden, explicación o validación |
 | Insuficiente | Muestra datos sin relación, paneles vacíos o resultados incorrectos |
 
-## 20 puntos: excelente
+#### 20 puntos: excelente
 
 - El dashboard tiene al menos seis paneles funcionales.
 - El orden sigue un flujo operativo.
@@ -594,39 +594,39 @@ index=curso earliest=0 latest=now
 - El dashboard ha sido probado con el usuario final o se documenta la limitación.
 - Se puede utilizar para investigar, no solo para observar indicadores.
 
-## 15 puntos: correcto
+#### 15 puntos: correcto
 
 - Incluye los paneles mínimos.
 - Los paneles muestran datos coherentes.
 - Existe una estructura razonable.
 - Falta alguna explicación o prueba con otro usuario.
 
-## 10 puntos: básico
+#### 10 puntos: básico
 
 - El dashboard funciona parcialmente.
 - Hay paneles repetidos o poco útiles.
 - El orden no facilita la investigación.
 - Algunos paneles dependen de búsquedas no documentadas.
 
-## 5 puntos: insuficiente
+#### 5 puntos: insuficiente
 
 - Hay paneles vacíos.
 - Los títulos no corresponden con la consulta.
 - Las visualizaciones no representan los datos.
 - No se puede explicar el propósito del dashboard.
 
-## 0 puntos
+#### 0 puntos
 
 No existe dashboard funcional o no puede demostrarse su relación con el proyecto.
 
 ---
 
-# 5. Filtros y tokens — 10 puntos
+## 5. Filtros y tokens — 10 puntos
 
 Esta sección evalúa si el dashboard permite cambiar el contexto de análisis sin
 editar manualmente las consultas.
 
-## Se valorará que:
+#### Se valorará que:
 
 - existan al menos dos filtros;
 - el selector temporal afecte a los paneles;
@@ -637,9 +637,9 @@ editar manualmente las consultas.
 - los valores del filtro estén controlados;
 - se prueben casos con resultados y sin resultados.
 
-## Filtros mínimos
+#### Filtros mínimos
 
-### Filtro temporal
+###### Filtro temporal
 
 Debe permitir seleccionar un intervalo temporal.
 
@@ -652,7 +652,7 @@ Documenta:
 - comportamiento cuando no hay datos;
 - diferencia entre rango histórico y relativo.
 
-### Segundo filtro
+###### Segundo filtro
 
 Puede ser:
 
@@ -663,7 +663,7 @@ Puede ser:
 - IP;
 - familia de código HTTP.
 
-## Ejemplo conceptual de filtro por host
+#### Ejemplo conceptual de filtro por host
 
 ```spl
 index=curso
@@ -674,7 +674,7 @@ index=curso
 La sintaxis exacta puede variar según se utilice Dashboard Studio o dashboards
 clásicos.
 
-## Pruebas obligatorias
+#### Pruebas obligatorias
 
 El participante debe probar al menos:
 
@@ -684,9 +684,9 @@ El participante debe probar al menos:
 - un valor vacío, si el control lo permite;
 - un cambio de intervalo temporal.
 
-## Niveles de valoración
+#### Niveles de valoración
 
-### 10 puntos: excelente
+###### 10 puntos: excelente
 
 - Los dos filtros funcionan correctamente.
 - La opción “todos” funciona.
@@ -696,25 +696,25 @@ El participante debe probar al menos:
 - Se entiende que no son un mecanismo de autorización.
 - No aparecen errores de sintaxis ni resultados antiguos engañosos.
 
-### 7 puntos: correcto
+###### 7 puntos: correcto
 
 - Los filtros funcionan en los casos habituales.
 - Falta documentar alguna prueba o el comportamiento sin datos.
 
-### 4 puntos: básico
+###### 4 puntos: básico
 
 - Existe al menos un filtro funcional.
 - El segundo filtro funciona parcialmente.
 - La opción “todos” no está claramente resuelta.
 
-### 0 puntos
+###### 0 puntos
 
 - Los filtros no funcionan.
 - Rompen las búsquedas.
 - Se utilizan como mecanismo para conceder permisos.
 - No se puede demostrar qué paneles afectan.
 
-## Nota sobre los permisos
+#### Nota sobre los permisos
 
 Un token únicamente cambia el valor que recibe una consulta. No concede acceso a:
 
@@ -727,12 +727,12 @@ Un token únicamente cambia el valor que recibe una consulta. No concede acceso 
 
 ---
 
-# 6. Alerta — 10 puntos
+## 6. Alerta — 10 puntos
 
 La alerta debe detectar cinco o más respuestas HTTP `500` durante una ventana de
 cinco minutos.
 
-## Consulta mínima
+#### Consulta mínima
 
 ```spl
 index=curso earliest=-5m latest=now
@@ -741,7 +741,7 @@ index=curso earliest=-5m latest=now
 | where errores_500>=5
 ```
 
-## La alerta debe incluir:
+#### La alerta debe incluir:
 
 - condición clara;
 - consulta validada;
@@ -753,7 +753,7 @@ index=curso earliest=-5m latest=now
 - prevención razonable de duplicados;
 - procedimiento posterior.
 
-## Consulta con contexto adicional
+#### Consulta con contexto adicional
 
 ```spl
 index=curso earliest=-5m latest=now
@@ -766,7 +766,7 @@ index=curso earliest=-5m latest=now
 
 Esta consulta permite conocer dónde se concentran los errores.
 
-## Prueba con datos históricos
+#### Prueba con datos históricos
 
 ```spl
 index=curso earliest="01/01/2026:00:00:00"
@@ -779,7 +779,7 @@ index=curso earliest="01/01/2026:00:00:00"
 Debe explicarse que esta consulta sirve para probar la lógica sobre eventos
 históricos, pero no representa necesariamente una alerta operativa en tiempo real.
 
-## Se valorará especialmente
+#### Se valorará especialmente
 
 - diferencia entre datos históricos y datos en tiempo real;
 - explicación del intervalo;
@@ -790,9 +790,9 @@ históricos, pero no representa necesariamente una alerta operativa en tiempo re
 - prueba de la condición falsa;
 - tratamiento de ausencia de datos.
 
-## Niveles de valoración
+#### Niveles de valoración
 
-### 10 puntos: excelente
+###### 10 puntos: excelente
 
 - La alerta funciona.
 - La consulta está validada.
@@ -805,27 +805,27 @@ históricos, pero no representa necesariamente una alerta operativa en tiempo re
 - Se ha probado la condición.
 - Se diferencia claramente entre histórico y tiempo real.
 
-### 7 puntos: correcto
+###### 7 puntos: correcto
 
 - La alerta funciona.
 - La condición está clara.
 - Falta documentar algún aspecto de frecuencia, acción o throttling.
 
-### 4 puntos: básico
+###### 4 puntos: básico
 
 - La consulta existe, pero no se ha probado suficientemente.
 - El intervalo temporal no está bien explicado.
 - La acción es genérica.
 - No se justifica el umbral.
 
-### 0 puntos
+###### 0 puntos
 
 - No existe alerta.
 - La condición no funciona.
 - Se presenta una alerta histórica como si fuera tiempo real.
 - No se puede explicar cuándo se dispara.
 
-## Alertas repetidas
+#### Alertas repetidas
 
 Una alerta que se ejecuta cada pocos minutos sobre una ventana móvil puede producir
 varios avisos para los mismos eventos.
@@ -844,12 +844,12 @@ Documenta:
 
 ---
 
-# 7. Seguridad y permisos — 5 puntos
+## 7. Seguridad y permisos — 5 puntos
 
 Esta sección evalúa si el participante entiende que tener rol `admin` es útil para
 el laboratorio, pero no debe ser el modelo de producción.
 
-## Se valorará que el participante:
+#### Se valorará que el participante:
 
 - no utilice `admin` como solución permanente;
 - revise quién puede ver el índice;
@@ -859,7 +859,7 @@ el laboratorio, pero no debe ser el modelo de producción.
 - diferencie permisos de lectura y modificación;
 - documente las limitaciones de la prueba.
 
-## Debe distinguir entre:
+#### Debe distinguir entre:
 
 - permisos para iniciar sesión;
 - permisos sobre índices;
@@ -871,7 +871,7 @@ el laboratorio, pero no debe ser el modelo de producción.
 - permisos para utilizar alertas;
 - permisos para administrar la plataforma.
 
-## Ejemplo de niveles de acceso
+#### Ejemplo de niveles de acceso
 
 | Ámbito | Ejemplo de pregunta |
 |---|---|
@@ -882,9 +882,9 @@ el laboratorio, pero no debe ser el modelo de producción.
 | Objeto | ¿Puede modificar la búsqueda? |
 | Administración | ¿Puede crear índices o usuarios? |
 
-## Niveles de valoración
+#### Niveles de valoración
 
-### 5 puntos: excelente
+###### 5 puntos: excelente
 
 - Se prueba el dashboard con un usuario final.
 - Se documentan los permisos.
@@ -892,18 +892,18 @@ el laboratorio, pero no debe ser el modelo de producción.
 - Se explica la diferencia entre `admin` y el rol final.
 - Se identifican las limitaciones del entorno.
 
-### 3 puntos: correcto
+###### 3 puntos: correcto
 
 - Se documentan los permisos principales.
 - Se reconoce que `admin` no debe utilizarse como modelo de producción.
 - No se pudo realizar una prueba completa con otro usuario.
 
-### 1 punto: básico
+###### 1 punto: básico
 
 - Se indica únicamente que se utilizó `admin`.
 - No se documentan permisos de objetos o índices.
 
-### 0 puntos
+###### 0 puntos
 
 - Se ignoran los permisos.
 - Se asume que todos los usuarios tienen el mismo acceso.
@@ -911,7 +911,7 @@ el laboratorio, pero no debe ser el modelo de producción.
 
 ---
 
-# 8. Documentación y explicación — 10 puntos
+## 8. Documentación y explicación — 10 puntos
 
 La documentación debe permitir que otra persona reproduzca el proyecto.
 
@@ -933,49 +933,49 @@ Debe incluir:
 - configuración del dashboard;
 - configuración de la alerta.
 
-## Estructura recomendada
+#### Estructura recomendada
 
 ```markdown
-# Análisis del proyecto
+## Análisis del proyecto
 
-## Resumen ejecutivo
+#### Resumen ejecutivo
 
 Describe en pocas líneas el resultado principal.
 
-## Entorno
+#### Entorno
 
 Indica versión, sistema, índice y dataset.
 
-## Datos
+#### Datos
 
 Indica cantidad de eventos, rango temporal y campos disponibles.
 
-## Búsquedas
+#### Búsquedas
 
 Incluye las cinco consultas SPL y su explicación.
 
-## Reportes
+#### Reportes
 
 Describe las consultas, visualizaciones y frecuencia.
 
-## Dashboard
+#### Dashboard
 
 Describe los paneles y los filtros.
 
-## Alerta
+#### Alerta
 
 Explica condición, intervalo, frecuencia y acción.
 
-## Limitaciones
+#### Limitaciones
 
 Indica los campos o pruebas que no están disponibles.
 
-## Recomendaciones
+#### Recomendaciones
 
 Propón los pasos siguientes.
 ```
 
-## Limitaciones que deben declararse
+#### Limitaciones que deben declararse
 
 Por ejemplo:
 
@@ -994,9 +994,9 @@ Por ejemplo:
 Documentar una limitación es mejor que presentar como válido un análisis que los
 datos no permiten realizar.
 
-## Niveles de valoración
+#### Niveles de valoración
 
-### 10 puntos: excelente
+###### 10 puntos: excelente
 
 - La documentación es completa.
 - Otra persona puede reproducir el proyecto.
@@ -1007,19 +1007,19 @@ datos no permiten realizar.
 - Las conclusiones se relacionan con evidencias.
 - Las recomendaciones son razonables.
 
-### 7 puntos: correcto
+###### 7 puntos: correcto
 
 - La documentación permite entender la solución.
 - Faltan algunos detalles menores.
 - La mayoría de las decisiones están explicadas.
 
-### 4 puntos: básico
+###### 4 puntos: básico
 
 - La documentación describe el resultado, pero no el proceso.
 - Faltan consultas, rangos o evidencias.
 - Las limitaciones son escasas.
 
-### 0 puntos
+###### 0 puntos
 
 - No existe documentación suficiente.
 - Solo se entrega una captura.
@@ -1028,7 +1028,7 @@ datos no permiten realizar.
 
 ---
 
-# Rúbrica resumida
+## Rúbrica resumida
 
 | Área | Excelente | Correcto | Básico | Insuficiente |
 |---|---|---|---|---|
@@ -1043,7 +1043,7 @@ datos no permiten realizar.
 
 ---
 
-# Defensa práctica
+## Defensa práctica
 
 Durante la presentación, el participante debe poder responder:
 
@@ -1066,7 +1066,7 @@ Durante la presentación, el participante debe poder responder:
 17. ¿Qué mejorarías en producción?
 18. ¿Qué buscarías a continuación para confirmar la causa del problema?
 
-## Respuesta esperada
+#### Respuesta esperada
 
 No es suficiente responder:
 
@@ -1084,7 +1084,7 @@ La respuesta debe explicar:
 
 ---
 
-# Prueba de diagnóstico
+## Prueba de diagnóstico
 
 Se puede solicitar al participante que resuelva uno de estos problemas:
 
@@ -1104,7 +1104,7 @@ Se puede solicitar al participante que resuelva uno de estos problemas:
 - panel que utiliza una búsqueda privada;
 - usuario final sin acceso al índice.
 
-## Orden de diagnóstico obligatorio
+#### Orden de diagnóstico obligatorio
 
 El participante debe seguir este orden:
 
@@ -1126,7 +1126,7 @@ SPL
 Objeto de conocimiento
 ```
 
-## Ejemplo de diagnóstico
+#### Ejemplo de diagnóstico
 
 Si esta búsqueda no devuelve resultados:
 
@@ -1136,14 +1136,14 @@ index=curso status=500 earliest=-5m latest=now
 
 El participante debe comprobar:
 
-### 1. Que existen eventos
+###### 1. Que existen eventos
 
 ```spl
 index=curso earliest=0 latest=now
 | stats count
 ```
 
-### 2. Qué valores tiene `status`
+###### 2. Qué valores tiene `status`
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1151,7 +1151,7 @@ index=curso earliest=0 latest=now
 | sort - count
 ```
 
-### 3. Si el valor puede convertirse a número
+###### 3. Si el valor puede convertirse a número
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1160,14 +1160,14 @@ index=curso earliest=0 latest=now
 | sort status
 ```
 
-### 4. Qué rango temporal tienen los datos
+###### 4. Qué rango temporal tienen los datos
 
 ```spl
 index=curso earliest=0 latest=now
 | stats min(_time) as inicio max(_time) as fin
 ```
 
-### 5. Si la búsqueda histórica funciona
+###### 5. Si la búsqueda histórica funciona
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1176,13 +1176,13 @@ index=curso earliest=0 latest=now
 | stats count
 ```
 
-### 6. Si el usuario puede consultar el índice
+###### 6. Si el usuario puede consultar el índice
 
 Debe probarse con el usuario final o revisarse la configuración del rol.
 
 ---
 
-# Prueba práctica final
+## Prueba práctica final
 
 Además de la entrega documental, el instructor puede solicitar una demostración
 práctica.
@@ -1202,14 +1202,14 @@ El participante debe:
 11. describir una limitación;
 12. indicar el siguiente paso de investigación.
 
-## Criterio de la demostración
+#### Criterio de la demostración
 
 La demostración no debe ser una navegación mecánica por menús. El participante
 debe explicar qué está comprobando en cada paso.
 
 ---
 
-# Resultado de la evaluación
+## Resultado de la evaluación
 
 | Puntuación | Resultado |
 |---:|---|
@@ -1218,7 +1218,7 @@ debe explicar qué está comprobando en cada paso.
 | 60–74 | Cumple parcialmente; requiere correcciones |
 | Menos de 60 | No demuestra todavía una solución operativa completa |
 
-## Condiciones recomendadas para superar el proyecto
+#### Condiciones recomendadas para superar el proyecto
 
 Para superar el proyecto se recomienda obtener al menos **60 puntos** y cumplir
 obligatoriamente estos elementos:
@@ -1232,7 +1232,7 @@ obligatoriamente estos elementos:
 - evidencia de resultados;
 - SPL disponible en texto editable.
 
-## Elementos obligatorios aunque falten campos opcionales
+#### Elementos obligatorios aunque falten campos opcionales
 
 La ausencia de IP o latencia no impide superar el proyecto si:
 
@@ -1244,9 +1244,9 @@ La ausencia de IP o latencia no impide superar el proyecto si:
 
 ---
 
-# Lista de comprobación del evaluador
+## Lista de comprobación del evaluador
 
-## Entorno e ingesta
+#### Entorno e ingesta
 
 - [ ] El índice está identificado.
 - [ ] Hay eventos consultables.
@@ -1257,7 +1257,7 @@ La ausencia de IP o latencia no impide superar el proyecto si:
 - [ ] Los campos principales están disponibles.
 - [ ] Los campos ausentes están documentados.
 
-## Búsquedas SPL
+#### Búsquedas SPL
 
 - [ ] Hay cinco búsquedas.
 - [ ] Todas utilizan el índice.
@@ -1268,7 +1268,7 @@ La ausencia de IP o latencia no impide superar el proyecto si:
 - [ ] Las limitaciones están explicadas.
 - [ ] Las búsquedas pueden reutilizarse.
 
-## Reportes y visualizaciones
+#### Reportes y visualizaciones
 
 - [ ] Hay dos reportes.
 - [ ] La visualización corresponde a la pregunta.
@@ -1277,7 +1277,7 @@ La ausencia de IP o latencia no impide superar el proyecto si:
 - [ ] La frecuencia está documentada.
 - [ ] La interpretación es correcta.
 
-## Dashboard
+#### Dashboard
 
 - [ ] Tiene al menos seis paneles.
 - [ ] Los títulos son claros.
@@ -1287,7 +1287,7 @@ La ausencia de IP o latencia no impide superar el proyecto si:
 - [ ] Se han utilizado alternativas si faltan IP o latencia.
 - [ ] La captura completa está incluida.
 
-## Filtros
+#### Filtros
 
 - [ ] Existe un filtro temporal.
 - [ ] Existe un segundo filtro.
@@ -1296,7 +1296,7 @@ La ausencia de IP o latencia no impide superar el proyecto si:
 - [ ] Un valor sin resultados ha sido probado.
 - [ ] Los tokens no se utilizan para conceder permisos.
 
-## Alerta
+#### Alerta
 
 - [ ] La consulta funciona.
 - [ ] El umbral está documentado.
@@ -1308,7 +1308,7 @@ La ausencia de IP o latencia no impide superar el proyecto si:
 - [ ] Se ha probado la condición.
 - [ ] Se diferencia histórico de tiempo real.
 
-## Seguridad
+#### Seguridad
 
 - [ ] Se ha revisado el acceso al índice.
 - [ ] Se ha revisado el acceso al dashboard.
@@ -1316,7 +1316,7 @@ La ausencia de IP o latencia no impide superar el proyecto si:
 - [ ] Se ha probado otro usuario cuando fue posible.
 - [ ] Se han documentado las limitaciones del uso de `admin`.
 
-## Documentación
+#### Documentación
 
 - [ ] Existe resumen técnico.
 - [ ] Existe análisis escrito.
@@ -1329,7 +1329,7 @@ La ausencia de IP o latencia no impide superar el proyecto si:
 
 ---
 
-# Referencias oficiales
+## Referencias oficiales
 
 - [Splunk Search Manual](https://docs.splunk.com/Documentation/Splunk/latest/Search/Aboutthesearchapp)
 - [Splunk Search Reference](https://docs.splunk.com/Documentation/Splunk/latest/SearchReference)
