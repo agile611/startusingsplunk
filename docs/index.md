@@ -51,9 +51,9 @@ muestre un gráfico. Debes comprobar:
 
 ---
 
-# 1. Información general del curso
+## 1. Información general del curso
 
-## 1.1 Duración
+#### 1.1 Duración
 
 El curso tiene una duración total de **18 horas**, distribuidas en:
 
@@ -72,7 +72,7 @@ El curso tiene una duración total de **18 horas**, distribuidas en:
 
 ---
 
-## 1.2 Nivel recomendado
+#### 1.2 Nivel recomendado
 
 El curso está orientado a personas con conocimientos básicos de:
 
@@ -89,7 +89,7 @@ No es necesario conocer SPL antes de comenzar.
 
 ---
 
-## 1.3 Entorno de trabajo
+#### 1.3 Entorno de trabajo
 
 Los laboratorios están diseñados para ejecutarse sobre:
 
@@ -120,7 +120,7 @@ deben comprobar los valores reales de su entorno antes de aplicar una correcció
 
 ---
 
-# 2. Objetivos del curso
+## 2. Objetivos del curso
 
 Al finalizar la formación podrás:
 
@@ -161,7 +161,7 @@ Al finalizar la formación podrás:
 
 ---
 
-# 3. Cómo trabajar en el curso
+## 3. Cómo trabajar en el curso
 
 Usa siempre este flujo:
 
@@ -187,7 +187,7 @@ Objeto reutilizable
 Acción operativa
 ```
 
-## 3.1 Validación antes del análisis
+#### 3.1 Validación antes del análisis
 
 Antes de construir un dashboard o una alerta, comprueba:
 
@@ -201,7 +201,7 @@ Antes de construir un dashboard o una alerta, comprueba:
 8. que el usuario tiene permisos;
 9. que la consulta produce resultados razonables.
 
-## 3.2 No empezar por la consulta final
+#### 3.2 No empezar por la consulta final
 
 No empieces directamente con una consulta compleja como:
 
@@ -228,7 +228,7 @@ index=curso earliest=0 latest=now
 
 A continuación añade condiciones una a una.
 
-## 3.3 Reproducibilidad
+#### 3.3 Reproducibilidad
 
 Cada consulta del curso debe documentar:
 
@@ -246,7 +246,7 @@ Cada consulta del curso debe documentar:
 
 ---
 
-# 4. El dataset del curso
+## 4. El dataset del curso
 
 En el laboratorio se utiliza principalmente el índice:
 
@@ -260,7 +260,7 @@ El dataset básico se denomina:
 eventos_web.csv
 ```
 
-## 4.1 Campos mínimos
+#### 4.1 Campos mínimos
 
 El dataset mínimo contiene:
 
@@ -281,7 +281,7 @@ timestamp,host,method,status,uri
 2026-01-01T00:02:00Z,web-02,POST,500,/api/users
 ```
 
-## 4.2 Campos ampliados
+#### 4.2 Campos ampliados
 
 Algunas actividades requieren una fuente ampliada con:
 
@@ -302,7 +302,7 @@ timestamp,host,method,status,uri,client_ip,response_time,user_agent,bytes,refere
 2026-01-01T00:02:00Z,web-02,POST,500,/api/users,192.0.2.12,2100,curl,256,-
 ```
 
-## 4.3 Limitaciones del dataset
+#### 4.3 Limitaciones del dataset
 
 No se deben inventar métricas que los datos no permitan calcular.
 
@@ -316,7 +316,7 @@ Si no existe `response_time`, documenta:
 > El dataset no contiene un tiempo de respuesta. No es posible determinar qué URI
 > es más lenta. Se utiliza como alternativa la URI con más errores.
 
-## 4.4 Fechas del dataset
+#### 4.4 Fechas del dataset
 
 El dataset de referencia contiene eventos del:
 
@@ -350,11 +350,11 @@ index=curso earliest=0 latest=now
 
 ---
 
-# 5. Flujo principal de trabajo
+## 5. Flujo principal de trabajo
 
 Utiliza esta secuencia en todas las prácticas:
 
-## Paso 1: plataforma
+#### Paso 1: plataforma
 
 Comprueba que Splunk está instalado y activo.
 
@@ -366,7 +366,7 @@ Comprueba que Splunk está instalado y activo.
 sudo systemctl status Splunkd
 ```
 
-## Paso 2: acceso web
+#### Paso 2: acceso web
 
 Comprueba que Splunk Web responde:
 
@@ -374,7 +374,7 @@ Comprueba que Splunk Web responde:
 curl -I http://127.0.0.1:8000
 ```
 
-## Paso 3: índice
+#### Paso 3: índice
 
 Confirma que existe `curso`:
 
@@ -384,7 +384,7 @@ Confirma que existe `curso`:
 | table title disabled totalEventCount currentDBSizeMB
 ```
 
-## Paso 4: eventos
+#### Paso 4: eventos
 
 Ejecuta una búsqueda mínima:
 
@@ -396,7 +396,7 @@ index=curso earliest=0 latest=now
     latest(_time) as ultimo_evento
 ```
 
-## Paso 5: campos y metadatos
+#### Paso 5: campos y metadatos
 
 ```spl
 index=curso earliest=0 latest=now
@@ -413,7 +413,7 @@ index=curso earliest=0 latest=now
 | head 20
 ```
 
-## Paso 6: análisis
+#### Paso 6: análisis
 
 Solo después de validar los datos, empieza a crear búsquedas de:
 
@@ -426,7 +426,7 @@ Solo después de validar los datos, empieza a crear búsquedas de:
 - IP;
 - alertas.
 
-## Paso 7: objetos
+#### Paso 7: objetos
 
 Convierte las búsquedas en:
 
@@ -435,21 +435,21 @@ Convierte las búsquedas en:
 - alertas;
 - búsquedas guardadas.
 
-## Paso 8: permisos y documentación
+#### Paso 8: permisos y documentación
 
 Prueba con el rol final y documenta las limitaciones.
 
 ---
 
-# 6. Programa detallado
+## 6. Programa detallado
 
-## Sesión 1: fundamentos e ingestión
+#### Sesión 1: fundamentos e ingestión
 
-### Objetivo
+###### Objetivo
 
 Comprender cómo funciona la plataforma y cómo llegan los datos a Splunk.
 
-### Contenidos
+###### Contenidos
 
 - Arquitectura básica.
 - Splunk Web y `splunkd`.
@@ -470,7 +470,7 @@ Comprender cómo funciona la plataforma y cómo llegan los datos a Splunk.
 - Validación de permisos.
 - Troubleshooting inicial.
 
-### Prácticas
+###### Prácticas
 
 1. Comprobar la versión de Splunk.
 2. Revisar el estado del servicio.
@@ -483,14 +483,14 @@ Comprender cómo funciona la plataforma y cómo llegan los datos a Splunk.
 9. Comprobar el rango temporal.
 10. Documentar la ingesta.
 
-### Búsqueda inicial
+###### Búsqueda inicial
 
 ```spl
 index=curso earliest=0 latest=now
 | stats count as total_eventos
 ```
 
-### Evidencias
+###### Evidencias
 
 El asistente debe conservar:
 
@@ -507,13 +507,13 @@ El asistente debe conservar:
 
 ---
 
-## Sesión 2: búsquedas, comandos y funciones SPL
+#### Sesión 2: búsquedas, comandos y funciones SPL
 
-### Objetivo
+###### Objetivo
 
 Construir búsquedas reproducibles y convertir eventos en información operativa.
 
-### Contenidos
+###### Contenidos
 
 - Sintaxis SPL.
 - Comando `search`.
@@ -539,7 +539,7 @@ Construir búsquedas reproducibles y convertir eventos en información operativa
 - Calidad de datos.
 - Optimización básica.
 
-### Prácticas
+###### Prácticas
 
 1. Contar eventos.
 2. Contar peticiones por host.
@@ -552,7 +552,7 @@ Construir búsquedas reproducibles y convertir eventos en información operativa
 9. Probar campos opcionales.
 10. Documentar limitaciones.
 
-### Consulta de ejemplo
+###### Consulta de ejemplo
 
 ```spl
 index=curso earliest=0 latest=now
@@ -565,7 +565,7 @@ index=curso earliest=0 latest=now
 | stats count as peticiones by resultado
 ```
 
-### Regla de normalización
+###### Regla de normalización
 
 Convierte los campos numéricos antes de compararlos:
 
@@ -579,13 +579,13 @@ Convierte los campos numéricos antes de compararlos:
 
 ---
 
-## Sesión 3: reportes, dashboards, alertas y proyecto
+#### Sesión 3: reportes, dashboards, alertas y proyecto
 
-### Objetivo
+###### Objetivo
 
 Convertir las búsquedas en objetos reutilizables y operativos.
 
-### Contenidos
+###### Contenidos
 
 - Búsquedas guardadas.
 - Reportes.
@@ -608,7 +608,7 @@ Convertir las búsquedas en objetos reutilizables y operativos.
 - Validación con usuarios finales.
 - Documentación del proyecto.
 
-### Prácticas
+###### Prácticas
 
 1. Crear un reporte de errores por URI.
 2. Crear un reporte de tráfico por host.
@@ -623,7 +623,7 @@ Convertir las búsquedas en objetos reutilizables y operativos.
 
 ---
 
-# 7. Metodología
+## 7. Metodología
 
 Cada sesión combina:
 
@@ -636,7 +636,7 @@ Cada sesión combina:
 - documentación técnica;
 - proyecto final.
 
-## 7.1 Demostración
+#### 7.1 Demostración
 
 El instructor mostrará:
 
@@ -647,17 +647,17 @@ El instructor mostrará:
 - los errores habituales;
 - la forma de validar.
 
-## 7.2 Laboratorio guiado
+#### 7.2 Laboratorio guiado
 
 Los asistentes repetirán el procedimiento en su propia instancia.
 
 Cada práctica debe dejar una evidencia.
 
-## 7.3 Ejercicio individual
+#### 7.3 Ejercicio individual
 
 El asistente modificará una consulta o resolverá un caso de forma autónoma.
 
-## 7.4 Reto de análisis
+#### 7.4 Reto de análisis
 
 Se plantea una pregunta operativa sin proporcionar directamente la consulta.
 
@@ -675,9 +675,9 @@ El asistente debe:
 
 ---
 
-# 8. Convenciones del curso
+## 8. Convenciones del curso
 
-## 8.1 Índice
+#### 8.1 Índice
 
 Utiliza principalmente:
 
@@ -693,7 +693,7 @@ index=*
 
 salvo para una investigación justificada.
 
-## 8.2 Rango temporal
+#### 8.2 Rango temporal
 
 Incluye un rango explícito en búsquedas guardadas:
 
@@ -709,7 +709,7 @@ earliest=0 latest=now
 
 o un intervalo absoluto.
 
-## 8.3 Campos numéricos
+#### 8.3 Campos numéricos
 
 Normaliza:
 
@@ -721,7 +721,7 @@ Normaliza:
 | eval response_time_num=tonumber(response_time)
 ```
 
-## 8.4 Nombres claros
+#### 8.4 Nombres claros
 
 Utiliza nombres como:
 
@@ -741,7 +741,7 @@ y
 resultado1
 ```
 
-## 8.5 Campos originales
+#### 8.5 Campos originales
 
 Durante la investigación, conserva los valores originales:
 
@@ -751,7 +751,7 @@ Durante la investigación, conserva los valores originales:
 
 No sustituyas inmediatamente `status` por el valor convertido.
 
-## 8.6 División entre cero
+#### 8.6 División entre cero
 
 Protege las divisiones:
 
@@ -763,7 +763,7 @@ Protege las divisiones:
 )
 ```
 
-## 8.7 Límites en rankings
+#### 8.7 Límites en rankings
 
 Limita los resultados:
 
@@ -774,16 +774,16 @@ Limita los resultados:
 
 ---
 
-# 9. Búsquedas iniciales
+## 9. Búsquedas iniciales
 
-## 9.1 Contar eventos
+#### 9.1 Contar eventos
 
 ```spl
 index=curso earliest=0 latest=now
 | stats count as total_eventos
 ```
 
-## 9.2 Revisar el rango temporal
+#### 9.2 Revisar el rango temporal
 
 ```spl
 index=curso earliest=0 latest=now
@@ -792,7 +792,7 @@ index=curso earliest=0 latest=now
     max(_time) as fin
 ```
 
-## 9.3 Revisar eventos
+#### 9.3 Revisar eventos
 
 ```spl
 index=curso earliest=0 latest=now
@@ -800,7 +800,7 @@ index=curso earliest=0 latest=now
 | head 20
 ```
 
-## 9.4 Revisar metadatos
+#### 9.4 Revisar metadatos
 
 ```spl
 index=curso earliest=0 latest=now
@@ -808,14 +808,14 @@ index=curso earliest=0 latest=now
 | sort - count
 ```
 
-## 9.5 Revisar campos
+#### 9.5 Revisar campos
 
 ```spl
 index=curso earliest=0 latest=now
 | fieldsummary
 ```
 
-## 9.6 Revisar códigos HTTP
+#### 9.6 Revisar códigos HTTP
 
 ```spl
 index=curso earliest=0 latest=now
@@ -823,7 +823,7 @@ index=curso earliest=0 latest=now
 | sort - count
 ```
 
-## 9.7 Normalizar códigos HTTP
+#### 9.7 Normalizar códigos HTTP
 
 ```spl
 index=curso earliest=0 latest=now
@@ -834,9 +834,9 @@ index=curso earliest=0 latest=now
 
 ---
 
-# 10. Entregables del curso
+## 10. Entregables del curso
 
-## 10.1 Entregables de la sesión 1
+#### 10.1 Entregables de la sesión 1
 
 - [ ] Estado de Splunk documentado.
 - [ ] Versión documentada.
@@ -849,7 +849,7 @@ index=curso earliest=0 latest=now
 - [ ] Primer y último evento documentados.
 - [ ] Problemas de ingesta documentados, si existen.
 
-## 10.2 Entregables de la sesión 2
+#### 10.2 Entregables de la sesión 2
 
 - [ ] Búsqueda de volumen.
 - [ ] Búsqueda de errores.
@@ -862,7 +862,7 @@ index=curso earliest=0 latest=now
 - [ ] Interpretación de resultados.
 - [ ] Limitaciones documentadas.
 
-## 10.3 Entregables de la sesión 3
+#### 10.3 Entregables de la sesión 3
 
 - [ ] Reporte de errores por URI.
 - [ ] Reporte de tráfico por host.
@@ -877,20 +877,20 @@ index=curso earliest=0 latest=now
 
 ---
 
-# 11. Proyecto final
+## 11. Proyecto final
 
-## 11.1 Contexto
+#### 11.1 Contexto
 
 La empresa ficticia `WebCorp` necesita monitorizar sus servidores web para detectar
 fallos y analizar el comportamiento de sus aplicaciones.
 
 El asistente debe implementar una solución básica de observabilidad en Splunk.
 
-## 11.2 Requisitos funcionales
+#### 11.2 Requisitos funcionales
 
 La solución debe incluir:
 
-### Cinco búsquedas SPL
+###### Cinco búsquedas SPL
 
 1. Volumen total de peticiones.
 2. Porcentaje de error.
@@ -898,12 +898,12 @@ La solución debe incluir:
 4. Errores HTTP 500.
 5. Evolución temporal del tráfico.
 
-### Dos reportes
+###### Dos reportes
 
 1. Reporte de errores por URI.
 2. Reporte de tráfico por host.
 
-### Un dashboard
+###### Un dashboard
 
 Debe contener al menos:
 
@@ -916,7 +916,7 @@ Debe contener al menos:
 7. URI con más errores.
 8. Latencia por URI, solo si existe el campo.
 
-### Una alerta
+###### Una alerta
 
 Debe detectar:
 
@@ -933,7 +933,7 @@ index=curso earliest=-5m latest=now
 | where errores_500>=5
 ```
 
-## 11.3 Requisitos de documentación
+#### 11.3 Requisitos de documentación
 
 Cada elemento debe incluir:
 
@@ -952,11 +952,11 @@ Cada elemento debe incluir:
 
 ---
 
-# 12. Criterios de calidad
+## 12. Criterios de calidad
 
 Una solución de calidad debe ser:
 
-## Reproducible
+#### Reproducible
 
 Otra persona debe poder repetir:
 
@@ -966,7 +966,7 @@ Otra persona debe poder repetir:
 - las pruebas;
 - la interpretación.
 
-## Trazable
+#### Trazable
 
 Debe poder saberse:
 
@@ -977,7 +977,7 @@ Debe poder saberse:
 - qué panel lo visualiza;
 - qué alerta lo utiliza.
 
-## Interpretable
+#### Interpretable
 
 Los resultados deben utilizar:
 
@@ -989,7 +989,7 @@ Los resultados deben utilizar:
 - explicaciones;
 - contexto operativo.
 
-## Segura
+#### Segura
 
 No debe exponer:
 
@@ -1001,7 +1001,7 @@ No debe exponer:
 - cabeceras de autenticación;
 - información de producción.
 
-## Honesta
+#### Honesta
 
 La documentación debe diferenciar entre:
 
@@ -1016,7 +1016,7 @@ solo que la causa sea CPU, memoria, base de datos o red.
 
 ---
 
-# 13. Troubleshooting durante el curso
+## 13. Troubleshooting durante el curso
 
 Cuando algo falle, sigue este orden:
 
@@ -1042,7 +1042,7 @@ Objeto
 Permisos
 ```
 
-## 13.1 Si Splunk no inicia
+#### 13.1 Si Splunk no inicia
 
 Consulta:
 
@@ -1061,7 +1061,7 @@ sudo tail -n 100 \
   /opt/splunk/var/log/splunk/splunkd.log
 ```
 
-## 13.2 Si Splunk Web no abre
+#### 13.2 Si Splunk Web no abre
 
 Consulta:
 
@@ -1079,7 +1079,7 @@ sudo ss -ltnp | grep -E ':8000|:8089'
 curl -I http://127.0.0.1:8000
 ```
 
-## 13.3 Si no aparecen eventos
+#### 13.3 Si no aparecen eventos
 
 Consulta:
 
@@ -1094,7 +1094,7 @@ index=curso earliest=0 latest=now
 | stats count
 ```
 
-## 13.4 Si los campos son incorrectos
+#### 13.4 Si los campos son incorrectos
 
 Consulta:
 
@@ -1110,7 +1110,7 @@ index=curso earliest=0 latest=now
 | head 20
 ```
 
-## 13.5 Si una consulta es lenta
+#### 13.5 Si una consulta es lenta
 
 Utiliza:
 
@@ -1123,7 +1123,7 @@ Utiliza:
 
 ---
 
-# 14. Diferencia entre Admin de Splunk y administrador de Ubuntu
+## 14. Diferencia entre Admin de Splunk y administrador de Ubuntu
 
 Tener el rol `admin` de Splunk no implica tener automáticamente permisos de
 `sudo` en Ubuntu.
@@ -1154,7 +1154,7 @@ No concedas `admin` como solución para:
 
 ---
 
-# 15. Validación con usuarios y roles
+## 15. Validación con usuarios y roles
 
 Una configuración no está terminada cuando funciona solo con `admin`.
 
@@ -1185,7 +1185,7 @@ Comprueba:
 
 ---
 
-# 16. Estructura recomendada de los ficheros
+## 16. Estructura recomendada de los ficheros
 
 La documentación del curso se organiza de la siguiente forma:
 
@@ -1247,9 +1247,9 @@ con las rutas reales del repositorio.
 
 ---
 
-# 17. Convenciones de nombres
+## 17. Convenciones de nombres
 
-## Ficheros
+#### Ficheros
 
 Utiliza nombres en minúsculas y separados por guiones:
 
@@ -1259,7 +1259,7 @@ campos-incorrectos.md
 plantillas-consultas.md
 ```
 
-## Búsquedas
+#### Búsquedas
 
 Utiliza nombres descriptivos:
 
@@ -1270,7 +1270,7 @@ Curso - Errores por URI
 Curso - HTTP 500 en cinco minutos
 ```
 
-## Campos calculados
+#### Campos calculados
 
 Utiliza nombres claros:
 
@@ -1284,7 +1284,7 @@ resultado
 familia_http
 ```
 
-## Índices y objetos
+#### Índices y objetos
 
 El índice principal del laboratorio es:
 
@@ -1301,7 +1301,7 @@ curso_monitorizacion
 
 ---
 
-# 18. Evidencias del curso
+## 18. Evidencias del curso
 
 Cada asistente debe conservar evidencias de:
 
@@ -1343,7 +1343,7 @@ Antes de compartir capturas o archivos, elimina:
 
 ---
 
-# 19. Criterios de finalización
+## 19. Criterios de finalización
 
 Al terminar deberías poder:
 
@@ -1383,7 +1383,7 @@ Al terminar deberías poder:
 
 ---
 
-# 20. Acceso rápido
+## 20. Acceso rápido
 
 - [Preparar el laboratorio](preparacion/index.md)
 - [Requisitos](curso/requisitos.md)
@@ -1408,15 +1408,15 @@ Al terminar deberías poder:
 
 ---
 
-# 21. Inicio rápido
+## 21. Inicio rápido
 
-## Paso 1: comprobar el servicio
+#### Paso 1: comprobar el servicio
 
 ```bash
 sudo systemctl status Splunkd
 ```
 
-## Paso 2: comprobar Splunk Web
+#### Paso 2: comprobar Splunk Web
 
 ```bash
 curl -I http://127.0.0.1:8000
@@ -1431,7 +1431,7 @@ http://localhost:8000
 Si la instancia utiliza HTTPS, utiliza la URL y el puerto configurados en el
 entorno.
 
-## Paso 3: confirmar el índice
+#### Paso 3: confirmar el índice
 
 ```spl
 | rest /services/data/indexes
@@ -1439,7 +1439,7 @@ entorno.
 | table title disabled totalEventCount currentDBSizeMB
 ```
 
-## Paso 4: cargar el dataset
+#### Paso 4: cargar el dataset
 
 Carga:
 
@@ -1455,7 +1455,7 @@ Selecciona:
 - formato adecuado;
 - ruta o método de ingesta documentado.
 
-## Paso 5: seleccionar el intervalo correcto
+#### Paso 5: seleccionar el intervalo correcto
 
 El dataset de referencia contiene eventos del 1 de enero de 2026.
 
@@ -1475,7 +1475,7 @@ latest="01/01/2026:23:59:59"
 | stats count
 ```
 
-## Paso 6: ejecutar una búsqueda mínima
+#### Paso 6: ejecutar una búsqueda mínima
 
 ```spl
 index=curso
@@ -1485,7 +1485,7 @@ index=curso
     latest(_time) as ultimo_evento
 ```
 
-## Paso 7: revisar un evento
+#### Paso 7: revisar un evento
 
 ```spl
 index=curso
@@ -1502,7 +1502,7 @@ index=curso
 | head 20
 ```
 
-## Paso 8: continuar con la sesión correspondiente
+#### Paso 8: continuar con la sesión correspondiente
 
 - Si estás preparando el entorno, continúa con `preparacion/index.md`.
 - Si estás aprendiendo ingestión, continúa con `sesion-1/index.md`.
@@ -1515,9 +1515,9 @@ antes de añadir filtros complejos o volver a cargar el archivo.
 
 ---
 
-# 22. Referencias oficiales
+## 22. Referencias oficiales
 
-## Documentación general
+#### Documentación general
 
 - [Documentación general de Splunk](https://docs.splunk.com/Documentation/Splunk)
 - [Splunk Enterprise Documentation](https://help.splunk.com/en/splunk-enterprise)
@@ -1525,7 +1525,7 @@ antes de añadir filtros complejos o volver a cargar el archivo.
 - [Splunk Answers](https://community.splunk.com/)
 - [Splunk Lantern](https://lantern.splunk.com/)
 
-## Búsquedas y SPL
+#### Búsquedas y SPL
 
 - [Search Manual](https://docs.splunk.com/Documentation/Splunk/latest/Search/WhatsInThisManual)
 - [Search Reference](https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/Overview)
@@ -1537,7 +1537,7 @@ antes de añadir filtros complejos o volver a cargar el archivo.
 - [Comando `spath`](https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/Spat h)
 - [Comando `fieldsummary`](https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/Fieldsummary)
 
-## Ingesta e índices
+#### Ingesta e índices
 
 - [Introducción a la entrada de datos](https://docs.splunk.com/Documentation/Splunk/latest/Data/Whatissource)
 - [Monitorizar archivos y directorios](https://docs.splunk.com/Documentation/Splunk/latest/Data/Monitorfilesanddirectories)
@@ -1548,27 +1548,27 @@ antes de añadir filtros complejos o volver a cargar el archivo.
 - [Referencia de `props.conf`](https://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf)
 - [Referencia de `transforms.conf`](https://docs.splunk.com/Documentation/Splunk/latest/Admin/Transformsconf)
 
-## Dashboards y visualización
+#### Dashboards y visualización
 
 - [Dashboards](https://docs.splunk.com/Documentation/Splunk/latest/Viz/AboutDashboards)
 - [Dashboard Studio](https://docs.splunk.com/Documentation/Splunk/latest/DashStudio/IntroFrame)
 - [Visualizaciones](https://docs.splunk.com/Documentation/Splunk/latest/Viz/Aboutthismanual)
 
-## Alertas y reportes
+#### Alertas y reportes
 
 - [Alertas](https://docs.splunk.com/Documentation/Splunk/latest/Alert/Aboutalerts)
 - [Crear alertas](https://docs.splunk.com/Documentation/Splunk/latest/Alert/Definescheduledalerts)
 - [Throttling de alertas](https://docs.splunk.com/Documentation/Splunk/latest/Alert/ThrottleAlerts)
 - [Búsquedas guardadas](https://docs.splunk.com/Documentation/Splunk/latest/Knowledge/Definesearches)
 
-## Seguridad y permisos
+#### Seguridad y permisos
 
 - [Roles y capacidades](https://docs.splunk.com/Documentation/Splunk/latest/Security/Rolesandcapabilities)
 - [Usuarios y roles](https://docs.splunk.com/Documentation/Splunk/latest/Security/Aboutusersandroles)
 - [Objetos de conocimiento](https://docs.splunk.com/Documentation/Splunk/latest/Knowledge/Aboutknowledgeobjects)
 - [Permisos de objetos](https://docs.splunk.com/Documentation/Splunk/latest/Knowledge/Manageknowledgeobjects)
 
-## Troubleshooting
+#### Troubleshooting
 
 - [Troubleshooting de Splunk](https://docs.splunk.com/Documentation/Splunk/latest/Troubleshooting/Abouttroubleshooting)
 - [Troubleshooting de datos](https://docs.splunk.com/Documentation/Splunk/latest/Troubleshooting/Troubleshootingyourdata)
@@ -1576,7 +1576,7 @@ antes de añadir filtros complejos o volver a cargar el archivo.
 - [Job Inspector](https://docs.splunk.com/Documentation/Splunk/latest/Search/Viewsearchjobproperties)
 - [Índice de auditoría](https://docs.splunk.com/Documentation/Splunk/latest/Security/Auditindex)
 
-## Ubuntu
+#### Ubuntu
 
 - [Ubuntu Server Documentation](https://documentation.ubuntu.com/server/)
 - [Systemd en Ubuntu](https://documentation.ubuntu.com/server/explanation/systemd/)
@@ -1584,7 +1584,7 @@ antes de añadir filtros complejos o volver a cargar el archivo.
 
 ---
 
-# 23. Nota sobre licencias y versiones
+## 23. Nota sobre licencias y versiones
 
 La disponibilidad de funciones, límites y opciones puede depender de:
 
@@ -1608,7 +1608,7 @@ oficial.
 
 ---
 
-# 24. Resultado esperado del curso
+## 24. Resultado esperado del curso
 
 Al finalizar, cada asistente debe ser capaz de explicar el recorrido completo de
 un evento:
