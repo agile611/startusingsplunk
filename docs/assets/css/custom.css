@@ -466,9 +466,13 @@ body {
 }
 
 /* =========================================================
-   Anchura uniforme de las columnas laterales
+   Igualar el ancho del título y del contenido lateral
    ========================================================= */
 
+/*
+ * Todas las capas de las barras laterales deben utilizar
+ * el mismo ancho de referencia.
+ */
 .md-sidebar--primary,
 .md-sidebar--secondary,
 .md-sidebar--primary .md-sidebar__scrollwrap,
@@ -476,41 +480,49 @@ body {
 .md-sidebar--primary .md-sidebar__inner,
 .md-sidebar--secondary .md-sidebar__inner,
 .md-sidebar--primary .md-nav,
-.md-sidebar--secondary .md-nav,
-.md-sidebar--primary .md-nav__title,
-.md-sidebar--secondary .md-nav__title {
-  box-sizing: border-box !important;
-  width: 100% !important;
-  max-width: 100% !important;
-  min-width: 0 !important;
+.md-sidebar--secondary .md-nav {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
 }
 
+/*
+ * El título inicial no debe extenderse mediante márgenes,
+ * padding o anchuras calculadas fuera de la columna.
+ */
 .md-sidebar--primary .md-nav__title,
 .md-sidebar--secondary .md-nav__title {
   display: block;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+
   margin: 0 !important;
-  padding: 0.55rem 0.75rem !important;
 }
 
+/*
+ * Las listas y los elementos inferiores deben compartir
+ * exactamente la misma caja de anchura.
+ */
 .md-sidebar--primary .md-nav__list,
 .md-sidebar--secondary .md-nav__list,
 .md-sidebar--primary .md-nav__item,
-.md-sidebar--secondary .md-nav__item,
+.md-sidebar--secondary .md-nav__item {
+  box-sizing: border-box;
+  max-width: 100%;
+  min-width: 0;
+}
+
+/*
+ * Evita que los enlaces provoquen una anchura visual
+ * diferente por padding o contenido largo.
+ */
 .md-sidebar--primary .md-nav__link,
 .md-sidebar--secondary .md-nav__link {
-  box-sizing: border-box !important;
-  max-width: 100% !important;
-  min-width: 0 !important;
-}
-
-.md-sidebar--primary .md-nav__title {
-  background: #057eb5 !important;
-  background-image: none !important;
-  color: #ffffff !important;
-}
-
-.md-sidebar--secondary .md-nav__title {
-  background: #057eb5 !important;
-  background-image: none !important;
-  color: #ffffff !important;
+  box-sizing: border-box;
+  max-width: 100%;
+  min-width: 0;
+  overflow-wrap: break-word;
 }
