@@ -47,7 +47,7 @@ Decisión operativa
 
 ---
 
-## 1. Requisitos previos
+#### 1. Requisitos previos
 
 Antes de comenzar la primera sesión, el asistente debe disponer de:
 
@@ -61,7 +61,7 @@ Antes de comenzar la primera sesión, el asistente debe disponer de:
 - navegador web actualizado;
 - acceso local al puerto `8000`.
 
-### 1.1 Comprobaciones previas
+###### 1.1 Comprobaciones previas
 
 En Ubuntu:
 
@@ -89,7 +89,7 @@ El acceso habitual es:
 http://localhost:8000
 ```
 
-### 1.2 Nota sobre los permisos
+###### 1.2 Nota sobre los permisos
 
 El rol `admin` permite administrar objetos y configuraciones dentro de Splunk,
 pero no sustituye automáticamente los permisos de Ubuntu.
@@ -110,7 +110,7 @@ operativo de menor privilegio.
 
 ---
 
-## 2. Metodología de trabajo
+#### 2. Metodología de trabajo
 
 Cada bloque sigue el ciclo:
 
@@ -153,7 +153,7 @@ resultados. También hay que comprobar que:
 
 ---
 
-## 3. Sesión 1: fundamentos e ingestión
+#### 3. Sesión 1: fundamentos e ingestión
 
 **Duración total: 6 horas**
 
@@ -161,7 +161,7 @@ La primera sesión establece la base operativa del curso. Se comprueba la
 instalación, se revisa la arquitectura, se ingieren datos y se valida el índice
 `curso`.
 
-### 3.1 Distribución temporal
+###### 3.1 Distribución temporal
 
 | Bloque | Duración |
 |---|---:|
@@ -176,11 +176,11 @@ instalación, se revisa la arquitectura, se ingieren datos y se valida el índic
 
 ---
 
-### 3.2 Bloque 1: presentación e introducción a Splunk
+###### 3.2 Bloque 1: presentación e introducción a Splunk
 
 **Duración: 45 minutos**
 
-### Contenidos
+###### Contenidos
 
 - objetivos del curso;
 - flujo general de trabajo;
@@ -192,7 +192,7 @@ instalación, se revisa la arquitectura, se ingieren datos y se valida el índic
 - papel de Splunk Web;
 - estructura de las sesiones.
 
-### Actividad práctica
+###### Actividad práctica
 
 Ejecutar una búsqueda mínima:
 
@@ -201,7 +201,7 @@ Ejecutar una búsqueda mínima:
 | eval estado="Splunk responde"
 ```
 
-### Resultado esperado
+###### Resultado esperado
 
 El asistente debe confirmar que:
 
@@ -212,11 +212,11 @@ El asistente debe confirmar que:
 
 ---
 
-### 3.3 Bloque 2: conceptos fundamentales
+###### 3.3 Bloque 2: conceptos fundamentales
 
 **Duración: 45 minutos**
 
-### Contenidos
+###### Contenidos
 
 - eventos;
 - fuentes;
@@ -230,7 +230,7 @@ El asistente debe confirmar que:
 - diferencia entre ingesta e indexación;
 - búsqueda y resultados.
 
-### Actividad práctica
+###### Actividad práctica
 
 Revisar eventos del índice de laboratorio:
 
@@ -246,7 +246,7 @@ index=curso earliest=0 latest=now
 | head 20
 ```
 
-### Preguntas de validación
+###### Preguntas de validación
 
 - ¿Qué representa `_time`?
 - ¿Qué representa `_indextime`?
@@ -257,11 +257,11 @@ index=curso earliest=0 latest=now
 
 ---
 
-### 3.4 Bloque 3: preparación, arquitectura y componentes
+###### 3.4 Bloque 3: preparación, arquitectura y componentes
 
 **Duración: 60 minutos**
 
-### Contenidos
+###### Contenidos
 
 - requisitos del laboratorio;
 - arquitectura mononodo;
@@ -274,7 +274,7 @@ index=curso earliest=0 latest=now
 - logs internos;
 - diferencias entre administración de Splunk y administración de Ubuntu.
 
-### Comandos de referencia
+###### Comandos de referencia
 
 ```bash
 /opt/splunk/bin/splunk version
@@ -296,7 +296,7 @@ df -h
 free -h
 ```
 
-### Puertos habituales
+###### Puertos habituales
 
 | Puerto | Función |
 |---:|---|
@@ -305,7 +305,7 @@ free -h
 | `9997` | Recepción desde forwarders |
 | `8088` | HTTP Event Collector, si está configurado |
 
-### Evidencia
+###### Evidencia
 
 El asistente debe documentar:
 
@@ -320,11 +320,11 @@ El asistente debe documentar:
 
 ---
 
-### 3.5 Bloque 4: ingesta de datos e índices
+###### 3.5 Bloque 4: ingesta de datos e índices
 
 **Duración: 90 minutos**
 
-### Contenidos
+###### Contenidos
 
 - creación y validación del índice `curso`;
 - carga de un archivo CSV;
@@ -336,7 +336,7 @@ El asistente debe documentar:
 - diferencia entre carga puntual y monitorización;
 - validación de eventos.
 
-### Validar el índice
+###### Validar el índice
 
 ```spl
 | rest /services/data/indexes
@@ -344,14 +344,14 @@ El asistente debe documentar:
 | table title disabled totalEventCount currentDBSizeMB
 ```
 
-### Validar la entrada de datos
+###### Validar la entrada de datos
 
 ```spl
 | rest /services/data/inputs/monitor
 | table path index sourcetype host disabled
 ```
 
-### Validar los eventos
+###### Validar los eventos
 
 ```spl
 index=curso earliest=0 latest=now
@@ -361,14 +361,14 @@ index=curso earliest=0 latest=now
     latest(_time) as ultimo_evento
 ```
 
-### Revisar campos
+###### Revisar campos
 
 ```spl
 index=curso earliest=0 latest=now
 | fieldsummary
 ```
 
-### Revisar metadatos
+###### Revisar metadatos
 
 ```spl
 index=curso earliest=0 latest=now
@@ -376,7 +376,7 @@ index=curso earliest=0 latest=now
 | sort - count
 ```
 
-### Resultado esperado
+###### Resultado esperado
 
 El asistente debe poder confirmar:
 
@@ -388,7 +388,7 @@ El asistente debe poder confirmar:
 - qué campos están disponibles;
 - si existen diferencias entre el dataset esperado y el real.
 
-### Advertencia sobre el rango temporal
+###### Advertencia sobre el rango temporal
 
 El dataset de laboratorio puede contener eventos históricos. Por eso una
 búsqueda como esta puede no devolver resultados:
@@ -407,11 +407,11 @@ index=curso earliest=0 latest=now
 
 ---
 
-### 3.6 Bloque 5: navegación por Splunk Web
+###### 3.6 Bloque 5: navegación por Splunk Web
 
 **Duración: 30 minutos**
 
-### Contenidos
+###### Contenidos
 
 - barra de aplicaciones;
 - Search & Reporting;
@@ -426,7 +426,7 @@ index=curso earliest=0 latest=now
 - gestión de índices;
 - gestión de entradas.
 
-### Actividad práctica
+###### Actividad práctica
 
 Ejecutar una búsqueda y revisar:
 
@@ -445,7 +445,7 @@ index=curso earliest=0 latest=now
 | sort - count
 ```
 
-### Resultado esperado
+###### Resultado esperado
 
 El asistente debe poder cambiar entre:
 
@@ -464,11 +464,11 @@ También debe identificar si el problema está en:
 
 ---
 
-### 3.7 Bloque 6: búsquedas iniciales y validación
+###### 3.7 Bloque 6: búsquedas iniciales y validación
 
 **Duración: 60 minutos**
 
-### Contenidos
+###### Contenidos
 
 - búsqueda por índice;
 - búsqueda por campo;
@@ -479,14 +479,14 @@ También debe identificar si el problema está en:
 - ordenación;
 - validación de valores.
 
-### Búsqueda total
+###### Búsqueda total
 
 ```spl
 index=curso earliest=0 latest=now
 | stats count as total_peticiones
 ```
 
-### Distribución por método
+###### Distribución por método
 
 ```spl
 index=curso earliest=0 latest=now
@@ -494,7 +494,7 @@ index=curso earliest=0 latest=now
 | sort - count
 ```
 
-### Distribución por estado HTTP
+###### Distribución por estado HTTP
 
 ```spl
 index=curso earliest=0 latest=now
@@ -502,7 +502,7 @@ index=curso earliest=0 latest=now
 | sort status
 ```
 
-### Distribución por host
+###### Distribución por host
 
 ```spl
 index=curso earliest=0 latest=now
@@ -510,7 +510,7 @@ index=curso earliest=0 latest=now
 | sort - count
 ```
 
-### Resultado esperado
+###### Resultado esperado
 
 El asistente debe entregar una tabla con:
 
@@ -522,16 +522,16 @@ El asistente debe entregar una tabla con:
 
 ---
 
-### 3.8 Bloque 7: laboratorio y repaso
+###### 3.8 Bloque 7: laboratorio y repaso
 
 **Duración: 30 minutos**
 
-### Actividad
+###### Actividad
 
 Completar una ficha de validación:
 
 ```markdown
-## Validación de la sesión 1
+#### Validación de la sesión 1
 
 - Versión:
 - Sistema operativo:
@@ -549,7 +549,7 @@ Completar una ficha de validación:
 - Solución aplicada:
 ```
 
-### Resultados de aprendizaje
+###### Resultados de aprendizaje
 
 Al terminar la sesión 1, el asistente podrá:
 
@@ -563,7 +563,7 @@ Al terminar la sesión 1, el asistente podrá:
 - validar los datos indexados;
 - documentar la ingesta.
 
-### Referencias internas
+###### Referencias internas
 
 - [Preparación del laboratorio](../preparacion/index.md)
 - [Arquitectura y componentes](../preparacion/arquitectura.md)
@@ -573,14 +573,14 @@ Al terminar la sesión 1, el asistente podrá:
 
 ---
 
-# 4. Sesión 2: búsquedas y lenguaje SPL
+## 4. Sesión 2: búsquedas y lenguaje SPL
 
 **Duración total: 6 horas**
 
 La segunda sesión transforma los eventos ingeridos en información útil mediante
 SPL.
 
-## 4.1 Distribución temporal
+#### 4.1 Distribución temporal
 
 | Bloque | Duración |
 |---|---:|
@@ -595,11 +595,11 @@ SPL.
 
 ---
 
-## 4.2 Bloque 1: introducción a SPL
+#### 4.2 Bloque 1: introducción a SPL
 
 **Duración: 45 minutos**
 
-### Contenidos
+###### Contenidos
 
 - estructura de una búsqueda;
 - comando inicial;
@@ -609,7 +609,7 @@ SPL.
 - diferencia entre filtrar y transformar;
 - legibilidad de las búsquedas.
 
-### Ejemplo
+###### Ejemplo
 
 ```spl
 index=curso earliest=0 latest=now
@@ -617,7 +617,7 @@ index=curso earliest=0 latest=now
 | head 20
 ```
 
-### Resultado esperado
+###### Resultado esperado
 
 El asistente debe poder explicar cada parte:
 
@@ -628,11 +628,11 @@ El asistente debe poder explicar cada parte:
 
 ---
 
-## 4.3 Bloque 2: búsquedas y filtros
+#### 4.3 Bloque 2: búsquedas y filtros
 
 **Duración: 60 minutos**
 
-### Contenidos
+###### Contenidos
 
 - filtros por campo;
 - operadores booleanos;
@@ -642,7 +642,7 @@ El asistente debe poder explicar cada parte:
 - comparación de campos;
 - filtros con `search` y `where`.
 
-### Ejemplos
+###### Ejemplos
 
 ```spl
 index=curso earliest=0 latest=now status=500
@@ -661,7 +661,7 @@ index=curso earliest=0 latest=now
 | stats count by status
 ```
 
-### Actividad
+###### Actividad
 
 Construir consultas para:
 
@@ -673,11 +673,11 @@ Construir consultas para:
 
 ---
 
-## 4.4 Bloque 3: gestión del tiempo y campos
+#### 4.4 Bloque 3: gestión del tiempo y campos
 
 **Duración: 45 minutos**
 
-### Contenidos
+###### Contenidos
 
 - selector temporal;
 - `earliest`;
@@ -690,7 +690,7 @@ Construir consultas para:
 - campos ausentes;
 - valores nulos.
 
-### Búsqueda de validación temporal
+###### Búsqueda de validación temporal
 
 ```spl
 index=curso earliest=0 latest=now
@@ -700,7 +700,7 @@ index=curso earliest=0 latest=now
     latest(_time) as ultimo_evento
 ```
 
-### Actividad
+###### Actividad
 
 Comparar el resultado de:
 
@@ -716,18 +716,18 @@ index=curso earliest=0 latest=now
 | stats count
 ```
 
-### Resultado esperado
+###### Resultado esperado
 
 El asistente debe poder explicar por qué los resultados pueden ser diferentes
 aunque el índice y la SPL sean iguales.
 
 ---
 
-## 4.5 Bloque 4: estadísticas y agregaciones
+#### 4.5 Bloque 4: estadísticas y agregaciones
 
 **Duración: 75 minutos**
 
-### Contenidos
+###### Contenidos
 
 - `stats`;
 - `count`;
@@ -741,14 +741,14 @@ aunque el índice y la SPL sean iguales.
 - rankings;
 - interpretación de tablas.
 
-### Total de peticiones
+###### Total de peticiones
 
 ```spl
 index=curso earliest=0 latest=now
 | stats count as total_peticiones
 ```
 
-### Peticiones por host
+###### Peticiones por host
 
 ```spl
 index=curso earliest=0 latest=now
@@ -756,7 +756,7 @@ index=curso earliest=0 latest=now
 | sort - peticiones
 ```
 
-### Peticiones por método y estado
+###### Peticiones por método y estado
 
 ```spl
 index=curso earliest=0 latest=now
@@ -764,14 +764,14 @@ index=curso earliest=0 latest=now
 | sort - peticiones
 ```
 
-### Hosts diferentes
+###### Hosts diferentes
 
 ```spl
 index=curso earliest=0 latest=now
 | stats dc(host) as hosts_distintos
 ```
 
-### Actividad
+###### Actividad
 
 Crear una tabla que responda:
 
@@ -782,11 +782,11 @@ Crear una tabla que responda:
 
 ---
 
-## 4.6 Bloque 5: `eval`, funciones y extracciones
+#### 4.6 Bloque 5: `eval`, funciones y extracciones
 
 **Duración: 75 minutos**
 
-### Contenidos
+###### Contenidos
 
 - creación de campos calculados;
 - conversión de tipos;
@@ -800,7 +800,7 @@ Crear una tabla que responda:
 - `rex`;
 - comprobación de conversiones.
 
-### Normalización de `status`
+###### Normalización de `status`
 
 ```spl
 index=curso earliest=0 latest=now
@@ -809,7 +809,7 @@ index=curso earliest=0 latest=now
 | head 20
 ```
 
-### Clasificación por familia HTTP
+###### Clasificación por familia HTTP
 
 ```spl
 index=curso earliest=0 latest=now
@@ -825,7 +825,7 @@ index=curso earliest=0 latest=now
 | sort familia_http
 ```
 
-### Errores por URI
+###### Errores por URI
 
 ```spl
 index=curso earliest=0 latest=now
@@ -836,7 +836,7 @@ index=curso earliest=0 latest=now
 | head 10
 ```
 
-### Detección de valores no numéricos
+###### Detección de valores no numéricos
 
 ```spl
 index=curso earliest=0 latest=now
@@ -845,7 +845,7 @@ index=curso earliest=0 latest=now
 | table _time status uri _raw
 ```
 
-### Nota práctica
+###### Nota práctica
 
 No se debe comparar directamente un campo textual como si fuera numérico sin
 comprobar su tipo. Para códigos HTTP se recomienda:
@@ -856,11 +856,11 @@ comprobar su tipo. Para códigos HTTP se recomienda:
 
 ---
 
-## 4.7 Bloque 6: rendimiento y buenas prácticas
+#### 4.7 Bloque 6: rendimiento y buenas prácticas
 
 **Duración: 30 minutos**
 
-### Contenidos
+###### Contenidos
 
 - especificar el índice;
 - limitar el rango temporal;
@@ -873,7 +873,7 @@ comprobar su tipo. Para códigos HTTP se recomienda:
 - distinguir rapidez de corrección;
 - documentar búsquedas.
 
-### Ejemplo preferido
+###### Ejemplo preferido
 
 ```spl
 index=curso earliest=0 latest=now
@@ -884,7 +884,7 @@ index=curso earliest=0 latest=now
 | head 10
 ```
 
-### Prácticas que deben evitarse
+###### Prácticas que deben evitarse
 
 ```spl
 index=*
@@ -896,11 +896,11 @@ dificulta la reproducción del resultado.
 
 ---
 
-## 4.8 Bloque 7: laboratorio y reto
+#### 4.8 Bloque 7: laboratorio y reto
 
 **Duración: 30 minutos**
 
-### Reto
+###### Reto
 
 Crear cinco búsquedas documentadas:
 
@@ -910,7 +910,7 @@ Crear cinco búsquedas documentadas:
 4. detalle de errores HTTP 500;
 5. evolución temporal del tráfico.
 
-### Ejemplo de porcentaje de error
+###### Ejemplo de porcentaje de error
 
 ```spl
 index=curso earliest=0 latest=now
@@ -925,14 +925,14 @@ index=curso earliest=0 latest=now
 | table total errores porcentaje_error
 ```
 
-### Evolución temporal
+###### Evolución temporal
 
 ```spl
 index=curso earliest=0 latest=now
 | timechart span=1m count as peticiones
 ```
 
-### Resultados de aprendizaje
+###### Resultados de aprendizaje
 
 Al terminar la sesión 2, el asistente podrá:
 
@@ -947,7 +947,7 @@ Al terminar la sesión 2, el asistente podrá:
 - optimizar búsquedas básicas;
 - interpretar limitaciones y valores ausentes.
 
-### Referencias internas
+###### Referencias internas
 
 - [Introducción a SPL](../sesion-2/01-introduccion-spl.md)
 - [Búsquedas básicas](../sesion-2/02-busquedas-basicas.md)
@@ -959,14 +959,14 @@ Al terminar la sesión 2, el asistente podrá:
 
 ---
 
-# 5. Sesión 3: reportes, dashboards y alertas
+## 5. Sesión 3: reportes, dashboards y alertas
 
 **Duración total: 6 horas**
 
 La tercera sesión convierte las búsquedas en objetos reutilizables para la
 operación diaria: reportes, visualizaciones, dashboards y alertas.
 
-## 5.1 Distribución temporal
+#### 5.1 Distribución temporal
 
 | Bloque | Duración |
 |---|---:|
@@ -981,11 +981,11 @@ operación diaria: reportes, visualizaciones, dashboards y alertas.
 
 ---
 
-## 5.2 Bloque 1: búsquedas guardadas y reportes
+#### 5.2 Bloque 1: búsquedas guardadas y reportes
 
 **Duración: 60 minutos**
 
-### Contenidos
+###### Contenidos
 
 - guardar una búsqueda;
 - nombrar objetos;
@@ -997,7 +997,7 @@ operación diaria: reportes, visualizaciones, dashboards y alertas.
 - interpretar resultados;
 - evitar duplicación de lógica.
 
-### Reporte de errores por URI
+###### Reporte de errores por URI
 
 ```spl
 index=curso earliest=-7d latest=now
@@ -1008,7 +1008,7 @@ index=curso earliest=-7d latest=now
 | head 10
 ```
 
-### Reporte de tráfico por host
+###### Reporte de tráfico por host
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -1016,7 +1016,7 @@ index=curso earliest=-24h latest=now
 | sort - peticiones
 ```
 
-### Validaciones
+###### Validaciones
 
 El asistente debe comprobar:
 
@@ -1029,11 +1029,11 @@ El asistente debe comprobar:
 
 ---
 
-## 5.3 Bloque 2: visualizaciones
+#### 5.3 Bloque 2: visualizaciones
 
 **Duración: 45 minutos**
 
-### Contenidos
+###### Contenidos
 
 - tablas;
 - single values;
@@ -1046,7 +1046,7 @@ El asistente debe comprobar:
 - interpretación de ejes;
 - limitaciones visuales.
 
-### Ejemplos
+###### Ejemplos
 
 Single value:
 
@@ -1073,7 +1073,7 @@ index=curso earliest=0 latest=now
 | timechart span=1m count as peticiones
 ```
 
-### Criterio de selección
+###### Criterio de selección
 
 La visualización debe responder a la pregunta:
 
@@ -1087,11 +1087,11 @@ La visualización debe responder a la pregunta:
 
 ---
 
-## 5.4 Bloque 3: dashboards
+#### 5.4 Bloque 3: dashboards
 
 **Duración: 75 minutos**
 
-### Contenidos
+###### Contenidos
 
 - creación de un dashboard;
 - Dashboard Studio;
@@ -1105,7 +1105,7 @@ La visualización debe responder a la pregunta:
 - coherencia visual;
 - validación de paneles.
 
-### Dashboard recomendado
+###### Dashboard recomendado
 
 El dashboard del curso debe incluir al menos:
 
@@ -1116,14 +1116,14 @@ El dashboard del curso debe incluir al menos:
 5. host con más errores;
 6. URI con más errores.
 
-### Total de peticiones
+###### Total de peticiones
 
 ```spl
 index=curso earliest=$earliest$ latest=$latest$
 | stats count as total_peticiones
 ```
 
-### Total de errores
+###### Total de errores
 
 ```spl
 index=curso earliest=$earliest$ latest=$latest$
@@ -1131,14 +1131,14 @@ index=curso earliest=$earliest$ latest=$latest$
 | stats count(eval(status_num>=400)) as total_errores
 ```
 
-### Peticiones por minuto
+###### Peticiones por minuto
 
 ```spl
 index=curso earliest=$earliest$ latest=$latest$
 | timechart span=1m count as peticiones
 ```
 
-### Errores por estado
+###### Errores por estado
 
 ```spl
 index=curso earliest=$earliest$ latest=$latest$
@@ -1148,7 +1148,7 @@ index=curso earliest=$earliest$ latest=$latest$
 | sort - count
 ```
 
-### URI con más errores
+###### URI con más errores
 
 ```spl
 index=curso earliest=$earliest$ latest=$latest$
@@ -1159,7 +1159,7 @@ index=curso earliest=$earliest$ latest=$latest$
 | head 10
 ```
 
-### Nota sobre los tokens
+###### Nota sobre los tokens
 
 Los nombres concretos de los tokens dependen de la configuración del dashboard.
 La idea general es que los paneles compartan:
@@ -1172,11 +1172,11 @@ Antes de validar el dashboard, prueba cada búsqueda por separado.
 
 ---
 
-## 5.5 Bloque 4: filtros y tokens
+#### 5.5 Bloque 4: filtros y tokens
 
 **Duración: 45 minutos**
 
-### Contenidos
+###### Contenidos
 
 - selector temporal;
 - filtro por host;
@@ -1187,7 +1187,7 @@ Antes de validar el dashboard, prueba cada búsqueda por separado.
 - validación de filtros;
 - comportamiento cuando no existen resultados.
 
-### Criterios de validación
+###### Criterios de validación
 
 Un filtro es funcional cuando:
 
@@ -1198,7 +1198,7 @@ Un filtro es funcional cuando:
 - permite volver a una selección general;
 - muestra un resultado coherente.
 
-### Ejemplo de filtro por host
+###### Ejemplo de filtro por host
 
 La lógica de la consulta puede ser:
 
@@ -1211,11 +1211,11 @@ El nombre del token debe coincidir con el configurado en Dashboard Studio.
 
 ---
 
-## 5.6 Bloque 5: alertas
+#### 5.6 Bloque 5: alertas
 
 **Duración: 60 minutos**
 
-### Contenidos
+###### Contenidos
 
 - alertas programadas;
 - búsquedas basadas en eventos;
@@ -1229,7 +1229,7 @@ El nombre del token debe coincidir con el configurado en Dashboard Studio.
 - falsos positivos;
 - pruebas históricas y pruebas en tiempo real.
 
-### Alerta de errores HTTP 500
+###### Alerta de errores HTTP 500
 
 Objetivo:
 
@@ -1244,7 +1244,7 @@ index=curso earliest=-5m latest=now
 
 La búsqueda devuelve resultados únicamente cuando se cumple la condición.
 
-### Recomendaciones
+###### Recomendaciones
 
 - utilizar una ventana temporal explícita;
 - utilizar una frecuencia coherente con la ventana;
@@ -1255,7 +1255,7 @@ La búsqueda devuelve resultados únicamente cuando se cumple la condición.
 - validar permisos de la alerta;
 - comprobar el comportamiento con datos recientes.
 
-### Prueba de la lógica
+###### Prueba de la lógica
 
 Para verificar la lógica con datos históricos, adapta temporalmente el rango al
 periodo real del dataset. Esta prueba confirma la consulta, pero no sustituye
@@ -1263,15 +1263,15 @@ la validación de la programación en tiempo real.
 
 ---
 
-## 5.7 Bloque 6: proyecto final
+#### 5.7 Bloque 6: proyecto final
 
 **Duración: 60 minutos**
 
-### Objetivo
+###### Objetivo
 
 Construir una solución básica de monitorización para una aplicación web.
 
-### Entregables
+###### Entregables
 
 El asistente debe presentar:
 
@@ -1283,7 +1283,7 @@ El asistente debe presentar:
 - limitaciones del dataset;
 - evidencias de validación.
 
-### Búsquedas mínimas
+###### Búsquedas mínimas
 
 1. volumen total de peticiones;
 2. porcentaje de error;
@@ -1291,12 +1291,12 @@ El asistente debe presentar:
 4. detalle de errores HTTP 500;
 5. evolución temporal del tráfico.
 
-### Reportes
+###### Reportes
 
 1. errores por URI, programado semanalmente;
 2. tráfico por host, programado diariamente.
 
-### Dashboard
+###### Dashboard
 
 Debe incluir:
 
@@ -1309,7 +1309,7 @@ Debe incluir:
 - selector temporal;
 - filtro por `host` o `status`.
 
-### Alerta
+###### Alerta
 
 Condición:
 
@@ -1324,11 +1324,11 @@ Acción:
 
 ---
 
-## 5.8 Bloque 7: evaluación y cierre
+#### 5.8 Bloque 7: evaluación y cierre
 
 **Duración: 15 minutos**
 
-### Revisión final
+###### Revisión final
 
 El asistente debe poder explicar:
 
@@ -1343,7 +1343,7 @@ El asistente debe poder explicar:
 - qué usuario puede acceder a cada objeto;
 - cómo diagnosticaría un fallo.
 
-### Resultados de aprendizaje
+###### Resultados de aprendizaje
 
 Al terminar la sesión 3, el asistente podrá:
 
@@ -1358,7 +1358,7 @@ Al terminar la sesión 3, el asistente podrá:
 - comprobar permisos;
 - presentar una solución básica de monitorización.
 
-### Referencias internas
+###### Referencias internas
 
 - [Búsquedas guardadas](../sesion-3/01-busquedas-guardadas.md)
 - [Reportes](../sesion-3/02-reportes.md)
@@ -1371,7 +1371,7 @@ Al terminar la sesión 3, el asistente podrá:
 
 ---
 
-# 6. Secuencia de trabajo entre sesiones
+## 6. Secuencia de trabajo entre sesiones
 
 Cada sesión utiliza los resultados de la anterior:
 
@@ -1404,7 +1404,7 @@ a un bloque posterior.
 
 ---
 
-# 7. Gestión de incidencias durante el curso
+## 7. Gestión de incidencias durante el curso
 
 Si una práctica no funciona, utiliza este orden:
 
@@ -1428,7 +1428,7 @@ SPL
 Permisos
 ```
 
-## 7.1 Splunk no inicia
+#### 7.1 Splunk no inicia
 
 Consulta:
 
@@ -1440,7 +1440,7 @@ Comando de referencia:
 sudo systemctl status Splunkd --no-pager
 ```
 
-## 7.2 Splunk Web no responde
+#### 7.2 Splunk Web no responde
 
 Consulta:
 
@@ -1456,7 +1456,7 @@ curl -I http://127.0.0.1:8000
 sudo ss -ltnp | grep ':8000'
 ```
 
-## 7.3 No aparecen datos
+#### 7.3 No aparecen datos
 
 Consulta:
 
@@ -1469,7 +1469,7 @@ index=curso earliest=0 latest=now
 | stats count
 ```
 
-## 7.4 Los campos son incorrectos
+#### 7.4 Los campos son incorrectos
 
 Consulta:
 
@@ -1483,7 +1483,7 @@ index=curso earliest=0 latest=now
 | head 20
 ```
 
-## 7.5 Campos desconocidos
+#### 7.5 Campos desconocidos
 
 Utiliza:
 
@@ -1497,11 +1497,11 @@ validado.
 
 ---
 
-# 8. Evidencias de aprendizaje
+## 8. Evidencias de aprendizaje
 
 Al finalizar el curso, el asistente debe conservar las siguientes evidencias:
 
-## Plataforma
+#### Plataforma
 
 - [ ] Versión de Splunk.
 - [ ] Versión de Ubuntu.
@@ -1509,7 +1509,7 @@ Al finalizar el curso, el asistente debe conservar las siguientes evidencias:
 - [ ] Acceso a Splunk Web.
 - [ ] Puertos comprobados.
 
-## Ingesta
+#### Ingesta
 
 - [ ] Índice `curso`.
 - [ ] Fuente de datos.
@@ -1519,7 +1519,7 @@ Al finalizar el curso, el asistente debe conservar las siguientes evidencias:
 - [ ] Primer y último timestamp.
 - [ ] Campos disponibles.
 
-## SPL
+#### SPL
 
 - [ ] Consulta de volumen.
 - [ ] Consulta de errores.
@@ -1530,7 +1530,7 @@ Al finalizar el curso, el asistente debe conservar las siguientes evidencias:
 - [ ] Uso de `stats`.
 - [ ] Uso de `timechart`.
 
-## Objetos
+#### Objetos
 
 - [ ] Búsqueda guardada.
 - [ ] Reporte diario.
@@ -1542,7 +1542,7 @@ Al finalizar el curso, el asistente debe conservar las siguientes evidencias:
 - [ ] Throttling.
 - [ ] Permisos documentados.
 
-## Documentación
+#### Documentación
 
 - [ ] Objetivo de cada práctica.
 - [ ] SPL o configuración.
@@ -1554,9 +1554,9 @@ Al finalizar el curso, el asistente debe conservar las siguientes evidencias:
 
 ---
 
-# 9. Lista de comprobación final
+## 9. Lista de comprobación final
 
-## Sesión 1
+#### Sesión 1
 
 - [ ] Splunk está instalado.
 - [ ] `Splunkd` está activo.
@@ -1567,7 +1567,7 @@ Al finalizar el curso, el asistente debe conservar las siguientes evidencias:
 - [ ] El rango temporal es correcto.
 - [ ] Los campos están identificados.
 
-## Sesión 2
+#### Sesión 2
 
 - [ ] Puedo buscar por índice.
 - [ ] Puedo filtrar por campo.
@@ -1579,7 +1579,7 @@ Al finalizar el curso, el asistente debe conservar las siguientes evidencias:
 - [ ] Puedo generar un `timechart`.
 - [ ] Puedo identificar errores por URI.
 
-## Sesión 3
+#### Sesión 3
 
 - [ ] Puedo guardar una búsqueda.
 - [ ] Puedo crear un reporte.
@@ -1593,9 +1593,9 @@ Al finalizar el curso, el asistente debe conservar las siguientes evidencias:
 
 ---
 
-# 10. Referencias del curso
+## 10. Referencias del curso
 
-## Documentación interna
+#### Documentación interna
 
 - [Presentación](presentacion.md)
 - [Objetivos](objetivos.md)
@@ -1608,7 +1608,7 @@ Al finalizar el curso, el asistente debe conservar las siguientes evidencias:
 - [Evaluación](../proyecto/evaluacion.md)
 - [Troubleshooting](../troubleshooting/index.md)
 
-## Referencias oficiales de Splunk
+#### Referencias oficiales de Splunk
 
 - [Documentación de Splunk Enterprise](https://docs.splunk.com/Documentation/Splunk)
 - [Splunk Enterprise Help](https://help.splunk.com/en/splunk-enterprise)
@@ -1629,7 +1629,7 @@ Al finalizar el curso, el asistente debe conservar las siguientes evidencias:
 - [Roles y capacidades](https://docs.splunk.com/Documentation/Splunk/latest/Security/Rolesandcapabilities)
 - [Usuarios y roles](https://docs.splunk.com/Documentation/Splunk/latest/Security/Aboutusersandroles)
 
-## Referencias de Ubuntu
+#### Referencias de Ubuntu
 
 - [Ubuntu Server Documentation](https://documentation.ubuntu.com/server/)
 - [Systemd en Ubuntu](https://documentation.ubuntu.com/server/explanation/systemd/)
@@ -1637,7 +1637,7 @@ Al finalizar el curso, el asistente debe conservar las siguientes evidencias:
 
 ---
 
-# 11. Resultado final esperado
+## 11. Resultado final esperado
 
 Al finalizar las tres sesiones, el asistente debe haber pasado de una instancia
 instalada a una solución básica y documentada de monitorización:

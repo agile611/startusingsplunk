@@ -25,7 +25,7 @@ tiempo de aprendizaje se dedica principalmente a:
 
 ---
 
-# 1. Público recomendado
+## 1. Público recomendado
 
 El curso está especialmente recomendado para:
 
@@ -42,7 +42,7 @@ El curso está especialmente recomendado para:
 - administradores de plataformas de monitorización;
 - profesionales que trabajan con logs y datos operativos.
 
-## 1.1 Administradores de sistemas
+#### 1.1 Administradores de sistemas
 
 Encontrarán utilidad en actividades como:
 
@@ -54,7 +54,7 @@ Encontrarán utilidad en actividades como:
 - crear alertas operativas;
 - relacionar datos de aplicación y sistema.
 
-## 1.2 Analistas de seguridad
+#### 1.2 Analistas de seguridad
 
 El curso proporciona una base para:
 
@@ -70,7 +70,7 @@ El curso no sustituye una formación completa en **Splunk Enterprise
 Security**, SOC, detección avanzada o respuesta ante incidentes. Sí proporciona
 los fundamentos de búsqueda, análisis y visualización necesarios para avanzar.
 
-## 1.3 Equipos de soporte
+#### 1.3 Equipos de soporte
 
 Los asistentes podrán utilizar Splunk para:
 
@@ -83,7 +83,7 @@ Los asistentes podrán utilizar Splunk para:
 - crear consultas reutilizables;
 - reducir diagnósticos basados únicamente en suposiciones.
 
-## 1.4 Desarrolladores y responsables de aplicaciones
+#### 1.4 Desarrolladores y responsables de aplicaciones
 
 El contenido resulta útil para:
 
@@ -98,7 +98,7 @@ El contenido resulta útil para:
 
 ---
 
-# 2. Situación de partida
+## 2. Situación de partida
 
 El curso está pensado para asistentes que cumplen estas condiciones:
 
@@ -110,7 +110,7 @@ El curso está pensado para asistentes que cumplen estas condiciones:
 - pueden ejecutar comandos básicos en Ubuntu;
 - están preparados para interpretar resultados técnicos.
 
-## 2.1 Comprobaciones iniciales
+#### 2.1 Comprobaciones iniciales
 
 Antes de comenzar, se recomienda verificar:
 
@@ -144,7 +144,7 @@ La instalación se considera preparada cuando:
 
 ---
 
-# 3. Perfil técnico recomendado
+## 3. Perfil técnico recomendado
 
 Es recomendable tener experiencia básica con:
 
@@ -176,7 +176,7 @@ desde el principio y se practican con búsquedas progresivas.
 
 ---
 
-# 4. Requisitos que no son obligatorios
+## 4. Requisitos que no son obligatorios
 
 No es necesario:
 
@@ -196,12 +196,12 @@ instancia mononodo y en un flujo práctico de análisis.
 
 ---
 
-# 5. Diferencia entre el rol `admin` y los permisos de Ubuntu
+## 5. Diferencia entre el rol `admin` y los permisos de Ubuntu
 
 Tener permisos de `admin` en Splunk no significa necesariamente tener permisos
 de administrador en Ubuntu.
 
-## 5.1 Permisos dentro de Splunk
+#### 5.1 Permisos dentro de Splunk
 
 El rol `admin` permite realizar, según la configuración de la instancia,
 actividades como:
@@ -216,7 +216,7 @@ actividades como:
 - administrar usuarios y roles;
 - consultar configuraciones desde Splunk Web.
 
-## 5.2 Permisos del sistema operativo
+#### 5.2 Permisos del sistema operativo
 
 Ubuntu controla acciones como:
 
@@ -238,7 +238,7 @@ sudo systemctl status Splunkd
 El hecho de tener el rol `admin` en Splunk no garantiza que el usuario pueda
 ejecutar correctamente comandos con `sudo`.
 
-## 5.3 Matriz de permisos
+#### 5.3 Matriz de permisos
 
 | Actividad | Contexto | Permiso habitual |
 |---|---|---|
@@ -255,11 +255,11 @@ se recomienda validar posteriormente los objetos con el rol operativo real.
 
 ---
 
-# 6. Qué debe saber hacer el asistente al finalizar
+## 6. Qué debe saber hacer el asistente al finalizar
 
 Al terminar el curso, el asistente podrá:
 
-## 6.1 Validar la plataforma
+#### 6.1 Validar la plataforma
 
 - consultar la versión de Splunk;
 - comprobar el estado de `splunkd`;
@@ -269,7 +269,7 @@ Al terminar el curso, el asistente podrá:
 - reconocer problemas básicos de acceso;
 - distinguir un problema de servicio de un problema de búsqueda.
 
-## 6.2 Validar los datos
+#### 6.2 Validar los datos
 
 - identificar el índice utilizado;
 - comprobar el número de eventos;
@@ -293,7 +293,7 @@ index=curso earliest=0 latest=now
     latest(_time) as ultimo_evento
 ```
 
-## 6.3 Construir búsquedas
+#### 6.3 Construir búsquedas
 
 - buscar por índice;
 - aplicar rangos temporales;
@@ -308,7 +308,7 @@ index=curso earliest=0 latest=now
 - convertir valores de texto a números;
 - extraer campos con `rex`.
 
-## 6.4 Crear objetos operativos
+#### 6.4 Crear objetos operativos
 
 - guardar búsquedas;
 - crear reportes;
@@ -323,7 +323,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-# 7. Qué se espera del participante
+## 7. Qué se espera del participante
 
 Durante las prácticas, el participante deberá trabajar de forma activa.
 
@@ -352,7 +352,7 @@ No basta con copiar y pegar una búsqueda. El participante debe comprender:
 
 ---
 
-# 8. Responsabilidad del participante
+## 8. Responsabilidad del participante
 
 Cada participante debe validar sus resultados.
 
@@ -375,9 +375,9 @@ Los resultados deben ser coherentes con los datos y con la pregunta original.
 
 ---
 
-# 9. Actividades prácticas para el perfil del asistente
+## 9. Actividades prácticas para el perfil del asistente
 
-## 9.1 Validación inicial
+#### 9.1 Validación inicial
 
 Ejecutar:
 
@@ -399,7 +399,7 @@ Objetivo:
 - comprobar la visibilidad del índice;
 - distinguir una búsqueda funcional de una búsqueda con datos.
 
-## 9.2 Revisión del modelo de datos
+#### 9.2 Revisión del modelo de datos
 
 ```spl
 index=curso earliest=0 latest=now
@@ -423,7 +423,7 @@ Objetivo:
 - comprobar campos;
 - comparar `_raw` con los campos extraídos.
 
-## 9.3 Análisis de errores
+#### 9.3 Análisis de errores
 
 ```spl
 index=curso earliest=0 latest=now
@@ -441,7 +441,7 @@ Objetivo:
 - producir una tabla operativa;
 - preparar un reporte o dashboard.
 
-## 9.4 Evolución temporal
+#### 9.4 Evolución temporal
 
 ```spl
 index=curso earliest=0 latest=now
@@ -455,7 +455,7 @@ Objetivo:
 - interpretar intervalos;
 - preparar un panel temporal.
 
-## 9.5 Alerta básica
+#### 9.5 Alerta básica
 
 ```spl
 index=curso earliest=-5m latest=now
@@ -473,9 +473,9 @@ Objetivo:
 
 ---
 
-# 10. Perfiles y objetivos profesionales
+## 10. Perfiles y objetivos profesionales
 
-## 10.1 Perfil de administración
+#### 10.1 Perfil de administración
 
 Prioridades:
 
@@ -496,7 +496,7 @@ Preguntas habituales:
 - ¿La entrada apunta al destino correcto?
 - ¿El usuario puede acceder al objeto?
 
-## 10.2 Perfil de operaciones
+#### 10.2 Perfil de operaciones
 
 Prioridades:
 
@@ -516,7 +516,7 @@ Preguntas habituales:
 - ¿Qué umbral debe generar una alerta?
 - ¿Cómo se presenta la información al equipo?
 
-## 10.3 Perfil de seguridad
+#### 10.3 Perfil de seguridad
 
 Prioridades:
 
@@ -536,7 +536,7 @@ Preguntas habituales:
 - ¿Qué campos faltan para investigar mejor?
 - ¿Qué usuario puede consultar los datos?
 
-## 10.4 Perfil de desarrollo
+#### 10.4 Perfil de desarrollo
 
 Prioridades:
 
@@ -558,7 +558,7 @@ Preguntas habituales:
 
 ---
 
-# 11. Limitaciones del curso
+## 11. Limitaciones del curso
 
 El curso utiliza una instancia mononodo y un dataset de laboratorio. Por tanto,
 no cubre en profundidad:
@@ -581,9 +581,9 @@ Sí proporciona una base sólida para continuar con esos contenidos.
 
 ---
 
-# 12. Recomendaciones para aprovechar las prácticas
+## 12. Recomendaciones para aprovechar las prácticas
 
-## Antes de ejecutar una búsqueda
+#### Antes de ejecutar una búsqueda
 
 1. Identifica el índice.
 2. Identifica el periodo temporal.
@@ -591,7 +591,7 @@ Sí proporciona una base sólida para continuar con esos contenidos.
 4. Formula la pregunta.
 5. Empieza con una consulta sencilla.
 
-## Mientras construyes la búsqueda
+#### Mientras construyes la búsqueda
 
 1. Añade un filtro cada vez.
 2. Revisa los resultados intermedios.
@@ -599,7 +599,7 @@ Sí proporciona una base sólida para continuar con esos contenidos.
 4. Convierte los tipos cuando sea necesario.
 5. Limita los resultados durante la exploración.
 
-## Antes de guardar el resultado
+#### Antes de guardar el resultado
 
 1. Ejecuta la consulta con el rango correcto.
 2. Revisa el resultado en forma de tabla.
@@ -610,7 +610,7 @@ Sí proporciona una base sólida para continuar con esos contenidos.
 
 ---
 
-# 13. Relación con las secciones del curso
+## 13. Relación con las secciones del curso
 
 Los destinatarios utilizarán especialmente estos documentos:
 
@@ -633,15 +633,15 @@ Los destinatarios utilizarán especialmente estos documentos:
 
 ---
 
-# 14. Referencias oficiales
+## 14. Referencias oficiales
 
-## Splunk Enterprise
+#### Splunk Enterprise
 
 - [Documentación de Splunk Enterprise](https://docs.splunk.com/Documentation/Splunk)
 - [Splunk Enterprise Help](https://help.splunk.com/en/splunk-enterprise)
 - [Notas de versión](https://docs.splunk.com/Documentation/Splunk/latest/ReleaseNotes)
 
-## Datos, fuentes e índices
+#### Datos, fuentes e índices
 
 - [Cómo procesa Splunk los datos](https://docs.splunk.com/Documentation/Splunk/latest/Data/HowSplunkprocessesdata)
 - [Introducción a las fuentes de datos](https://docs.splunk.com/Documentation/Splunk/latest/Data/Whatissource)
@@ -651,7 +651,7 @@ Los destinatarios utilizarán especialmente estos documentos:
 - [Referencia de `indexes.conf`](https://docs.splunk.com/Documentation/Splunk/latest/Admin/Indexesconf)
 - [Referencia de `props.conf`](https://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf)
 
-## SPL
+#### SPL
 
 - [Search Manual](https://docs.splunk.com/Documentation/Splunk/latest/Search/WhatsInThisManual)
 - [Search Reference](https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/Overview)
@@ -662,7 +662,7 @@ Los destinatarios utilizarán especialmente estos documentos:
 - [`fieldsummary`](https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/Fieldsummary)
 - [Modificadores temporales](https://docs.splunk.com/Documentation/Splunk/latest/Search/Specifytimemodifiersinyoursearch)
 
-## Dashboards y alertas
+#### Dashboards y alertas
 
 - [Dashboards](https://docs.splunk.com/Documentation/Splunk/latest/Viz/AboutDashboards)
 - [Dashboard Studio](https://docs.splunk.com/Documentation/Splunk/latest/DashStudio/IntroFrame)
@@ -670,13 +670,13 @@ Los destinatarios utilizarán especialmente estos documentos:
 - [Alertas](https://docs.splunk.com/Documentation/Splunk/latest/Alert/Aboutalerts)
 - [Throttling de alertas](https://docs.splunk.com/Documentation/Splunk/latest/Alert/ThrottleAlerts)
 
-## Seguridad y permisos
+#### Seguridad y permisos
 
 - [Usuarios y roles](https://docs.splunk.com/Documentation/Splunk/latest/Security/Aboutusersandroles)
 - [Roles y capacidades](https://docs.splunk.com/Documentation/Splunk/latest/Security/Rolesandcapabilities)
 - [Objetos de conocimiento](https://docs.splunk.com/Documentation/Splunk/latest/Knowledge/Aboutknowledgeobjects)
 
-## Ubuntu
+#### Ubuntu
 
 - [Ubuntu Server Documentation](https://documentation.ubuntu.com/server/)
 - [Systemd en Ubuntu](https://documentation.ubuntu.com/server/explanation/systemd/)

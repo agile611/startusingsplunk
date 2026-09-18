@@ -43,7 +43,7 @@ Decisión operativa
 
 ---
 
-# 1. Contexto del curso
+## 1. Contexto del curso
 
 El curso utiliza como entorno de referencia:
 
@@ -69,7 +69,7 @@ preguntas operativas como:
 
 ---
 
-# 2. Objetivos generales
+## 2. Objetivos generales
 
 Al finalizar el curso, el asistente podrá:
 
@@ -93,12 +93,12 @@ Al finalizar el curso, el asistente podrá:
 
 ---
 
-# 3. Resultados de aprendizaje observables
+## 3. Resultados de aprendizaje observables
 
 Los objetivos se consideran alcanzados cuando el asistente puede demostrar
 cada resultado mediante una práctica o evidencia.
 
-## 3.1 Plataforma
+#### 3.1 Plataforma
 
 El asistente puede:
 
@@ -134,7 +134,7 @@ Prueba funcional:
 
 ---
 
-## 3.2 Ingesta
+#### 3.2 Ingesta
 
 El asistente puede:
 
@@ -164,7 +164,7 @@ Validación del índice:
 
 ---
 
-## 3.3 Tiempo
+#### 3.3 Tiempo
 
 El asistente puede:
 
@@ -205,7 +205,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## 3.4 SPL
+#### 3.4 SPL
 
 El asistente puede:
 
@@ -239,7 +239,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## 3.5 Objetos operativos
+#### 3.5 Objetos operativos
 
 El asistente puede:
 
@@ -258,9 +258,9 @@ El asistente puede:
 
 ---
 
-# 4. Objetivos específicos
+## 4. Objetivos específicos
 
-## 4.1 Preparar el entorno
+#### 4.1 Preparar el entorno
 
 El asistente podrá:
 
@@ -312,7 +312,7 @@ Validación web:
 curl -I http://127.0.0.1:8000
 ```
 
-### Evidencia esperada
+###### Evidencia esperada
 
 El asistente debe conservar:
 
@@ -328,7 +328,7 @@ El asistente debe conservar:
 
 ---
 
-## 4.2 Comprender los datos
+#### 4.2 Comprender los datos
 
 El asistente podrá:
 
@@ -380,7 +380,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## 4.3 Buscar y analizar
+#### 4.3 Buscar y analizar
 
 El asistente podrá:
 
@@ -403,14 +403,14 @@ El asistente podrá:
 - interpretar resultados;
 - reconocer datos incompletos o mal extraídos.
 
-### Búsqueda mínima
+###### Búsqueda mínima
 
 ```spl
 index=curso earliest=0 latest=now
 | stats count as total_peticiones
 ```
 
-### Filtrado por código HTTP
+###### Filtrado por código HTTP
 
 ```spl
 index=curso earliest=0 latest=now
@@ -419,7 +419,7 @@ index=curso earliest=0 latest=now
 | stats count as errores_404
 ```
 
-### Errores por URI
+###### Errores por URI
 
 ```spl
 index=curso earliest=0 latest=now
@@ -430,14 +430,14 @@ index=curso earliest=0 latest=now
 | head 10
 ```
 
-### Evolución temporal
+###### Evolución temporal
 
 ```spl
 index=curso earliest=0 latest=now
 | timechart span=1m count as peticiones
 ```
 
-### Detección de valores no numéricos
+###### Detección de valores no numéricos
 
 ```spl
 index=curso earliest=0 latest=now
@@ -448,7 +448,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## 4.4 Presentar y actuar
+#### 4.4 Presentar y actuar
 
 El asistente podrá:
 
@@ -464,7 +464,7 @@ El asistente podrá:
 - probar la acción de la alerta;
 - documentar resultados y decisiones.
 
-### Ejemplo de alerta
+###### Ejemplo de alerta
 
 Objetivo:
 
@@ -487,9 +487,9 @@ alerta en tiempo real esté funcionando.
 
 ---
 
-# 5. Objetivos organizados por sesiones
+## 5. Objetivos organizados por sesiones
 
-## 5.1 Sesión 1: fundamentos e ingestión
+#### 5.1 Sesión 1: fundamentos e ingestión
 
 Al terminar la sesión 1, el asistente podrá:
 
@@ -508,7 +508,7 @@ Al terminar la sesión 1, el asistente podrá:
 - documentar el proceso de ingesta;
 - utilizar la guía de troubleshooting.
 
-### Evidencias de la sesión 1
+###### Evidencias de la sesión 1
 
 - [ ] Captura o salida del estado del servicio.
 - [ ] Versión de Splunk.
@@ -528,7 +528,7 @@ Referencia:
 
 ---
 
-## 5.2 Sesión 2: búsquedas y SPL
+#### 5.2 Sesión 2: búsquedas y SPL
 
 Al terminar la sesión 2, el asistente podrá:
 
@@ -547,7 +547,7 @@ Al terminar la sesión 2, el asistente podrá:
 - optimizar consultas básicas;
 - explicar por qué una consulta produce un resultado concreto.
 
-### Evidencias de la sesión 2
+###### Evidencias de la sesión 2
 
 - [ ] Búsqueda de volumen total.
 - [ ] Búsqueda de peticiones por host.
@@ -567,7 +567,7 @@ Referencia:
 
 ---
 
-## 5.3 Sesión 3: reportes, dashboards y alertas
+#### 5.3 Sesión 3: reportes, dashboards y alertas
 
 Al terminar la sesión 3, el asistente podrá:
 
@@ -587,7 +587,7 @@ Al terminar la sesión 3, el asistente podrá:
 - validar el objeto con otro usuario;
 - presentar el proyecto final.
 
-### Evidencias de la sesión 3
+###### Evidencias de la sesión 3
 
 - [ ] Reporte de errores por URI.
 - [ ] Reporte de tráfico por host.
@@ -608,7 +608,7 @@ Referencia:
 
 ---
 
-# 6. Evidencias de aprendizaje
+## 6. Evidencias de aprendizaje
 
 El aprendizaje se comprobará mediante una secuencia de resultados:
 
@@ -639,9 +639,9 @@ Cada evidencia debe indicar:
 
 ---
 
-# 7. Criterios de logro
+## 7. Criterios de logro
 
-## Nivel inicial
+#### Nivel inicial
 
 El asistente:
 
@@ -651,7 +651,7 @@ El asistente:
 - identifica el índice;
 - reconoce los campos principales.
 
-## Nivel operativo
+#### Nivel operativo
 
 El asistente:
 
@@ -663,7 +663,7 @@ El asistente:
 - documenta resultados;
 - identifica errores de ingesta o parsing.
 
-## Nivel final
+#### Nivel final
 
 El asistente:
 
@@ -679,7 +679,7 @@ El asistente:
 
 ---
 
-# 8. Criterios de calidad
+## 8. Criterios de calidad
 
 Una práctica se considera correcta cuando:
 
@@ -697,7 +697,7 @@ Una práctica se considera correcta cuando:
 - no utiliza permisos excesivos;
 - no expone información sensible.
 
-## 8.1 Reproducibilidad
+#### 8.1 Reproducibilidad
 
 Una consulta reproducible debe indicar:
 
@@ -713,7 +713,7 @@ Una consulta reproducible debe indicar:
 - Limitaciones:
 ```
 
-## 8.2 Normalización
+#### 8.2 Normalización
 
 Los campos numéricos deben convertirse antes de compararlos:
 
@@ -724,7 +724,7 @@ Los campos numéricos deben convertirse antes de compararlos:
 No se debe asumir que un campo es numérico solo porque contiene valores como
 `200`, `404` o `500`.
 
-## 8.3 Limitaciones
+#### 8.3 Limitaciones
 
 Si no existe un campo, debe documentarse:
 
@@ -736,9 +736,9 @@ No se debe presentar una dimensión alternativa como si fuera equivalente.
 
 ---
 
-# 9. Actividades prácticas asociadas
+## 9. Actividades prácticas asociadas
 
-## Actividad 1: validar la plataforma
+#### Actividad 1: validar la plataforma
 
 ```bash
 /opt/splunk/bin/splunk version
@@ -760,7 +760,7 @@ Resultado esperado:
 
 ---
 
-## Actividad 2: validar la búsqueda
+#### Actividad 2: validar la búsqueda
 
 ```spl
 | makeresults
@@ -775,7 +775,7 @@ estado = Splunk responde
 
 ---
 
-## Actividad 3: validar los datos
+#### Actividad 3: validar los datos
 
 ```spl
 index=curso earliest=0 latest=now
@@ -793,7 +793,7 @@ Resultado esperado:
 
 ---
 
-## Actividad 4: revisar campos
+#### Actividad 4: revisar campos
 
 ```spl
 index=curso earliest=0 latest=now
@@ -809,7 +809,7 @@ Resultado esperado:
 
 ---
 
-## Actividad 5: crear una métrica
+#### Actividad 5: crear una métrica
 
 ```spl
 index=curso earliest=0 latest=now
@@ -825,7 +825,7 @@ Resultado esperado:
 
 ---
 
-## Actividad 6: crear una alerta
+#### Actividad 6: crear una alerta
 
 ```spl
 index=curso earliest=-5m latest=now
@@ -841,7 +841,7 @@ Resultado esperado:
 
 ---
 
-# 10. Errores que el asistente debe saber evitar
+## 10. Errores que el asistente debe saber evitar
 
 Durante el curso se analizarán estos errores habituales:
 
@@ -863,7 +863,7 @@ Durante el curso se analizarán estos errores habituales:
 
 ---
 
-# 11. Relación con la documentación del curso
+## 11. Relación con la documentación del curso
 
 Estos objetivos se desarrollan mediante los siguientes documentos:
 
@@ -885,15 +885,15 @@ Estos objetivos se desarrollan mediante los siguientes documentos:
 
 ---
 
-# 13. Referencias oficiales
+## 13. Referencias oficiales
 
-## Splunk Enterprise
+#### Splunk Enterprise
 
 - [Documentación general de Splunk](https://docs.splunk.com/Documentation/Splunk)
 - [Splunk Enterprise Help](https://help.splunk.com/en/splunk-enterprise)
 - [Notas de versión](https://docs.splunk.com/Documentation/Splunk/latest/ReleaseNotes)
 
-## Arquitectura, datos e índices
+#### Arquitectura, datos e índices
 
 - [Introducción a la entrada de datos](https://docs.splunk.com/Documentation/Splunk/latest/Data/Whatissource)
 - [Cómo procesa Splunk los datos](https://docs.splunk.com/Documentation/Splunk/latest/Data/HowSplunkprocessesdata)
@@ -903,7 +903,7 @@ Estos objetivos se desarrollan mediante los siguientes documentos:
 - [Referencia de `indexes.conf`](https://docs.splunk.com/Documentation/Splunk/latest/Admin/Indexesconf)
 - [Referencia de `props.conf`](https://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf)
 
-## SPL y búsqueda
+#### SPL y búsqueda
 
 - [Search Manual](https://docs.splunk.com/Documentation/Splunk/latest/Search/WhatsInThisManual)
 - [Search Reference](https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/Overview)
@@ -915,7 +915,7 @@ Estos objetivos se desarrollan mediante los siguientes documentos:
 - [`fieldsummary`](https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/Fieldsummary)
 - [Modificadores temporales](https://docs.splunk.com/Documentation/Splunk/latest/Search/Specifytimemodifiersinyoursearch)
 
-## Dashboards, reportes y alertas
+#### Dashboards, reportes y alertas
 
 - [Dashboards](https://docs.splunk.com/Documentation/Splunk/latest/Viz/AboutDashboards)
 - [Dashboard Studio](https://docs.splunk.com/Documentation/Splunk/latest/DashStudio/IntroFrame)
@@ -924,21 +924,21 @@ Estos objetivos se desarrollan mediante los siguientes documentos:
 - [Búsquedas programadas](https://docs.splunk.com/Documentation/Splunk/latest/Alert/Definescheduledalerts)
 - [Throttling de alertas](https://docs.splunk.com/Documentation/Splunk/latest/Alert/ThrottleAlerts)
 
-## Seguridad y permisos
+#### Seguridad y permisos
 
 - [Roles y capacidades](https://docs.splunk.com/Documentation/Splunk/latest/Security/Rolesandcapabilities)
 - [Usuarios y roles](https://docs.splunk.com/Documentation/Splunk/latest/Security/Aboutusersandroles)
 - [Objetos de conocimiento](https://docs.splunk.com/Documentation/Splunk/latest/Knowledge/Aboutknowledgeobjects)
 - [Gestión de permisos de objetos](https://docs.splunk.com/Documentation/Splunk/latest/Knowledge/Manageknowledgeobjects)
 
-## Troubleshooting
+#### Troubleshooting
 
 - [Troubleshooting general](https://docs.splunk.com/Documentation/Splunk/latest/Troubleshooting/Abouttroubleshooting)
 - [Troubleshooting de datos](https://docs.splunk.com/Documentation/Splunk/latest/Troubleshooting/Troubleshootingyourdata)
 - [Monitoring Console](https://docs.splunk.com/Documentation/Splunk/latest/Monitor/MonitoringConsole)
 - [Job Inspector](https://docs.splunk.com/Documentation/Splunk/latest/Search/Viewsearchjobproperties)
 
-## Ubuntu
+#### Ubuntu
 
 - [Ubuntu Server Documentation](https://documentation.ubuntu.com/server/)
 - [Systemd en Ubuntu](https://documentation.ubuntu.com/server/explanation/systemd/)
