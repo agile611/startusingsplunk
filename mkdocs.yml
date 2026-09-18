@@ -33,6 +33,7 @@ theme:
     - search.highlight
     - search.suggest
 
+
   palette:
     - media: "(prefers-color-scheme: light)"
       scheme: default
