@@ -56,7 +56,7 @@ una reinstalación porque una búsqueda tenga un mal día.
 
 ---
 
-# 1. Objetivos
+## 1. Objetivos
 
 Al finalizar esta sección, los asistentes podrán:
 
@@ -80,7 +80,7 @@ Al finalizar esta sección, los asistentes podrán:
 
 ---
 
-# 2. Entorno de referencia
+## 2. Entorno de referencia
 
 El laboratorio utiliza como referencia:
 
@@ -106,7 +106,7 @@ Comprueba siempre los valores reales antes de aplicar una corrección.
 
 ---
 
-# 3. Mapa rápido de síntomas
+## 3. Mapa rápido de síntomas
 
 | Síntoma | Empieza por | Documento relacionado |
 |---|---|---|
@@ -124,7 +124,7 @@ Comprueba siempre los valores reales antes de aplicar una corrección.
 
 ---
 
-# 4. Procedimiento común
+## 4. Procedimiento común
 
 Cuando alguien informe de un problema, registra primero:
 
@@ -154,7 +154,7 @@ Después sigue este orden:
 
 ---
 
-# 5. Regla de oro: cambiar una sola capa cada vez
+## 5. Regla de oro: cambiar una sola capa cada vez
 
 No realices simultáneamente todos estos cambios:
 
@@ -186,9 +186,9 @@ Documentar
 
 ---
 
-# 6. Prueba mínima del servicio
+## 6. Prueba mínima del servicio
 
-## 6.1 Comprobar la versión
+#### 6.1 Comprobar la versión
 
 ```bash
 /opt/splunk/bin/splunk version
@@ -200,25 +200,25 @@ Si es necesario:
 sudo /opt/splunk/bin/splunk version
 ```
 
-## 6.2 Comprobar el servicio
+#### 6.2 Comprobar el servicio
 
 ```bash
 sudo systemctl status Splunkd --no-pager
 ```
 
-## 6.3 Comprobar el proceso
+#### 6.3 Comprobar el proceso
 
 ```bash
 ps -eo user,pid,ppid,cmd | grep -i '[s]plunk'
 ```
 
-## 6.4 Comprobar puertos principales
+#### 6.4 Comprobar puertos principales
 
 ```bash
 sudo ss -ltnp | grep -E ':8000|:8089'
 ```
 
-## 6.5 Comprobar Splunk Web localmente
+#### 6.5 Comprobar Splunk Web localmente
 
 ```bash
 curl -I http://127.0.0.1:8000
@@ -236,7 +236,7 @@ aceptando conexiones en esa dirección y puerto.
 
 ---
 
-# 7. Prueba mínima de búsqueda
+## 7. Prueba mínima de búsqueda
 
 Para el laboratorio, utiliza primero una búsqueda conocida:
 
@@ -283,9 +283,9 @@ No utilices `index=*` como primera prueba. Puede:
 
 ---
 
-# 8. Diagnóstico por capas
+## 8. Diagnóstico por capas
 
-## 8.1 Capa de servicio
+#### 8.1 Capa de servicio
 
 Pregunta:
 
@@ -301,7 +301,7 @@ sudo systemctl status Splunkd
 sudo /opt/splunk/bin/splunk status
 ```
 
-## 8.2 Capa de red
+#### 8.2 Capa de red
 
 Pregunta:
 
@@ -321,7 +321,7 @@ getent hosts NOMBRE_O_IP
 ip route
 ```
 
-## 8.3 Capa de ingesta
+#### 8.3 Capa de ingesta
 
 Pregunta:
 
@@ -334,7 +334,7 @@ Consulta:
 | table path index sourcetype host disabled
 ```
 
-## 8.4 Capa de índice
+#### 8.4 Capa de índice
 
 Pregunta:
 
@@ -348,7 +348,7 @@ Consulta:
 | table title disabled totalEventCount currentDBSizeMB
 ```
 
-## 8.5 Capa temporal
+#### 8.5 Capa temporal
 
 Pregunta:
 
@@ -364,7 +364,7 @@ index=curso earliest=0 latest=now
     count
 ```
 
-## 8.6 Capa de campos
+#### 8.6 Capa de campos
 
 Pregunta:
 
@@ -378,7 +378,7 @@ index=curso earliest=0 latest=now
 | head 20
 ```
 
-## 8.7 Capa SPL
+#### 8.7 Capa SPL
 
 Pregunta:
 
@@ -398,7 +398,7 @@ index=curso status=404
 index=curso status=404 uri="/missing"
 ```
 
-## 8.8 Capa de permisos
+#### 8.8 Capa de permisos
 
 Pregunta:
 
@@ -413,11 +413,11 @@ Consulta:
 
 ---
 
-# 9. Evidencias útiles
+## 9. Evidencias útiles
 
 Recoge únicamente la información necesaria.
 
-## 9.1 Evidencias del sistema
+#### 9.1 Evidencias del sistema
 
 ```bash
 /opt/splunk/bin/splunk version
@@ -439,7 +439,7 @@ df -h
 timedatectl
 ```
 
-## 9.2 Evidencias de logs
+#### 9.2 Evidencias de logs
 
 ```bash
 sudo tail -n 100 \
@@ -451,7 +451,7 @@ sudo tail -n 100 \
   /opt/splunk/var/log/splunk/web_service.log
 ```
 
-## 9.3 Evidencias de Splunk
+#### 9.3 Evidencias de Splunk
 
 ```spl
 | rest /services/authentication/current-context
@@ -468,7 +468,7 @@ sudo tail -n 100 \
 | table path index sourcetype host disabled
 ```
 
-## 9.4 Información que debe eliminarse antes de compartir
+#### 9.4 Información que debe eliminarse antes de compartir
 
 No incluyas:
 
@@ -483,9 +483,9 @@ No incluyas:
 
 ---
 
-# 10. Logs internos de Splunk
+## 10. Logs internos de Splunk
 
-## 10.1 Errores recientes
+#### 10.1 Errores recientes
 
 ```spl
 index=_internal earliest=-30m latest=now
@@ -499,7 +499,7 @@ index=_internal earliest=-30m latest=now
 | sort - _time
 ```
 
-## 10.2 Problemas de ingesta
+#### 10.2 Problemas de ingesta
 
 ```spl
 index=_internal earliest=-30m latest=now
@@ -513,7 +513,7 @@ index=_internal earliest=-30m latest=now
 | sort - _time
 ```
 
-## 10.3 Problemas de autenticación
+#### 10.3 Problemas de autenticación
 
 ```spl
 index=_internal earliest=-1h latest=now
@@ -537,11 +537,11 @@ index=_internal earliest=-15m latest=now
 
 ---
 
-# 11. Job Inspector
+## 11. Job Inspector
 
 Job Inspector ayuda a analizar la ejecución de una búsqueda.
 
-## 11.1 Cuándo utilizarlo
+#### 11.1 Cuándo utilizarlo
 
 Utilízalo cuando:
 
@@ -552,7 +552,7 @@ Utilízalo cuando:
 - un comando parece ser el cuello de botella;
 - necesitas comparar dos versiones de SPL.
 
-## 11.2 Procedimiento
+#### 11.2 Procedimiento
 
 1. Ejecuta la búsqueda.
 2. Abre el menú de acciones de la búsqueda.
@@ -563,7 +563,7 @@ Utilízalo cuando:
 
 La ubicación exacta puede variar según la versión y la aplicación.
 
-## 11.3 Qué observar
+#### 11.3 Qué observar
 
 Revisa especialmente:
 
@@ -576,7 +576,7 @@ Revisa especialmente:
 - uso de subsearches;
 - comandos que generan grandes volúmenes intermedios.
 
-## 11.4 Buenas prácticas de rendimiento
+#### 11.4 Buenas prácticas de rendimiento
 
 Preferible:
 
@@ -608,11 +608,11 @@ Buenas prácticas:
 
 ---
 
-# 12. Monitoring Console
+## 12. Monitoring Console
 
 Monitoring Console permite revisar el estado y rendimiento de la plataforma.
 
-## 12.1 Áreas de interés
+#### 12.1 Áreas de interés
 
 Según la versión y configuración, puede ayudar a investigar:
 
@@ -625,7 +625,7 @@ Según la versión y configuración, puede ayudar a investigar:
 - actividad de forwarders;
 - problemas de configuración.
 
-## 12.2 Cuándo utilizarla
+#### 12.2 Cuándo utilizarla
 
 Utiliza Monitoring Console cuando:
 
@@ -636,7 +636,7 @@ Utiliza Monitoring Console cuando:
 - hay problemas de capacidad;
 - el fallo no se limita a una única consulta.
 
-## 12.3 Limitación
+#### 12.3 Limitación
 
 Monitoring Console no sustituye a:
 
@@ -650,9 +650,9 @@ Es una fuente adicional de evidencias, no una respuesta automática.
 
 ---
 
-# 13. Diagnóstico de búsquedas lentas
+## 13. Diagnóstico de búsquedas lentas
 
-## 13.1 Reducir el intervalo
+#### 13.1 Reducir el intervalo
 
 Prueba primero:
 
@@ -670,7 +670,7 @@ index=curso earliest=-24h latest=now
 
 Compara el tiempo de ejecución.
 
-## 13.2 Reducir campos
+#### 13.2 Reducir campos
 
 Evita:
 
@@ -684,7 +684,7 @@ Utiliza:
 | table _time host status uri
 ```
 
-## 13.3 Filtrar temprano
+#### 13.3 Filtrar temprano
 
 Preferible:
 
@@ -702,14 +702,14 @@ index=curso earliest=-24h latest=now
 | stats count by uri
 ```
 
-## 13.4 Limitar resultados
+#### 13.4 Limitar resultados
 
 ```spl
 | sort - count
 | head 10
 ```
 
-## 13.5 Evitar comandos costosos sin necesidad
+#### 13.5 Evitar comandos costosos sin necesidad
 
 Investiga antes de utilizar:
 
@@ -723,15 +723,15 @@ Investiga antes de utilizar:
 
 ---
 
-# 14. Diagnóstico de dashboards
+## 14. Diagnóstico de dashboards
 
 Cuando una búsqueda funciona en Search, pero un dashboard no muestra datos:
 
-## 14.1 Ejecutar la búsqueda fuera del dashboard
+#### 14.1 Ejecutar la búsqueda fuera del dashboard
 
 Copia la SPL y ejecútala manualmente.
 
-## 14.2 Revisar el intervalo
+#### 14.2 Revisar el intervalo
 
 Comprueba si el dashboard utiliza:
 
@@ -740,7 +740,7 @@ Comprueba si el dashboard utiliza:
 - un valor vacío;
 - una fecha incompatible con el dataset histórico.
 
-## 14.3 Revisar tokens
+#### 14.3 Revisar tokens
 
 Comprueba:
 
@@ -752,7 +752,7 @@ Comprueba:
 - token de host;
 - token de status.
 
-## 14.4 Revisar permisos
+#### 14.4 Revisar permisos
 
 Comprueba:
 
@@ -762,7 +762,7 @@ Comprueba:
 - búsquedas dependientes;
 - acceso al índice.
 
-## 14.5 Probar una versión mínima
+#### 14.5 Probar una versión mínima
 
 Utiliza temporalmente:
 
@@ -775,7 +775,7 @@ Si funciona, añade los filtros y tokens uno por uno.
 
 ---
 
-# 15. Diagnóstico de alertas
+## 15. Diagnóstico de alertas
 
 Cuando una alerta no se activa, revisa:
 
@@ -790,7 +790,7 @@ Cuando una alerta no se activa, revisa:
 9. ¿El correo, webhook o script funciona?
 10. ¿La alerta utiliza datos históricos en lugar de recientes?
 
-## 15.1 Consulta de prueba
+#### 15.1 Consulta de prueba
 
 Para cinco HTTP 500 en cinco minutos:
 
@@ -801,7 +801,7 @@ index=curso earliest=-5m latest=now
 | where errores_500>=5
 ```
 
-## 15.2 Prueba histórica
+#### 15.2 Prueba histórica
 
 ```spl
 index=curso
@@ -815,7 +815,7 @@ latest="01/01/2026:00:10:00"
 Esta prueba valida la lógica, pero no demuestra que la alerta en tiempo real
 funcione.
 
-## 15.3 Validar eventos recientes
+#### 15.3 Validar eventos recientes
 
 ```spl
 index=curso earliest=-10m latest=now
@@ -825,16 +825,16 @@ index=curso earliest=-10m latest=now
 
 ---
 
-# 16. Diagnóstico de permisos
+## 16. Diagnóstico de permisos
 
-## 16.1 Revisar usuario y roles
+#### 16.1 Revisar usuario y roles
 
 ```spl
 | rest /services/authentication/current-context
 | table username roles
 ```
 
-## 16.2 Comparar usuarios
+#### 16.2 Comparar usuarios
 
 Ejecuta la misma consulta con:
 
@@ -849,7 +849,7 @@ index=curso earliest=0 latest=now
 | stats count
 ```
 
-## 16.3 Revisar el índice
+#### 16.3 Revisar el índice
 
 ```spl
 | rest /services/data/indexes
@@ -857,7 +857,7 @@ index=curso earliest=0 latest=now
 | table title disabled totalEventCount currentDBSizeMB
 ```
 
-## 16.4 Principio de mínimo privilegio
+#### 16.4 Principio de mínimo privilegio
 
 No concedas `admin` para resolver:
 
@@ -871,27 +871,27 @@ Concede únicamente las capacidades y accesos necesarios.
 
 ---
 
-# 17. Diagnóstico de almacenamiento
+## 17. Diagnóstico de almacenamiento
 
-## 17.1 Espacio libre
+#### 17.1 Espacio libre
 
 ```bash
 df -h
 ```
 
-## 17.2 Inodos
+#### 17.2 Inodos
 
 ```bash
 df -ih
 ```
 
-## 17.3 Tamaño de Splunk
+#### 17.3 Tamaño de Splunk
 
 ```bash
 sudo du -sh /opt/splunk
 ```
 
-## 17.4 Tamaño de índices
+#### 17.4 Tamaño de índices
 
 ```bash
 sudo du -h --max-depth=1 \
@@ -899,7 +899,7 @@ sudo du -h --max-depth=1 \
   | sort -h
 ```
 
-## 17.5 Tamaño de logs
+#### 17.5 Tamaño de logs
 
 ```bash
 sudo du -h --max-depth=1 \
@@ -917,9 +917,9 @@ Gestiona retención, archivado y capacidad mediante procedimientos controlados.
 
 ---
 
-# 18. Diagnóstico de duplicados
+## 18. Diagnóstico de duplicados
 
-## 18.1 Revisar volumen por fuente
+#### 18.1 Revisar volumen por fuente
 
 ```spl
 index=curso earliest=0 latest=now
@@ -927,7 +927,7 @@ index=curso earliest=0 latest=now
 | sort - count
 ```
 
-## 18.2 Buscar `_raw` repetido
+#### 18.2 Buscar `_raw` repetido
 
 ```spl
 index=curso earliest=0 latest=now
@@ -937,7 +937,7 @@ index=curso earliest=0 latest=now
 | head 50
 ```
 
-## 18.3 Revisar entradas repetidas
+#### 18.3 Revisar entradas repetidas
 
 ```spl
 | rest /services/data/inputs/monitor
@@ -950,9 +950,9 @@ peticiones reales pueden tener exactamente el mismo contenido.
 
 ---
 
-# 19. Procedimientos de diagnóstico por síntoma
+## 19. Procedimientos de diagnóstico por síntoma
 
-## 19.1 Splunk no inicia
+#### 19.1 Splunk no inicia
 
 Ejecuta:
 
@@ -977,7 +977,7 @@ splunk-no-inicia.md
 
 ---
 
-## 19.2 Splunk Web no abre
+#### 19.2 Splunk Web no abre
 
 Ejecuta:
 
@@ -1002,7 +1002,7 @@ acceso-web.md
 
 ---
 
-## 19.3 No hay eventos
+#### 19.3 No hay eventos
 
 Ejecuta:
 
@@ -1026,7 +1026,7 @@ datos-no-aparecen.md
 
 ---
 
-## 19.4 Campos incorrectos
+#### 19.4 Campos incorrectos
 
 Ejecuta:
 
@@ -1051,7 +1051,7 @@ campos-incorrectos.md
 
 ---
 
-## 19.5 Dashboard sin datos
+#### 19.5 Dashboard sin datos
 
 1. Ejecuta la SPL fuera del dashboard.
 2. Utiliza un rango temporal amplio.
@@ -1062,7 +1062,7 @@ campos-incorrectos.md
 
 ---
 
-## 19.6 Alerta sin activación
+#### 19.6 Alerta sin activación
 
 1. Ejecuta la SPL manualmente.
 2. Revisa `_time`.
@@ -1074,7 +1074,7 @@ campos-incorrectos.md
 
 ---
 
-# 20. Qué no hacer
+## 20. Qué no hacer
 
 - No reinstales Splunk ante el primer error.
 - No borres `/opt/splunk`.
@@ -1097,7 +1097,7 @@ campos-incorrectos.md
 
 ---
 
-# 21. Criterio de resolución
+## 21. Criterio de resolución
 
 Un problema está resuelto cuando:
 
@@ -1119,63 +1119,63 @@ debe utilizarlo un analista u operador.
 
 ---
 
-# 22. Plantilla de informe de troubleshooting
+## 22. Plantilla de informe de troubleshooting
 
 ```markdown
-# Informe de troubleshooting
+## Informe de troubleshooting
 
-## Fecha y hora
-
-Completar.
-
-## Zona horaria
+#### Fecha y hora
 
 Completar.
 
-## Instancia
+#### Zona horaria
 
 Completar.
 
-## Versión de Splunk
+#### Instancia
 
 Completar.
 
-## Sistema operativo
+#### Versión de Splunk
 
 Completar.
 
-## Usuario afectado
+#### Sistema operativo
 
 Completar.
 
-## Rol
+#### Usuario afectado
 
 Completar.
 
-## Aplicación
+#### Rol
 
 Completar.
 
-## Síntoma
+#### Aplicación
+
+Completar.
+
+#### Síntoma
 
 Describir qué ocurre.
 
-## Comportamiento esperado
+#### Comportamiento esperado
 
 Describir qué debería ocurrir.
 
-## Primera hipótesis
+#### Primera hipótesis
 
 Completar.
 
-## Servicio
+#### Servicio
 
 ```text
 Estado:
 Usuario del proceso:
 ```
 
-## Red y puertos
+#### Red y puertos
 
 ```text
 Splunk Web:
@@ -1184,92 +1184,92 @@ Dirección de escucha:
 Firewall:
 ```
 
-## Índice
+#### Índice
 
 ```text
 curso
 ```
 
-## Source
+#### Source
 
 Completar.
 
-## Sourcetype
+#### Sourcetype
 
 Completar.
 
-## Rango temporal
+#### Rango temporal
 
 Completar.
 
-## Consulta mínima
+#### Consulta mínima
 
 ```spl
 Completar.
 ```
 
-## Resultado de la consulta mínima
+#### Resultado de la consulta mínima
 
 Completar.
 
-## `_time`
+#### `_time`
 
 Completar.
 
-## `_indextime`
+#### `_indextime`
 
 Completar.
 
-## Campos revisados
+#### Campos revisados
 
 Completar.
 
-## Logs consultados
+#### Logs consultados
 
 Completar.
 
-## Job Inspector
+#### Job Inspector
 
 Completar si aplica.
 
-## Monitoring Console
+#### Monitoring Console
 
 Completar si aplica.
 
-## Causa raíz
+#### Causa raíz
 
 Describir una causa concreta.
 
-## Corrección aplicada
+#### Corrección aplicada
 
 Describir el cambio.
 
-## Validación
+#### Validación
 
 Indicar la consulta y el resultado.
 
-## Validación con el rol final
+#### Validación con el rol final
 
 Completar.
 
-## Riesgos o limitaciones
+#### Riesgos o limitaciones
 
 Completar.
 
-## Rollback
+#### Rollback
 
 Describir cómo revertir el cambio.
 
-## Responsable
+#### Responsable
 
 Completar.
 ```
 
 ---
 
-# 23. Checklist de diagnóstico
+## 23. Checklist de diagnóstico
 
-## Servicio
+#### Servicio
 
 - [ ] Splunk está instalado.
 - [ ] Se ha comprobado la versión.
@@ -1277,7 +1277,7 @@ Completar.
 - [ ] Se conoce el usuario del proceso.
 - [ ] Se han revisado los logs de arranque.
 
-## Red
+#### Red
 
 - [ ] El puerto esperado está escuchando.
 - [ ] Se ha probado el acceso local.
@@ -1287,7 +1287,7 @@ Completar.
 - [ ] Se ha revisado el proxy.
 - [ ] Se ha verificado HTTP frente a HTTPS.
 
-## Ingesta
+#### Ingesta
 
 - [ ] La entrada existe.
 - [ ] Está habilitada.
@@ -1298,7 +1298,7 @@ Completar.
 - [ ] El `source` es correcto.
 - [ ] El `sourcetype` es correcto.
 
-## Índice
+#### Índice
 
 - [ ] Existe `curso`.
 - [ ] Está habilitado.
@@ -1307,7 +1307,7 @@ Completar.
 - [ ] El usuario tiene acceso.
 - [ ] Hay espacio disponible.
 
-## Tiempo
+#### Tiempo
 
 - [ ] Se ha probado `earliest=0 latest=now`.
 - [ ] Se conoce el primer evento.
@@ -1316,7 +1316,7 @@ Completar.
 - [ ] `_indextime` se ha revisado.
 - [ ] La zona horaria es coherente.
 
-## Campos y SPL
+#### Campos y SPL
 
 - [ ] Se ha revisado `_raw`.
 - [ ] Se han revisado los campos extraídos.
@@ -1326,7 +1326,7 @@ Completar.
 - [ ] Se han evitado comandos complejos al principio.
 - [ ] Se han revisado valores nulos y vacíos.
 
-## Dashboards y alertas
+#### Dashboards y alertas
 
 - [ ] La búsqueda funciona fuera del objeto.
 - [ ] Los tokens tienen valores correctos.
@@ -1336,7 +1336,7 @@ Completar.
 - [ ] La condición funciona manualmente.
 - [ ] Se ha revisado el throttling.
 
-## Seguridad
+#### Seguridad
 
 - [ ] No se han compartido secretos.
 - [ ] No se han concedido permisos excesivos.
@@ -1345,7 +1345,7 @@ Completar.
 - [ ] No se ha desactivado TLS permanentemente.
 - [ ] No se han eliminado datos como primera medida.
 
-## Cierre
+#### Cierre
 
 - [ ] Se ha identificado la causa.
 - [ ] Se ha aplicado una corrección.
@@ -1356,7 +1356,7 @@ Completar.
 - [ ] El informe está completo.
 ```
 
-# Referencias incluidas
+## Referencias incluidas
 
 - [Troubleshooting de Splunk](https://docs.splunk.com/Documentation/Splunk/latest/Troubleshooting/Abouttroubleshooting)
 - [Troubleshooting de datos](https://docs.splunk.com/Documentation/Splunk/latest/Troubleshooting/Troubleshootingyourdata)

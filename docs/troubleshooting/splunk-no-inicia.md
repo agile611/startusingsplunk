@@ -36,7 +36,7 @@ No ejecutes varias correcciones a la vez. Conserva:
 
 ---
 
-# 1. Objetivos
+## 1. Objetivos
 
 Al finalizar esta práctica, el asistente podrá:
 
@@ -57,7 +57,7 @@ Al finalizar esta práctica, el asistente podrá:
 
 ---
 
-# 2. Entorno de referencia
+## 2. Entorno de referencia
 
 El laboratorio utiliza como referencia:
 
@@ -74,9 +74,9 @@ los valores reales antes de aplicar una corrección.
 
 ---
 
-# 3. Diferenciar los componentes
+## 3. Diferenciar los componentes
 
-## `splunkd`
+#### `splunkd`
 
 Es el proceso principal de Splunk Enterprise.
 
@@ -91,7 +91,7 @@ Gestiona, entre otras funciones:
 - comunicación interna;
 - parte de los servicios web.
 
-## Splunk Web
+#### Splunk Web
 
 Es la interfaz web accesible normalmente mediante:
 
@@ -110,7 +110,7 @@ Por eso no basta con comprobar que existe un proceso llamado `splunkd`.
 
 ---
 
-# 4. Regla de diagnóstico
+## 4. Regla de diagnóstico
 
 Sigue siempre este orden:
 
@@ -139,9 +139,9 @@ No empieces por:
 
 ---
 
-# 5. Paso 1: comprobar el comando y la instalación
+## 5. Paso 1: comprobar el comando y la instalación
 
-## 5.1 Comprobar la ruta
+#### 5.1 Comprobar la ruta
 
 ```bash
 ls -ld /opt/splunk
@@ -149,13 +149,13 @@ ls -ld /opt/splunk
 
 Si la instalación está en otra ruta, utiliza el valor real.
 
-## 5.2 Comprobar el ejecutable
+#### 5.2 Comprobar el ejecutable
 
 ```bash
 ls -l /opt/splunk/bin/splunk
 ```
 
-## 5.3 Comprobar la variable `SPLUNK_HOME`
+#### 5.3 Comprobar la variable `SPLUNK_HOME`
 
 ```bash
 echo "$SPLUNK_HOME"
@@ -167,7 +167,7 @@ Si está definida:
 ls -ld "$SPLUNK_HOME"
 ```
 
-## 5.4 Comprobar la versión
+#### 5.4 Comprobar la versión
 
 ```bash
 /opt/splunk/bin/splunk version
@@ -204,18 +204,18 @@ sudo find /opt /usr/local -type f -name splunk 2>/dev/null
 
 ---
 
-# 6. Paso 2: comprobar el usuario de ejecución
+## 6. Paso 2: comprobar el usuario de ejecución
 
 No mezcles arranques como `root` y `splunk` durante la misma sesión de
 diagnóstico.
 
-## 6.1 Identificar el usuario del proceso
+#### 6.1 Identificar el usuario del proceso
 
 ```bash
 ps -eo user,pid,ppid,cmd | grep -i '[s]plunk'
 ```
 
-## 6.2 Revisar el propietario de la instalación
+#### 6.2 Revisar el propietario de la instalación
 
 ```bash
 stat -c '%U:%G %a %n' \
@@ -224,13 +224,13 @@ stat -c '%U:%G %a %n' \
   /opt/splunk/var
 ```
 
-## 6.3 Comprobar si existe el usuario `splunk`
+#### 6.3 Comprobar si existe el usuario `splunk`
 
 ```bash
 getent passwd splunk
 ```
 
-## 6.4 Ejecutar como `splunk`
+#### 6.4 Ejecutar como `splunk`
 
 Si la instalación pertenece a `splunk`:
 
@@ -244,7 +244,7 @@ También:
 sudo -u splunk /opt/splunk/bin/splunk start
 ```
 
-## 6.5 Ejecutar como `root`
+#### 6.5 Ejecutar como `root`
 
 Si la instalación está configurada para ejecutarse como `root`, utiliza
 explícitamente:
@@ -263,7 +263,7 @@ La ejecución como `root` no debe utilizarse como solución automática. Puede o
 problemas de propiedad y crear archivos que después el usuario `splunk` no pueda
 modificar.
 
-## 6.6 Advertencia sobre `root`
+#### 6.6 Advertencia sobre `root`
 
 El mensaje:
 
@@ -278,9 +278,9 @@ migrar a un usuario de servicio dedicado cuando la instalación lo permita.
 
 ---
 
-# 7. Paso 3: comprobar systemd
+## 7. Paso 3: comprobar systemd
 
-## 7.1 Estado del servicio
+#### 7.1 Estado del servicio
 
 ```bash
 sudo systemctl status Splunkd --no-pager
@@ -292,7 +292,7 @@ Resultado esperado:
 Active: active (running)
 ```
 
-## 7.2 Consultar si la unidad existe
+#### 7.2 Consultar si la unidad existe
 
 ```bash
 systemctl list-unit-files | grep -i splunk
@@ -302,7 +302,7 @@ systemctl list-unit-files | grep -i splunk
 systemctl list-units --type=service | grep -i splunk
 ```
 
-## 7.3 Consultar el estado de forma breve
+#### 7.3 Consultar el estado de forma breve
 
 ```bash
 sudo systemctl is-active Splunkd
@@ -322,7 +322,7 @@ Interpretación:
 | `enabled` | Está configurado para iniciar con systemd |
 | `disabled` | No está configurado para arranque automático |
 
-## 7.4 Consultar logs de systemd
+#### 7.4 Consultar logs de systemd
 
 ```bash
 sudo journalctl -u Splunkd --no-pager
@@ -353,7 +353,7 @@ sudo journalctl -u Splunkd \
 
 ---
 
-# 8. Paso 4: detener posibles procesos residuales
+## 8. Paso 4: detener posibles procesos residuales
 
 Antes de iniciar, comprueba si ya existen procesos de Splunk:
 
@@ -401,16 +401,16 @@ No elimines manualmente archivos PID o locks sin comprender su origen.
 
 ---
 
-# 9. Paso 5: revisar los logs de Splunk
+## 9. Paso 5: revisar los logs de Splunk
 
-## 9.1 Log principal
+#### 9.1 Log principal
 
 ```bash
 sudo tail -n 100 \
   /opt/splunk/var/log/splunk/splunkd.log
 ```
 
-## 9.2 Buscar errores relevantes
+#### 9.2 Buscar errores relevantes
 
 ```bash
 sudo grep -iE \
@@ -419,14 +419,14 @@ sudo grep -iE \
   | tail -n 100
 ```
 
-## 9.3 Log de Splunk Web
+#### 9.3 Log de Splunk Web
 
 ```bash
 sudo tail -n 100 \
   /opt/splunk/var/log/splunk/web_service.log
 ```
 
-## 9.4 Buscar errores de Web y TLS
+#### 9.4 Buscar errores de Web y TLS
 
 ```bash
 sudo grep -iE \
@@ -435,7 +435,7 @@ sudo grep -iE \
   | tail -n 100
 ```
 
-## 9.5 Revisar el log completo con contexto
+#### 9.5 Revisar el log completo con contexto
 
 No te quedes únicamente con una línea aislada:
 
@@ -455,7 +455,7 @@ sudo sed -n '1200,1250p' \
 
 Sustituye las líneas por el rango real.
 
-## 9.6 Seguir el log durante un arranque
+#### 9.6 Seguir el log durante un arranque
 
 Terminal 1:
 
@@ -474,7 +474,7 @@ Guarda el primer error relevante, no solo el último mensaje mostrado.
 
 ---
 
-# 10. Paso 6: comprobar espacio, inodos y memoria
+## 10. Paso 6: comprobar espacio, inodos y memoria
 
 Un disco lleno o sin inodos puede impedir que Splunk escriba:
 
@@ -485,7 +485,7 @@ Un disco lleno o sin inodos puede impedir que Splunk escriba:
 - buckets;
 - metadatos.
 
-## 10.1 Espacio disponible
+#### 10.1 Espacio disponible
 
 ```bash
 df -h /opt/splunk
@@ -497,7 +497,7 @@ Revisar todos los sistemas de archivos:
 df -h
 ```
 
-## 10.2 Inodos
+#### 10.2 Inodos
 
 ```bash
 df -i /opt/splunk
@@ -507,13 +507,13 @@ df -i /opt/splunk
 df -ih
 ```
 
-## 10.3 Memoria
+#### 10.3 Memoria
 
 ```bash
 free -h
 ```
 
-## 10.4 Procesos y consumo
+#### 10.4 Procesos y consumo
 
 ```bash
 ps aux --sort=-%mem | head -20
@@ -523,13 +523,13 @@ ps aux --sort=-%mem | head -20
 ps aux --sort=-%cpu | head -20
 ```
 
-## 10.5 Tamaño de la instalación
+#### 10.5 Tamaño de la instalación
 
 ```bash
 sudo du -sh /opt/splunk
 ```
 
-## 10.6 Directorios de mayor tamaño
+#### 10.6 Directorios de mayor tamaño
 
 ```bash
 sudo du -h --max-depth=1 /opt/splunk | sort -h
@@ -551,7 +551,7 @@ sudo du -h --max-depth=1 \
   | sort -h
 ```
 
-## 10.7 No borrar índices manualmente
+#### 10.7 No borrar índices manualmente
 
 No elimines directamente:
 
@@ -571,7 +571,7 @@ Antes de actuar:
 
 ---
 
-# 11. Paso 7: comprobar los puertos
+## 11. Paso 7: comprobar los puertos
 
 Los puertos habituales son:
 
@@ -581,14 +581,14 @@ Los puertos habituales son:
 - `8088`: HTTP Event Collector;
 - `8065` y `8191`: pueden aparecer en algunas arquitecturas o componentes.
 
-## 11.1 Revisar puertos
+#### 11.1 Revisar puertos
 
 ```bash
 sudo ss -ltnp | grep -E \
   ':8000|:8089|:8065|:8191|:9997|:8088'
 ```
 
-## 11.2 Revisar un puerto concreto
+#### 11.2 Revisar un puerto concreto
 
 ```bash
 sudo lsof -nP -iTCP:8000 -sTCP:LISTEN
@@ -598,7 +598,7 @@ sudo lsof -nP -iTCP:8000 -sTCP:LISTEN
 sudo lsof -nP -iTCP:8089 -sTCP:LISTEN
 ```
 
-## 11.3 Detectar conflictos
+#### 11.3 Detectar conflictos
 
 Si otro proceso utiliza `8000`:
 
@@ -616,7 +616,7 @@ Identifica:
 
 No detengas el proceso antes de saber qué servicio proporciona.
 
-## 11.4 Probar disponibilidad del puerto
+#### 11.4 Probar disponibilidad del puerto
 
 ```bash
 nc -vz 127.0.0.1 8000
@@ -633,12 +633,12 @@ existe un servicio TCP accesible.
 
 ---
 
-# 12. Paso 8: comprobar configuración efectiva
+## 12. Paso 8: comprobar configuración efectiva
 
 No edites archivos `.conf` durante el primer diagnóstico. Primero revisa la
 configuración efectiva y relaciónala con el primer error del log.
 
-## 12.1 Revisar configuración de Web
+#### 12.1 Revisar configuración de Web
 
 ```bash
 sudo /opt/splunk/bin/splunk btool web list --debug
@@ -652,25 +652,25 @@ sudo /opt/splunk/bin/splunk btool web list --debug \
   'httpport|enableSplunkWeb|mgmtHostPort|ssl|privKeyPath|serverCert'
 ```
 
-## 12.2 Revisar configuración del servidor
+#### 12.2 Revisar configuración del servidor
 
 ```bash
 sudo /opt/splunk/bin/splunk btool server list --debug
 ```
 
-## 12.3 Revisar índices
+#### 12.3 Revisar índices
 
 ```bash
 sudo /opt/splunk/bin/splunk btool indexes list --debug
 ```
 
-## 12.4 Revisar entradas
+#### 12.4 Revisar entradas
 
 ```bash
 sudo /opt/splunk/bin/splunk btool inputs list --debug
 ```
 
-## 12.5 Revisar propiedades y transformaciones
+#### 12.5 Revisar propiedades y transformaciones
 
 ```bash
 sudo /opt/splunk/bin/splunk btool props list --debug
@@ -680,7 +680,7 @@ sudo /opt/splunk/bin/splunk btool props list --debug
 sudo /opt/splunk/bin/splunk btool transforms list --debug
 ```
 
-## 12.6 Qué aporta `--debug`
+#### 12.6 Qué aporta `--debug`
 
 El modo `--debug` ayuda a saber:
 
@@ -692,7 +692,7 @@ El modo `--debug` ayuda a saber:
 
 ---
 
-# 13. Paso 9: revisar cambios recientes
+## 13. Paso 9: revisar cambios recientes
 
 Si Splunk dejó de iniciar después de un cambio, identifica:
 
@@ -703,7 +703,7 @@ Si Splunk dejó de iniciar después de un cambio, identifica:
 - valor nuevo;
 - componente afectado.
 
-## 13.1 Revisar archivos modificados recientemente
+#### 13.1 Revisar archivos modificados recientemente
 
 ```bash
 sudo find /opt/splunk/etc \
@@ -714,7 +714,7 @@ sudo find /opt/splunk/etc \
   | sort -r
 ```
 
-## 13.2 Revisar certificados modificados
+#### 13.2 Revisar certificados modificados
 
 ```bash
 sudo find /opt/splunk/etc \
@@ -725,7 +725,7 @@ sudo find /opt/splunk/etc \
   | sort -r
 ```
 
-## 13.3 Revisar permisos de certificados
+#### 13.3 Revisar permisos de certificados
 
 ```bash
 sudo stat -c '%U:%G %a %n' \
@@ -746,9 +746,9 @@ No compartas:
 
 ---
 
-# 14. Paso 10: revisar propiedad y permisos
+## 14. Paso 10: revisar propiedad y permisos
 
-## 14.1 Comprobar la instalación
+#### 14.1 Comprobar la instalación
 
 ```bash
 stat -c '%U:%G %a %n' \
@@ -759,13 +759,13 @@ stat -c '%U:%G %a %n' \
   /opt/splunk/var/log/splunk
 ```
 
-## 14.2 Comprobar la ruta completa
+#### 14.2 Comprobar la ruta completa
 
 ```bash
 namei -l /opt/splunk/bin/splunk
 ```
 
-## 14.3 Detectar archivos propiedad de `root`
+#### 14.3 Detectar archivos propiedad de `root`
 
 ```bash
 sudo find /opt/splunk \
@@ -783,7 +783,7 @@ incorrectos. Debes valorar:
 - si la instalación se ejecutó anteriormente como `root`;
 - si el usuario de servicio puede leerlo y modificarlo.
 
-## 14.4 Comprobar escritura como usuario de servicio
+#### 14.4 Comprobar escritura como usuario de servicio
 
 ```bash
 sudo -u splunk test -r /opt/splunk \
@@ -799,7 +799,7 @@ sudo -u splunk test -w /opt/splunk/var \
   || echo "No puede escribir en var"
 ```
 
-## 14.5 Corregir una instalación que se ejecutó como `root`
+#### 14.5 Corregir una instalación que se ejecutó como `root`
 
 Si se ha confirmado que toda la instalación debe pertenecer a `splunk`:
 
@@ -844,24 +844,24 @@ sudo -u splunk /opt/splunk/bin/splunk status
 
 ---
 
-# 15. Paso 11: revisar certificados y TLS
+## 15. Paso 11: revisar certificados y TLS
 
 Si `splunkd` inicia, pero Splunk Web no responde, revisa `web_service.log` y la
 configuración TLS.
 
-## 15.1 Probar HTTP
+#### 15.1 Probar HTTP
 
 ```bash
 curl -vI http://127.0.0.1:8000
 ```
 
-## 15.2 Probar HTTPS
+#### 15.2 Probar HTTPS
 
 ```bash
 curl -vkI https://127.0.0.1:8000
 ```
 
-## 15.3 Inspeccionar el certificado
+#### 15.3 Inspeccionar el certificado
 
 ```bash
 openssl s_client \
@@ -880,7 +880,7 @@ openssl s_client \
   | openssl x509 -noout -subject -issuer -dates
 ```
 
-## 15.4 Problemas habituales
+#### 15.4 Problemas habituales
 
 - certificado caducado;
 - nombre no incluido en el certificado;
@@ -894,12 +894,12 @@ No desactives TLS permanentemente para ocultar un problema de certificados.
 
 ---
 
-# 16. Paso 12: revisar el arranque automático
+## 16. Paso 12: revisar el arranque automático
 
 Si el arranque manual funciona, pero Splunk no se inicia después de reiniciar
 Ubuntu, revisa systemd y boot-start.
 
-## 16.1 Comprobar si está habilitado
+#### 16.1 Comprobar si está habilitado
 
 ```bash
 sudo systemctl is-enabled Splunkd
@@ -909,19 +909,19 @@ sudo systemctl is-enabled Splunkd
 sudo systemctl status Splunkd --no-pager
 ```
 
-## 16.2 Revisar la unidad
+#### 16.2 Revisar la unidad
 
 ```bash
 systemctl cat Splunkd
 ```
 
-## 16.3 Revisar dependencias y errores de arranque
+#### 16.3 Revisar dependencias y errores de arranque
 
 ```bash
 sudo journalctl -b -u Splunkd --no-pager
 ```
 
-## 16.4 Configurar boot-start
+#### 16.4 Configurar boot-start
 
 La forma exacta depende de la versión y de la instalación. En un entorno que
 utilice el usuario `splunk`, el comando habitual es:
@@ -949,33 +949,33 @@ Podrían iniciar varias instancias o producir estados inconsistentes.
 
 ---
 
-# 17. Paso 13: iniciar y validar de forma controlada
+## 17. Paso 13: iniciar y validar de forma controlada
 
-## 17.1 Iniciar mediante systemd
+#### 17.1 Iniciar mediante systemd
 
 ```bash
 sudo systemctl start Splunkd
 ```
 
-## 17.2 Comprobar estado
+#### 17.2 Comprobar estado
 
 ```bash
 sudo systemctl status Splunkd --no-pager
 ```
 
-## 17.3 Comprobar procesos
+#### 17.3 Comprobar procesos
 
 ```bash
 pgrep -af splunk
 ```
 
-## 17.4 Comprobar puertos
+#### 17.4 Comprobar puertos
 
 ```bash
 sudo ss -ltnp | grep -E ':8000|:8089'
 ```
 
-## 17.5 Probar Splunk Web
+#### 17.5 Probar Splunk Web
 
 HTTP:
 
@@ -989,7 +989,7 @@ HTTPS:
 curl -kI https://127.0.0.1:8000
 ```
 
-## 17.6 Probar la API local
+#### 17.6 Probar la API local
 
 ```bash
 curl -kI https://127.0.0.1:8089
@@ -998,7 +998,7 @@ curl -kI https://127.0.0.1:8089
 Una respuesta `401` puede indicar que la API está disponible, pero requiere
 autenticación. Eso es distinto de que el puerto esté cerrado.
 
-## 17.7 Validar una búsqueda mínima
+#### 17.7 Validar una búsqueda mínima
 
 Después de iniciar sesión en Splunk Web:
 
@@ -1023,7 +1023,7 @@ datos-no-aparecen.md
 
 ---
 
-# 18. Tabla de síntomas
+## 18. Tabla de síntomas
 
 | Síntoma | Causa probable | Primera acción |
 |---|---|---|
@@ -1043,18 +1043,18 @@ datos-no-aparecen.md
 
 ---
 
-# 19. Comprobación de límites del sistema
+## 19. Comprobación de límites del sistema
 
 Algunos errores de arranque o rendimiento pueden estar relacionados con límites del
 sistema.
 
-## 19.1 Límites del shell actual
+#### 19.1 Límites del shell actual
 
 ```bash
 ulimit -a
 ```
 
-## 19.2 Descriptores abiertos del proceso
+#### 19.2 Descriptores abiertos del proceso
 
 Primero identifica el PID:
 
@@ -1068,7 +1068,7 @@ Después:
 sudo ls /proc/<PID>/fd | wc -l
 ```
 
-## 19.3 Límites del servicio systemd
+#### 19.3 Límites del servicio systemd
 
 ```bash
 sudo systemctl show Splunkd \
@@ -1092,7 +1092,7 @@ no cambies límites de forma improvisada. Documenta:
 
 ---
 
-# 20. Comprobar el reloj del sistema
+## 20. Comprobar el reloj del sistema
 
 Un reloj incorrecto puede afectar a:
 
@@ -1125,7 +1125,7 @@ Revisa:
 
 ---
 
-# 21. No confundir mensajes de instalación con comandos
+## 21. No confundir mensajes de instalación con comandos
 
 Durante un arranque o instalación pueden aparecer mensajes como:
 
@@ -1149,7 +1149,7 @@ No ejecutes fragmentos de mensajes como si fueran comandos.
 
 ---
 
-# 22. Avisos relacionados con Python
+## 22. Avisos relacionados con Python
 
 Durante algunas operaciones pueden aparecer referencias a rutas internas como:
 
@@ -1181,7 +1181,7 @@ interna de Splunk sin una instrucción específica y compatible con la versión.
 
 ---
 
-# 23. Evidencias para pedir ayuda
+## 23. Evidencias para pedir ayuda
 
 Recoge la información siguiente sin incluir secretos:
 
@@ -1220,7 +1220,7 @@ Antes de compartir la salida, elimina:
 
 ---
 
-# 24. Cuándo no reinstalar
+## 24. Cuándo no reinstalar
 
 No reinstales mientras no hayas descartado:
 
@@ -1252,9 +1252,9 @@ Una reinstalación puede:
 
 ---
 
-# 25. Ejercicio práctico 1: diagnóstico básico
+## 25. Ejercicio práctico 1: diagnóstico básico
 
-## Objetivo
+#### Objetivo
 
 Identificar si el problema está en el comando, servicio o puerto.
 
@@ -1283,9 +1283,9 @@ Documenta:
 
 ---
 
-# 26. Ejercicio práctico 2: usuario y permisos
+## 26. Ejercicio práctico 2: usuario y permisos
 
-## Objetivo
+#### Objetivo
 
 Comprobar si Splunk funciona con el usuario previsto.
 
@@ -1322,9 +1322,9 @@ Documenta:
 
 ---
 
-# 27. Ejercicio práctico 3: conflicto de puertos
+## 27. Ejercicio práctico 3: conflicto de puertos
 
-## Objetivo
+#### Objetivo
 
 Identificar si otro servicio impide el arranque.
 
@@ -1353,9 +1353,9 @@ No detengas el proceso sin confirmar su función.
 
 ---
 
-# 28. Ejercicio práctico 4: recursos
+## 28. Ejercicio práctico 4: recursos
 
-## Objetivo
+#### Objetivo
 
 Determinar si el sistema tiene capacidad suficiente.
 
@@ -1388,7 +1388,7 @@ Documenta:
 
 ---
 
-# 29. Ejercicio práctico 5: validación funcional
+## 29. Ejercicio práctico 5: validación funcional
 
 Cuando Splunk aparezca activo:
 
@@ -1421,66 +1421,66 @@ Interpreta:
 
 ---
 
-# 30. Plantilla de informe
+## 30. Plantilla de informe
 
 ```markdown
-# Informe: Splunk no inicia
+## Informe: Splunk no inicia
 
-## Fecha y hora
-
-Completar.
-
-## Zona horaria
+#### Fecha y hora
 
 Completar.
 
-## Servidor
+#### Zona horaria
 
 Completar.
 
-## Versión de Splunk
+#### Servidor
 
 Completar.
 
-## Ruta de instalación
+#### Versión de Splunk
 
 Completar.
 
-## Usuario de ejecución esperado
+#### Ruta de instalación
 
 Completar.
 
-## Usuario de ejecución observado
+#### Usuario de ejecución esperado
 
 Completar.
 
-## Estado de systemd
+#### Usuario de ejecución observado
+
+Completar.
+
+#### Estado de systemd
 
 ```text
 Completar.
 ```
 
-## Comando ejecutado
+#### Comando ejecutado
 
 ```bash
 Completar.
 ```
 
-## Primer error observado
+#### Primer error observado
 
 ```text
 Completar.
 ```
 
-## `splunkd.log`
+#### `splunkd.log`
 
 Resumen del mensaje relevante.
 
-## `web_service.log`
+#### `web_service.log`
 
 Resumen del mensaje relevante.
 
-## Recursos
+#### Recursos
 
 ```text
 Espacio:
@@ -1489,7 +1489,7 @@ Memoria:
 CPU:
 ```
 
-## Puertos
+#### Puertos
 
 ```text
 8000:
@@ -1498,25 +1498,25 @@ CPU:
 8088:
 ```
 
-## Configuración revisada
+#### Configuración revisada
 
 ```text
 Archivos o comandos utilizados:
 ```
 
-## Propiedad y permisos
+#### Propiedad y permisos
 
 Completar.
 
-## Causa raíz
+#### Causa raíz
 
 Describir una causa concreta.
 
-## Corrección aplicada
+#### Corrección aplicada
 
 Describir un único cambio cada vez.
 
-## Validación
+#### Validación
 
 ```bash
 Completar.
@@ -1526,26 +1526,26 @@ Completar.
 Completar.
 ```
 
-## Resultado posterior
+#### Resultado posterior
 
 Completar.
 
-## Rollback
+#### Rollback
 
 Describir cómo revertir la corrección.
 
-## Limitaciones
+#### Limitaciones
 
 Completar.
 
-## Responsable
+#### Responsable
 
 Completar.
 ```
 
 ---
 
-# 31. Criterios de resolución
+## 31. Criterios de resolución
 
 El problema se considera resuelto cuando:
 
@@ -1568,7 +1568,7 @@ si la configuración objetivo utiliza el usuario `splunk`.
 
 ---
 
-# 32. Buenas prácticas
+## 32. Buenas prácticas
 
 - Ejecuta cada comando con el usuario correcto.
 - No mezcles arranques como `root` y `splunk`.
@@ -1589,7 +1589,7 @@ si la configuración objetivo utiliza el usuario `splunk`.
 - Mantén un rollback claro.
 ```
 
-# Referencias oficiales
+## Referencias oficiales
 
 - [Iniciar y detener Splunk](https://docs.splunk.com/Documentation/Splunk/latest/Admin/StartandstopSplunk)
 - [Configurar el arranque automático](https://docs.splunk.com/Documentation/Splunk/latest/Admin/ConfigureSplunkforautostart)

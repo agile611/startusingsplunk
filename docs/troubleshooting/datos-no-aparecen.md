@@ -40,7 +40,7 @@ diagnóstico. Antes de repetir una ingesta, demuestra dónde está el problema.
 
 ---
 
-# 1. Objetivos de la práctica
+## 1. Objetivos de la práctica
 
 Al finalizar esta guía, el asistente podrá:
 
@@ -65,7 +65,7 @@ Al finalizar esta guía, el asistente podrá:
 
 ---
 
-# 2. Entorno de referencia
+## 2. Entorno de referencia
 
 El laboratorio utiliza:
 
@@ -94,7 +94,7 @@ timestamp,host,method,status,uri,clientip,response_time,user_agent,bytes,referer
 
 ---
 
-# 3. Regla principal: empieza con la búsqueda mínima
+## 3. Regla principal: empieza con la búsqueda mínima
 
 No comiences con:
 
@@ -133,9 +133,9 @@ Primero demuestra que existen eventos visibles.
 
 ---
 
-# 4. Paso 1: confirmar que Splunk está activo
+## 4. Paso 1: confirmar que Splunk está activo
 
-## 4.1 Revisar el servicio con systemd
+#### 4.1 Revisar el servicio con systemd
 
 ```bash
 sudo systemctl status Splunkd
@@ -147,7 +147,7 @@ Resultado esperado:
 Active: active (running)
 ```
 
-## 4.2 Revisar el estado mediante el binario
+#### 4.2 Revisar el estado mediante el binario
 
 Si Splunk se ejecuta como usuario `splunk`:
 
@@ -163,7 +163,7 @@ sudo /opt/splunk/bin/splunk status --run-as-root
 
 El comando debe ser coherente con el usuario propietario de la instalación.
 
-## 4.3 Identificar el usuario del proceso
+#### 4.3 Identificar el usuario del proceso
 
 ```bash
 ps -eo user,pid,ppid,cmd | grep -i '[s]plunk'
@@ -175,7 +175,7 @@ Comprobar el propietario de la instalación:
 stat -c '%U:%G %n' /opt/splunk
 ```
 
-## 4.4 Si Splunk no está activo
+#### 4.4 Si Splunk no está activo
 
 Revisa:
 
@@ -202,16 +202,16 @@ No confundas disponibilidad de Splunk Web con disponibilidad de los datos.
 
 ---
 
-# 5. Paso 2: validar el índice
+## 5. Paso 2: validar el índice
 
-## 5.1 Buscar en el índice del laboratorio
+#### 5.1 Buscar en el índice del laboratorio
 
 ```spl
 index=curso earliest=0 latest=now
 | stats count as total_eventos
 ```
 
-## 5.2 Consultar la existencia del índice
+#### 5.2 Consultar la existencia del índice
 
 ```spl
 | rest /services/data/indexes
@@ -219,7 +219,7 @@ index=curso earliest=0 latest=now
 | table title disabled totalEventCount currentDBSizeMB
 ```
 
-## 5.3 Interpretar el resultado
+#### 5.3 Interpretar el resultado
 
 | Resultado | Significado probable |
 |---|---|
@@ -229,7 +229,7 @@ index=curso earliest=0 latest=now
 | Hay eventos, pero la búsqueda no devuelve datos | Rango, permisos o filtros |
 | El índice existe con otro nombre | La entrada puede apuntar a otro índice |
 
-## 5.4 Revisar índices visibles para el usuario
+#### 5.4 Revisar índices visibles para el usuario
 
 ```spl
 | rest /services/data/indexes
@@ -239,7 +239,7 @@ index=curso earliest=0 latest=now
 
 La respuesta depende de los permisos del usuario.
 
-## 5.5 No utilizar `index=*` como primera prueba
+#### 5.5 No utilizar `index=*` como primera prueba
 
 Evita empezar con:
 
@@ -261,12 +261,12 @@ y el intervalo esté limitado.
 
 ---
 
-# 6. Paso 3: revisar el rango temporal
+## 6. Paso 3: revisar el rango temporal
 
 Una búsqueda puede estar funcionando correctamente y devolver cero resultados
 porque los eventos están fuera del intervalo seleccionado.
 
-## 6.1 Buscar en todo el tiempo
+#### 6.1 Buscar en todo el tiempo
 
 Para una primera comprobación controlada:
 
@@ -284,7 +284,7 @@ Todo el tiempo
 No mantengas un rango ilimitado como consulta operativa habitual. Úsalo para
 diagnóstico y después reduce el intervalo.
 
-## 6.2 Consultar el primer y último evento
+#### 6.2 Consultar el primer y último evento
 
 ```spl
 index=curso earliest=0 latest=now
@@ -312,7 +312,7 @@ index=curso earliest=0 latest=now
 )
 ```
 
-## 6.3 Dataset histórico
+#### 6.3 Dataset histórico
 
 Si el archivo contiene eventos del 1 de enero de 2026, una búsqueda como esta:
 
@@ -333,9 +333,9 @@ latest="01/01/2026:00:10:00"
 
 Adapta la zona horaria al entorno real.
 
-## 6.4 Diferencia entre rango relativo y absoluto
+#### 6.4 Diferencia entre rango relativo y absoluto
 
-### Rango relativo
+###### Rango relativo
 
 ```spl
 earliest=-15m latest=now
@@ -343,7 +343,7 @@ earliest=-15m latest=now
 
 Busca eventos relativos al momento actual.
 
-### Rango absoluto
+###### Rango absoluto
 
 ```spl
 earliest="01/01/2026:00:00:00"
@@ -352,7 +352,7 @@ latest="01/01/2026:01:00:00"
 
 Busca un periodo concreto del calendario.
 
-## 6.5 El selector temporal no corrige `_time`
+#### 6.5 El selector temporal no corrige `_time`
 
 Cambiar a `Todo el tiempo` puede encontrar los eventos, pero no corrige:
 
@@ -364,11 +364,11 @@ Cambiar a `Todo el tiempo` puede encontrar los eventos, pero no corrige:
 
 ---
 
-# 7. Paso 4: comparar `_time` e `_indextime`
+## 7. Paso 4: comparar `_time` e `_indextime`
 
 Un archivo puede contener eventos antiguos e indexarse en el momento actual.
 
-## 7.1 Revisar ambos tiempos
+#### 7.1 Revisar ambos tiempos
 
 ```spl
 index=curso earliest=0 latest=now
@@ -382,7 +382,7 @@ index=curso earliest=0 latest=now
 | sort 0 _time
 ```
 
-## 7.2 Mostrar fechas legibles
+#### 7.2 Mostrar fechas legibles
 
 ```spl
 index=curso earliest=0 latest=now
@@ -406,13 +406,13 @@ index=curso earliest=0 latest=now
 | head 30
 ```
 
-## 7.3 Significado
+#### 7.3 Significado
 
 - `_time`: momento asignado al evento y utilizado por el rango temporal.
 - `_indextime`: momento en que Splunk indexó el evento.
 - `retraso_segundos`: diferencia entre ambos.
 
-## 7.4 Diagnóstico
+#### 7.4 Diagnóstico
 
 | Observación | Posible explicación |
 |---|---|
@@ -424,9 +424,9 @@ index=curso earliest=0 latest=now
 
 ---
 
-# 8. Paso 5: revisar `source`, `sourcetype` y `host`
+## 8. Paso 5: revisar `source`, `sourcetype` y `host`
 
-## 8.1 Revisar metadatos
+#### 8.1 Revisar metadatos
 
 ```spl
 index=curso earliest=0 latest=now
@@ -441,7 +441,7 @@ Comprueba que:
 - `sourcetype` es coherente con el formato;
 - `host` identifica correctamente el origen.
 
-## 8.2 Distribución por `source`
+#### 8.2 Distribución por `source`
 
 ```spl
 index=curso earliest=0 latest=now
@@ -449,7 +449,7 @@ index=curso earliest=0 latest=now
 | sort - count
 ```
 
-## 8.3 Distribución por `sourcetype`
+#### 8.3 Distribución por `sourcetype`
 
 ```spl
 index=curso earliest=0 latest=now
@@ -457,7 +457,7 @@ index=curso earliest=0 latest=now
 | sort - count
 ```
 
-## 8.4 Distribución por `host`
+#### 8.4 Distribución por `host`
 
 ```spl
 index=curso earliest=0 latest=now
@@ -465,13 +465,13 @@ index=curso earliest=0 latest=now
 | sort - count
 ```
 
-## 8.5 Diferencia entre metadatos
+#### 8.5 Diferencia entre metadatos
 
-### `index`
+###### `index`
 
 Lugar lógico donde se almacenan los eventos.
 
-### `source`
+###### `source`
 
 Origen del evento, por ejemplo:
 
@@ -479,7 +479,7 @@ Origen del evento, por ejemplo:
 /var/log/splunk-curso/eventos_web.csv
 ```
 
-### `sourcetype`
+###### `sourcetype`
 
 Tipo de datos y reglas de interpretación, por ejemplo:
 
@@ -487,7 +487,7 @@ Tipo de datos y reglas de interpretación, por ejemplo:
 web:csv
 ```
 
-### `host`
+###### `host`
 
 Sistema o entidad asociada al evento, por ejemplo:
 
@@ -499,7 +499,7 @@ No confundas una fuente incorrecta con un índice vacío.
 
 ---
 
-# 9. Paso 6: comprobar la entrada de datos
+## 9. Paso 6: comprobar la entrada de datos
 
 Desde Splunk Web revisa:
 
@@ -528,7 +528,7 @@ Confirma:
 - si el archivo fue cargado una sola vez;
 - si existe otra entrada para el mismo archivo.
 
-## 9.1 Revisar entradas monitorizadas mediante REST
+#### 9.1 Revisar entradas monitorizadas mediante REST
 
 ```spl
 | rest /services/data/inputs/monitor
@@ -541,21 +541,21 @@ Confirma:
 | sort path
 ```
 
-## 9.2 Revisar entradas TCP
+#### 9.2 Revisar entradas TCP
 
 ```spl
 | rest /services/data/inputs/tcp
 | table port index sourcetype disabled
 ```
 
-## 9.3 Revisar entradas UDP
+#### 9.3 Revisar entradas UDP
 
 ```spl
 | rest /services/data/inputs/udp
 | table port index sourcetype disabled
 ```
 
-## 9.4 Revisar la configuración efectiva
+#### 9.4 Revisar la configuración efectiva
 
 ```bash
 sudo /opt/splunk/bin/splunk btool inputs list --debug
@@ -573,30 +573,30 @@ cada valor.
 
 ---
 
-# 10. Paso 7: comprobar el archivo en Ubuntu
+## 10. Paso 7: comprobar el archivo en Ubuntu
 
 En una fuente local, que el archivo exista en el ordenador del asistente no
 significa que exista en el servidor donde se ejecuta Splunk.
 
-## 10.1 Comprobar la ruta
+#### 10.1 Comprobar la ruta
 
 ```bash
 ls -l /var/log/splunk-curso/eventos_web.csv
 ```
 
-## 10.2 Comprobar directorio
+#### 10.2 Comprobar directorio
 
 ```bash
 ls -ld /var/log/splunk-curso
 ```
 
-## 10.3 Comprobar el contenido
+#### 10.3 Comprobar el contenido
 
 ```bash
 head -n 10 /var/log/splunk-curso/eventos_web.csv
 ```
 
-## 10.4 Mostrar caracteres especiales
+#### 10.4 Mostrar caracteres especiales
 
 ```bash
 cat -A /var/log/splunk-curso/eventos_web.csv | head -n 10
@@ -610,13 +610,13 @@ Esto puede revelar:
 - espacios;
 - codificación problemática.
 
-## 10.5 Comprobar el tipo de archivo
+#### 10.5 Comprobar el tipo de archivo
 
 ```bash
 file /var/log/splunk-curso/eventos_web.csv
 ```
 
-## 10.6 Comprobar que el usuario de Splunk puede leerlo
+#### 10.6 Comprobar que el usuario de Splunk puede leerlo
 
 ```bash
 sudo -u splunk test -r \
@@ -627,7 +627,7 @@ sudo -u splunk test -r \
 
 Si Splunk se ejecuta con otro usuario, sustitúyelo.
 
-## 10.7 Comprobar todos los directorios de la ruta
+#### 10.7 Comprobar todos los directorios de la ruta
 
 ```bash
 namei -l /var/log/splunk-curso/eventos_web.csv
@@ -637,25 +637,25 @@ El proceso debe poder atravesar cada directorio y leer el archivo.
 
 ---
 
-# 11. Paso 8: revisar permisos de Splunk
+## 11. Paso 8: revisar permisos de Splunk
 
 Si `admin` ve eventos y otro usuario no, no concedas `admin` automáticamente.
 
-## 11.1 Revisar el contexto del usuario
+#### 11.1 Revisar el contexto del usuario
 
 ```spl
 | rest /services/authentication/current-context
 | table username roles
 ```
 
-## 11.2 Ejecutar la búsqueda mínima con el usuario afectado
+#### 11.2 Ejecutar la búsqueda mínima con el usuario afectado
 
 ```spl
 index=curso earliest=0 latest=now
 | stats count as total_eventos
 ```
 
-## 11.3 Revisar el índice
+#### 11.3 Revisar el índice
 
 ```spl
 | rest /services/data/indexes
@@ -663,7 +663,7 @@ index=curso earliest=0 latest=now
 | table title disabled totalEventCount currentDBSizeMB
 ```
 
-## 11.4 Comprobar posibles causas
+#### 11.4 Comprobar posibles causas
 
 - el rol no incluye el índice;
 - existe una exclusión de índice;
@@ -673,7 +673,7 @@ index=curso earliest=0 latest=now
 - el rango temporal es diferente;
 - el usuario no puede ejecutar la búsqueda guardada.
 
-## 11.5 Principio de mínimo privilegio
+#### 11.5 Principio de mínimo privilegio
 
 El usuario debe recibir:
 
@@ -686,7 +686,7 @@ pero no capacidades administrativas completas si no las necesita.
 
 ---
 
-# 12. Paso 9: revisar `_raw` y los campos
+## 12. Paso 9: revisar `_raw` y los campos
 
 Cuando aparecen eventos, pero una consulta concreta no devuelve datos, muestra el
 evento original.
@@ -719,14 +719,14 @@ Si el valor aparece en `_raw`, pero no como campo, consulta:
 campos-incorrectos.md
 ```
 
-## 12.1 Revisar campos disponibles
+#### 12.1 Revisar campos disponibles
 
 ```spl
 index=curso earliest=0 latest=now
 | fieldsummary
 ```
 
-## 12.2 Revisar valores de un campo
+#### 12.2 Revisar valores de un campo
 
 ```spl
 index=curso earliest=0 latest=now
@@ -734,7 +734,7 @@ index=curso earliest=0 latest=now
 | sort - count
 ```
 
-## 12.3 Revisar el `sourcetype`
+#### 12.3 Revisar el `sourcetype`
 
 ```spl
 index=curso earliest=0 latest=now
@@ -747,18 +747,18 @@ llegado.
 
 ---
 
-# 13. Paso 10: añadir filtros progresivamente
+## 13. Paso 10: añadir filtros progresivamente
 
 Construye la consulta incrementando una condición cada vez.
 
-## 13.1 Búsqueda base
+#### 13.1 Búsqueda base
 
 ```spl
 index=curso earliest=0 latest=now
 | stats count
 ```
 
-## 13.2 Añadir código HTTP
+#### 13.2 Añadir código HTTP
 
 ```spl
 index=curso earliest=0 latest=now
@@ -766,7 +766,7 @@ index=curso earliest=0 latest=now
 | stats count
 ```
 
-## 13.3 Añadir URI
+#### 13.3 Añadir URI
 
 ```spl
 index=curso earliest=0 latest=now
@@ -774,7 +774,7 @@ index=curso earliest=0 latest=now
 | stats count
 ```
 
-## 13.4 Añadir host
+#### 13.4 Añadir host
 
 ```spl
 index=curso earliest=0 latest=now
@@ -782,7 +782,7 @@ index=curso earliest=0 latest=now
 | stats count
 ```
 
-## 13.5 Interpretación
+#### 13.5 Interpretación
 
 | Consulta | Resultado | Conclusión |
 |---|---|---|
@@ -805,11 +805,11 @@ Primero demuestra que la búsqueda base encuentra el conjunto correcto.
 
 ---
 
-# 14. Revisar tipos de datos durante el filtrado
+## 14. Revisar tipos de datos durante el filtrado
 
 Un campo como `status` puede ser texto.
 
-## 14.1 Revisar valores
+#### 14.1 Revisar valores
 
 ```spl
 index=curso earliest=0 latest=now
@@ -817,7 +817,7 @@ index=curso earliest=0 latest=now
 | head 30
 ```
 
-## 14.2 Convertir temporalmente
+#### 14.2 Convertir temporalmente
 
 ```spl
 index=curso earliest=0 latest=now
@@ -826,7 +826,7 @@ index=curso earliest=0 latest=now
 | table _time host status status_num uri
 ```
 
-## 14.3 Detectar valores no convertibles
+#### 14.3 Detectar valores no convertibles
 
 ```spl
 index=curso earliest=0 latest=now
@@ -840,9 +840,9 @@ del campo antes de modificar la extracción.
 
 ---
 
-# 15. Revisar `_time` e `_indextime` en detalle
+## 15. Revisar `_time` e `_indextime` en detalle
 
-## 15.1 Mostrar ambos campos
+#### 15.1 Mostrar ambos campos
 
 ```spl
 index=curso earliest=0 latest=now
@@ -866,7 +866,7 @@ index=curso earliest=0 latest=now
 | sort 0 _time
 ```
 
-## 15.2 Calcular retraso
+#### 15.2 Calcular retraso
 
 ```spl
 index=curso earliest=0 latest=now
@@ -877,7 +877,7 @@ index=curso earliest=0 latest=now
     max(retraso_segundos) as retraso_maximo
 ```
 
-## 15.3 Eventos con tiempo futuro
+#### 15.3 Eventos con tiempo futuro
 
 ```spl
 index=curso earliest=0 latest=now
@@ -895,7 +895,7 @@ Si aparecen eventos futuros, revisa:
 
 ---
 
-# 16. Revisar la zona horaria
+## 16. Revisar la zona horaria
 
 Una zona horaria incorrecta puede hacer que los eventos aparezcan varias horas
 antes o después de lo esperado.
@@ -929,18 +929,18 @@ del desplazamiento.
 
 ---
 
-# 17. Revisar logs del servidor
+## 17. Revisar logs del servidor
 
 Si la entrada no produce eventos, revisa los logs de Splunk.
 
-## 17.1 `splunkd.log`
+#### 17.1 `splunkd.log`
 
 ```bash
 sudo tail -n 100 \
   /opt/splunk/var/log/splunk/splunkd.log
 ```
 
-## 17.2 Buscar mensajes relacionados con la ingesta
+#### 17.2 Buscar mensajes relacionados con la ingesta
 
 ```bash
 sudo grep -iE \
@@ -949,7 +949,7 @@ sudo grep -iE \
   | tail -n 100
 ```
 
-## 17.3 Ver errores desde `_internal`
+#### 17.3 Ver errores desde `_internal`
 
 ```spl
 index=_internal earliest=-30m latest=now
@@ -963,7 +963,7 @@ index=_internal earliest=-30m latest=now
 | sort - _time
 ```
 
-## 17.4 Revisar eventos internos recientes
+#### 17.4 Revisar eventos internos recientes
 
 ```spl
 index=_internal earliest=-15m latest=now
@@ -977,11 +977,11 @@ repetidamente sin conocer el motivo.
 
 ---
 
-# 18. Comprobar duplicados potenciales
+## 18. Comprobar duplicados potenciales
 
 Cargar o monitorizar varias veces el mismo archivo puede generar duplicados.
 
-## 18.1 Revisar volumen por fuente
+#### 18.1 Revisar volumen por fuente
 
 ```spl
 index=curso earliest=0 latest=now
@@ -989,7 +989,7 @@ index=curso earliest=0 latest=now
 | sort - count
 ```
 
-## 18.2 Revisar combinaciones repetidas
+#### 18.2 Revisar combinaciones repetidas
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1003,7 +1003,7 @@ index=curso earliest=0 latest=now
 Esta consulta identifica repeticiones potenciales, pero no demuestra por sí sola
 que sean duplicados. Dos peticiones reales pueden tener los mismos valores.
 
-## 18.3 Revisar `_raw` repetido
+#### 18.3 Revisar `_raw` repetido
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1013,7 +1013,7 @@ index=curso earliest=0 latest=now
 | head 50
 ```
 
-## 18.4 Revisar entradas duplicadas
+#### 18.4 Revisar entradas duplicadas
 
 ```spl
 | rest /services/data/inputs/monitor
@@ -1034,7 +1034,7 @@ No vuelvas a cargar el archivo hasta saber si ya está indexado.
 
 ---
 
-# 19. Revisar fuentes alternativas
+## 19. Revisar fuentes alternativas
 
 Si no aparecen datos en `curso`, puede que estén en otro índice.
 
@@ -1076,9 +1076,9 @@ Si necesitas localizar eventos en toda la plataforma, limita:
 
 ---
 
-# 20. Caso práctico: eventos en otro índice
+## 20. Caso práctico: eventos en otro índice
 
-## Situación
+#### Situación
 
 La búsqueda no devuelve resultados:
 
@@ -1089,7 +1089,7 @@ index=curso earliest=0 latest=now
 
 Pero la entrada parece activa.
 
-## Diagnóstico
+#### Diagnóstico
 
 Consulta los índices disponibles:
 
@@ -1118,7 +1118,7 @@ index=web earliest=0 latest=now
 | stats count
 ```
 
-## Corrección
+#### Corrección
 
 No cambies la consulta final sin documentar si el índice correcto debe ser:
 
@@ -1131,9 +1131,9 @@ datos a otro índice debe corregirse o justificarse.
 
 ---
 
-# 21. Caso práctico: datos históricos
+## 21. Caso práctico: datos históricos
 
-## Situación
+#### Situación
 
 Esta búsqueda no devuelve eventos:
 
@@ -1142,7 +1142,7 @@ index=curso earliest=-24h latest=now
 | stats count
 ```
 
-## Diagnóstico
+#### Diagnóstico
 
 Amplía el intervalo:
 
@@ -1154,7 +1154,7 @@ index=curso earliest=0 latest=now
     latest(_time)
 ```
 
-## Resultado
+#### Resultado
 
 Si los eventos pertenecen al 1 de enero de 2026, prueba:
 
@@ -1165,16 +1165,16 @@ latest="01/01/2026:23:59:59"
 | stats count
 ```
 
-## Conclusión
+#### Conclusión
 
 La ingesta puede ser correcta. El problema era que la búsqueda relativa no incluía
 los timestamps del dataset.
 
 ---
 
-# 22. Caso práctico: Admin ve datos y otro usuario no
+## 22. Caso práctico: Admin ve datos y otro usuario no
 
-## Situación
+#### Situación
 
 El administrador ejecuta:
 
@@ -1187,7 +1187,7 @@ y obtiene eventos.
 
 El usuario operativo no obtiene resultados.
 
-## Diagnóstico
+#### Diagnóstico
 
 Con el usuario operativo:
 
@@ -1211,7 +1211,7 @@ index=curso earliest=0 latest=now
 | stats count
 ```
 
-## Posibles causas
+#### Posibles causas
 
 - el rol no tiene acceso a `curso`;
 - el rol utiliza un conjunto de índices permitido diferente;
@@ -1220,7 +1220,7 @@ index=curso earliest=0 latest=now
 - el objeto es privado;
 - el usuario no tiene permisos de lectura.
 
-## Corrección
+#### Corrección
 
 Concede únicamente:
 
@@ -1232,9 +1232,9 @@ No concedas `admin` como solución.
 
 ---
 
-# 23. Caso práctico: el evento existe, pero el filtro falla
+## 23. Caso práctico: el evento existe, pero el filtro falla
 
-## Situación
+#### Situación
 
 Esta búsqueda devuelve eventos:
 
@@ -1250,7 +1250,7 @@ index=curso earliest=0 latest=now status=404
 | stats count
 ```
 
-## Diagnóstico
+#### Diagnóstico
 
 Revisa los valores reales:
 
@@ -1269,7 +1269,7 @@ HTTP/1.1 404
 status=404
 ```
 
-## Probar normalización
+#### Probar normalización
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1289,9 +1289,9 @@ index=curso earliest=0 latest=now
 
 ---
 
-# 24. Caso práctico: el campo está en `_raw`, pero no se extrae
+## 24. Caso práctico: el campo está en `_raw`, pero no se extrae
 
-## Situación
+#### Situación
 
 `_raw` contiene:
 
@@ -1301,7 +1301,7 @@ index=curso earliest=0 latest=now
 
 pero `status` aparece vacío.
 
-## Diagnóstico temporal
+#### Diagnóstico temporal
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1311,7 +1311,7 @@ index=curso earliest=0 latest=now
 | head 20
 ```
 
-## Interpretación
+#### Interpretación
 
 Si `status_temp` contiene `404`, el evento llegó correctamente. El problema está
 en:
@@ -1329,13 +1329,13 @@ campos-incorrectos.md
 
 ---
 
-# 25. Caso práctico: la entrada existe, pero no lee el archivo
+## 25. Caso práctico: la entrada existe, pero no lee el archivo
 
-## Situación
+#### Situación
 
 La entrada está configurada, pero no hay eventos.
 
-## Comprobaciones
+#### Comprobaciones
 
 ```bash
 ls -l /var/log/splunk-curso/eventos_web.csv
@@ -1356,7 +1356,7 @@ sudo -u splunk test -r \
   || echo "No legible"
 ```
 
-## Posibles causas
+#### Posibles causas
 
 - archivo inexistente;
 - ruta incorrecta;
@@ -1369,15 +1369,15 @@ sudo -u splunk test -r \
 
 ---
 
-# 26. Caso práctico: el dataset se cargó, pero se modificó después
+## 26. Caso práctico: el dataset se cargó, pero se modificó después
 
 Una carga puntual y una entrada monitorizada no se comportan igual.
 
-## Carga puntual
+#### Carga puntual
 
 Splunk ingiere el contenido disponible durante la carga.
 
-## Monitorización
+#### Monitorización
 
 Splunk observa una ruta y puede ingerir nuevos datos según la configuración.
 
@@ -1395,7 +1395,7 @@ No vuelvas a subir el archivo completo sin considerar duplicados.
 
 ---
 
-# 27. Revisar el estado de los datos con `metadata`
+## 27. Revisar el estado de los datos con `metadata`
 
 Para una comprobación rápida de fuentes:
 
@@ -1420,29 +1420,29 @@ eventos ni muestra todos los campos de cada evento.
 
 ---
 
-# 28. Revisar la capacidad de almacenamiento
+## 28. Revisar la capacidad de almacenamiento
 
 La falta de espacio puede impedir la ingesta o afectar al servicio.
 
-## 28.1 Espacio en disco
+#### 28.1 Espacio en disco
 
 ```bash
 df -h
 ```
 
-## 28.2 Inodos
+#### 28.2 Inodos
 
 ```bash
 df -ih
 ```
 
-## 28.3 Tamaño de Splunk
+#### 28.3 Tamaño de Splunk
 
 ```bash
 sudo du -sh /opt/splunk
 ```
 
-## 28.4 Tamaño de los datos indexados
+#### 28.4 Tamaño de los datos indexados
 
 ```bash
 sudo du -h --max-depth=1 \
@@ -1450,7 +1450,7 @@ sudo du -h --max-depth=1 \
   | sort -h
 ```
 
-## 28.5 Logs internos relacionados
+#### 28.5 Logs internos relacionados
 
 ```spl
 index=_internal earliest=-1h latest=now
@@ -1467,33 +1467,33 @@ No elimines manualmente buckets ni archivos de índice para liberar espacio.
 
 ---
 
-# 29. Revisión de configuración con `btool`
+## 29. Revisión de configuración con `btool`
 
-## 29.1 Entradas
+#### 29.1 Entradas
 
 ```bash
 sudo /opt/splunk/bin/splunk btool inputs list --debug
 ```
 
-## 29.2 Índices
+#### 29.2 Índices
 
 ```bash
 sudo /opt/splunk/bin/splunk btool indexes list --debug
 ```
 
-## 29.3 Parsing
+#### 29.3 Parsing
 
 ```bash
 sudo /opt/splunk/bin/splunk btool props list --debug
 ```
 
-## 29.4 Transformaciones
+#### 29.4 Transformaciones
 
 ```bash
 sudo /opt/splunk/bin/splunk btool transforms list --debug
 ```
 
-## 29.5 Filtrar por aplicación o índice
+#### 29.5 Filtrar por aplicación o índice
 
 ```bash
 sudo /opt/splunk/bin/splunk btool inputs list --debug \
@@ -1511,101 +1511,101 @@ El resultado debe interpretarse junto con:
 
 ---
 
-# 30. Qué no hacer durante el diagnóstico
+## 30. Qué no hacer durante el diagnóstico
 
 Evita estas acciones prematuras:
 
-## No reinstalar Splunk
+#### No reinstalar Splunk
 
 La ausencia de datos suele deberse a tiempo, índice, permisos o entrada, no a una
 instalación dañada.
 
-## No volver a cargar el archivo inmediatamente
+#### No volver a cargar el archivo inmediatamente
 
 Puedes crear duplicados.
 
-## No cambiar el índice sin documentarlo
+#### No cambiar el índice sin documentarlo
 
 Podrías ocultar el problema en lugar de resolverlo.
 
-## No usar `index=*` sin límite temporal
+#### No usar `index=*` sin límite temporal
 
 Puede producir búsquedas lentas y resultados confusos.
 
-## No empezar con una expresión regular
+#### No empezar con una expresión regular
 
 Primero demuestra que existen eventos y que `_raw` contiene el dato.
 
-## No conceder `admin`
+#### No conceder `admin`
 
 Un problema de acceso al índice no se corrige con privilegios excesivos.
 
-## No borrar el archivo monitorizado
+#### No borrar el archivo monitorizado
 
 Podrías perder evidencia necesaria para investigar.
 
-## No reiniciar repetidamente
+#### No reiniciar repetidamente
 
 Un reinicio puede borrar el contexto temporal del problema y no corregir la
 causa.
 
-## No modificar `props.conf` o `transforms.conf` globalmente sin pruebas
+#### No modificar `props.conf` o `transforms.conf` globalmente sin pruebas
 
 Una configuración puede afectar a varias fuentes y aplicaciones.
 
 ---
 
-# 31. Procedimiento completo de diagnóstico
+## 31. Procedimiento completo de diagnóstico
 
-## Paso 1: comprobar el servicio
+#### Paso 1: comprobar el servicio
 
 ```bash
 sudo systemctl status Splunkd
 ```
 
-## Paso 2: comprobar la entrada
+#### Paso 2: comprobar la entrada
 
 ```spl
 | rest /services/data/inputs/monitor
 | table path index sourcetype host disabled
 ```
 
-## Paso 3: buscar en el índice sin filtros
+#### Paso 3: buscar en el índice sin filtros
 
 ```spl
 index=curso earliest=0 latest=now
 | stats count
 ```
 
-## Paso 4: revisar el rango temporal
+#### Paso 4: revisar el rango temporal
 
 ```spl
 index=curso earliest=0 latest=now
 | stats earliest(_time) latest(_time) count
 ```
 
-## Paso 5: revisar metadatos
+#### Paso 5: revisar metadatos
 
 ```spl
 index=curso earliest=0 latest=now
 | stats count by index source sourcetype host
 ```
 
-## Paso 6: revisar permisos del archivo
+#### Paso 6: revisar permisos del archivo
 
 ```bash
 ls -l /ruta/al/archivo
 sudo -u splunk test -r /ruta/al/archivo
 ```
 
-## Paso 7: revisar permisos de Splunk
+#### Paso 7: revisar permisos de Splunk
 
 ```spl
 | rest /services/authentication/current-context
 | table username roles
 ```
 
-## Paso 8: revisar `_raw`
+#### Paso 8: revisar `_raw`
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1613,7 +1613,7 @@ index=curso earliest=0 latest=now
 | head 20
 ```
 
-## Paso 9: añadir filtros uno a uno
+#### Paso 9: añadir filtros uno a uno
 
 ```spl
 index=curso status=404
@@ -1623,21 +1623,21 @@ index=curso status=404
 index=curso status=404 uri="/missing"
 ```
 
-## Paso 10: revisar logs
+#### Paso 10: revisar logs
 
 ```bash
 sudo tail -n 100 \
   /opt/splunk/var/log/splunk/splunkd.log
 ```
 
-## Paso 11: revisar duplicados potenciales
+#### Paso 11: revisar duplicados potenciales
 
 ```spl
 index=curso earliest=0 latest=now
 | stats count by source sourcetype host
 ```
 
-## Paso 12: documentar y validar
+#### Paso 12: documentar y validar
 
 Registra:
 
@@ -1651,7 +1651,7 @@ Registra:
 
 ---
 
-# 32. Tabla de síntomas
+## 32. Tabla de síntomas
 
 | Síntoma | Causa probable | Acción |
 |---|---|---|
@@ -1671,9 +1671,9 @@ Registra:
 
 ---
 
-# 33. Ejercicio práctico 1: búsqueda mínima
+## 33. Ejercicio práctico 1: búsqueda mínima
 
-## Objetivo
+#### Objetivo
 
 Determinar si el índice contiene eventos.
 
@@ -1701,7 +1701,7 @@ Documenta:
 
 ---
 
-# 34. Ejercicio práctico 2: localizar el periodo real
+## 34. Ejercicio práctico 2: localizar el periodo real
 
 Ejecuta:
 
@@ -1724,7 +1724,7 @@ Documenta:
 
 ---
 
-# 35. Ejercicio práctico 3: comprobar la entrada
+## 35. Ejercicio práctico 3: comprobar la entrada
 
 Ejecuta:
 
@@ -1759,7 +1759,7 @@ Documenta:
 
 ---
 
-# 36. Ejercicio práctico 4: filtros progresivos
+## 36. Ejercicio práctico 4: filtros progresivos
 
 Ejecuta las consultas en orden:
 
@@ -1791,7 +1791,7 @@ comportamiento.
 
 ---
 
-# 37. Ejercicio práctico 5: permisos
+## 37. Ejercicio práctico 5: permisos
 
 Con el usuario administrador:
 
@@ -1822,7 +1822,7 @@ Documenta una corrección basada en mínimo privilegio.
 
 ---
 
-# 38. Ejercicio práctico 6: eventos duplicados
+## 38. Ejercicio práctico 6: eventos duplicados
 
 Ejecuta:
 
@@ -1851,7 +1851,7 @@ Documenta:
 
 ---
 
-# 39. Ejercicio práctico 7: revisar `_time` e `_indextime`
+## 39. Ejercicio práctico 7: revisar `_time` e `_indextime`
 
 Ejecuta:
 
@@ -1886,117 +1886,117 @@ Responde:
 
 ---
 
-# 40. Plantilla de informe de diagnóstico
+## 40. Plantilla de informe de diagnóstico
 
 ```markdown
-# Informe: datos no aparecen
+## Informe: datos no aparecen
 
-## Fecha y hora
-
-Completar.
-
-## Instancia
+#### Fecha y hora
 
 Completar.
 
-## Versión de Splunk
+#### Instancia
 
 Completar.
 
-## Usuario y rol
+#### Versión de Splunk
 
 Completar.
 
-## Índice consultado
+#### Usuario y rol
+
+Completar.
+
+#### Índice consultado
 
 curso
 
-## Rango temporal
+#### Rango temporal
 
 Completar.
 
-## Búsqueda mínima
+#### Búsqueda mínima
 
 ```spl
 Completar.
 ```
 
-## Resultado de la búsqueda mínima
+#### Resultado de la búsqueda mínima
 
 Completar.
 
-## Primer y último evento
+#### Primer y último evento
 
 Completar.
 
-## Source
+#### Source
 
 Completar.
 
-## Sourcetype
+#### Sourcetype
 
 Completar.
 
-## Host
+#### Host
 
 Completar.
 
-## Entrada de datos
+#### Entrada de datos
 
 Completar.
 
-## Archivo o fuente
+#### Archivo o fuente
 
 Completar.
 
-## Permisos del archivo
+#### Permisos del archivo
 
 Completar.
 
-## Usuario del proceso Splunk
+#### Usuario del proceso Splunk
 
 Completar.
 
-## `_time`
+#### `_time`
 
 Completar.
 
-## `_indextime`
+#### `_indextime`
 
 Completar.
 
-## Logs revisados
+#### Logs revisados
 
 Completar.
 
-## Filtros probados
+#### Filtros probados
 
 Completar.
 
-## Causa raíz
+#### Causa raíz
 
 Indicar una causa concreta.
 
-## Corrección aplicada
+#### Corrección aplicada
 
 Describir el cambio realizado.
 
-## Validación posterior
+#### Validación posterior
 
 Indicar la búsqueda y el resultado.
 
-## Riesgo de duplicación
+#### Riesgo de duplicación
 
 Indicar si se volvió a cargar el dataset.
 
-## Limitaciones
+#### Limitaciones
 
 Completar.
 ```
 
 ---
 
-# 41. Criterios para considerar resuelta la incidencia
+## 41. Criterios para considerar resuelta la incidencia
 
 La incidencia está resuelta cuando:
 
@@ -2018,7 +2018,7 @@ terminada si el objetivo es que la utilice un rol operativo.
 
 ---
 
-# 42. Buenas prácticas
+## 42. Buenas prácticas
 
 - Empieza con la consulta más pequeña posible.
 - Confirma índice y tiempo antes de investigar campos.
@@ -2043,7 +2043,7 @@ terminada si el objetivo es que la utilice un rol operativo.
 
 ---
 
-# 43. Referencias oficiales
+## 43. Referencias oficiales
 
 - [Troubleshooting de datos en Splunk](https://docs.splunk.com/Documentation/Splunk/latest/Troubleshooting/Troubleshootingyourdata)
 - [Introducción a la entrada de datos](https://docs.splunk.com/Documentation/Splunk/latest/Data/Whatissource)
@@ -2062,16 +2062,16 @@ terminada si el objetivo es que la utilice un rol operativo.
 
 ---
 
-# 44. Lista de comprobación final
+## 44. Lista de comprobación final
 
-## Servicio
+#### Servicio
 
 - [ ] Splunk está activo.
 - [ ] Se conoce el usuario del proceso.
 - [ ] No hay errores recientes de arranque.
 - [ ] El servicio de indexación está operativo.
 
-## Entrada
+#### Entrada
 
 - [ ] La entrada existe.
 - [ ] Está habilitada.
@@ -2080,7 +2080,7 @@ terminada si el objetivo es que la utilice un rol operativo.
 - [ ] El usuario de Splunk puede leerlo.
 - [ ] No hay entradas duplicadas.
 
-## Índice
+#### Índice
 
 - [ ] Existe el índice `curso`.
 - [ ] Está habilitado.
@@ -2088,7 +2088,7 @@ terminada si el objetivo es que la utilice un rol operativo.
 - [ ] El usuario puede buscarlo.
 - [ ] Hay capacidad de almacenamiento.
 
-## Tiempo
+#### Tiempo
 
 - [ ] Se ha probado `earliest=0 latest=now`.
 - [ ] Se conoce el primer evento.
@@ -2097,7 +2097,7 @@ terminada si el objetivo es que la utilice un rol operativo.
 - [ ] `_indextime` se ha revisado.
 - [ ] La zona horaria es coherente.
 
-## Eventos
+#### Eventos
 
 - [ ] Se ha revisado `_raw`.
 - [ ] `source` es correcto.
@@ -2106,7 +2106,7 @@ terminada si el objetivo es que la utilice un rol operativo.
 - [ ] Los campos esperados existen.
 - [ ] Los tipos de datos son adecuados.
 
-## Consulta
+#### Consulta
 
 - [ ] Se ha probado la consulta mínima.
 - [ ] Los filtros se han añadido uno a uno.
@@ -2114,7 +2114,7 @@ terminada si el objetivo es que la utilice un rol operativo.
 - [ ] Se han revisado valores y nombres exactos.
 - [ ] Se han documentado las limitaciones.
 
-## Permisos
+#### Permisos
 
 - [ ] Se ha probado con el usuario final.
 - [ ] El rol tiene acceso al índice.
@@ -2122,7 +2122,7 @@ terminada si el objetivo es que la utilice un rol operativo.
 - [ ] Los objetos necesarios están compartidos.
 - [ ] No se ha concedido `admin` innecesariamente.
 
-## Cierre
+#### Cierre
 
 - [ ] Se ha identificado la causa raíz.
 - [ ] Se ha aplicado una corrección.

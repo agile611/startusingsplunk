@@ -29,7 +29,7 @@ y no solo el primer resultado.
 
 ---
 
-# 1. Objetivos de la práctica
+## 1. Objetivos de la práctica
 
 Al finalizar esta guía, el asistente podrá:
 
@@ -52,7 +52,7 @@ Al finalizar esta guía, el asistente podrá:
 
 ---
 
-# 2. Dataset de referencia
+## 2. Dataset de referencia
 
 El laboratorio utiliza principalmente:
 
@@ -94,7 +94,7 @@ Antes de utilizar un campo opcional, comprueba que realmente existe.
 
 ---
 
-# 3. Síntomas habituales
+## 3. Síntomas habituales
 
 Los siguientes síntomas requieren diagnósticos diferentes:
 
@@ -123,11 +123,11 @@ No confundas:
 
 ---
 
-# 4. Primer diagnóstico: índice y tiempo
+## 4. Primer diagnóstico: índice y tiempo
 
 Antes de investigar campos, confirma que existen eventos visibles.
 
-## 4.1 Búsqueda mínima
+#### 4.1 Búsqueda mínima
 
 ```spl
 index=curso earliest=0 latest=now
@@ -155,7 +155,7 @@ index=curso earliest=0 latest=now
 )
 ```
 
-## 4.2 Si no devuelve resultados
+#### 4.2 Si no devuelve resultados
 
 Comprueba, en este orden:
 
@@ -184,7 +184,7 @@ No investigues la extracción de campos hasta confirmar que hay eventos visibles
 
 ---
 
-# 5. Comparar `_raw` con los campos extraídos
+## 5. Comparar `_raw` con los campos extraídos
 
 La comparación entre el evento original y los campos es la prueba más importante.
 
@@ -203,17 +203,17 @@ index=curso earliest=0 latest=now
 | head 20
 ```
 
-## 5.1 Interpretación
+#### 5.1 Interpretación
 
-### El valor aparece en `_raw` y también como campo
+###### El valor aparece en `_raw` y también como campo
 
 La extracción funciona.
 
-### El valor aparece en `_raw`, pero no como campo
+###### El valor aparece en `_raw`, pero no como campo
 
 Existe un problema de extracción, parsing o nombre del campo.
 
-### El valor no aparece en `_raw`
+###### El valor no aparece en `_raw`
 
 El problema está probablemente en:
 
@@ -223,7 +223,7 @@ El problema está probablemente en:
 - transformación previa a la indexación;
 - archivo incompleto.
 
-### El campo aparece, pero con otro valor
+###### El campo aparece, pero con otro valor
 
 Puede existir:
 
@@ -234,7 +234,7 @@ Puede existir:
 - campo multivalor;
 - valor calculado posterior.
 
-## 5.2 Mostrar más eventos representativos
+#### 5.2 Mostrar más eventos representativos
 
 No utilices solo `head 1`.
 
@@ -258,9 +258,9 @@ index=curso earliest=0 latest=now
 
 ---
 
-# 6. Revisar los campos disponibles
+## 6. Revisar los campos disponibles
 
-## 6.1 Utilizar `fieldsummary`
+#### 6.1 Utilizar `fieldsummary`
 
 ```spl
 index=curso earliest=0 latest=now
@@ -276,7 +276,7 @@ La salida ayuda a revisar:
 - presencia de nulos;
 - cobertura aproximada.
 
-## 6.2 Revisar nombres de campos
+#### 6.2 Revisar nombres de campos
 
 ```spl
 index=curso earliest=0 latest=now
@@ -287,7 +287,7 @@ index=curso earliest=0 latest=now
 
 La estructura exacta de la salida puede variar según la versión y el contexto.
 
-## 6.3 Revisar campos concretos
+#### 6.3 Revisar campos concretos
 
 ```spl
 index=curso earliest=0 latest=now
@@ -295,7 +295,7 @@ index=curso earliest=0 latest=now
 | head 20
 ```
 
-## 6.4 Revisar la distribución de valores
+#### 6.4 Revisar la distribución de valores
 
 ```spl
 index=curso earliest=0 latest=now
@@ -326,7 +326,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-# 7. Diferencias de nombres
+## 7. Diferencias de nombres
 
 Splunk trata estos nombres como campos distintos:
 
@@ -348,7 +348,7 @@ http_status
 status_code
 ```
 
-## 7.1 Detectar nombres alternativos
+#### 7.1 Detectar nombres alternativos
 
 ```spl
 index=curso earliest=0 latest=now
@@ -363,7 +363,7 @@ index=curso earliest=0 latest=now
     )
 ```
 
-## 7.2 Normalizar temporalmente con `coalesce`
+#### 7.2 Normalizar temporalmente con `coalesce`
 
 ```spl
 index=curso earliest=0 latest=now
@@ -380,7 +380,7 @@ index=curso earliest=0 latest=now
 
 `coalesce` devuelve el primer valor no nulo de la lista.
 
-## 7.3 Normalizar el estado HTTP
+#### 7.3 Normalizar el estado HTTP
 
 ```spl
 index=curso earliest=0 latest=now
@@ -405,11 +405,11 @@ No publiques una normalización permanente hasta comprobar que:
 
 ---
 
-# 8. Campos ausentes, vacíos y nulos
+## 8. Campos ausentes, vacíos y nulos
 
 Un campo ausente no es exactamente lo mismo que un campo vacío.
 
-## 8.1 Eventos en los que existe el campo
+#### 8.1 Eventos en los que existe el campo
 
 ```spl
 index=curso earliest=0 latest=now
@@ -417,7 +417,7 @@ index=curso earliest=0 latest=now
 | stats count
 ```
 
-## 8.2 Eventos en los que no existe
+#### 8.2 Eventos en los que no existe
 
 ```spl
 index=curso earliest=0 latest=now
@@ -426,7 +426,7 @@ index=curso earliest=0 latest=now
 | head 20
 ```
 
-## 8.3 Clasificación temporal del campo
+#### 8.3 Clasificación temporal del campo
 
 ```spl
 index=curso earliest=0 latest=now
@@ -438,7 +438,7 @@ index=curso earliest=0 latest=now
 | stats count by estado_campo
 ```
 
-## 8.4 Revisar valores con espacios
+#### 8.4 Revisar valores con espacios
 
 ```spl
 index=curso earliest=0 latest=now
@@ -447,7 +447,7 @@ index=curso earliest=0 latest=now
 | head 30
 ```
 
-## 8.5 Revisar caracteres invisibles
+#### 8.5 Revisar caracteres invisibles
 
 ```spl
 index=curso earliest=0 latest=now
@@ -457,7 +457,7 @@ index=curso earliest=0 latest=now
 | table status longitud_original longitud_limpia _raw
 ```
 
-## 8.6 Revisar valores literales inesperados
+#### 8.6 Revisar valores literales inesperados
 
 ```spl
 index=curso earliest=0 latest=now
@@ -469,12 +469,12 @@ No asumas que una cadena como `NULL` equivale automáticamente a un valor nulo.
 
 ---
 
-# 9. `fillnull`: utilidad y riesgo
+## 9. `fillnull`: utilidad y riesgo
 
 `fillnull` puede ser útil para presentar resultados, pero no debe utilizarse para
 ocultar un problema de ingesta.
 
-## 9.1 Ejemplo de presentación
+#### 9.1 Ejemplo de presentación
 
 ```spl
 index=curso earliest=0 latest=now
@@ -482,7 +482,7 @@ index=curso earliest=0 latest=now
 | fillnull value="sin_valor" status
 ```
 
-## 9.2 Riesgo
+#### 9.2 Riesgo
 
 Si utilizas:
 
@@ -493,7 +493,7 @@ Si utilizas:
 puedes hacer que parezca que los eventos sin latencia tienen una latencia de
 cero milisegundos. Eso sería incorrecto desde el punto de vista operativo.
 
-## 9.3 Uso recomendado
+#### 9.3 Uso recomendado
 
 Utiliza `fillnull` solo cuando:
 
@@ -504,7 +504,7 @@ Utiliza `fillnull` solo cuando:
 
 ---
 
-# 10. Tipos de datos incorrectos
+## 10. Tipos de datos incorrectos
 
 Un código HTTP puede llegar como texto:
 
@@ -514,7 +514,7 @@ Un código HTTP puede llegar como texto:
 
 Para comparaciones numéricas, conviértelo de forma explícita.
 
-## 10.1 Revisar valores originales
+#### 10.1 Revisar valores originales
 
 ```spl
 index=curso earliest=0 latest=now
@@ -522,7 +522,7 @@ index=curso earliest=0 latest=now
 | head 30
 ```
 
-## 10.2 Convertir temporalmente
+#### 10.2 Convertir temporalmente
 
 ```spl
 index=curso earliest=0 latest=now
@@ -531,7 +531,7 @@ index=curso earliest=0 latest=now
 | head 30
 ```
 
-## 10.3 Filtrar errores
+#### 10.3 Filtrar errores
 
 ```spl
 index=curso earliest=0 latest=now
@@ -540,7 +540,7 @@ index=curso earliest=0 latest=now
 | table _time host status status_num uri
 ```
 
-## 10.4 Detectar valores no convertibles
+#### 10.4 Detectar valores no convertibles
 
 ```spl
 index=curso earliest=0 latest=now
@@ -549,7 +549,7 @@ index=curso earliest=0 latest=now
 | table _time status status_num uri _raw
 ```
 
-## 10.5 Validar códigos HTTP
+#### 10.5 Validar códigos HTTP
 
 ```spl
 index=curso earliest=0 latest=now
@@ -561,7 +561,7 @@ index=curso earliest=0 latest=now
 | table _time status status_num uri _raw
 ```
 
-## 10.6 Latencia como número
+#### 10.6 Latencia como número
 
 ```spl
 index=curso earliest=0 latest=now
@@ -605,7 +605,7 @@ No mezcles milisegundos y segundos sin normalización.
 
 ---
 
-# 11. CSV mal interpretado
+## 11. CSV mal interpretado
 
 Si todo el CSV aparece como una sola columna, revisa:
 
@@ -620,14 +620,14 @@ Si todo el CSV aparece como una sola columna, revisa:
 - archivo realmente ingerido;
 - `source` e índice.
 
-## 11.1 Evento correcto
+#### 11.1 Evento correcto
 
 ```text
 timestamp,host,method,status,uri
 2026-01-01T00:00:00Z,web-01,GET,200,/login
 ```
 
-## 11.2 Evento problemático
+#### 11.2 Evento problemático
 
 ```text
 timestamp,host,method,status,uri 2026-01-01T00:00:00Z web-01 GET 200 /login
@@ -640,7 +640,7 @@ Posibles problemas:
 - cabecera y datos mezclados;
 - parsing incorrecto.
 
-## 11.3 Inspeccionar el archivo en Ubuntu
+#### 11.3 Inspeccionar el archivo en Ubuntu
 
 ```bash
 head -n 10 /var/log/splunk-curso/eventos_web.csv
@@ -673,7 +673,7 @@ Si el número de columnas cambia, puede haber:
 - líneas corruptas;
 - registros con estructura variable.
 
-## 11.4 Extracción temporal con `rex`
+#### 11.4 Extracción temporal con `rex`
 
 Para un CSV simple sin comas internas:
 
@@ -694,7 +694,7 @@ index=curso earliest=0 latest=now
 Esta técnica sirve para diagnosticar, no para sustituir automáticamente una
 configuración correcta de CSV complejo.
 
-## 11.5 Comparar extracción temporal con campos originales
+#### 11.5 Comparar extracción temporal con campos originales
 
 ```spl
 index=curso earliest=0 latest=now
@@ -713,7 +713,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-# 12. Problemas con cabeceras CSV
+## 12. Problemas con cabeceras CSV
 
 Algunos archivos contienen una cabecera:
 
@@ -734,7 +734,7 @@ Antes de configurar la extracción, determina:
 - si la cabecera aparece repetida;
 - si la cabecera se está tratando como un evento normal.
 
-## Detectar cabeceras repetidas
+#### Detectar cabeceras repetidas
 
 ```spl
 index=curso earliest=0 latest=now
@@ -742,7 +742,7 @@ index=curso earliest=0 latest=now
 | stats count
 ```
 
-## Excluir temporalmente la cabecera
+#### Excluir temporalmente la cabecera
 
 ```spl
 index=curso earliest=0 latest=now
@@ -758,7 +758,7 @@ el análisis.
 
 ---
 
-# 13. JSON y estructuras anidadas
+## 13. JSON y estructuras anidadas
 
 Si el evento es JSON, comprueba primero el `sourcetype` y el contenido original.
 
@@ -778,7 +778,7 @@ Ejemplo:
 }
 ```
 
-## 13.1 Revisar el evento
+#### 13.1 Revisar el evento
 
 ```spl
 index=curso earliest=0 latest=now
@@ -786,7 +786,7 @@ index=curso earliest=0 latest=now
 | head 10
 ```
 
-## 13.2 Extraer campos con `spath`
+#### 13.2 Extraer campos con `spath`
 
 ```spl
 index=curso sourcetype=json earliest=0 latest=now
@@ -801,7 +801,7 @@ index=curso sourcetype=json earliest=0 latest=now
     duration_json
 ```
 
-## 13.3 Intentar parsear JSON inválido
+#### 13.3 Intentar parsear JSON inválido
 
 ```spl
 index=curso sourcetype=json earliest=0 latest=now
@@ -820,7 +820,7 @@ Si no se extraen campos, comprueba:
 - estructura;
 - múltiples objetos por evento.
 
-## 13.4 No utilizar `spath` como solución universal
+#### 13.4 No utilizar `spath` como solución universal
 
 No utilices:
 
@@ -839,11 +839,11 @@ El comando debe corresponder al formato real de la fuente.
 
 ---
 
-# 14. Extracción temporal con `rex`
+## 14. Extracción temporal con `rex`
 
 `rex` es útil para verificar rápidamente si un patrón puede extraerse.
 
-## 14.1 Extraer código HTTP
+#### 14.1 Extraer código HTTP
 
 ```spl
 index=curso earliest=0 latest=now
@@ -853,7 +853,7 @@ index=curso earliest=0 latest=now
 | head 20
 ```
 
-## 14.2 Extraer una URI
+#### 14.2 Extraer una URI
 
 ```spl
 index=curso earliest=0 latest=now
@@ -863,7 +863,7 @@ index=curso earliest=0 latest=now
 | head 20
 ```
 
-## 14.3 Extraer desde texto clave-valor
+#### 14.3 Extraer desde texto clave-valor
 
 Para un evento como:
 
@@ -882,7 +882,7 @@ index=curso earliest=0 latest=now
 | table method_temp status_temp uri_temp host_temp
 ```
 
-## 14.4 Comparar varios patrones
+#### 14.4 Comparar varios patrones
 
 ```spl
 index=curso earliest=0 latest=now
@@ -897,9 +897,9 @@ La comparación ayuda a detectar si la fuente contiene más de un formato.
 
 ---
 
-# 15. Diferenciar `eval` de una extracción reutilizable
+## 15. Diferenciar `eval` de una extracción reutilizable
 
-## 15.1 Campo creado con `eval`
+#### 15.1 Campo creado con `eval`
 
 ```spl
 index=curso earliest=0 latest=now
@@ -922,7 +922,7 @@ index=curso earliest=0 latest=now
 
 es posible que no aparezca.
 
-## 15.2 Cuándo utilizar `eval`
+#### 15.2 Cuándo utilizar `eval`
 
 Utiliza `eval` para:
 
@@ -933,7 +933,7 @@ Utiliza `eval` para:
 - normalización temporal;
 - clasificación de resultados.
 
-## 15.3 Cuándo considerar una extracción reutilizable
+#### 15.3 Cuándo considerar una extracción reutilizable
 
 Considera una extracción reutilizable cuando:
 
@@ -944,7 +944,7 @@ Considera una extracción reutilizable cuando:
 - el campo debe estar disponible en dashboards y alertas;
 - el patrón se ha probado con suficientes eventos.
 
-## 15.4 No convertir automáticamente todo `eval` en configuración
+#### 15.4 No convertir automáticamente todo `eval` en configuración
 
 Antes de publicar una extracción:
 
@@ -958,11 +958,11 @@ Antes de publicar una extracción:
 
 ---
 
-# 16. `sourcetype`, `source` y `host`
+## 16. `sourcetype`, `source` y `host`
 
 Estos metadatos son esenciales para localizar la causa del problema.
 
-## 16.1 Revisar distribución
+#### 16.1 Revisar distribución
 
 ```spl
 index=curso earliest=0 latest=now
@@ -970,7 +970,7 @@ index=curso earliest=0 latest=now
 | sort - count
 ```
 
-## 16.2 Comparar campos por `sourcetype`
+#### 16.2 Comparar campos por `sourcetype`
 
 ```spl
 index=curso earliest=0 latest=now
@@ -982,7 +982,7 @@ index=curso earliest=0 latest=now
     by sourcetype
 ```
 
-## 16.3 Comparar `_raw` por fuente
+#### 16.3 Comparar `_raw` por fuente
 
 ```spl
 index=curso earliest=0 latest=now
@@ -993,7 +993,7 @@ index=curso earliest=0 latest=now
     by source
 ```
 
-## 16.4 El mismo archivo con varios `sourcetype`
+#### 16.4 El mismo archivo con varios `sourcetype`
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1010,11 +1010,11 @@ Si una misma fuente llega con varios `sourcetype`, pueden producirse:
 
 ---
 
-# 17. Revisar la configuración efectiva
+## 17. Revisar la configuración efectiva
 
 Como administrador, puedes revisar las configuraciones con `btool`.
 
-## 17.1 Revisar `props.conf`
+#### 17.1 Revisar `props.conf`
 
 ```bash
 sudo /opt/splunk/bin/splunk btool props list --debug
@@ -1026,19 +1026,19 @@ Filtrar por el `sourcetype` del curso:
 sudo /opt/splunk/bin/splunk btool props list web:csv --debug
 ```
 
-## 17.2 Revisar `transforms.conf`
+#### 17.2 Revisar `transforms.conf`
 
 ```bash
 sudo /opt/splunk/bin/splunk btool transforms list --debug
 ```
 
-## 17.3 Revisar entradas
+#### 17.3 Revisar entradas
 
 ```bash
 sudo /opt/splunk/bin/splunk btool inputs list --debug
 ```
 
-## 17.4 Buscar una configuración concreta
+#### 17.4 Buscar una configuración concreta
 
 ```bash
 sudo /opt/splunk/bin/splunk btool props list --debug \
@@ -1052,7 +1052,7 @@ impacto en otras fuentes y aplicaciones.
 
 ---
 
-# 18. Tipos de extracción reutilizable
+## 18. Tipos de extracción reutilizable
 
 Según el caso, una extracción puede implementarse mediante:
 
@@ -1075,9 +1075,9 @@ La elección depende de:
 - mantenimiento;
 - necesidad de almacenar o no el campo.
 
-## 18.1 Diferencia entre alias y extracción
+#### 18.1 Diferencia entre alias y extracción
 
-### Alias
+###### Alias
 
 Utiliza varios nombres para el mismo concepto.
 
@@ -1087,7 +1087,7 @@ Ejemplo conceptual:
 client_ip → clientip
 ```
 
-### Extracción
+###### Extracción
 
 Obtiene un valor desde `_raw` o desde la estructura del evento.
 
@@ -1107,7 +1107,7 @@ No utilices un alias para resolver un campo que nunca se ha extraído.
 
 ---
 
-# 19. Comprobar permisos y contexto
+## 19. Comprobar permisos y contexto
 
 Los campos creados como objetos de conocimiento pueden depender de:
 
@@ -1119,14 +1119,14 @@ Los campos creados como objetos de conocimiento pueden depender de:
 - usuario;
 - rol.
 
-## 19.1 Revisar el usuario actual
+#### 19.1 Revisar el usuario actual
 
 ```spl
 | rest /services/authentication/current-context
 | table username roles
 ```
 
-## 19.2 Comparar con un usuario final
+#### 19.2 Comparar con un usuario final
 
 Ejecuta la misma búsqueda con:
 
@@ -1146,7 +1146,7 @@ Campo visible:
 Resultado:
 ```
 
-## 19.3 Síntoma: Admin ve el campo y otro usuario no
+#### 19.3 Síntoma: Admin ve el campo y otro usuario no
 
 Comprueba:
 
@@ -1164,7 +1164,7 @@ del objeto o el rol necesario.
 
 ---
 
-# 20. Campos calculados y objetos compartidos
+## 20. Campos calculados y objetos compartidos
 
 Un campo puede estar definido como:
 
@@ -1175,7 +1175,7 @@ Un campo puede estar definido como:
 - objeto compartido con una aplicación;
 - objeto global.
 
-## 20.1 Problemas habituales
+#### 20.1 Problemas habituales
 
 - funciona para el propietario, pero no para otros usuarios;
 - funciona en Search, pero no en un dashboard;
@@ -1183,7 +1183,7 @@ Un campo puede estar definido como:
 - funciona en una búsqueda guardada, pero no en una alerta;
 - está definido en `local`, pero no en el entorno esperado.
 
-## 20.2 Lista de comprobación del objeto
+#### 20.2 Lista de comprobación del objeto
 
 Comprueba:
 
@@ -1200,7 +1200,7 @@ Comprueba:
 
 ---
 
-# 21. Campos multivalor
+## 21. Campos multivalor
 
 A veces un campo contiene varios valores.
 
@@ -1210,7 +1210,7 @@ Ejemplo conceptual:
 status=200 status=404
 ```
 
-## 21.1 Revisar el tipo de contenido
+#### 21.1 Revisar el tipo de contenido
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1218,7 +1218,7 @@ index=curso earliest=0 latest=now
 | head 20
 ```
 
-## 21.2 Contar valores
+#### 21.2 Contar valores
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1226,7 +1226,7 @@ index=curso earliest=0 latest=now
 | table _time status cantidad_status
 ```
 
-## 21.3 Seleccionar un valor
+#### 21.3 Seleccionar un valor
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1234,7 +1234,7 @@ index=curso earliest=0 latest=now
 | table status primer_status
 ```
 
-## 21.4 Unir valores
+#### 21.4 Unir valores
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1247,11 +1247,11 @@ utilizarse.
 
 ---
 
-# 22. Errores frecuentes con `table`
+## 22. Errores frecuentes con `table`
 
 `table` puede ocultar información durante la investigación.
 
-## 22.1 Consulta demasiado limitada
+#### 22.1 Consulta demasiado limitada
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1260,7 +1260,7 @@ index=curso earliest=0 latest=now
 
 Si el problema está en `source`, `sourcetype` o `_raw`, no los verás.
 
-## 22.2 Consulta recomendada para diagnóstico
+#### 22.2 Consulta recomendada para diagnóstico
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1282,7 +1282,7 @@ el panel o el reporte final.
 
 ---
 
-# 23. Diagnóstico de campos con una consulta unificada
+## 23. Diagnóstico de campos con una consulta unificada
 
 La siguiente búsqueda resume varios problemas de calidad:
 
@@ -1321,11 +1321,11 @@ Esta consulta no corrige la fuente. Solo ayuda a medir el problema.
 
 ---
 
-# 24. Procedimiento de corrección
+## 24. Procedimiento de corrección
 
 Aplica este orden:
 
-## Paso 1: guardar evidencia
+#### Paso 1: guardar evidencia
 
 Conserva:
 
@@ -1338,14 +1338,14 @@ Conserva:
 - aplicación;
 - resultado observado.
 
-## Paso 2: confirmar el origen
+#### Paso 2: confirmar el origen
 
 ```spl
 index=curso earliest=0 latest=now
 | stats count by index source sourcetype host
 ```
 
-## Paso 3: verificar si el dato existe
+#### Paso 3: verificar si el dato existe
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1353,7 +1353,7 @@ index=curso earliest=0 latest=now
 | head 20
 ```
 
-## Paso 4: probar una extracción temporal
+#### Paso 4: probar una extracción temporal
 
 Utiliza:
 
@@ -1369,7 +1369,7 @@ o:
 
 según el formato real.
 
-## Paso 5: validar cobertura
+#### Paso 5: validar cobertura
 
 Prueba:
 
@@ -1382,17 +1382,17 @@ Prueba:
 - valores nulos;
 - valor con espacios.
 
-## Paso 6: validar el tipo
+#### Paso 6: validar el tipo
 
 ```spl
 | eval status_num=tonumber(status)
 ```
 
-## Paso 7: decidir si hace falta una configuración reutilizable
+#### Paso 7: decidir si hace falta una configuración reutilizable
 
 Solo publícala si el patrón es estable y suficientemente probado.
 
-## Paso 8: publicar con alcance correcto
+#### Paso 8: publicar con alcance correcto
 
 Define:
 
@@ -1403,11 +1403,11 @@ Define:
 - documentación;
 - procedimiento de rollback.
 
-## Paso 9: repetir la prueba con el rol final
+#### Paso 9: repetir la prueba con el rol final
 
 No pruebes únicamente con `admin`.
 
-## Paso 10: documentar el cambio
+#### Paso 10: documentar el cambio
 
 Indica:
 
@@ -1422,7 +1422,7 @@ Indica:
 
 ---
 
-# 25. Tabla de diagnóstico
+## 25. Tabla de diagnóstico
 
 | Síntoma | Causa probable | Acción |
 |---|---|---|
@@ -1442,13 +1442,13 @@ Indica:
 
 ---
 
-# 26. Ejercicio práctico 1: comparar `_raw` y campos
+## 26. Ejercicio práctico 1: comparar `_raw` y campos
 
-## Objetivo
+#### Objetivo
 
 Determinar si el problema está en el evento o en la extracción.
 
-## Consulta
+#### Consulta
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1464,7 +1464,7 @@ index=curso earliest=0 latest=now
 | head 30
 ```
 
-## Preguntas
+#### Preguntas
 
 - ¿aparece `status` en `_raw`?
 - ¿aparece también como campo?
@@ -1474,9 +1474,9 @@ index=curso earliest=0 latest=now
 
 ---
 
-# 27. Ejercicio práctico 2: detectar campos ausentes y vacíos
+## 27. Ejercicio práctico 2: detectar campos ausentes y vacíos
 
-## Consulta
+#### Consulta
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1488,7 +1488,7 @@ index=curso earliest=0 latest=now
 | stats count by estado_status
 ```
 
-## Extensión
+#### Extensión
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1500,16 +1500,16 @@ index=curso earliest=0 latest=now
 | stats count by estado_uri
 ```
 
-## Entrega
+#### Entrega
 
 Documenta el número de eventos en cada categoría y explica si el problema parece
 de fuente, parsing o calidad de datos.
 
 ---
 
-# 28. Ejercicio práctico 3: normalizar nombres alternativos
+## 28. Ejercicio práctico 3: normalizar nombres alternativos
 
-## Consulta
+#### Consulta
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1526,7 +1526,7 @@ index=curso earliest=0 latest=now
 | sort - peticiones
 ```
 
-## Preguntas
+#### Preguntas
 
 - ¿qué nombre existe realmente?
 - ¿hay eventos con más de un nombre?
@@ -1535,9 +1535,9 @@ index=curso earliest=0 latest=now
 
 ---
 
-# 29. Ejercicio práctico 4: detectar tipos incorrectos
+## 29. Ejercicio práctico 4: detectar tipos incorrectos
 
-## Consulta
+#### Consulta
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1552,7 +1552,7 @@ index=curso earliest=0 latest=now
 | stats count by tipo_status
 ```
 
-## Preguntas
+#### Preguntas
 
 - ¿hay valores no numéricos?
 - ¿hay códigos fuera de rango?
@@ -1561,9 +1561,9 @@ index=curso earliest=0 latest=now
 
 ---
 
-# 30. Ejercicio práctico 5: probar `rex`
+## 30. Ejercicio práctico 5: probar `rex`
 
-## Consulta
+#### Consulta
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1580,7 +1580,7 @@ index=curso earliest=0 latest=now
 | head 30
 ```
 
-## Interpretación
+#### Interpretación
 
 Si `host_temp`, `status_temp` y `uri_temp` aparecen correctamente, pero los
 campos originales no, el problema está en la extracción reutilizable o en el
@@ -1588,9 +1588,9 @@ parsing asociado a la fuente.
 
 ---
 
-# 31. Ejercicio práctico 6: probar `spath`
+## 31. Ejercicio práctico 6: probar `spath`
 
-## Consulta
+#### Consulta
 
 ```spl
 index=curso sourcetype=json earliest=0 latest=now
@@ -1601,7 +1601,7 @@ index=curso sourcetype=json earliest=0 latest=now
 | head 20
 ```
 
-## Preguntas
+#### Preguntas
 
 - ¿el evento es JSON válido?
 - ¿las rutas son correctas?
@@ -1611,13 +1611,13 @@ index=curso sourcetype=json earliest=0 latest=now
 
 ---
 
-# 32. Ejercicio práctico 7: comprobar permisos
+## 32. Ejercicio práctico 7: comprobar permisos
 
-## Objetivo
+#### Objetivo
 
 Comprobar si el problema depende del usuario.
 
-## Con el administrador
+#### Con el administrador
 
 ```spl
 | rest /services/authentication/current-context
@@ -1633,7 +1633,7 @@ index=curso earliest=0 latest=now
 
 Después repite las mismas búsquedas con un usuario final.
 
-## Documenta
+#### Documenta
 
 ```text
 Usuario administrador:
@@ -1656,62 +1656,62 @@ permisos.
 
 ---
 
-# 33. Plantilla de documentación del problema
+## 33. Plantilla de documentación del problema
 
 ```markdown
-# Incidencia de campo
+## Incidencia de campo
 
-## Fecha
-
-Completar.
-
-## Usuario
+#### Fecha
 
 Completar.
 
-## Aplicación
+#### Usuario
 
 Completar.
 
-## Índice
+#### Aplicación
+
+Completar.
+
+#### Índice
 
 curso
 
-## Sourcetype
+#### Sourcetype
 
 Completar.
 
-## Source
+#### Source
 
 Completar.
 
-## Campo afectado
+#### Campo afectado
 
 Completar.
 
-## Síntoma
+#### Síntoma
 
 Describir el comportamiento.
 
-## Consulta original
+#### Consulta original
 
 ```spl
 Completar.
 ```
 
-## Evento `_raw`
+#### Evento `_raw`
 
 ```text
 Completar sin datos sensibles.
 ```
 
-## Campo extraído
+#### Campo extraído
 
 ```text
 Completar.
 ```
 
-## Diagnóstico
+#### Diagnóstico
 
 Indicar si el problema está en:
 
@@ -1723,44 +1723,44 @@ Indicar si el problema está en:
 - transformación;
 - permisos.
 
-## Prueba temporal
+#### Prueba temporal
 
 ```spl
 Completar.
 ```
 
-## Corrección aplicada
+#### Corrección aplicada
 
 Describirla.
 
-## Aplicación y alcance
+#### Aplicación y alcance
 
 Completar.
 
-## Permisos
+#### Permisos
 
 Completar.
 
-## Validación con varios eventos
+#### Validación con varios eventos
 
 Describirla.
 
-## Validación con el rol final
+#### Validación con el rol final
 
 Describirla.
 
-## Limitaciones
+#### Limitaciones
 
 Completar.
 
-## Rollback
+#### Rollback
 
 Describir cómo deshacer el cambio.
 ```
 
 ---
 
-# 34. Buenas prácticas
+## 34. Buenas prácticas
 
 - Compara siempre `_raw` con los campos extraídos.
 - Confirma índice y tiempo antes de investigar la extracción.
@@ -1786,7 +1786,7 @@ Describir cómo deshacer el cambio.
 
 ---
 
-# 35. Referencias oficiales
+## 35. Referencias oficiales
 
 - [Extracción de campos](https://docs.splunk.com/Documentation/Splunk/latest/Knowledge/Extractfields)
 - [Operaciones de búsqueda en tiempo de búsqueda](https://docs.splunk.com/Documentation/Splunk/latest/Knowledge/Searchtimeoperations)
@@ -1805,16 +1805,16 @@ Describir cómo deshacer el cambio.
 
 ---
 
-# 36. Lista de comprobación final
+## 36. Lista de comprobación final
 
-## Existencia de eventos
+#### Existencia de eventos
 
 - [ ] El índice es correcto.
 - [ ] El rango temporal contiene eventos.
 - [ ] El usuario puede buscar el índice.
 - [ ] Se ha comprobado `_raw`.
 
-## Extracción
+#### Extracción
 
 - [ ] El dato existe en `_raw`.
 - [ ] El `sourcetype` es correcto.
@@ -1823,7 +1823,7 @@ Describir cómo deshacer el cambio.
 - [ ] Se han probado varios eventos.
 - [ ] Se han comparado variantes de formato.
 
-## Calidad
+#### Calidad
 
 - [ ] Se han detectado campos ausentes.
 - [ ] Se han detectado campos vacíos.
@@ -1832,7 +1832,7 @@ Describir cómo deshacer el cambio.
 - [ ] Se han validado códigos HTTP.
 - [ ] Se han tratado los valores nulos.
 
-## Corrección
+#### Corrección
 
 - [ ] Se ha probado `rex` o `spath` temporalmente.
 - [ ] Se ha validado la cobertura.
@@ -1843,7 +1843,7 @@ Describir cómo deshacer el cambio.
 - [ ] Se han revisado los permisos.
 - [ ] Se ha preparado rollback.
 
-## Validación
+#### Validación
 
 - [ ] La prueba funciona con varios eventos.
 - [ ] Funciona para todas las fuentes previstas.

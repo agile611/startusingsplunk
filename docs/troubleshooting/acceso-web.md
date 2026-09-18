@@ -28,7 +28,7 @@ cerrado, y abrir un puerto no corrige un rol sin acceso al índice `curso`.
 
 ---
 
-# 1. Objetivos de la práctica
+## 1. Objetivos de la práctica
 
 Al finalizar esta guía, el asistente podrá:
 
@@ -50,7 +50,7 @@ Al finalizar esta guía, el asistente podrá:
 
 ---
 
-# 2. Entorno de referencia
+## 2. Entorno de referencia
 
 El laboratorio utiliza como referencia:
 
@@ -67,7 +67,7 @@ siempre los valores de la instancia antes de aplicar una corrección.
 
 ---
 
-# 3. Principio de diagnóstico por capas
+## 3. Principio de diagnóstico por capas
 
 La secuencia recomendada es:
 
@@ -85,61 +85,61 @@ La secuencia recomendada es:
 11. Índice y datos
 ```
 
-## 3.1 Servicio
+#### 3.1 Servicio
 
 Pregunta:
 
 > ¿Está ejecutándose Splunk y está activo `splunkd`?
 
-## 3.2 Puerto
+#### 3.2 Puerto
 
 Pregunta:
 
 > ¿Existe un proceso escuchando en el puerto esperado?
 
-## 3.3 Acceso local
+#### 3.3 Acceso local
 
 Pregunta:
 
 > ¿La propia máquina puede conectarse a Splunk Web?
 
-## 3.4 Red
+#### 3.4 Red
 
 Pregunta:
 
 > ¿El equipo cliente puede alcanzar el servidor?
 
-## 3.5 Proxy
+#### 3.5 Proxy
 
 Pregunta:
 
 > ¿Existe un proxy que intercepte o bloquee la conexión?
 
-## 3.6 TLS
+#### 3.6 TLS
 
 Pregunta:
 
 > ¿El cliente utiliza el protocolo correcto y confía en el certificado?
 
-## 3.7 Navegador
+#### 3.7 Navegador
 
 Pregunta:
 
 > ¿El problema depende de cookies, caché, extensiones o configuración local?
 
-## 3.8 Autenticación
+#### 3.8 Autenticación
 
 Pregunta:
 
 > ¿El usuario puede iniciar sesión?
 
-## 3.9 Autorización
+#### 3.9 Autorización
 
 Pregunta:
 
 > ¿El usuario tiene permisos para realizar la operación?
 
-## 3.10 Datos
+#### 3.10 Datos
 
 Pregunta:
 
@@ -148,11 +148,11 @@ Pregunta:
 
 ---
 
-# 4. Recopilar información inicial
+## 4. Recopilar información inicial
 
 Antes de cambiar configuraciones, recopila datos básicos.
 
-## 4.1 Identificar la versión
+#### 4.1 Identificar la versión
 
 ```bash
 /opt/splunk/bin/splunk version
@@ -164,7 +164,7 @@ Si el comando necesita privilegios:
 sudo /opt/splunk/bin/splunk version
 ```
 
-## 4.2 Identificar la ruta de instalación
+#### 4.2 Identificar la ruta de instalación
 
 ```bash
 echo "$SPLUNK_HOME"
@@ -176,7 +176,7 @@ Si la variable no está definida:
 ls -ld /opt/splunk
 ```
 
-## 4.3 Identificar el usuario del proceso
+#### 4.3 Identificar el usuario del proceso
 
 ```bash
 ps -eo user,pid,ppid,cmd | grep -i '[s]plunk'
@@ -188,7 +188,7 @@ Otra opción:
 pgrep -af splunk
 ```
 
-## 4.4 Identificar el servicio systemd
+#### 4.4 Identificar el servicio systemd
 
 ```bash
 systemctl list-units --type=service | grep -i splunk
@@ -206,7 +206,7 @@ Comprueba el estado:
 sudo systemctl status Splunkd
 ```
 
-## 4.5 Guardar información sin exponer secretos
+#### 4.5 Guardar información sin exponer secretos
 
 Puedes guardar una evidencia técnica:
 
@@ -230,11 +230,11 @@ Revisa el archivo antes de compartirlo. Elimina:
 
 ---
 
-# 5. Confirmar el servicio
+## 5. Confirmar el servicio
 
 Desde el servidor donde está instalado Splunk, comprueba el estado.
 
-## 5.1 Método preferente: systemd
+#### 5.1 Método preferente: systemd
 
 ```bash
 sudo systemctl status Splunkd
@@ -246,7 +246,7 @@ Resultado esperado:
 Active: active (running)
 ```
 
-## 5.2 Método mediante el binario de Splunk
+#### 5.2 Método mediante el binario de Splunk
 
 Si la instalación pertenece al usuario `splunk`:
 
@@ -263,7 +263,7 @@ sudo /opt/splunk/bin/splunk status --run-as-root
 El modo de ejecución debe ser coherente con el propietario real de la
 instalación.
 
-## 5.3 Descubrir el propietario de la instalación
+#### 5.3 Descubrir el propietario de la instalación
 
 ```bash
 stat -c '%U:%G %n' /opt/splunk
@@ -284,7 +284,7 @@ ps -eo user,pid,cmd | grep -i '[s]plunkd'
 No asumas que el usuario siempre se llama `splunk`. Puede variar según la forma
 en que se instaló la plataforma.
 
-## 5.4 Si el servicio no está activo
+#### 5.4 Si el servicio no está activo
 
 Consulta primero:
 
@@ -314,9 +314,9 @@ No continúes investigando el navegador hasta resolver el estado del servicio.
 
 ---
 
-# 6. Revisar los logs del servicio
+## 6. Revisar los logs del servicio
 
-## 6.1 `splunkd.log`
+#### 6.1 `splunkd.log`
 
 ```bash
 sudo tail -n 100 /opt/splunk/var/log/splunk/splunkd.log
@@ -331,7 +331,7 @@ sudo grep -iE \
   | tail -n 100
 ```
 
-## 6.2 `web_service.log`
+#### 6.2 `web_service.log`
 
 ```bash
 sudo tail -n 100 /opt/splunk/var/log/splunk/web_service.log
@@ -346,7 +346,7 @@ sudo grep -iE \
   | tail -n 100
 ```
 
-## 6.3 Ver logs en tiempo real
+#### 6.3 Ver logs en tiempo real
 
 ```bash
 sudo tail -f /opt/splunk/var/log/splunk/web_service.log
@@ -366,7 +366,7 @@ Para detener `tail`:
 Ctrl+C
 ```
 
-## 6.4 Revisar logs desde Splunk
+#### 6.4 Revisar logs desde Splunk
 
 Si la instancia está disponible para realizar búsquedas:
 
@@ -391,7 +391,7 @@ index=_internal earliest=-30m latest=now
 
 ---
 
-# 7. Confirmar el puerto local
+## 7. Confirmar el puerto local
 
 En la instalación de laboratorio, Splunk Web suele utilizar el puerto `8000` y
 la API de administración el `8089`.
@@ -412,9 +412,9 @@ Para el puerto de administración:
 sudo lsof -nP -iTCP:8089 -sTCP:LISTEN
 ```
 
-## 7.1 Interpretación
+#### 7.1 Interpretación
 
-### No aparece `8000`
+###### No aparece `8000`
 
 Posibles causas:
 
@@ -425,7 +425,7 @@ Posibles causas:
 - otro proceso impide la apertura;
 - el proceso escucha en otra dirección o protocolo.
 
-### Escucha en `127.0.0.1:8000`
+###### Escucha en `127.0.0.1:8000`
 
 Solo acepta conexiones desde el propio servidor.
 
@@ -435,16 +435,16 @@ Solo acepta conexiones desde el propio servidor.
 
 Una conexión desde otro equipo no funcionará directamente.
 
-### Escucha en `0.0.0.0:8000`
+###### Escucha en `0.0.0.0:8000`
 
 Puede aceptar conexiones IPv4 en las interfaces disponibles, siempre condicionado
 por el firewall y la configuración de red.
 
-### Escucha en una IP concreta
+###### Escucha en una IP concreta
 
 Solo acepta conexiones dirigidas a esa interfaz.
 
-### Otro proceso utiliza `8000`
+###### Otro proceso utiliza `8000`
 
 Comprueba el proceso:
 
@@ -462,11 +462,11 @@ No mates el proceso automáticamente. Primero identifica:
 
 ---
 
-# 8. Confirmar el puerto configurado
+## 8. Confirmar el puerto configurado
 
 No asumas que Splunk Web utiliza siempre `8000`.
 
-## 8.1 Revisar configuración mediante `btool`
+#### 8.1 Revisar configuración mediante `btool`
 
 ```bash
 sudo /opt/splunk/bin/splunk btool web list settings --debug
@@ -482,14 +482,14 @@ sudo /opt/splunk/bin/splunk btool web list settings \
 
 La sintaxis disponible puede variar según la versión y el modo de ejecución.
 
-## 8.2 Buscar referencias al puerto
+#### 8.2 Buscar referencias al puerto
 
 ```bash
 sudo /opt/splunk/bin/splunk btool web list --debug \
   | grep -iE 'httpport|mgmtHostPort|enableSplunkWeb'
 ```
 
-## 8.3 Revisar archivos de configuración
+#### 8.3 Revisar archivos de configuración
 
 Busca configuraciones relacionadas:
 
@@ -512,11 +512,11 @@ Primero identifica:
 
 ---
 
-# 9. Probar desde el propio servidor
+## 9. Probar desde el propio servidor
 
 Comprueba primero el acceso local. Esta prueba elimina muchos problemas de red.
 
-## 9.1 HTTP
+#### 9.1 HTTP
 
 ```bash
 curl -I http://127.0.0.1:8000
@@ -528,7 +528,7 @@ También puedes solicitar el contenido:
 curl -v http://127.0.0.1:8000/
 ```
 
-## 9.2 HTTPS
+#### 9.2 HTTPS
 
 Si Splunk Web está configurado con HTTPS:
 
@@ -539,7 +539,7 @@ curl -vk https://127.0.0.1:8000/
 El parámetro `-k` permite diagnosticar certificados no confiables. No debe ser la
 solución permanente de seguridad.
 
-## 9.3 Qué significa una respuesta HTTP
+#### 9.3 Qué significa una respuesta HTTP
 
 Una respuesta como cualquiera de las siguientes demuestra que existe un servicio
 respondiendo:
@@ -569,7 +569,7 @@ Connection timed out
 
 apunta más frecuentemente a red, firewall o ruta.
 
-## 9.4 Ver cabeceras y redirecciones
+#### 9.4 Ver cabeceras y redirecciones
 
 ```bash
 curl -vkI http://127.0.0.1:8000
@@ -585,7 +585,7 @@ No compartas las cabeceras si contienen información sensible.
 
 ---
 
-# 10. Probar desde el equipo cliente
+## 10. Probar desde el equipo cliente
 
 Desde el ordenador del asistente, utiliza el nombre o IP reales del servidor.
 
@@ -599,7 +599,7 @@ Si se utiliza HTTPS:
 curl -k -I https://NOMBRE_O_IP:8000
 ```
 
-## 10.1 Comparar acceso local y remoto
+#### 10.1 Comparar acceso local y remoto
 
 | Prueba | Resultado | Interpretación |
 |---|---|---|
@@ -609,7 +609,7 @@ curl -k -I https://NOMBRE_O_IP:8000
 | Login aparece | Web accesible | Investigar autenticación |
 | Login correcto, sin datos | Web y autenticación funcionan | Investigar roles, índice o tiempo |
 
-## 10.2 Resolver el nombre
+#### 10.2 Resolver el nombre
 
 ```bash
 getent hosts NOMBRE_O_IP
@@ -635,7 +635,7 @@ curl -I http://IP_DEL_SERVIDOR:8000
 
 No confundas un error DNS con un problema de Splunk.
 
-## 10.3 Probar conectividad TCP
+#### 10.3 Probar conectividad TCP
 
 ```bash
 nc -vz NOMBRE_O_IP 8000
@@ -665,9 +665,9 @@ Una conexión TCP correcta no demuestra que:
 
 ---
 
-# 11. Interpretar errores de red
+## 11. Interpretar errores de red
 
-## `Connection refused`
+#### `Connection refused`
 
 Significa normalmente que:
 
@@ -686,7 +686,7 @@ sudo ss -ltnp | grep ':8000'
 sudo systemctl status Splunkd
 ```
 
-## `Connection timed out`
+#### `Connection timed out`
 
 Significa normalmente que:
 
@@ -711,7 +711,7 @@ nc -vz NOMBRE_O_IP 8000
 sudo ufw status verbose
 ```
 
-## `No route to host`
+#### `No route to host`
 
 Indica un problema de red, enrutamiento o direccionamiento.
 
@@ -731,7 +731,7 @@ Desde el cliente:
 ip route get IP_DEL_SERVIDOR
 ```
 
-## `Could not resolve host`
+#### `Could not resolve host`
 
 Indica un problema de resolución de nombres.
 
@@ -745,23 +745,23 @@ y luego utiliza directamente la IP para separar DNS de Splunk.
 
 ---
 
-# 12. Firewall y red
+## 12. Firewall y red
 
 Comprueba las reglas del sistema operativo y de la red del laboratorio.
 
-## 12.1 Estado de UFW
+#### 12.1 Estado de UFW
 
 ```bash
 sudo ufw status verbose
 ```
 
-## 12.2 Reglas numeradas
+#### 12.2 Reglas numeradas
 
 ```bash
 sudo ufw status numbered
 ```
 
-## 12.3 Revisar nftables
+#### 12.3 Revisar nftables
 
 Ubuntu puede utilizar nftables como infraestructura de filtrado:
 
@@ -771,7 +771,7 @@ sudo nft list ruleset
 
 Utiliza esta consulta con precaución y respeta las políticas del entorno.
 
-## 12.4 Abrir Splunk Web de forma limitada
+#### 12.4 Abrir Splunk Web de forma limitada
 
 Si necesitas abrir el acceso desde una red de formación:
 
@@ -793,7 +793,7 @@ sudo ufw allow 8000/tcp
 
 La regla exacta depende de la topología y de la política del laboratorio.
 
-## 12.5 Proteger el puerto 8089
+#### 12.5 Proteger el puerto 8089
 
 No abras `8089` al exterior como solución a un problema de navegador.
 
@@ -805,7 +805,7 @@ Es un puerto de administración y debe limitarse a:
 - túnel seguro;
 - firewall controlado.
 
-## 12.6 Abrir el puerto 9997 solo si se utilizan forwarders
+#### 12.6 Abrir el puerto 9997 solo si se utilizan forwarders
 
 ```bash
 sudo ufw allow from <RED_FORWARDERS> to any port 9997 proto tcp
@@ -813,7 +813,7 @@ sudo ufw allow from <RED_FORWARDERS> to any port 9997 proto tcp
 
 ---
 
-# 13. HTTP, HTTPS y TLS
+## 13. HTTP, HTTPS y TLS
 
 El esquema utilizado debe coincidir con la configuración:
 
@@ -827,19 +827,19 @@ o:
 https://NOMBRE_O_IP:8000
 ```
 
-## 13.1 Probar HTTP
+#### 13.1 Probar HTTP
 
 ```bash
 curl -v http://NOMBRE_O_IP:8000/
 ```
 
-## 13.2 Probar HTTPS
+#### 13.2 Probar HTTPS
 
 ```bash
 curl -vk https://NOMBRE_O_IP:8000/
 ```
 
-## 13.3 Error `wrong version number`
+#### 13.3 Error `wrong version number`
 
 Este error suele aparecer cuando:
 
@@ -858,7 +858,7 @@ curl -v http://127.0.0.1:8000/
 curl -vk https://127.0.0.1:8000/
 ```
 
-## 13.4 Error de certificado no confiable
+#### 13.4 Error de certificado no confiable
 
 Puede deberse a:
 
@@ -877,7 +877,7 @@ curl -vk https://127.0.0.1:8000/
 
 No copies claves privadas ni certificados sensibles en el material del curso.
 
-## 13.5 Inspeccionar un certificado
+#### 13.5 Inspeccionar un certificado
 
 ```bash
 openssl s_client \
@@ -905,7 +905,7 @@ Comprueba:
 - nombres alternativos;
 - cadena de confianza.
 
-## 13.6 Causas de nombre no coincidente
+#### 13.6 Causas de nombre no coincidente
 
 El navegador puede advertir si se accede mediante:
 
@@ -923,7 +923,7 @@ En ese caso, el nombre utilizado y el certificado no coinciden.
 
 ---
 
-# 14. Tabla de síntomas TLS
+## 14. Tabla de síntomas TLS
 
 | Síntoma | Posible causa | Comprobación |
 |---|---|---|
@@ -937,7 +937,7 @@ En ese caso, el nombre utilizado y el certificado no coinciden.
 
 ---
 
-# 15. Proxy del navegador
+## 15. Proxy del navegador
 
 Un proxy puede impedir el acceso a una IP privada, cambiar el esquema o
 redirigir la conexión.
@@ -952,7 +952,7 @@ Si el acceso local funciona pero el navegador no:
 6. revisa la consola de desarrollador;
 7. comprueba si los recursos se cargan desde otro hostname.
 
-## 15.1 Variables de proxy en Linux
+#### 15.1 Variables de proxy en Linux
 
 ```bash
 env | grep -i proxy
@@ -967,7 +967,7 @@ ALL_PROXY
 NO_PROXY
 ```
 
-## 15.2 Probar sin proxy
+#### 15.2 Probar sin proxy
 
 En un entorno controlado:
 
@@ -979,7 +979,7 @@ Si esta prueba funciona y la normal no, el proxy es una hipótesis relevante.
 
 No desactives permanentemente el proxy corporativo.
 
-## 15.3 Excepción de laboratorio
+#### 15.3 Excepción de laboratorio
 
 La excepción debe aplicarse únicamente:
 
@@ -990,7 +990,7 @@ La excepción debe aplicarse únicamente:
 
 ---
 
-# 16. Navegador, caché y cookies
+## 16. Navegador, caché y cookies
 
 Cuando Splunk Web muestra:
 
@@ -1016,7 +1016,7 @@ El navegador no debe ser la primera hipótesis si `curl` tampoco puede conectar.
 
 ---
 
-# 17. Autenticación
+## 17. Autenticación
 
 Si aparece la pantalla de login, la conectividad web ya funciona.
 
@@ -1030,7 +1030,7 @@ A partir de ese momento, separa:
 - sesión o cookies inválidas;
 - problema de autorización posterior al login.
 
-## 17.1 Probar una sesión limpia
+#### 17.1 Probar una sesión limpia
 
 - abre una ventana privada;
 - utiliza la URL correcta;
@@ -1038,7 +1038,7 @@ A partir de ese momento, separa:
 - verifica que no estás entrando en otra instancia;
 - confirma el nombre o IP del servidor.
 
-## 17.2 No introducir secretos en la terminal
+#### 17.2 No introducir secretos en la terminal
 
 Evita:
 
@@ -1054,7 +1054,7 @@ La contraseña puede quedar en:
 - capturas;
 - herramientas de auditoría.
 
-## 17.3 Revisar contexto del usuario desde SPL
+#### 17.3 Revisar contexto del usuario desde SPL
 
 Después de iniciar sesión:
 
@@ -1063,15 +1063,15 @@ Después de iniciar sesión:
 | table username roles
 ```
 
-## 17.4 Diferencia entre autenticación y autorización
+#### 17.4 Diferencia entre autenticación y autorización
 
-### Autenticación
+###### Autenticación
 
 Responde:
 
 > ¿Quién eres?
 
-### Autorización
+###### Autorización
 
 Responde:
 
@@ -1088,9 +1088,9 @@ Un usuario puede autenticarse correctamente y no tener acceso a:
 
 ---
 
-# 18. Autorización y permisos
+## 18. Autorización y permisos
 
-## 18.1 Usuario autenticado, pero sin datos
+#### 18.1 Usuario autenticado, pero sin datos
 
 Prueba una búsqueda mínima:
 
@@ -1106,14 +1106,14 @@ Si no devuelve eventos, comprueba:
 - que el intervalo temporal es correcto;
 - que los eventos realmente están indexados.
 
-## 18.2 Revisar roles
+#### 18.2 Revisar roles
 
 ```spl
 | rest /services/authentication/current-context
 | table username roles
 ```
 
-## 18.3 Revisar el índice
+#### 18.3 Revisar el índice
 
 ```spl
 | rest /services/data/indexes
@@ -1121,7 +1121,7 @@ Si no devuelve eventos, comprueba:
 | table title disabled totalEventCount currentDBSizeMB
 ```
 
-## 18.4 Revisar objetos de conocimiento
+#### 18.4 Revisar objetos de conocimiento
 
 Los dashboards, reportes y alertas pueden tener permisos propios.
 
@@ -1134,7 +1134,7 @@ Comprueba:
 - dependencia de búsquedas privadas;
 - acceso al índice utilizado.
 
-## 18.5 Síntoma `403`
+#### 18.5 Síntoma `403`
 
 Un `403 Forbidden` suele indicar:
 
@@ -1149,7 +1149,7 @@ No lo trates como un problema de contraseña sin revisar los permisos.
 
 ---
 
-# 19. Tabla de códigos HTTP
+## 19. Tabla de códigos HTTP
 
 | Código | Interpretación habitual | Siguiente acción |
 |---:|---|---|
@@ -1168,94 +1168,94 @@ No lo trates como un problema de contraseña sin revisar los permisos.
 
 ---
 
-# 20. Procedimiento completo de diagnóstico
+## 20. Procedimiento completo de diagnóstico
 
 Ejecuta las comprobaciones en orden.
 
-## Paso 1: versión
+#### Paso 1: versión
 
 ```bash
 /opt/splunk/bin/splunk version
 ```
 
-## Paso 2: usuario del proceso
+#### Paso 2: usuario del proceso
 
 ```bash
 ps -eo user,pid,cmd | grep -i '[s]plunkd'
 ```
 
-## Paso 3: estado del servicio
+#### Paso 3: estado del servicio
 
 ```bash
 sudo systemctl status Splunkd --no-pager
 ```
 
-## Paso 4: puertos
+#### Paso 4: puertos
 
 ```bash
 sudo ss -ltnp | grep -E ':8000|:8089'
 ```
 
-## Paso 5: prueba local HTTP
+#### Paso 5: prueba local HTTP
 
 ```bash
 curl -vI http://127.0.0.1:8000
 ```
 
-## Paso 6: prueba local HTTPS
+#### Paso 6: prueba local HTTPS
 
 ```bash
 curl -vkI https://127.0.0.1:8000
 ```
 
-## Paso 7: prueba desde cliente
+#### Paso 7: prueba desde cliente
 
 ```bash
 curl -vI http://NOMBRE_O_IP:8000
 ```
 
-## Paso 8: resolución de nombre
+#### Paso 8: resolución de nombre
 
 ```bash
 getent hosts NOMBRE_O_IP
 ```
 
-## Paso 9: conectividad TCP
+#### Paso 9: conectividad TCP
 
 ```bash
 nc -vz NOMBRE_O_IP 8000
 ```
 
-## Paso 10: firewall
+#### Paso 10: firewall
 
 ```bash
 sudo ufw status verbose
 ```
 
-## Paso 11: logs del servicio
+#### Paso 11: logs del servicio
 
 ```bash
 sudo tail -n 100 /opt/splunk/var/log/splunk/splunkd.log
 ```
 
-## Paso 12: logs de Web
+#### Paso 12: logs de Web
 
 ```bash
 sudo tail -n 100 /opt/splunk/var/log/splunk/web_service.log
 ```
 
-## Paso 13: autenticación
+#### Paso 13: autenticación
 
 Después de llegar a la pantalla de login, prueba una sesión limpia.
 
-## Paso 14: autorización
+#### Paso 14: autorización
 
 ```spl
 | rest /services/authentication/current-context
 | table username roles
 ```
 
-## Paso 15: datos
+#### Paso 15: datos
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1264,9 +1264,9 @@ index=curso earliest=0 latest=now
 
 ---
 
-# 21. Interpretación rápida
+## 21. Interpretación rápida
 
-## Caso A: no hay servicio ni puerto
+#### Caso A: no hay servicio ni puerto
 
 ```text
 systemctl: inactive
@@ -1288,7 +1288,7 @@ Consultar splunk-no-inicia.md y los logs de arranque.
 
 ---
 
-## Caso B: servicio activo, pero no hay puerto `8000`
+#### Caso B: servicio activo, pero no hay puerto `8000`
 
 ```text
 systemctl: active
@@ -1317,7 +1317,7 @@ sudo tail -n 100 /opt/splunk/var/log/splunk/web_service.log
 
 ---
 
-## Caso C: local funciona, remoto falla
+#### Caso C: local funciona, remoto falla
 
 ```text
 curl local: 200 o 302
@@ -1343,7 +1343,7 @@ nc -vz IP_DEL_SERVIDOR 8000
 
 ---
 
-## Caso D: navegador muestra aviso TLS
+#### Caso D: navegador muestra aviso TLS
 
 ```text
 curl -k: responde
@@ -1369,7 +1369,7 @@ openssl s_client \
 
 ---
 
-## Caso E: login funciona, pero no aparecen datos
+#### Caso E: login funciona, pero no aparecen datos
 
 ```text
 Splunk Web: accesible
@@ -1402,13 +1402,13 @@ index=curso earliest=0 latest=now
 
 ---
 
-# 22. Ejercicio práctico 1: diagnóstico local
+## 22. Ejercicio práctico 1: diagnóstico local
 
-## Objetivo
+#### Objetivo
 
 Determinar si el problema está en el servicio, el puerto o el navegador.
 
-## Pasos
+#### Pasos
 
 ```bash
 sudo systemctl status Splunkd --no-pager
@@ -1422,7 +1422,7 @@ sudo ss -ltnp | grep -E ':8000|:8089'
 curl -vI http://127.0.0.1:8000
 ```
 
-## Entrega
+#### Entrega
 
 Documenta:
 
@@ -1435,13 +1435,13 @@ Documenta:
 
 ---
 
-# 23. Ejercicio práctico 2: diagnóstico desde cliente
+## 23. Ejercicio práctico 2: diagnóstico desde cliente
 
-## Objetivo
+#### Objetivo
 
 Diferenciar DNS, red y servicio.
 
-## Pasos
+#### Pasos
 
 Desde el equipo cliente:
 
@@ -1463,7 +1463,7 @@ Después repite utilizando la IP:
 curl -vI http://IP_DEL_SERVIDOR:8000
 ```
 
-## Preguntas
+#### Preguntas
 
 - ¿resuelve el nombre?
 - ¿funciona la IP?
@@ -1474,13 +1474,13 @@ curl -vI http://IP_DEL_SERVIDOR:8000
 
 ---
 
-# 24. Ejercicio práctico 3: HTTP frente a HTTPS
+## 24. Ejercicio práctico 3: HTTP frente a HTTPS
 
-## Objetivo
+#### Objetivo
 
 Identificar el esquema correcto.
 
-## Pasos
+#### Pasos
 
 ```bash
 curl -vI http://127.0.0.1:8000
@@ -1490,7 +1490,7 @@ curl -vI http://127.0.0.1:8000
 curl -vkI https://127.0.0.1:8000
 ```
 
-## Interpretación
+#### Interpretación
 
 - Si HTTP responde y HTTPS falla, probablemente el puerto utiliza HTTP.
 - Si HTTPS responde y HTTP falla, probablemente el puerto utiliza HTTPS.
@@ -1499,13 +1499,13 @@ curl -vkI https://127.0.0.1:8000
 
 ---
 
-# 25. Ejercicio práctico 4: permisos y autorización
+## 25. Ejercicio práctico 4: permisos y autorización
 
-## Objetivo
+#### Objetivo
 
 Separar login correcto de acceso a datos.
 
-## Pasos
+#### Pasos
 
 Después de iniciar sesión:
 
@@ -1529,7 +1529,7 @@ index=curso earliest=0 latest=now
 | stats count
 ```
 
-## Preguntas
+#### Preguntas
 
 - ¿qué usuario está conectado?
 - ¿qué roles tiene?
@@ -1540,109 +1540,109 @@ index=curso earliest=0 latest=now
 
 ---
 
-# 26. Ejercicio práctico 5: elaborar un informe de diagnóstico
+## 26. Ejercicio práctico 5: elaborar un informe de diagnóstico
 
 Utiliza la siguiente plantilla:
 
 ```markdown
-# Informe de diagnóstico de Splunk Web
+## Informe de diagnóstico de Splunk Web
 
-## Fecha
-
-Completar.
-
-## Servidor
+#### Fecha
 
 Completar.
 
-## Versión de Splunk
+#### Servidor
 
 Completar.
 
-## Usuario del proceso
+#### Versión de Splunk
 
 Completar.
 
-## Estado de Splunkd
+#### Usuario del proceso
 
 Completar.
 
-## Puerto de Splunk Web
+#### Estado de Splunkd
 
 Completar.
 
-## Dirección de escucha
+#### Puerto de Splunk Web
 
 Completar.
 
-## Prueba local
+#### Dirección de escucha
 
 Completar.
 
-## Prueba remota
+#### Prueba local
 
 Completar.
 
-## Esquema utilizado
+#### Prueba remota
+
+Completar.
+
+#### Esquema utilizado
 
 HTTP o HTTPS.
 
-## Resultado TLS
+#### Resultado TLS
 
 Completar.
 
-## Resolución DNS
+#### Resolución DNS
 
 Completar.
 
-## Conectividad TCP
+#### Conectividad TCP
 
 Completar.
 
-## Firewall
+#### Firewall
 
 Completar.
 
-## Proxy
+#### Proxy
 
 Completar.
 
-## Autenticación
+#### Autenticación
 
 Completar.
 
-## Autorización
+#### Autorización
 
 Completar.
 
-## Índice `curso`
+#### Índice `curso`
 
 Completar.
 
-## Evidencias
+#### Evidencias
 
 Indicar comandos y capturas utilizadas.
 
-## Diagnóstico final
+#### Diagnóstico final
 
 Indicar la capa en la que se encontró el problema.
 
-## Acción aplicada
+#### Acción aplicada
 
 Describir el cambio realizado.
 
-## Validación posterior
+#### Validación posterior
 
 Describir cómo se comprobó la solución.
 
-## Limitaciones
+#### Limitaciones
 
 Indicar cualquier aspecto no validado.
 ```
 
 ---
 
-# 27. Buenas prácticas
+## 27. Buenas prácticas
 
 - Comprueba el servicio antes de cambiar credenciales.
 - Comprueba el puerto antes de modificar el navegador.
@@ -1664,7 +1664,7 @@ Indicar cualquier aspecto no validado.
 
 ---
 
-# 28. Tabla rápida de diagnóstico
+## 28. Tabla rápida de diagnóstico
 
 | Síntoma | Comprobación inicial | Siguiente acción |
 |---|---|---|
@@ -1682,9 +1682,9 @@ Indicar cualquier aspecto no validado.
 
 ---
 
-# 29. Referencias oficiales
+## 29. Referencias oficiales
 
-## Splunk
+#### Splunk
 
 - [Puertos de Splunk](https://docs.splunk.com/Documentation/Splunk/latest/Installation/Ports)
 - [Configuración del servidor](https://docs.splunk.com/Documentation/Splunk/latest/Admin/Serverconf)
@@ -1697,7 +1697,7 @@ Indicar cualquier aspecto no validado.
 - [Usuarios y roles](https://docs.splunk.com/Documentation/Splunk/latest/Security/Aboutusersandroles)
 - [Knowledge Objects](https://docs.splunk.com/Documentation/Splunk/latest/Knowledge/Aboutknowledgeobjects)
 
-## Ubuntu
+#### Ubuntu
 
 - [Ubuntu Server Documentation](https://documentation.ubuntu.com/server/)
 - [Systemd en Ubuntu](https://documentation.ubuntu.com/server/explanation/systemd/)
