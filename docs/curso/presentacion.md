@@ -45,7 +45,7 @@ Decisión operativa
 
 ---
 
-# 1. Entorno de referencia
+## 1. Entorno de referencia
 
 El entorno de referencia del curso es una instalación manual de:
 
@@ -68,9 +68,9 @@ La instancia se ejecuta como un laboratorio mononodo: el mismo equipo proporcion
 Esta arquitectura es suficiente para aprender los conceptos fundamentales sin
 añadir inicialmente la complejidad de varios indexers, search heads o forwarders.
 
-## 1.1 Componentes principales
+#### 1.1 Componentes principales
 
-### `splunkd`
+###### `splunkd`
 
 Es el proceso principal de Splunk Enterprise. Gestiona, entre otras funciones:
 
@@ -82,7 +82,7 @@ Es el proceso principal de Splunk Enterprise. Gestiona, entre otras funciones:
 - configuración;
 - comunicación interna.
 
-### Splunk Web
+###### Splunk Web
 
 Es la interfaz web desde la que se realizan las tareas del curso.
 
@@ -95,7 +95,7 @@ http://localhost:8000
 La URL y el protocolo pueden variar si se ha configurado HTTPS o un puerto
 diferente.
 
-### Índice
+###### Índice
 
 El índice es el destino lógico donde Splunk almacena los eventos.
 
@@ -105,7 +105,7 @@ En este curso se utiliza principalmente:
 curso
 ```
 
-### SPL
+###### SPL
 
 SPL es el lenguaje de búsqueda de Splunk. Permite:
 
@@ -119,7 +119,7 @@ SPL es el lenguaje de búsqueda de Splunk. Permite:
 
 ---
 
-# 2. Qué aprenderás
+## 2. Qué aprenderás
 
 Durante el curso aprenderás a:
 
@@ -161,7 +161,7 @@ Durante el curso aprenderás a:
 
 ---
 
-# 3. Objetivo práctico del curso
+## 3. Objetivo práctico del curso
 
 Al terminar el curso, deberás ser capaz de construir una solución básica de
 monitorización web.
@@ -195,7 +195,7 @@ La respuesta debe estar respaldada por:
 
 ---
 
-# 4. Dataset de prácticas
+## 4. Dataset de prácticas
 
 El dataset básico del curso es:
 
@@ -215,7 +215,7 @@ También puede consultarse la documentación de:
 recursos/datasets.md
 ```
 
-## 4.1 Campos básicos
+#### 4.1 Campos básicos
 
 El dataset mínimo contiene:
 
@@ -236,7 +236,7 @@ timestamp,host,method,status,uri
 2026-01-01T00:02:00Z,web-02,POST,500,/api/users
 ```
 
-## 4.2 Campos opcionales
+#### 4.2 Campos opcionales
 
 Algunas actividades pueden utilizar una fuente ampliada con:
 
@@ -265,7 +265,7 @@ index=curso earliest=0 latest=now
 | head 20
 ```
 
-## 4.3 Limitaciones del dataset
+#### 4.3 Limitaciones del dataset
 
 Si el campo `client_ip` no existe, documenta:
 
@@ -281,7 +281,7 @@ Si el campo `response_time` no existe, documenta:
 No inventes resultados para campos que no están presentes. Una limitación
 documentada es mejor que una métrica aparentemente precisa pero incorrecta.
 
-## 4.4 Timestamp del dataset
+#### 4.4 Timestamp del dataset
 
 El dataset de referencia contiene eventos del:
 
@@ -318,7 +318,7 @@ fecha de carga del archivo.
 
 ---
 
-# 5. Método de trabajo
+## 5. Método de trabajo
 
 Cada bloque sigue este ciclo:
 
@@ -330,7 +330,7 @@ Cada bloque sigue este ciclo:
 6. Relacionar lo aprendido con un caso de operaciones, seguridad o soporte.
 7. Documentar la consulta y sus limitaciones.
 
-## 5.1 Preguntas que debes hacerte siempre
+#### 5.1 Preguntas que debes hacerte siempre
 
 Antes de aceptar un resultado, comprueba:
 
@@ -345,7 +345,7 @@ Antes de aceptar un resultado, comprueba:
 - ¿El resultado responde a la pregunta original?
 - ¿Qué limitaciones tiene el dataset?
 
-## 5.2 Flujo mínimo de validación
+#### 5.2 Flujo mínimo de validación
 
 Utiliza este orden:
 
@@ -377,9 +377,9 @@ basada en un rango temporal equivocado o en campos mal extraídos.
 
 ---
 
-# 6. Primer contacto con la instancia
+## 6. Primer contacto con la instancia
 
-## 6.1 Comprobar la versión
+#### 6.1 Comprobar la versión
 
 En Ubuntu:
 
@@ -387,13 +387,13 @@ En Ubuntu:
 /opt/splunk/bin/splunk version
 ```
 
-## 6.2 Comprobar el servicio
+#### 6.2 Comprobar el servicio
 
 ```bash
 sudo systemctl status Splunkd --no-pager
 ```
 
-## 6.3 Comprobar Splunk Web
+#### 6.3 Comprobar Splunk Web
 
 ```bash
 curl -I http://127.0.0.1:8000
@@ -405,7 +405,7 @@ Después accede desde el navegador:
 http://localhost:8000
 ```
 
-## 6.4 Comprobar los puertos
+#### 6.4 Comprobar los puertos
 
 ```bash
 sudo ss -ltnp | grep -E ':8000|:8089'
@@ -426,7 +426,7 @@ específico de Splunk Web, TLS, puerto o proxy.
 
 ---
 
-# 7. Primera búsqueda
+## 7. Primera búsqueda
 
 Cuando Splunk Web esté disponible, ejecuta:
 
@@ -448,7 +448,7 @@ index=curso earliest=0 latest=now
     latest(_time) as ultimo_evento
 ```
 
-## 7.1 Interpretación
+#### 7.1 Interpretación
 
 | Resultado | Interpretación |
 |---|---|
@@ -458,7 +458,7 @@ index=curso earliest=0 latest=now
 | Hay eventos, pero faltan campos | Revisar parsing y extracciones |
 | Hay eventos, pero los filtros no coinciden | Revisar valores y tipos de datos |
 
-## 7.2 Revisar eventos
+#### 7.2 Revisar eventos
 
 ```spl
 index=curso earliest=0 latest=now
@@ -477,9 +477,9 @@ index=curso earliest=0 latest=now
 
 ---
 
-# 8. Conceptos fundamentales
+## 8. Conceptos fundamentales
 
-## 8.1 Evento
+#### 8.1 Evento
 
 Un evento es una unidad de información indexada por Splunk.
 
@@ -492,7 +492,7 @@ Puede representar:
 - una transacción;
 - un mensaje de aplicación.
 
-## 8.2 `_raw`
+#### 8.2 `_raw`
 
 Contiene el evento original tal como lo recibió Splunk.
 
@@ -512,13 +512,13 @@ index=curso earliest=0 latest=now
 | head 20
 ```
 
-## 8.3 `_time`
+#### 8.3 `_time`
 
 Es la marca temporal asignada al evento.
 
 El selector temporal de Splunk utiliza principalmente `_time`.
 
-## 8.4 `_indextime`
+#### 8.4 `_indextime`
 
 Es el momento en que el evento se indexó.
 
@@ -543,21 +543,21 @@ index=curso earliest=0 latest=now
 | head 20
 ```
 
-## 8.5 `source`
+#### 8.5 `source`
 
 Identifica el origen del evento, como un archivo o una entrada.
 
-## 8.6 `sourcetype`
+#### 8.6 `sourcetype`
 
 Describe el tipo de datos y ayuda a aplicar reglas de interpretación.
 
-## 8.7 `host`
+#### 8.7 `host`
 
 Identifica el sistema o entidad asociada al evento.
 
 ---
 
-# 9. Administración durante el laboratorio
+## 9. Administración durante el laboratorio
 
 El curso utiliza acceso administrativo a Splunk para facilitar:
 
@@ -571,7 +571,7 @@ El curso utiliza acceso administrativo a Splunk para facilitar:
 Sin embargo, ser `admin` dentro de Splunk no equivale automáticamente a ser
 administrador de Ubuntu.
 
-## 9.1 Diferencia de permisos
+#### 9.1 Diferencia de permisos
 
 | Contexto | Ejemplo | Qué controla |
 |---|---|---|
@@ -588,7 +588,7 @@ sudo systemctl status Splunkd
 
 se necesitan permisos de Ubuntu, no solo el rol `admin` de Splunk.
 
-## 9.2 Principio de mínimo privilegio
+#### 9.2 Principio de mínimo privilegio
 
 En un entorno real, no todos los usuarios deben ser `admin`.
 
@@ -605,9 +605,9 @@ con el rol operativo previsto.
 
 ---
 
-# 10. Prácticas principales
+## 10. Prácticas principales
 
-## Práctica 1: validar la instancia
+#### Práctica 1: validar la instancia
 
 Objetivo:
 
@@ -638,7 +638,7 @@ Búsqueda:
 
 ---
 
-## Práctica 2: validar el índice
+#### Práctica 2: validar el índice
 
 Objetivo:
 
@@ -663,7 +663,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## Práctica 3: revisar el rango temporal
+#### Práctica 3: revisar el rango temporal
 
 Objetivo:
 
@@ -684,7 +684,7 @@ Después utiliza el intervalo real del dataset.
 
 ---
 
-## Práctica 4: revisar los campos
+#### Práctica 4: revisar los campos
 
 Objetivo:
 
@@ -709,7 +709,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## Práctica 5: normalizar códigos HTTP
+#### Práctica 5: normalizar códigos HTTP
 
 Objetivo:
 
@@ -732,7 +732,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## Práctica 6: errores por URI
+#### Práctica 6: errores por URI
 
 Objetivo:
 
@@ -750,7 +750,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## Práctica 7: evolución temporal
+#### Práctica 7: evolución temporal
 
 Objetivo:
 
@@ -772,50 +772,50 @@ index=curso earliest=0 latest=now
 
 ---
 
-# 11. Documentación de las prácticas
+## 11. Documentación de las prácticas
 
 Para cada práctica utiliza este formato:
 
 ```markdown
-## Nombre de la práctica
+#### Nombre de la práctica
 
-### Objetivo
+###### Objetivo
 
 Describir qué se quiere comprobar.
 
-### Índice
+###### Índice
 
 ```text
 curso
 ```
 
-### Rango temporal
+###### Rango temporal
 
 Describir el intervalo utilizado.
 
-### SPL
+###### SPL
 
 ```spl
 Pegar aquí la consulta.
 ```
 
-### Resultado esperado
+###### Resultado esperado
 
 Describir qué debería mostrar.
 
-### Resultado observado
+###### Resultado observado
 
 Describir qué ha ocurrido realmente.
 
-### Interpretación
+###### Interpretación
 
 Explicar el significado operativo.
 
-### Limitaciones
+###### Limitaciones
 
 Indicar campos ausentes, datos históricos o restricciones.
 
-### Evidencia
+###### Evidencia
 
 Añadir captura o referencia a la ejecución.
 ```
@@ -831,7 +831,7 @@ Una captura sin contexto no es suficiente. Debe poder saberse:
 
 ---
 
-# 12. Cómo actuar cuando algo no funciona
+## 12. Cómo actuar cuando algo no funciona
 
 No recargues inmediatamente el archivo ni añadas filtros complejos.
 
@@ -857,7 +857,7 @@ Consulta
 Permisos
 ```
 
-## 12.1 Splunk no inicia
+#### 12.1 Splunk no inicia
 
 Consulta:
 
@@ -865,7 +865,7 @@ Consulta:
 troubleshooting/splunk-no-inicia.md
 ```
 
-## 12.2 Splunk Web no abre
+#### 12.2 Splunk Web no abre
 
 Consulta:
 
@@ -873,7 +873,7 @@ Consulta:
 troubleshooting/acceso-web.md
 ```
 
-## 12.3 No aparecen eventos
+#### 12.3 No aparecen eventos
 
 Consulta:
 
@@ -881,7 +881,7 @@ Consulta:
 troubleshooting/datos-no-aparecen.md
 ```
 
-## 12.4 Los campos son incorrectos
+#### 12.4 Los campos son incorrectos
 
 Consulta:
 
@@ -889,7 +889,7 @@ Consulta:
 troubleshooting/campos-incorrectos.md
 ```
 
-## 12.5 Búsqueda mínima para troubleshooting
+#### 12.5 Búsqueda mínima para troubleshooting
 
 ```spl
 index=curso earliest=0 latest=now
@@ -909,7 +909,7 @@ Primero confirma que los datos son visibles.
 
 ---
 
-# 13. Resultado final
+## 13. Resultado final
 
 Al finalizar tendrás:
 
@@ -934,7 +934,7 @@ funcionar.
 
 ---
 
-# 14. Criterios de finalización
+## 14. Criterios de finalización
 
 Se considera que una persona ha completado correctamente esta introducción cuando
 puede:
@@ -962,7 +962,7 @@ puede:
 
 ---
 
-# 15. Siguiente paso
+## 15. Siguiente paso
 
 Comienza por la preparación del entorno:
 
@@ -978,7 +978,7 @@ Después continúa con:
 
 ---
 
-# 16. Referencias del curso
+## 16. Referencias del curso
 
 - [Preparación del laboratorio](../preparacion/index.md)
 - [Arquitectura de Splunk](../preparacion/arquitectura.md)
@@ -996,15 +996,15 @@ Después continúa con:
 
 ---
 
-# 17. Referencias oficiales
+## 17. Referencias oficiales
 
-## Documentación general
+#### Documentación general
 
 - [Documentación de Splunk Enterprise](https://docs.splunk.com/Documentation/Splunk)
 - [Splunk Enterprise en Help](https://help.splunk.com/en/splunk-enterprise)
 - [Notas de versión](https://docs.splunk.com/Documentation/Splunk/latest/ReleaseNotes)
 
-## Búsqueda y SPL
+#### Búsqueda y SPL
 
 - [Search Manual](https://docs.splunk.com/Documentation/Splunk/latest/Search/WhatsInThisManual)
 - [Search Reference](https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/Overview)
@@ -1014,7 +1014,7 @@ Después continúa con:
 - [Comando `rex`](https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/Rex)
 - [Comando `fieldsummary`](https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/Fieldsummary)
 
-## Ingesta e índices
+#### Ingesta e índices
 
 - [Introducción a la entrada de datos](https://docs.splunk.com/Documentation/Splunk/latest/Data/Whatissource)
 - [Monitorización de archivos](https://docs.splunk.com/Documentation/Splunk/latest/Data/Monitorfilesanddirectories)
@@ -1024,7 +1024,7 @@ Después continúa con:
 - [`indexes.conf`](https://docs.splunk.com/Documentation/Splunk/latest/Admin/Indexesconf)
 - [`props.conf`](https://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf)
 
-## Dashboards, reportes y alertas
+#### Dashboards, reportes y alertas
 
 - [Dashboards](https://docs.splunk.com/Documentation/Splunk/latest/Viz/AboutDashboards)
 - [Dashboard Studio](https://docs.splunk.com/Documentation/Splunk/latest/DashStudio/IntroFrame)
@@ -1033,20 +1033,20 @@ Después continúa con:
 - [Búsquedas programadas](https://docs.splunk.com/Documentation/Splunk/latest/Alert/Definescheduledalerts)
 - [Throttling de alertas](https://docs.splunk.com/Documentation/Splunk/latest/Alert/ThrottleAlerts)
 
-## Seguridad y permisos
+#### Seguridad y permisos
 
 - [Roles y capacidades](https://docs.splunk.com/Documentation/Splunk/latest/Security/Rolesandcapabilities)
 - [Usuarios y roles](https://docs.splunk.com/Documentation/Splunk/latest/Security/Aboutusersandroles)
 - [Objetos de conocimiento](https://docs.splunk.com/Documentation/Splunk/latest/Knowledge/Aboutknowledgeobjects)
 
-## Troubleshooting
+#### Troubleshooting
 
 - [Troubleshooting general](https://docs.splunk.com/Documentation/Splunk/latest/Troubleshooting/Abouttroubleshooting)
 - [Troubleshooting de datos](https://docs.splunk.com/Documentation/Splunk/latest/Troubleshooting/Troubleshootingyourdata)
 - [Monitoring Console](https://docs.splunk.com/Documentation/Splunk/latest/Monitor/MonitoringConsole)
 - [Job Inspector](https://docs.splunk.com/Documentation/Splunk/latest/Search/Viewsearchjobproperties)
 
-## Ubuntu
+#### Ubuntu
 
 - [Ubuntu Server Documentation](https://documentation.ubuntu.com/server/)
 - [Systemd en Ubuntu](https://documentation.ubuntu.com/server/explanation/systemd/)
