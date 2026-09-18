@@ -49,13 +49,13 @@ body {
   color: #242424;
 }
 
-.md-main,
-.md-content {
+.md-main {
   background: #ffffff;
 }
 
 .md-content {
   min-width: 0;
+  background: #ffffff;
   color: #242424;
 }
 
@@ -91,8 +91,8 @@ body {
    ========================================================= */
 
 /*
- * Las pestañas permanecen en una sola línea.
- * Si no caben, se desplazan horizontalmente.
+ * Las pestañas se mantienen en una sola línea.
+ * Si no caben, se permite desplazamiento horizontal.
  */
 
 .md-tabs {
@@ -126,8 +126,8 @@ body {
 .md-tabs__link:hover,
 .md-tabs__link:focus,
 .md-tabs__link--active {
-  color: #ffffff !important;
   background: rgba(255, 255, 255, 0.12);
+  color: #ffffff !important;
   opacity: 1;
 }
 
@@ -160,17 +160,30 @@ body {
    Navegación lateral izquierda
    ========================================================= */
 
-.md-sidebar--primary,
-.md-sidebar--primary .md-sidebar__scrollwrap {
-  background: #f5f5f5 !important;
+/*
+ * No se establece width en .md-sidebar--primary.
+ * Material for MkDocs controla su anchura mediante su cuadrícula.
+ */
+
+.md-sidebar--primary {
+  background: #f5f5f5;
 }
 
 .md-sidebar--primary .md-sidebar__scrollwrap {
+  background: #f5f5f5 !important;
   background-image: none !important;
   box-shadow: none !important;
 }
 
+/*
+ * No se establece width: 100% en el título.
+ * Así conserva exactamente la anchura nativa de la columna.
+ */
+
 .md-sidebar--primary .md-nav__title {
+  box-sizing: border-box;
+  margin: 0 !important;
+
   background: #057eb5 !important;
   background-image: none !important;
   color: #ffffff !important;
@@ -182,6 +195,7 @@ body {
 }
 
 .md-sidebar--primary .md-nav__link {
+  box-sizing: border-box;
   background: transparent !important;
   color: #242424 !important;
 }
@@ -202,24 +216,23 @@ body {
    ========================================================= */
 
 /*
- * La columna derecha conserva la cuadrícula nativa de Material.
- * No se fuerzan anchuras, posiciones ni z-index.
+ * No se establece width, position ni z-index.
+ * La columna derecha conserva la cuadrícula nativa.
  */
 
-.md-sidebar--secondary,
-.md-sidebar--secondary .md-sidebar__scrollwrap {
-  background: #f5f5f5 !important;
+.md-sidebar--secondary {
+  background: #f5f5f5;
 }
 
 .md-sidebar--secondary .md-sidebar__scrollwrap {
+  background: #f5f5f5 !important;
   background-image: none !important;
   box-shadow: none !important;
 }
 
 .md-sidebar--secondary .md-nav__title {
-  display: block;
-  width: 100%;
   box-sizing: border-box;
+  margin: 0 !important;
 
   background: #057eb5 !important;
   background-image: none !important;
@@ -232,6 +245,7 @@ body {
 }
 
 .md-sidebar--secondary .md-nav__link {
+  box-sizing: border-box;
   background: transparent !important;
   color: #242424 !important;
 }
@@ -293,15 +307,15 @@ body {
    Código
    ========================================================= */
 
-.md-typeset code,
-.md-typeset pre,
-.highlight {
+.md-typeset code {
   background: #f5f5f5;
   color: #242424;
 }
 
-.md-typeset code {
-  box-sizing: border-box;
+.md-typeset pre,
+.highlight {
+  background: #f5f5f5;
+  color: #242424;
 }
 
 
@@ -393,14 +407,12 @@ body {
    Diseño responsive
    ========================================================= */
 
-/*
- * En pantallas pequeñas, Material for MkDocs controla
- * las barras laterales mediante sus propios paneles.
- */
-
 @media screen and (max-width: 76.24em) {
   .md-sidebar--primary,
-  .md-sidebar--secondary,
+  .md-sidebar--secondary {
+    background: #f5f5f5;
+  }
+
   .md-sidebar--primary .md-sidebar__scrollwrap,
   .md-sidebar--secondary .md-sidebar__scrollwrap {
     background: #f5f5f5 !important;
@@ -413,7 +425,7 @@ body {
    ========================================================= */
 
 /*
- * Se mantiene intencionadamente el diseño claro.
+ * Se mantiene deliberadamente el diseño claro.
  */
 
 @media (prefers-color-scheme: dark) {
@@ -463,66 +475,4 @@ body {
     background: #f5f5f5 !important;
     color: #242424 !important;
   }
-}
-
-/* =========================================================
-   Igualar el ancho del título y del contenido lateral
-   ========================================================= */
-
-/*
- * Todas las capas de las barras laterales deben utilizar
- * el mismo ancho de referencia.
- */
-.md-sidebar--primary,
-.md-sidebar--secondary,
-.md-sidebar--primary .md-sidebar__scrollwrap,
-.md-sidebar--secondary .md-sidebar__scrollwrap,
-.md-sidebar--primary .md-sidebar__inner,
-.md-sidebar--secondary .md-sidebar__inner,
-.md-sidebar--primary .md-nav,
-.md-sidebar--secondary .md-nav {
-  box-sizing: border-box;
-  width: 100%;
-  max-width: 100%;
-  min-width: 0;
-}
-
-/*
- * El título inicial no debe extenderse mediante márgenes,
- * padding o anchuras calculadas fuera de la columna.
- */
-.md-sidebar--primary .md-nav__title,
-.md-sidebar--secondary .md-nav__title {
-  display: block;
-  box-sizing: border-box;
-  width: 100%;
-  max-width: 100%;
-  min-width: 0;
-
-  margin: 0 !important;
-}
-
-/*
- * Las listas y los elementos inferiores deben compartir
- * exactamente la misma caja de anchura.
- */
-.md-sidebar--primary .md-nav__list,
-.md-sidebar--secondary .md-nav__list,
-.md-sidebar--primary .md-nav__item,
-.md-sidebar--secondary .md-nav__item {
-  box-sizing: border-box;
-  max-width: 100%;
-  min-width: 0;
-}
-
-/*
- * Evita que los enlaces provoquen una anchura visual
- * diferente por padding o contenido largo.
- */
-.md-sidebar--primary .md-nav__link,
-.md-sidebar--secondary .md-nav__link {
-  box-sizing: border-box;
-  max-width: 100%;
-  min-width: 0;
-  overflow-wrap: break-word;
 }
