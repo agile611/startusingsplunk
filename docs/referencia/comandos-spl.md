@@ -19,7 +19,7 @@ Search & Reporting
 
 ---
 
-## 1. Qué es SPL
+#### 1. Qué es SPL
 
 SPL es el lenguaje de búsqueda de Splunk. Permite:
 
@@ -68,7 +68,7 @@ Ordenar de mayor a menor
 
 ---
 
-## 2. Estructura general de una búsqueda
+#### 2. Estructura general de una búsqueda
 
 Una búsqueda suele tener estas partes:
 
@@ -81,7 +81,7 @@ latest=now
 | comando3
 ```
 
-### Índice
+###### Índice
 
 Indica dónde buscar:
 
@@ -89,7 +89,7 @@ Indica dónde buscar:
 index=curso
 ```
 
-### Tiempo inicial
+###### Tiempo inicial
 
 Indica desde cuándo buscar:
 
@@ -97,7 +97,7 @@ Indica desde cuándo buscar:
 earliest=-24h
 ```
 
-### Tiempo final
+###### Tiempo final
 
 Indica hasta cuándo buscar:
 
@@ -105,7 +105,7 @@ Indica hasta cuándo buscar:
 latest=now
 ```
 
-### Comandos posteriores
+###### Comandos posteriores
 
 Transforman o filtran los resultados:
 
@@ -113,7 +113,7 @@ Transforman o filtran los resultados:
 | stats count by host
 ```
 
-### Ejemplo completo
+###### Ejemplo completo
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -123,7 +123,7 @@ index=curso earliest=-24h latest=now
 
 ---
 
-## 3. Reglas básicas antes de empezar
+#### 3. Reglas básicas antes de empezar
 
 Todas las búsquedas del proyecto deben:
 
@@ -136,7 +136,7 @@ Todas las búsquedas del proyecto deben:
 - ser reproducibles;
 - explicar sus limitaciones.
 
-### Ejemplo recomendado
+###### Ejemplo recomendado
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -146,7 +146,7 @@ index=curso earliest=-24h latest=now
 | sort - errores
 ```
 
-### Ejemplo poco recomendable
+###### Ejemplo poco recomendable
 
 ```spl
 index=*
@@ -166,29 +166,29 @@ Problemas del segundo ejemplo:
 
 ---
 
-# 4. Búsqueda inicial de eventos
+## 4. Búsqueda inicial de eventos
 
-## Ver eventos del índice
+#### Ver eventos del índice
 
 ```spl
 index=curso
 ```
 
-## Ver los primeros eventos
+#### Ver los primeros eventos
 
 ```spl
 index=curso
 | head 20
 ```
 
-## Ver eventos recientes
+#### Ver eventos recientes
 
 ```spl
 index=curso earliest=-15m latest=now
 | head 20
 ```
 
-## Ver eventos históricos
+#### Ver eventos históricos
 
 ```spl
 index=curso earliest=0 latest=now
@@ -206,7 +206,7 @@ permite buscar eventos históricos disponibles en el índice.
 No utilices `earliest=0` habitualmente en dashboards operativos si no es necesario.
 Para un dashboard suele ser preferible un rango más limitado.
 
-## Mostrar el evento original
+#### Mostrar el evento original
 
 ```spl
 index=curso earliest=0 latest=now
@@ -214,7 +214,7 @@ index=curso earliest=0 latest=now
 | head 20
 ```
 
-## Mostrar campos internos importantes
+#### Mostrar campos internos importantes
 
 ```spl
 index=curso earliest=0 latest=now
@@ -224,7 +224,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-# 5. Campos internos de Splunk
+## 5. Campos internos de Splunk
 
 Splunk añade campos internos a los eventos.
 
@@ -239,7 +239,7 @@ Splunk añade campos internos a los eventos.
 | `index` | Índice donde se encuentra el evento |
 | `linecount` | Número de líneas del evento, cuando aplica |
 
-## Revisar el tiempo del evento
+#### Revisar el tiempo del evento
 
 ```spl
 index=curso earliest=0 latest=now
@@ -247,7 +247,7 @@ index=curso earliest=0 latest=now
 | head 20
 ```
 
-## Comparar `_time` e `_indextime`
+#### Comparar `_time` e `_indextime`
 
 ```spl
 index=curso earliest=0 latest=now
@@ -265,7 +265,7 @@ También puede indicar:
 - parsing incorrecto;
 - datos generados antes de ser ingeridos.
 
-## Formatear `_time`
+#### Formatear `_time`
 
 ```spl
 index=curso earliest=0 latest=now
@@ -276,60 +276,60 @@ index=curso earliest=0 latest=now
 
 ---
 
-# 6. Comando `search`
+## 6. Comando `search`
 
 El comando `search` filtra eventos.
 
-## Filtrar por código HTTP
+#### Filtrar por código HTTP
 
 ```spl
 index=curso earliest=0 latest=now
 | search status=500
 ```
 
-## Filtrar por host
+#### Filtrar por host
 
 ```spl
 index=curso earliest=0 latest=now
 | search host=web-01
 ```
 
-## Filtrar por URI
+#### Filtrar por URI
 
 ```spl
 index=curso earliest=0 latest=now
 | search uri="/api/users"
 ```
 
-## Combinar condiciones
+#### Combinar condiciones
 
 ```spl
 index=curso earliest=0 latest=now
 | search status=500 host=web-01
 ```
 
-## Utilizar `OR`
+#### Utilizar `OR`
 
 ```spl
 index=curso earliest=0 latest=now
 | search status=500 OR status=503
 ```
 
-## Utilizar paréntesis
+#### Utilizar paréntesis
 
 ```spl
 index=curso earliest=0 latest=now
 | search (status=500 OR status=503) host=web-01
 ```
 
-## Buscar una palabra
+#### Buscar una palabra
 
 ```spl
 index=curso earliest=0 latest=now
 | search "timeout"
 ```
 
-## Buscar en un campo concreto
+#### Buscar en un campo concreto
 
 ```spl
 index=curso earliest=0 latest=now
@@ -340,13 +340,13 @@ Cuando sea posible, es preferible utilizar filtros específicos de campo.
 
 ---
 
-# 7. Comando `where`
+## 7. Comando `where`
 
 `where` filtra resultados utilizando expresiones.
 
 Es especialmente útil después de crear campos con `eval`.
 
-## Filtrar códigos superiores o iguales a 400
+#### Filtrar códigos superiores o iguales a 400
 
 ```spl
 index=curso earliest=0 latest=now
@@ -354,7 +354,7 @@ index=curso earliest=0 latest=now
 | where status_num>=400
 ```
 
-## Filtrar errores HTTP 500
+#### Filtrar errores HTTP 500
 
 ```spl
 index=curso earliest=0 latest=now
@@ -362,7 +362,7 @@ index=curso earliest=0 latest=now
 | where status_num=500
 ```
 
-## Filtrar por duración
+#### Filtrar por duración
 
 ```spl
 index=curso earliest=0 latest=now
@@ -370,21 +370,21 @@ index=curso earliest=0 latest=now
 | where tiempo_ms>1000
 ```
 
-## Filtrar valores no nulos
+#### Filtrar valores no nulos
 
 ```spl
 index=curso earliest=0 latest=now
 | where isnotnull(uri)
 ```
 
-## Filtrar valores nulos
+#### Filtrar valores nulos
 
 ```spl
 index=curso earliest=0 latest=now
 | where isnull(response_time)
 ```
 
-## Combinar condiciones
+#### Combinar condiciones
 
 ```spl
 index=curso earliest=0 latest=now
@@ -392,7 +392,7 @@ index=curso earliest=0 latest=now
 | where status_num>=500 AND host="web-01"
 ```
 
-## Diferencia entre `search` y `where`
+#### Diferencia entre `search` y `where`
 
 Utiliza `search` para filtros sencillos sobre eventos:
 
@@ -409,18 +409,18 @@ Utiliza `where` cuando necesites expresiones o cálculos:
 
 ---
 
-# 8. Comando `table`
+## 8. Comando `table`
 
 `table` selecciona los campos que quieres mostrar.
 
-## Mostrar campos concretos
+#### Mostrar campos concretos
 
 ```spl
 index=curso earliest=0 latest=now
 | table _time host method status uri
 ```
 
-## Mostrar campos calculados
+#### Mostrar campos calculados
 
 ```spl
 index=curso earliest=0 latest=now
@@ -428,7 +428,7 @@ index=curso earliest=0 latest=now
 | table _time host status status_num uri
 ```
 
-## Tabla de eventos recientes
+#### Tabla de eventos recientes
 
 ```spl
 index=curso earliest=-1h latest=now
@@ -449,25 +449,25 @@ Una tabla con todos los campos puede ser difícil de leer y consumir más recurs
 
 ---
 
-# 9. Comando `fields`
+## 9. Comando `fields`
 
 `fields` incluye o excluye campos.
 
-## Mantener campos concretos
+#### Mantener campos concretos
 
 ```spl
 index=curso earliest=0 latest=now
 | fields _time host status uri
 ```
 
-## Excluir un campo
+#### Excluir un campo
 
 ```spl
 index=curso earliest=0 latest=now
 | fields - _raw
 ```
 
-## Diferencia entre `table` y `fields`
+#### Diferencia entre `table` y `fields`
 
 `table` está orientado a presentar una tabla final.
 
@@ -476,18 +476,18 @@ puede ayudar a reducir el volumen de datos procesados.
 
 ---
 
-# 10. Comando `head`
+## 10. Comando `head`
 
 `head` devuelve los primeros resultados.
 
-## Primeros diez eventos
+#### Primeros diez eventos
 
 ```spl
 index=curso earliest=0 latest=now
 | head 10
 ```
 
-## Primeros resultados después de ordenar
+#### Primeros resultados después de ordenar
 
 ```spl
 index=curso earliest=0 latest=now
@@ -500,7 +500,7 @@ En este caso, `head` devuelve las diez URI con más errores.
 
 ---
 
-# 11. Comando `tail`
+## 11. Comando `tail`
 
 `tail` devuelve los últimos resultados.
 
@@ -520,11 +520,11 @@ index=curso earliest=-1h latest=now
 
 ---
 
-# 12. Comando `sort`
+## 12. Comando `sort`
 
 `sort` ordena resultados.
 
-## Orden ascendente
+#### Orden ascendente
 
 ```spl
 index=curso earliest=0 latest=now
@@ -532,7 +532,7 @@ index=curso earliest=0 latest=now
 | sort peticiones
 ```
 
-## Orden descendente
+#### Orden descendente
 
 ```spl
 index=curso earliest=0 latest=now
@@ -540,7 +540,7 @@ index=curso earliest=0 latest=now
 | sort - peticiones
 ```
 
-## Ordenar por varios campos
+#### Ordenar por varios campos
 
 ```spl
 index=curso earliest=0 latest=now
@@ -548,7 +548,7 @@ index=curso earliest=0 latest=now
 | sort - errores host uri
 ```
 
-## Ordenar por latencia
+#### Ordenar por latencia
 
 ```spl
 index=curso earliest=0 latest=now
@@ -559,18 +559,18 @@ index=curso earliest=0 latest=now
 
 ---
 
-# 13. Comando `eval`
+## 13. Comando `eval`
 
 `eval` crea campos calculados y transforma valores.
 
-## Convertir un campo a número
+#### Convertir un campo a número
 
 ```spl
 index=curso earliest=0 latest=now
 | eval status_num=tonumber(status)
 ```
 
-## Crear una bandera de error
+#### Crear una bandera de error
 
 ```spl
 index=curso earliest=0 latest=now
@@ -578,7 +578,7 @@ index=curso earliest=0 latest=now
 | eval es_error=if(status_num>=400, 1, 0)
 ```
 
-## Crear una bandera de HTTP 500
+#### Crear una bandera de HTTP 500
 
 ```spl
 index=curso earliest=0 latest=now
@@ -586,7 +586,7 @@ index=curso earliest=0 latest=now
 | eval es_500=if(status_num=500, 1, 0)
 ```
 
-## Crear una clasificación HTTP
+#### Crear una clasificación HTTP
 
 ```spl
 index=curso earliest=0 latest=now
@@ -600,14 +600,14 @@ index=curso earliest=0 latest=now
 )
 ```
 
-## Crear una clasificación sencilla
+#### Crear una clasificación sencilla
 
 ```spl
 index=curso earliest=0 latest=now
 | eval resultado=if(status_num>=400, "Error", "Correcta")
 ```
 
-## Calcular porcentaje
+#### Calcular porcentaje
 
 ```spl
 index=curso earliest=0 latest=now
@@ -632,7 +632,7 @@ index=curso earliest=0 latest=now
 )
 ```
 
-## Formatear fechas
+#### Formatear fechas
 
 ```spl
 index=curso earliest=0 latest=now
@@ -640,7 +640,7 @@ index=curso earliest=0 latest=now
 | stats count by fecha
 ```
 
-## Calcular segundos desde el evento
+#### Calcular segundos desde el evento
 
 ```spl
 index=curso earliest=0 latest=now
@@ -650,15 +650,15 @@ index=curso earliest=0 latest=now
 
 ---
 
-# 14. Funciones habituales de `eval`
+## 14. Funciones habituales de `eval`
 
-## `if`
+#### `if`
 
 ```spl
 | eval tipo=if(status_num>=400, "Error", "Correcta")
 ```
 
-## `case`
+#### `case`
 
 ```spl
 | eval clase=case(
@@ -670,7 +670,7 @@ index=curso earliest=0 latest=now
 )
 ```
 
-## `coalesce`
+#### `coalesce`
 
 Devuelve el primer campo no nulo.
 
@@ -678,49 +678,49 @@ Devuelve el primer campo no nulo.
 | eval ip_origen=coalesce(clientip, src_ip, source_ip)
 ```
 
-## `isnull`
+#### `isnull`
 
 ```spl
 | eval falta_latencia=if(isnull(response_time), 1, 0)
 ```
 
-## `isnotnull`
+#### `isnotnull`
 
 ```spl
 | where isnotnull(uri)
 ```
 
-## `len`
+#### `len`
 
 ```spl
 | eval longitud_uri=len(uri)
 ```
 
-## `lower`
+#### `lower`
 
 ```spl
 | eval uri_normalizada=lower(uri)
 ```
 
-## `upper`
+#### `upper`
 
 ```spl
 | eval metodo_mayusculas=upper(method)
 ```
 
-## `round`
+#### `round`
 
 ```spl
 | eval media_redondeada=round(media_ms, 2)
 ```
 
-## `tonumber`
+#### `tonumber`
 
 ```spl
 | eval tiempo_ms=tonumber(response_time)
 ```
 
-## `tostring`
+#### `tostring`
 
 ```spl
 | eval estado_texto=tostring(status_num)
@@ -728,32 +728,32 @@ Devuelve el primer campo no nulo.
 
 ---
 
-# 15. Comando `stats`
+## 15. Comando `stats`
 
 `stats` calcula agregaciones sobre los eventos.
 
-## Contar eventos
+#### Contar eventos
 
 ```spl
 index=curso earliest=0 latest=now
 | stats count
 ```
 
-## Contar con alias
+#### Contar con alias
 
 ```spl
 index=curso earliest=0 latest=now
 | stats count as total_eventos
 ```
 
-## Contar por host
+#### Contar por host
 
 ```spl
 index=curso earliest=0 latest=now
 | stats count as peticiones by host
 ```
 
-## Contar por código HTTP
+#### Contar por código HTTP
 
 ```spl
 index=curso earliest=0 latest=now
@@ -761,14 +761,14 @@ index=curso earliest=0 latest=now
 | stats count as peticiones by status_num
 ```
 
-## Contar por host y URI
+#### Contar por host y URI
 
 ```spl
 index=curso earliest=0 latest=now
 | stats count as peticiones by host uri
 ```
 
-## Calcular varias métricas
+#### Calcular varias métricas
 
 ```spl
 index=curso earliest=0 latest=now
@@ -780,7 +780,7 @@ index=curso earliest=0 latest=now
     dc(host) as hosts_distintos
 ```
 
-## Media de latencia
+#### Media de latencia
 
 ```spl
 index=curso earliest=0 latest=now
@@ -788,7 +788,7 @@ index=curso earliest=0 latest=now
 | stats avg(tiempo_ms) as media_ms
 ```
 
-## Mínimo y máximo
+#### Mínimo y máximo
 
 ```spl
 index=curso earliest=0 latest=now
@@ -798,7 +798,7 @@ index=curso earliest=0 latest=now
     max(tiempo_ms) as maximo_ms
 ```
 
-## Mediana y percentiles
+#### Mediana y percentiles
 
 ```spl
 index=curso earliest=0 latest=now
@@ -809,7 +809,7 @@ index=curso earliest=0 latest=now
     perc99(tiempo_ms) as p99_ms
 ```
 
-## Errores por URI
+#### Errores por URI
 
 ```spl
 index=curso earliest=0 latest=now
@@ -821,11 +821,11 @@ index=curso earliest=0 latest=now
 
 ---
 
-# 16. Funciones estadísticas condicionales
+## 16. Funciones estadísticas condicionales
 
 Puedes utilizar `count(eval(...))` dentro de `stats`.
 
-## Contar errores
+#### Contar errores
 
 ```spl
 index=curso earliest=0 latest=now
@@ -833,7 +833,7 @@ index=curso earliest=0 latest=now
 | stats count(eval(status_num>=400)) as errores
 ```
 
-## Contar HTTP 500
+#### Contar HTTP 500
 
 ```spl
 index=curso earliest=0 latest=now
@@ -841,7 +841,7 @@ index=curso earliest=0 latest=now
 | stats count(eval(status_num=500)) as errores_500
 ```
 
-## Comparar correctas y errores
+#### Comparar correctas y errores
 
 ```spl
 index=curso earliest=0 latest=now
@@ -852,7 +852,7 @@ index=curso earliest=0 latest=now
     count(eval(status_num>=400)) as errores
 ```
 
-## Calcular tasa de error
+#### Calcular tasa de error
 
 ```spl
 index=curso earliest=0 latest=now
@@ -869,25 +869,25 @@ index=curso earliest=0 latest=now
 
 ---
 
-# 17. Comando `timechart`
+## 17. Comando `timechart`
 
 `timechart` crea series temporales.
 
-## Peticiones por minuto
+#### Peticiones por minuto
 
 ```spl
 index=curso earliest=0 latest=now
 | timechart span=1m count as peticiones
 ```
 
-## Peticiones por cinco minutos
+#### Peticiones por cinco minutos
 
 ```spl
 index=curso earliest=0 latest=now
 | timechart span=5m count as peticiones
 ```
 
-## Errores por minuto
+#### Errores por minuto
 
 ```spl
 index=curso earliest=0 latest=now
@@ -896,7 +896,7 @@ index=curso earliest=0 latest=now
 | timechart span=1m count as errores
 ```
 
-## Correctas frente a errores
+#### Correctas frente a errores
 
 ```spl
 index=curso earliest=0 latest=now
@@ -905,7 +905,7 @@ index=curso earliest=0 latest=now
 | timechart span=1m count by tipo
 ```
 
-## HTTP 500 por minuto
+#### HTTP 500 por minuto
 
 ```spl
 index=curso earliest=0 latest=now
@@ -914,14 +914,14 @@ index=curso earliest=0 latest=now
 | timechart span=1m count as errores_500
 ```
 
-## Evolución por host
+#### Evolución por host
 
 ```spl
 index=curso earliest=0 latest=now
 | timechart span=1m count by host
 ```
 
-## Evolución por código HTTP
+#### Evolución por código HTTP
 
 ```spl
 index=curso earliest=0 latest=now
@@ -929,7 +929,7 @@ index=curso earliest=0 latest=now
 | timechart span=1m count by status_num
 ```
 
-## Interpretación
+#### Interpretación
 
 Busca:
 
@@ -944,18 +944,18 @@ Una serie temporal muestra cuándo ocurre algo, pero no necesariamente por qué.
 
 ---
 
-# 18. Comando `chart`
+## 18. Comando `chart`
 
 `chart` crea tablas o gráficos agrupados por uno o dos campos.
 
-## Peticiones por host y método
+#### Peticiones por host y método
 
 ```spl
 index=curso earliest=0 latest=now
 | chart count over host by method
 ```
 
-## Errores por host y código
+#### Errores por host y código
 
 ```spl
 index=curso earliest=0 latest=now
@@ -970,12 +970,12 @@ Utiliza `timechart` cuando el eje principal sea el tiempo.
 
 ---
 
-# 19. Comando `eventstats`
+## 19. Comando `eventstats`
 
 `eventstats` calcula estadísticas y las añade a cada evento sin eliminar el
 detalle original.
 
-## Añadir el total de eventos a cada evento
+#### Añadir el total de eventos a cada evento
 
 ```spl
 index=curso earliest=0 latest=now
@@ -984,7 +984,7 @@ index=curso earliest=0 latest=now
 | head 20
 ```
 
-## Añadir el total por host
+#### Añadir el total por host
 
 ```spl
 index=curso earliest=0 latest=now
@@ -993,7 +993,7 @@ index=curso earliest=0 latest=now
 | head 20
 ```
 
-## Calcular porcentaje de cada host
+#### Calcular porcentaje de cada host
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1006,11 +1006,11 @@ index=curso earliest=0 latest=now
 
 ---
 
-# 20. Comando `streamstats`
+## 20. Comando `streamstats`
 
 `streamstats` calcula valores acumulados respetando el orden de los eventos.
 
-## Contador acumulado
+#### Contador acumulado
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1019,7 +1019,7 @@ index=curso earliest=0 latest=now
 | table _time numero_evento host status uri
 ```
 
-## Errores acumulados
+#### Errores acumulados
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1035,11 +1035,11 @@ eventos están ordenados como necesitas.
 
 ---
 
-# 21. Comando `dedup`
+## 21. Comando `dedup`
 
 `dedup` elimina eventos duplicados según uno o varios campos.
 
-## Eliminar URI repetidas
+#### Eliminar URI repetidas
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1047,14 +1047,14 @@ index=curso earliest=0 latest=now
 | table _time host status uri
 ```
 
-## Eliminar duplicados por varios campos
+#### Eliminar duplicados por varios campos
 
 ```spl
 index=curso earliest=0 latest=now
 | dedup host method status uri
 ```
 
-## Mantener una muestra por host
+#### Mantener una muestra por host
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1067,11 +1067,11 @@ no significa necesariamente que sean duplicados reales.
 
 ---
 
-# 22. Comando `rename`
+## 22. Comando `rename`
 
 `rename` cambia el nombre de un campo en los resultados.
 
-## Renombrar un campo
+#### Renombrar un campo
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1079,7 +1079,7 @@ index=curso earliest=0 latest=now
 | table _time host status recurso
 ```
 
-## Renombrar métricas
+#### Renombrar métricas
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1091,11 +1091,11 @@ Los nombres deben ser claros para los usuarios del dashboard.
 
 ---
 
-# 23. Comando `rex`
+## 23. Comando `rex`
 
 `rex` extrae o transforma valores mediante expresiones regulares.
 
-## Extraer el recurso principal de una URI
+#### Extraer el recurso principal de una URI
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1115,7 +1115,7 @@ el campo `recurso` podría contener:
 api
 ```
 
-## Extraer un identificador de una URI
+#### Extraer un identificador de una URI
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1123,7 +1123,7 @@ index=curso earliest=0 latest=now
 | table uri user_id
 ```
 
-## Extraer un código desde `_raw`
+#### Extraer un código desde `_raw`
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1138,11 +1138,11 @@ No utilices expresiones regulares complejas si el campo ya está disponible.
 
 ---
 
-# 24. Comando `spath`
+## 24. Comando `spath`
 
 `spath` extrae campos de estructuras JSON o XML compatibles.
 
-## Ejemplo conceptual con JSON
+#### Ejemplo conceptual con JSON
 
 Si un evento contiene:
 
@@ -1166,7 +1166,7 @@ index=curso earliest=0 latest=now
 | table request.method request.uri response.status
 ```
 
-## Extraer un campo concreto
+#### Extraer un campo concreto
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1178,7 +1178,7 @@ La sintaxis exacta depende de la estructura real del evento.
 
 ---
 
-# 25. Comando `lookup`
+## 25. Comando `lookup`
 
 `lookup` permite enriquecer eventos con información externa.
 
@@ -1198,7 +1198,7 @@ web-01,Equipo Web,produccion
 web-02,Equipo Web,pruebas
 ```
 
-## Uso práctico
+#### Uso práctico
 
 Puedes utilizar un lookup para añadir:
 
@@ -1220,11 +1220,11 @@ Documenta siempre:
 
 ---
 
-# 26. Comando `fillnull`
+## 26. Comando `fillnull`
 
 `fillnull` sustituye valores nulos.
 
-## Sustituir nulos de `host`
+#### Sustituir nulos de `host`
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1232,7 +1232,7 @@ index=curso earliest=0 latest=now
 | stats count by host
 ```
 
-## Sustituir nulos de latencia
+#### Sustituir nulos de latencia
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1246,11 +1246,11 @@ En muchos casos es mejor conservar el valor nulo y documentar su significado.
 
 ---
 
-# 27. Comando `replace`
+## 27. Comando `replace`
 
 `replace` sustituye valores de un campo.
 
-## Normalizar métodos
+#### Normalizar métodos
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1258,7 +1258,7 @@ index=curso earliest=0 latest=now
 | stats count by method
 ```
 
-## Normalizar nombres de host
+#### Normalizar nombres de host
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1269,7 +1269,7 @@ Utilízalo únicamente cuando conozcas la equivalencia correcta.
 
 ---
 
-# 28. Comando `format`
+## 28. Comando `format`
 
 `format` convierte resultados en una expresión de búsqueda.
 
@@ -1287,7 +1287,7 @@ Es un comando avanzado. Úsalo solo si entiendes la consulta generada.
 
 ---
 
-# 29. Comando `return`
+## 29. Comando `return`
 
 `return` devuelve valores concretos de los resultados.
 
@@ -1303,7 +1303,7 @@ Su uso suele aparecer en búsquedas encadenadas o subsearches.
 
 ---
 
-# 30. Subsearches
+## 30. Subsearches
 
 Una subsearch está delimitada por corchetes:
 
@@ -1313,7 +1313,7 @@ Una subsearch está delimitada por corchetes:
 ]
 ```
 
-## Ejemplo conceptual
+#### Ejemplo conceptual
 
 Buscar eventos de los hosts que hayan generado HTTP `500`:
 
@@ -1333,9 +1333,9 @@ Para los ejercicios iniciales, suele ser preferible una búsqueda directa y clar
 
 ---
 
-# 31. Análisis de códigos HTTP
+## 31. Análisis de códigos HTTP
 
-## Distribución por código
+#### Distribución por código
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1344,7 +1344,7 @@ index=curso earliest=0 latest=now
 | sort status_num
 ```
 
-## Clasificación por familia
+#### Clasificación por familia
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1360,7 +1360,7 @@ index=curso earliest=0 latest=now
 | sort familia
 ```
 
-## Errores por host
+#### Errores por host
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1370,7 +1370,7 @@ index=curso earliest=0 latest=now
 | sort - errores
 ```
 
-## Errores por URI
+#### Errores por URI
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1381,7 +1381,7 @@ index=curso earliest=0 latest=now
 | head 10
 ```
 
-## HTTP 500 por minuto
+#### HTTP 500 por minuto
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1392,9 +1392,9 @@ index=curso earliest=0 latest=now
 
 ---
 
-# 32. Análisis de porcentaje de error
+## 32. Análisis de porcentaje de error
 
-## Porcentaje global
+#### Porcentaje global
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1409,7 +1409,7 @@ index=curso earliest=0 latest=now
 )
 ```
 
-## Porcentaje por host
+#### Porcentaje por host
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1426,7 +1426,7 @@ index=curso earliest=0 latest=now
 | sort - porcentaje_error
 ```
 
-## Porcentaje por URI
+#### Porcentaje por URI
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1449,18 +1449,18 @@ Ambos deben interpretarse con cuidado.
 
 ---
 
-# 33. Análisis de latencia
+## 33. Análisis de latencia
 
 Este análisis requiere un campo como `response_time`, `duration` o `latency`.
 
-## Convertir la latencia
+#### Convertir la latencia
 
 ```spl
 index=curso earliest=0 latest=now
 | eval tiempo_ms=tonumber(response_time)
 ```
 
-## Latencia media por URI
+#### Latencia media por URI
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1470,7 +1470,7 @@ index=curso earliest=0 latest=now
 | sort - media_ms
 ```
 
-## Percentil 95 por URI
+#### Percentil 95 por URI
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1484,7 +1484,7 @@ index=curso earliest=0 latest=now
 | sort - p95_ms
 ```
 
-## Respuestas superiores a un segundo
+#### Respuestas superiores a un segundo
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1499,11 +1499,11 @@ titulado “URL más lentas”.
 
 ---
 
-# 34. Análisis por IP
+## 34. Análisis por IP
 
 Este análisis requiere `clientip`, `src_ip` o un campo equivalente.
 
-## IP con más errores
+#### IP con más errores
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1514,7 +1514,7 @@ index=curso earliest=0 latest=now
 | head 10
 ```
 
-## Peticiones y errores por IP
+#### Peticiones y errores por IP
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1531,7 +1531,7 @@ index=curso earliest=0 latest=now
 | sort - errores
 ```
 
-## IP con actividad elevada en cinco minutos
+#### IP con actividad elevada en cinco minutos
 
 ```spl
 index=curso earliest=-5m latest=now
@@ -1547,7 +1547,7 @@ la limitación.
 
 ---
 
-# 35. Comando `transaction`
+## 35. Comando `transaction`
 
 `transaction` agrupa eventos relacionados.
 
@@ -1574,23 +1574,23 @@ justificarlo.
 
 ---
 
-# 36. Comando `search` con comodines
+## 36. Comando `search` con comodines
 
-## URI que comienza por `/api`
+#### URI que comienza por `/api`
 
 ```spl
 index=curso earliest=0 latest=now
 | search uri="/api/*"
 ```
 
-## Hosts de una familia
+#### Hosts de una familia
 
 ```spl
 index=curso earliest=0 latest=now
 | search host="web-*"
 ```
 
-## Métodos concretos
+#### Métodos concretos
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1601,11 +1601,11 @@ Comprueba que los valores reales coinciden exactamente con el patrón utilizado.
 
 ---
 
-# 37. Comando `IN`
+## 37. Comando `IN`
 
 `IN` permite comprobar varios valores.
 
-## Códigos concretos
+#### Códigos concretos
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1613,14 +1613,14 @@ index=curso earliest=0 latest=now
 | where status_num IN (400, 401, 403, 404)
 ```
 
-## Hosts concretos
+#### Hosts concretos
 
 ```spl
 index=curso earliest=0 latest=now
 | search host IN ("web-01", "web-02")
 ```
 
-## Métodos concretos
+#### Métodos concretos
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1629,7 +1629,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-# 38. Comando `like`
+## 38. Comando `like`
 
 `like` permite comparar patrones.
 
@@ -1648,16 +1648,16 @@ representa una secuencia de caracteres.
 
 ---
 
-# 39. Diagnóstico de campos ausentes
+## 39. Diagnóstico de campos ausentes
 
-## Revisar campos disponibles
+#### Revisar campos disponibles
 
 ```spl
 index=curso earliest=0 latest=now
 | fieldsummary
 ```
 
-## Revisar eventos originales
+#### Revisar eventos originales
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1665,7 +1665,7 @@ index=curso earliest=0 latest=now
 | head 20
 ```
 
-## Comprobar IP
+#### Comprobar IP
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1673,7 +1673,7 @@ index=curso earliest=0 latest=now
 | head 20
 ```
 
-## Comprobar latencia
+#### Comprobar latencia
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1681,7 +1681,7 @@ index=curso earliest=0 latest=now
 | head 20
 ```
 
-## Comprobar campos nulos
+#### Comprobar campos nulos
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1694,7 +1694,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-# 40. Diagnóstico de una búsqueda sin resultados
+## 40. Diagnóstico de una búsqueda sin resultados
 
 Si esta búsqueda no devuelve resultados:
 
@@ -1704,28 +1704,28 @@ index=curso status=500 earliest=-5m latest=now
 
 sigue este orden.
 
-## Paso 1: comprobar que el índice contiene eventos
+#### Paso 1: comprobar que el índice contiene eventos
 
 ```spl
 index=curso earliest=0 latest=now
 | stats count
 ```
 
-## Paso 2: comprobar el rango temporal
+#### Paso 2: comprobar el rango temporal
 
 ```spl
 index=curso earliest=0 latest=now
 | stats min(_time) as inicio max(_time) as fin
 ```
 
-## Paso 3: comprobar los valores de `status`
+#### Paso 3: comprobar los valores de `status`
 
 ```spl
 index=curso earliest=0 latest=now
 | stats count by status
 ```
 
-## Paso 4: convertir el campo
+#### Paso 4: convertir el campo
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1733,7 +1733,7 @@ index=curso earliest=0 latest=now
 | stats count by status status_num
 ```
 
-## Paso 5: realizar el filtro
+#### Paso 5: realizar el filtro
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1742,11 +1742,11 @@ index=curso earliest=0 latest=now
 | stats count
 ```
 
-## Paso 6: revisar permisos
+#### Paso 6: revisar permisos
 
 Comprueba que el usuario puede leer el índice `curso`.
 
-## Paso 7: revisar logs internos
+#### Paso 7: revisar logs internos
 
 ```spl
 index=_internal earliest=-30m latest=now
@@ -1757,16 +1757,16 @@ index=_internal earliest=-30m latest=now
 
 ---
 
-# 41. Búsquedas para dashboards
+## 41. Búsquedas para dashboards
 
-## Panel de total de peticiones
+#### Panel de total de peticiones
 
 ```spl
 index=curso earliest=-24h latest=now
 | stats count as peticiones
 ```
 
-## Panel de total de errores
+#### Panel de total de errores
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -1774,7 +1774,7 @@ index=curso earliest=-24h latest=now
 | stats count(eval(status_num>=400)) as errores
 ```
 
-## Panel de porcentaje de error
+#### Panel de porcentaje de error
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -1789,14 +1789,14 @@ index=curso earliest=-24h latest=now
 )
 ```
 
-## Panel de peticiones por minuto
+#### Panel de peticiones por minuto
 
 ```spl
 index=curso earliest=-24h latest=now
 | timechart span=1m count as peticiones
 ```
 
-## Panel de errores por código
+#### Panel de errores por código
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -1805,7 +1805,7 @@ index=curso earliest=-24h latest=now
 | sort status_num
 ```
 
-## Panel de URI con más errores
+#### Panel de URI con más errores
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -1816,7 +1816,7 @@ index=curso earliest=-24h latest=now
 | head 10
 ```
 
-## Panel de host con más errores
+#### Panel de host con más errores
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -1829,9 +1829,9 @@ index=curso earliest=-24h latest=now
 
 ---
 
-# 42. Búsquedas para alertas
+## 42. Búsquedas para alertas
 
-## Cinco HTTP 500 en cinco minutos
+#### Cinco HTTP 500 en cinco minutos
 
 ```spl
 index=curso earliest=-5m latest=now
@@ -1840,7 +1840,7 @@ index=curso earliest=-5m latest=now
 | where errores_500>=5
 ```
 
-## Cinco errores de cualquier tipo en cinco minutos
+#### Cinco errores de cualquier tipo en cinco minutos
 
 ```spl
 index=curso earliest=-5m latest=now
@@ -1849,7 +1849,7 @@ index=curso earliest=-5m latest=now
 | where errores>=5
 ```
 
-## Host con cinco errores
+#### Host con cinco errores
 
 ```spl
 index=curso earliest=-5m latest=now
@@ -1859,7 +1859,7 @@ index=curso earliest=-5m latest=now
 | where errores>=5
 ```
 
-## URI con cinco errores
+#### URI con cinco errores
 
 ```spl
 index=curso earliest=-5m latest=now
@@ -1879,9 +1879,9 @@ Documenta siempre:
 
 ---
 
-# 43. Buenas prácticas de rendimiento
+## 43. Buenas prácticas de rendimiento
 
-## Filtrar por índice y tiempo
+#### Filtrar por índice y tiempo
 
 Recomendado:
 
@@ -1897,7 +1897,7 @@ index=*
 | search status=500
 ```
 
-## Filtrar pronto
+#### Filtrar pronto
 
 Recomendado:
 
@@ -1908,7 +1908,7 @@ index=curso earliest=-24h latest=now
 | stats count by uri
 ```
 
-## Evitar campos innecesarios
+#### Evitar campos innecesarios
 
 Recomendado:
 
@@ -1918,14 +1918,14 @@ index=curso earliest=-24h latest=now
 | table _time host status uri
 ```
 
-## Limitar rankings
+#### Limitar rankings
 
 ```spl
 | sort - errores
 | head 10
 ```
 
-## Evitar `table *`
+#### Evitar `table *`
 
 Utiliza solo los campos necesarios:
 
@@ -1933,7 +1933,7 @@ Utiliza solo los campos necesarios:
 | table _time host status uri
 ```
 
-## Evitar `transaction` sin necesidad
+#### Evitar `transaction` sin necesidad
 
 Considera primero:
 
@@ -1947,7 +1947,7 @@ o:
 | streamstats
 ```
 
-## Revisar búsquedas programadas
+#### Revisar búsquedas programadas
 
 Los reportes y alertas frecuentes pueden consumir recursos. Documenta:
 
@@ -1960,9 +1960,9 @@ Los reportes y alertas frecuentes pueden consumir recursos. Documenta:
 
 ---
 
-# 44. Ejercicios progresivos
+## 44. Ejercicios progresivos
 
-## Ejercicio 1: contar eventos
+#### Ejercicio 1: contar eventos
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1975,7 +1975,7 @@ Preguntas:
 - ¿Qué rango temporal tienen?
 - ¿El número coincide con el archivo original?
 
-## Ejercicio 2: contar por host
+#### Ejercicio 2: contar por host
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1989,7 +1989,7 @@ Preguntas:
 - ¿Hay hosts inesperados?
 - ¿Qué implicación tendría un host sin datos?
 
-## Ejercicio 3: clasificar códigos
+#### Ejercicio 3: clasificar códigos
 
 ```spl
 index=curso earliest=0 latest=now
@@ -2010,7 +2010,7 @@ Preguntas:
 - ¿Hay respuestas `5xx`?
 - ¿Hay valores `otro`?
 
-## Ejercicio 4: URI con más errores
+#### Ejercicio 4: URI con más errores
 
 ```spl
 index=curso earliest=0 latest=now
@@ -2027,7 +2027,7 @@ Preguntas:
 - ¿Se trata de `4xx` o `5xx`?
 - ¿La URI tiene mucho tráfico total?
 
-## Ejercicio 5: evolución temporal
+#### Ejercicio 5: evolución temporal
 
 ```spl
 index=curso earliest=0 latest=now
@@ -2042,7 +2042,7 @@ Preguntas:
 - ¿Coinciden con un pico de tráfico?
 - ¿Hay intervalos sin actividad?
 
-## Ejercicio 6: error relativo por URI
+#### Ejercicio 6: error relativo por URI
 
 ```spl
 index=curso earliest=0 latest=now
@@ -2061,7 +2061,7 @@ Preguntas:
 - ¿Qué métrica es más útil para priorizar?
 - ¿Qué volumen mínimo necesitarías para confiar en el porcentaje?
 
-## Ejercicio 7: alerta
+#### Ejercicio 7: alerta
 
 ```spl
 index=curso earliest=-5m latest=now
@@ -2078,66 +2078,66 @@ Preguntas:
 
 ---
 
-# 45. Plantilla para documentar una búsqueda
+## 45. Plantilla para documentar una búsqueda
 
 Utiliza esta plantilla en los entregables:
 
 ```markdown
-## Nombre de la búsqueda
+#### Nombre de la búsqueda
 
-### Objetivo
+###### Objetivo
 
 Describir la pregunta operativa que responde.
 
-### SPL
+###### SPL
 
 ```spl
 index=curso earliest=-24h latest=now
 | stats count by host
 ```
 
-### Índice
+###### Índice
 
 ```text
 curso
 ```
 
-### Intervalo temporal
+###### Intervalo temporal
 
 ```text
 Últimas 24 horas
 ```
 
-### Campos utilizados
+###### Campos utilizados
 
 - host
 
-### Resultado esperado
+###### Resultado esperado
 
 Describir el resultado.
 
-### Resultado observado
+###### Resultado observado
 
 Completar con el resultado real.
 
-### Interpretación
+###### Interpretación
 
 Explicar qué significa.
 
-### Limitaciones
+###### Limitaciones
 
 Indicar qué no puede demostrarse.
 
-### Fecha de validación
+###### Fecha de validación
 
 Completar la fecha.
 ```
 
 ---
 
-# 46. Errores habituales de los asistentes
+## 46. Errores habituales de los asistentes
 
-## Error: no indicar el índice
+#### Error: no indicar el índice
 
 Incorrecto:
 
@@ -2152,7 +2152,7 @@ index=curso earliest=-24h latest=now
 | stats count
 ```
 
-## Error: comparar texto con números
+#### Error: comparar texto con números
 
 Poco recomendable:
 
@@ -2167,7 +2167,7 @@ Recomendado:
 | where status_num>=400
 ```
 
-## Error: utilizar datos históricos con tiempo relativo
+#### Error: utilizar datos históricos con tiempo relativo
 
 Si los eventos son del 1 de enero de 2026, esta búsqueda puede no devolver datos:
 
@@ -2182,31 +2182,31 @@ index=curso earliest="01/01/2026:00:00:00"
           latest="01/01/2026:00:10:00"
 ```
 
-## Error: tratar `host` como IP
+#### Error: tratar `host` como IP
 
 `host` y `clientip` representan entidades diferentes.
 
-## Error: afirmar que una URI es lenta sin latencia
+#### Error: afirmar que una URI es lenta sin latencia
 
 Sin `response_time`, `duration` o `latency`, no puedes calcular rendimiento.
 
-## Error: crear una alerta sin probar la consulta
+#### Error: crear una alerta sin probar la consulta
 
 Ejecuta primero la búsqueda manualmente y documenta el resultado.
 
-## Error: utilizar `table *`
+#### Error: utilizar `table *`
 
 Selecciona únicamente los campos necesarios.
 
-## Error: confiar únicamente en una visualización
+#### Error: confiar únicamente en una visualización
 
 Un gráfico no sustituye la validación de la consulta.
 
 ---
 
-# 47. Checklist de SPL
+## 47. Checklist de SPL
 
-## Antes de ejecutar
+#### Antes de ejecutar
 
 - [ ] El índice es correcto.
 - [ ] El intervalo temporal es correcto.
@@ -2215,7 +2215,7 @@ Un gráfico no sustituye la validación de la consulta.
 - [ ] La consulta responde una pregunta concreta.
 - [ ] El usuario tiene permisos.
 
-## Después de ejecutar
+#### Después de ejecutar
 
 - [ ] El resultado tiene sentido.
 - [ ] El número de eventos es razonable.
@@ -2224,7 +2224,7 @@ Un gráfico no sustituye la validación de la consulta.
 - [ ] La consulta puede reutilizarse.
 - [ ] Se han documentado las limitaciones.
 
-## Antes de guardar
+#### Antes de guardar
 
 - [ ] El nombre es claro.
 - [ ] La descripción está completa.
@@ -2235,7 +2235,7 @@ Un gráfico no sustituye la validación de la consulta.
 
 ---
 
-# 48. Referencias oficiales
+## 48. Referencias oficiales
 
 - [Splunk Enterprise Documentation](https://docs.splunk.com/Documentation/Splunk)
 - [Splunk Help](https://help.splunk.com/)

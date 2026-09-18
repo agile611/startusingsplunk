@@ -38,7 +38,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-# 1. Cómo utilizar estas plantillas
+## 1. Cómo utilizar estas plantillas
 
 Una plantilla debe adaptarse antes de guardarse como búsqueda, reporte, panel o
 alerta.
@@ -55,7 +55,7 @@ Revisa siempre:
 - volumen de datos;
 - limitaciones.
 
-## Estructura recomendada
+#### Estructura recomendada
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -65,7 +65,7 @@ index=curso earliest=-24h latest=now
 | ordenación
 ```
 
-## Ejemplo
+#### Ejemplo
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -88,7 +88,7 @@ Esta consulta:
 
 ---
 
-# 2. Variables que deben sustituirse
+## 2. Variables que deben sustituirse
 
 Las plantillas utilizan valores que debes adaptar.
 
@@ -120,20 +120,20 @@ index=curso earliest=-24h latest=now
 
 ---
 
-# 3. Plantilla de validación inicial
+## 3. Plantilla de validación inicial
 
 Antes de realizar análisis, ejecuta estas consultas.
 
 ---
 
-## 3.1 Comprobar que existen eventos
+#### 3.1 Comprobar que existen eventos
 
 ```spl
 index=curso earliest=0 latest=now
 | stats count as total_eventos
 ```
 
-### Interpretación
+###### Interpretación
 
 - Si `total_eventos` es mayor que cero, el índice contiene eventos.
 - Si el resultado es cero, revisa índice, tiempo e ingesta.
@@ -141,7 +141,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## 3.2 Comprobar el rango temporal
+#### 3.2 Comprobar el rango temporal
 
 ```spl
 index=curso earliest=0 latest=now
@@ -150,7 +150,7 @@ index=curso earliest=0 latest=now
 | eval fin=strftime(fin, "%Y-%m-%d %H:%M:%S")
 ```
 
-### Interpretación
+###### Interpretación
 
 Esta consulta permite comprobar:
 
@@ -162,7 +162,7 @@ Esta consulta permite comprobar:
 
 ---
 
-## 3.3 Revisar metadatos
+#### 3.3 Revisar metadatos
 
 ```spl
 index=curso earliest=0 latest=now
@@ -170,27 +170,27 @@ index=curso earliest=0 latest=now
 | sort - count
 ```
 
-### Objetivo
+###### Objetivo
 
 Confirmar que los eventos llegan desde la fuente y el tipo de datos esperados.
 
 ---
 
-## 3.4 Revisar campos disponibles
+#### 3.4 Revisar campos disponibles
 
 ```spl
 index=curso earliest=0 latest=now
 | fieldsummary
 ```
 
-### Campos mínimos esperados
+###### Campos mínimos esperados
 
 - `host`;
 - `method`;
 - `status`;
 - `uri`.
 
-### Campos opcionales
+###### Campos opcionales
 
 - `clientip`;
 - `src_ip`;
@@ -202,7 +202,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## 3.5 Revisar eventos originales
+#### 3.5 Revisar eventos originales
 
 ```spl
 index=curso earliest=0 latest=now
@@ -214,7 +214,7 @@ Esta consulta es imprescindible cuando los campos no aparecen como esperabas.
 
 ---
 
-## 3.6 Comprobar el retraso de ingesta
+#### 3.6 Comprobar el retraso de ingesta
 
 ```spl
 index=curso earliest=0 latest=now
@@ -229,18 +229,18 @@ Un retraso elevado puede ser normal si se cargan datos históricos.
 
 ---
 
-# 4. Plantillas de volumen
+## 4. Plantillas de volumen
 
 ---
 
-## 4.1 Volumen total de eventos
+#### 4.1 Volumen total de eventos
 
 ```spl
 index=curso earliest=-24h latest=now
 | stats count as total_eventos
 ```
 
-### Uso
+###### Uso
 
 - panel de total de eventos;
 - validación rápida;
@@ -249,7 +249,7 @@ index=curso earliest=-24h latest=now
 
 ---
 
-## 4.2 Peticiones por host
+#### 4.2 Peticiones por host
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -257,7 +257,7 @@ index=curso earliest=-24h latest=now
 | sort - peticiones
 ```
 
-### Preguntas que responde
+###### Preguntas que responde
 
 - ¿Qué host genera más tráfico?
 - ¿Hay hosts sin actividad?
@@ -266,7 +266,7 @@ index=curso earliest=-24h latest=now
 
 ---
 
-## 4.3 Peticiones por método
+#### 4.3 Peticiones por método
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -275,7 +275,7 @@ index=curso earliest=-24h latest=now
 | sort - peticiones
 ```
 
-### Uso
+###### Uso
 
 Permite identificar la distribución entre:
 
@@ -288,7 +288,7 @@ Permite identificar la distribución entre:
 
 ---
 
-## 4.4 Peticiones por URI
+#### 4.4 Peticiones por URI
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -297,7 +297,7 @@ index=curso earliest=-24h latest=now
 | head 10
 ```
 
-### Uso
+###### Uso
 
 - ranking de recursos;
 - identificación de endpoints más utilizados;
@@ -305,14 +305,14 @@ index=curso earliest=-24h latest=now
 
 ---
 
-## 4.5 Peticiones por minuto
+#### 4.5 Peticiones por minuto
 
 ```spl
 index=curso earliest=-24h latest=now
 | timechart span=1m count as peticiones
 ```
 
-### Variantes de intervalo
+###### Variantes de intervalo
 
 ```spl
 | timechart span=1m count
@@ -330,14 +330,14 @@ Selecciona el intervalo según el volumen de datos y la duración del análisis.
 
 ---
 
-## 4.6 Peticiones por host y minuto
+#### 4.6 Peticiones por host y minuto
 
 ```spl
 index=curso earliest=-24h latest=now
 | timechart span=1m count by host
 ```
 
-### Uso
+###### Uso
 
 Permite detectar:
 
@@ -348,11 +348,11 @@ Permite detectar:
 
 ---
 
-# 5. Plantillas de códigos HTTP
+## 5. Plantillas de códigos HTTP
 
 ---
 
-## 5.1 Distribución de códigos
+#### 5.1 Distribución de códigos
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -363,7 +363,7 @@ index=curso earliest=-24h latest=now
 
 ---
 
-## 5.2 Clasificar por familia HTTP
+#### 5.2 Clasificar por familia HTTP
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -381,7 +381,7 @@ index=curso earliest=-24h latest=now
 
 ---
 
-## 5.3 Solo respuestas correctas
+#### 5.3 Solo respuestas correctas
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -392,7 +392,7 @@ index=curso earliest=-24h latest=now
 
 ---
 
-## 5.4 Todos los errores HTTP
+#### 5.4 Todos los errores HTTP
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -403,7 +403,7 @@ index=curso earliest=-24h latest=now
 
 ---
 
-## 5.5 Errores `4xx`
+#### 5.5 Errores `4xx`
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -414,7 +414,7 @@ index=curso earliest=-24h latest=now
 
 ---
 
-## 5.6 Errores `5xx`
+#### 5.6 Errores `5xx`
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -425,7 +425,7 @@ index=curso earliest=-24h latest=now
 
 ---
 
-## 5.7 Códigos HTTP concretos
+#### 5.7 Códigos HTTP concretos
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -437,7 +437,7 @@ index=curso earliest=-24h latest=now
 
 ---
 
-## 5.8 Respuestas HTTP 500
+#### 5.8 Respuestas HTTP 500
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -449,11 +449,11 @@ index=curso earliest=-24h latest=now
 
 ---
 
-# 6. Plantillas de errores
+## 6. Plantillas de errores
 
 ---
 
-## 6.1 Porcentaje de error global
+#### 6.1 Porcentaje de error global
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -469,7 +469,7 @@ index=curso earliest=-24h latest=now
 | table total errores porcentaje_error
 ```
 
-### Interpretación
+###### Interpretación
 
 El porcentaje se calcula como:
 
@@ -482,7 +482,7 @@ consideran errores.
 
 ---
 
-## 6.2 Porcentaje de errores `5xx`
+#### 6.2 Porcentaje de errores `5xx`
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -500,7 +500,7 @@ index=curso earliest=-24h latest=now
 
 ---
 
-## 6.3 Errores por host
+#### 6.3 Errores por host
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -512,7 +512,7 @@ index=curso earliest=-24h latest=now
 
 ---
 
-## 6.4 Errores por URI
+#### 6.4 Errores por URI
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -525,7 +525,7 @@ index=curso earliest=-24h latest=now
 
 ---
 
-## 6.5 Porcentaje de error por host
+#### 6.5 Porcentaje de error por host
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -542,7 +542,7 @@ index=curso earliest=-24h latest=now
 | sort - porcentaje_error
 ```
 
-### Interpretación
+###### Interpretación
 
 No confundas:
 
@@ -553,7 +553,7 @@ Un host con más tráfico puede tener más errores absolutos, pero un porcentaje
 
 ---
 
-## 6.6 Porcentaje de error por URI
+#### 6.6 Porcentaje de error por URI
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -576,7 +576,7 @@ sobre una muestra muy pequeña.
 
 ---
 
-## 6.7 Evolución de errores
+#### 6.7 Evolución de errores
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -587,7 +587,7 @@ index=curso earliest=-24h latest=now
 
 ---
 
-## 6.8 Correctas frente a errores
+#### 6.8 Correctas frente a errores
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -598,7 +598,7 @@ index=curso earliest=-24h latest=now
 
 ---
 
-## 6.9 Evolución de familias HTTP
+#### 6.9 Evolución de familias HTTP
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -615,11 +615,11 @@ index=curso earliest=-24h latest=now
 
 ---
 
-# 7. Plantillas de URI y endpoints
+## 7. Plantillas de URI y endpoints
 
 ---
 
-## 7.1 URI con más peticiones
+#### 7.1 URI con más peticiones
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -630,7 +630,7 @@ index=curso earliest=-24h latest=now
 
 ---
 
-## 7.2 URI con más errores `5xx`
+#### 7.2 URI con más errores `5xx`
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -643,7 +643,7 @@ index=curso earliest=-24h latest=now
 
 ---
 
-## 7.3 URI de API
+#### 7.3 URI de API
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -655,7 +655,7 @@ index=curso earliest=-24h latest=now
 
 ---
 
-## 7.4 URI fuera de la API
+#### 7.4 URI fuera de la API
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -667,7 +667,7 @@ index=curso earliest=-24h latest=now
 
 ---
 
-## 7.5 Eliminar parámetros de consulta
+#### 7.5 Eliminar parámetros de consulta
 
 Para agrupar:
 
@@ -688,7 +688,7 @@ index=curso earliest=-24h latest=now
 
 ---
 
-## 7.6 Extraer el primer nivel de la URI
+#### 7.6 Extraer el primer nivel de la URI
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -699,7 +699,7 @@ index=curso earliest=-24h latest=now
 
 ---
 
-## 7.7 URI con códigos específicos
+#### 7.7 URI con códigos específicos
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -711,7 +711,7 @@ index=curso earliest=-24h latest=now
 
 ---
 
-## 7.8 Comparar peticiones y errores por URI
+#### 7.8 Comparar peticiones y errores por URI
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -731,11 +731,11 @@ index=curso earliest=-24h latest=now
 
 ---
 
-# 8. Plantillas de host
+## 8. Plantillas de host
 
 ---
 
-## 8.1 Hosts activos
+#### 8.1 Hosts activos
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -745,7 +745,7 @@ index=curso earliest=-24h latest=now
 
 ---
 
-## 8.2 Hosts con errores
+#### 8.2 Hosts con errores
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -757,7 +757,7 @@ index=curso earliest=-24h latest=now
 
 ---
 
-## 8.3 Hosts con HTTP 500
+#### 8.3 Hosts con HTTP 500
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -769,7 +769,7 @@ index=curso earliest=-24h latest=now
 
 ---
 
-## 8.4 Comparativa de hosts
+#### 8.4 Comparativa de hosts
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -789,7 +789,7 @@ index=curso earliest=-24h latest=now
 
 ---
 
-## 8.5 Host concreto
+#### 8.5 Host concreto
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -799,7 +799,7 @@ index=curso earliest=-24h latest=now
 
 ---
 
-## 8.6 Comparar varios hosts
+#### 8.6 Comparar varios hosts
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -809,7 +809,7 @@ index=curso earliest=-24h latest=now
 
 ---
 
-## 8.7 Evolución por host
+#### 8.7 Evolución por host
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -818,13 +818,13 @@ index=curso earliest=-24h latest=now
 
 ---
 
-# 9. Plantillas por IP
+## 9. Plantillas por IP
 
 Estas consultas requieren un campo como `clientip`, `src_ip` o equivalente.
 
 ---
 
-## 9.1 Normalizar el campo de IP
+#### 9.1 Normalizar el campo de IP
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -835,7 +835,7 @@ index=curso earliest=-24h latest=now
 
 ---
 
-## 9.2 IP con más errores
+#### 9.2 IP con más errores
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -849,7 +849,7 @@ index=curso earliest=-24h latest=now
 
 ---
 
-## 9.3 Peticiones, errores y porcentaje por IP
+#### 9.3 Peticiones, errores y porcentaje por IP
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -869,7 +869,7 @@ index=curso earliest=-24h latest=now
 
 ---
 
-## 9.4 IP con cinco o más errores en cinco minutos
+#### 9.4 IP con cinco o más errores en cinco minutos
 
 ```spl
 index=curso earliest=-5m latest=now
@@ -883,7 +883,7 @@ index=curso earliest=-5m latest=now
 
 ---
 
-## 9.5 IP con muchos HTTP 500
+#### 9.5 IP con muchos HTTP 500
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -896,7 +896,7 @@ index=curso earliest=-24h latest=now
 
 ---
 
-## 9.6 Ausencia de IP
+#### 9.6 Ausencia de IP
 
 Si no existe ningún campo de IP:
 
@@ -922,13 +922,13 @@ index=curso earliest=-24h latest=now
 
 ---
 
-# 10. Plantillas de latencia
+## 10. Plantillas de latencia
 
 Estas consultas requieren un campo como `response_time`, `duration` o `latency`.
 
 ---
 
-## 10.1 Normalizar el campo de latencia
+#### 10.1 Normalizar el campo de latencia
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -945,7 +945,7 @@ Si los campos utilizan unidades diferentes, no los combines sin convertirlos.
 
 ---
 
-## 10.2 Latencia media por URI
+#### 10.2 Latencia media por URI
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -958,7 +958,7 @@ index=curso earliest=-24h latest=now
 
 ---
 
-## 10.3 Mediana y percentiles
+#### 10.3 Mediana y percentiles
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -980,7 +980,7 @@ index=curso earliest=-24h latest=now
 
 ---
 
-## 10.4 Respuestas superiores a un segundo
+#### 10.4 Respuestas superiores a un segundo
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -992,7 +992,7 @@ index=curso earliest=-24h latest=now
 
 ---
 
-## 10.5 Evolución de la latencia
+#### 10.5 Evolución de la latencia
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -1006,7 +1006,7 @@ index=curso earliest=-24h latest=now
 
 ---
 
-## 10.6 URI por encima del percentil 95 global
+#### 10.6 URI por encima del percentil 95 global
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -1020,7 +1020,7 @@ index=curso earliest=-24h latest=now
 
 ---
 
-## 10.7 Ausencia de latencia
+#### 10.7 Ausencia de latencia
 
 Si no existe un campo de latencia, utiliza:
 
@@ -1036,11 +1036,11 @@ Documenta:
 
 ---
 
-# 11. Plantillas de calidad de datos
+## 11. Plantillas de calidad de datos
 
 ---
 
-## 11.1 Códigos HTTP no numéricos
+#### 11.1 Códigos HTTP no numéricos
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -1051,7 +1051,7 @@ index=curso earliest=-24h latest=now
 
 ---
 
-## 11.2 Códigos HTTP fuera de rango
+#### 11.2 Códigos HTTP fuera de rango
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -1062,7 +1062,7 @@ index=curso earliest=-24h latest=now
 
 ---
 
-## 11.3 URI vacía
+#### 11.3 URI vacía
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -1072,7 +1072,7 @@ index=curso earliest=-24h latest=now
 
 ---
 
-## 11.4 Método vacío
+#### 11.4 Método vacío
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -1082,7 +1082,7 @@ index=curso earliest=-24h latest=now
 
 ---
 
-## 11.5 Latencia no numérica
+#### 11.5 Latencia no numérica
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -1093,7 +1093,7 @@ index=curso earliest=-24h latest=now
 
 ---
 
-## 11.6 Resumen de calidad
+#### 11.6 Resumen de calidad
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -1121,7 +1121,7 @@ index=curso earliest=-24h latest=now
 
 ---
 
-## 11.7 Porcentaje de registros incompletos
+#### 11.7 Porcentaje de registros incompletos
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -1145,14 +1145,14 @@ index=curso earliest=-24h latest=now
 
 ---
 
-# 12. Plantillas para dashboards
+## 12. Plantillas para dashboards
 
 Los tokens exactos pueden variar según el tipo de dashboard. Las consultas
 siguientes muestran la lógica de los paneles.
 
 ---
 
-## 12.1 Total de peticiones
+#### 12.1 Total de peticiones
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -1167,7 +1167,7 @@ Single value
 
 ---
 
-## 12.2 Total de errores
+#### 12.2 Total de errores
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -1177,7 +1177,7 @@ index=curso earliest=-24h latest=now
 
 ---
 
-## 12.3 Porcentaje de error
+#### 12.3 Porcentaje de error
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -1194,7 +1194,7 @@ index=curso earliest=-24h latest=now
 
 ---
 
-## 12.4 Tráfico temporal
+#### 12.4 Tráfico temporal
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -1203,7 +1203,7 @@ index=curso earliest=-24h latest=now
 
 ---
 
-## 12.5 Errores por código
+#### 12.5 Errores por código
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -1215,7 +1215,7 @@ index=curso earliest=-24h latest=now
 
 ---
 
-## 12.6 Host con más errores
+#### 12.6 Host con más errores
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -1228,7 +1228,7 @@ index=curso earliest=-24h latest=now
 
 ---
 
-## 12.7 URI con más errores
+#### 12.7 URI con más errores
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -1241,7 +1241,7 @@ index=curso earliest=-24h latest=now
 
 ---
 
-## 12.8 Panel de últimos eventos
+#### 12.8 Panel de últimos eventos
 
 ```spl
 index=curso earliest=-15m latest=now
@@ -1252,7 +1252,7 @@ index=curso earliest=-15m latest=now
 
 ---
 
-## 12.9 Filtro por host
+#### 12.9 Filtro por host
 
 Consulta conceptual:
 
@@ -1267,11 +1267,11 @@ restringir los resultados cuando el token tenga ese valor.
 
 ---
 
-# 13. Plantillas para reportes
+## 13. Plantillas para reportes
 
 ---
 
-## 13.1 Reporte de errores por URI
+#### 13.1 Reporte de errores por URI
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -1286,7 +1286,7 @@ index=curso earliest=-24h latest=now
 | head 20
 ```
 
-### Documentación recomendada
+###### Documentación recomendada
 
 ```text
 Nombre:
@@ -1307,7 +1307,7 @@ Finalidad:
 
 ---
 
-## 13.2 Reporte de evolución del tráfico
+#### 13.2 Reporte de evolución del tráfico
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -1316,7 +1316,7 @@ index=curso earliest=-24h latest=now
 | timechart span=5m count by resultado
 ```
 
-### Documentación recomendada
+###### Documentación recomendada
 
 ```text
 Nombre:
@@ -1334,7 +1334,7 @@ Finalidad:
 
 ---
 
-## 13.3 Reporte de hosts degradados
+#### 13.3 Reporte de hosts degradados
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -1354,11 +1354,11 @@ index=curso earliest=-24h latest=now
 
 ---
 
-# 14. Plantillas para alertas
+## 14. Plantillas para alertas
 
 ---
 
-## 14.1 Cinco HTTP 500 en cinco minutos
+#### 14.1 Cinco HTTP 500 en cinco minutos
 
 ```spl
 index=curso earliest=-5m latest=now
@@ -1371,7 +1371,7 @@ Esta es la alerta principal del proyecto.
 
 ---
 
-## 14.2 Cinco errores de servidor en cinco minutos
+#### 14.2 Cinco errores de servidor en cinco minutos
 
 ```spl
 index=curso earliest=-5m latest=now
@@ -1382,7 +1382,7 @@ index=curso earliest=-5m latest=now
 
 ---
 
-## 14.3 Host con demasiados errores
+#### 14.3 Host con demasiados errores
 
 ```spl
 index=curso earliest=-5m latest=now
@@ -1395,7 +1395,7 @@ index=curso earliest=-5m latest=now
 
 ---
 
-## 14.4 URI con demasiados errores
+#### 14.4 URI con demasiados errores
 
 ```spl
 index=curso earliest=-5m latest=now
@@ -1408,7 +1408,7 @@ index=curso earliest=-5m latest=now
 
 ---
 
-## 14.5 Porcentaje de error elevado
+#### 14.5 Porcentaje de error elevado
 
 ```spl
 index=curso earliest=-5m latest=now
@@ -1428,7 +1428,7 @@ El umbral del 10 % es didáctico. Debe ajustarse según el comportamiento espera
 
 ---
 
-## 14.6 Percentil 95 de latencia elevado
+#### 14.6 Percentil 95 de latencia elevado
 
 ```spl
 index=curso earliest=-5m latest=now
@@ -1447,11 +1447,11 @@ Esta alerta solo es válida si:
 
 ---
 
-# 15. Plantillas de troubleshooting
+## 15. Plantillas de troubleshooting
 
 ---
 
-## 15.1 El índice no devuelve eventos
+#### 15.1 El índice no devuelve eventos
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1476,7 +1476,7 @@ index=_internal earliest=-30m latest=now
 
 ---
 
-## 15.2 Revisar fuentes activas
+#### 15.2 Revisar fuentes activas
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1486,7 +1486,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## 15.3 Revisar hosts inesperados
+#### 15.3 Revisar hosts inesperados
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1496,7 +1496,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## 15.4 Revisar eventos recientes
+#### 15.4 Revisar eventos recientes
 
 ```spl
 index=curso earliest=-15m latest=now
@@ -1507,7 +1507,7 @@ index=curso earliest=-15m latest=now
 
 ---
 
-## 15.5 Revisar timestamps anómalos
+#### 15.5 Revisar timestamps anómalos
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1519,7 +1519,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## 15.6 Revisar valores de `status`
+#### 15.6 Revisar valores de `status`
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1529,7 +1529,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## 15.7 Revisar duplicados potenciales
+#### 15.7 Revisar duplicados potenciales
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1543,7 +1543,7 @@ sean duplicados reales.
 
 ---
 
-## 15.8 Comprobar permisos del usuario
+#### 15.8 Comprobar permisos del usuario
 
 ```spl
 | rest /services/authentication/current-context
@@ -1552,11 +1552,11 @@ sean duplicados reales.
 
 ---
 
-# 16. Plantillas de comparación temporal
+## 16. Plantillas de comparación temporal
 
 ---
 
-## 16.1 Comparar tráfico por hora
+#### 16.1 Comparar tráfico por hora
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -1567,7 +1567,7 @@ index=curso earliest=-24h latest=now
 
 ---
 
-## 16.2 Comparar errores por hora
+#### 16.2 Comparar errores por hora
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -1580,7 +1580,7 @@ index=curso earliest=-24h latest=now
 
 ---
 
-## 16.3 Evolución diaria
+#### 16.3 Evolución diaria
 
 ```spl
 index=curso earliest=-7d latest=now
@@ -1589,7 +1589,7 @@ index=curso earliest=-7d latest=now
 
 ---
 
-## 16.4 Evolución diaria de errores
+#### 16.4 Evolución diaria de errores
 
 ```spl
 index=curso earliest=-7d latest=now
@@ -1600,11 +1600,11 @@ index=curso earliest=-7d latest=now
 
 ---
 
-# 17. Plantillas de indicadores operativos
+## 17. Plantillas de indicadores operativos
 
 ---
 
-## 17.1 Estado global de la aplicación
+#### 17.1 Estado global de la aplicación
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -1627,7 +1627,7 @@ index=curso earliest=-24h latest=now
 
 ---
 
-## 17.2 Estado por host
+#### 17.2 Estado por host
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -1651,7 +1651,7 @@ index=curso earliest=-24h latest=now
 
 ---
 
-## 17.3 Resumen operativo por URI
+#### 17.3 Resumen operativo por URI
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -1672,7 +1672,7 @@ index=curso earliest=-24h latest=now
 
 ---
 
-# 18. Plantilla de consulta histórica para pruebas
+## 18. Plantilla de consulta histórica para pruebas
 
 Cuando el dataset contiene datos históricos, utiliza fechas absolutas.
 
@@ -1694,7 +1694,7 @@ La búsqueda relativa solo funcionará si `_time` de los eventos está dentro de
 
 ---
 
-# 19. Plantilla de consulta operativa en tiempo real
+## 19. Plantilla de consulta operativa en tiempo real
 
 Para búsquedas operativas o alertas:
 
@@ -1718,9 +1718,9 @@ Evita intervalos y frecuencias que generen huecos o duplicación excesiva.
 
 ---
 
-# 20. Plantilla de búsqueda con filtros opcionales
+## 20. Plantilla de búsqueda con filtros opcionales
 
-## Filtro por host
+#### Filtro por host
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -1730,7 +1730,7 @@ index=curso earliest=-24h latest=now
 
 Esta versión requiere que el token siempre tenga un valor válido.
 
-## Filtro con opción `Todos`
+#### Filtro con opción `Todos`
 
 Una estrategia habitual consiste en aplicar el filtro solo si el valor no es
 `Todos`:
@@ -1746,7 +1746,7 @@ dashboard.
 
 ---
 
-# 21. Plantilla con múltiples filtros
+## 21. Plantilla con múltiples filtros
 
 ```spl
 index=curso earliest=$time.earliest$ latest=$time.latest$
@@ -1767,7 +1767,7 @@ Antes de guardar esta consulta, prueba:
 
 ---
 
-# 22. Plantilla con clasificación de resultados
+## 22. Plantilla con clasificación de resultados
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -1786,76 +1786,76 @@ index=curso earliest=-24h latest=now
 
 ---
 
-# 23. Plantilla de consulta documentada
+## 23. Plantilla de consulta documentada
 
 Utiliza este formato en los entregables.
 
 ```markdown
-## Nombre de la consulta
+#### Nombre de la consulta
 
-### Objetivo
+###### Objetivo
 
 Describir la pregunta que se quiere responder.
 
-### Índice
+###### Índice
 
 ```text
 curso
 ```
 
-### Intervalo temporal
+###### Intervalo temporal
 
 ```text
 Últimas 24 horas
 ```
 
-### SPL
+###### SPL
 
 ```spl
 index=curso earliest=-24h latest=now
 | stats count by host
 ```
 
-### Campos utilizados
+###### Campos utilizados
 
 - host
 
-### Resultado esperado
+###### Resultado esperado
 
 Una tabla con el número de eventos por host.
 
-### Interpretación
+###### Interpretación
 
 Explicar qué significa el resultado.
 
-### Limitaciones
+###### Limitaciones
 
 Indicar campos ausentes, muestra pequeña o posibles sesgos.
 
-### Uso previsto
+###### Uso previsto
 
 - búsqueda;
 - reporte;
 - dashboard;
 - alerta.
 
-### Fecha de validación
+###### Fecha de validación
 
 Completar.
 ```
 
 ---
 
-# 24. Plantilla de consulta para un reporte
+## 24. Plantilla de consulta para un reporte
 
 ```markdown
-## Reporte: errores por URI
+#### Reporte: errores por URI
 
-### Finalidad
+###### Finalidad
 
 Identificar los recursos que concentran más errores.
 
-### Consulta
+###### Consulta
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -1866,40 +1866,40 @@ index=curso earliest=-24h latest=now
 | head 20
 ```
 
-### Audiencia
+###### Audiencia
 
 Equipo de operaciones y desarrollo.
 
-### Frecuencia
+###### Frecuencia
 
 Cada 15 minutos.
 
-### Retención
+###### Retención
 
 Completar.
 
-### Permisos
+###### Permisos
 
 Lectura para usuarios operativos.
 Edición limitada al propietario o administrador.
 
-### Limitaciones
+###### Limitaciones
 
 El número absoluto de errores no representa por sí solo el porcentaje de error.
 ```
 
 ---
 
-# 25. Plantilla de consulta para un panel
+## 25. Plantilla de consulta para un panel
 
 ```markdown
-## Panel: errores HTTP por código
+#### Panel: errores HTTP por código
 
-### Objetivo
+###### Objetivo
 
 Mostrar la distribución de códigos HTTP erróneos.
 
-### SPL
+###### SPL
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -1909,43 +1909,43 @@ index=curso earliest=-24h latest=now
 | sort status_num
 ```
 
-### Visualización
+###### Visualización
 
 Gráfico de barras.
 
-### Eje horizontal
+###### Eje horizontal
 
 status_num
 
-### Eje vertical
+###### Eje vertical
 
 errores
 
-### Filtro temporal
+###### Filtro temporal
 
 Sí.
 
-### Resultado esperado
+###### Resultado esperado
 
 Una barra por cada código HTTP con errores.
 
-### Limitaciones
+###### Limitaciones
 
 No muestra la causa raíz de los errores.
 ```
 
 ---
 
-# 26. Plantilla de consulta para una alerta
+## 26. Plantilla de consulta para una alerta
 
 ```markdown
-## Alerta: cinco HTTP 500 en cinco minutos
+#### Alerta: cinco HTTP 500 en cinco minutos
 
-### Objetivo
+###### Objetivo
 
 Detectar un incremento de errores internos del servidor.
 
-### SPL
+###### SPL
 
 ```spl
 index=curso earliest=-5m latest=now
@@ -1954,33 +1954,33 @@ index=curso earliest=-5m latest=now
 | where errores_500>=5
 ```
 
-### Condición
+###### Condición
 
 ```text
 errores_500 >= 5
 ```
 
-### Frecuencia
+###### Frecuencia
 
 Completar.
 
-### Acción
+###### Acción
 
 Completar.
 
-### Throttling
+###### Throttling
 
 Completar.
 
-### Prueba histórica
+###### Prueba histórica
 
 Completar.
 
-### Prueba reciente
+###### Prueba reciente
 
 Completar.
 
-### Limitaciones
+###### Limitaciones
 
 - retraso de ingesta;
 - duplicados;
@@ -1991,9 +1991,9 @@ Completar.
 
 ---
 
-# 27. Ejercicios prácticos
+## 27. Ejercicios prácticos
 
-## Ejercicio 1: volumen
+#### Ejercicio 1: volumen
 
 Ejecuta:
 
@@ -2011,7 +2011,7 @@ Documenta:
 
 ---
 
-## Ejercicio 2: errores por URI
+#### Ejercicio 2: errores por URI
 
 ```spl
 index=curso earliest=0 latest=now
@@ -2029,7 +2029,7 @@ Responde:
 
 ---
 
-## Ejercicio 3: porcentaje por host
+#### Ejercicio 3: porcentaje por host
 
 ```spl
 index=curso earliest=0 latest=now
@@ -2054,7 +2054,7 @@ Responde:
 
 ---
 
-## Ejercicio 4: evolución temporal
+#### Ejercicio 4: evolución temporal
 
 ```spl
 index=curso earliest=0 latest=now
@@ -2071,7 +2071,7 @@ Responde:
 
 ---
 
-## Ejercicio 5: calidad de datos
+#### Ejercicio 5: calidad de datos
 
 ```spl
 index=curso earliest=0 latest=now
@@ -2096,7 +2096,7 @@ Responde:
 
 ---
 
-## Ejercicio 6: alerta
+#### Ejercicio 6: alerta
 
 ```spl
 index=curso earliest=-5m latest=now
@@ -2114,9 +2114,9 @@ Responde:
 
 ---
 
-# 28. Buenas prácticas para reutilizar consultas
+## 28. Buenas prácticas para reutilizar consultas
 
-## Mantener el índice explícito
+#### Mantener el índice explícito
 
 Recomendado:
 
@@ -2132,12 +2132,12 @@ index=*
 
 salvo en tareas de diagnóstico.
 
-## Mantener el tiempo explícito
+#### Mantener el tiempo explícito
 
 No dependas exclusivamente del selector visual de tiempo si la consulta se va a
 guardar como reporte o alerta.
 
-## Convertir los valores numéricos
+#### Convertir los valores numéricos
 
 ```spl
 | eval status_num=tonumber(status)
@@ -2147,13 +2147,13 @@ guardar como reporte o alerta.
 | eval tiempo_ms=tonumber(response_time)
 ```
 
-## Proteger las divisiones
+#### Proteger las divisiones
 
 ```spl
 | eval porcentaje=if(total>0, errores*100/total, 0)
 ```
 
-## Evitar campos inexistentes
+#### Evitar campos inexistentes
 
 Comprueba:
 
@@ -2161,7 +2161,7 @@ Comprueba:
 | fieldsummary
 ```
 
-## Utilizar nombres claros
+#### Utilizar nombres claros
 
 Recomendado:
 
@@ -2180,14 +2180,14 @@ y
 resultado1
 ```
 
-## Limitar rankings
+#### Limitar rankings
 
 ```spl
 | sort - errores
 | head 10
 ```
 
-## Documentar unidades
+#### Documentar unidades
 
 Indica si la latencia está expresada en:
 
@@ -2195,7 +2195,7 @@ Indica si la latencia está expresada en:
 - segundos;
 - microsegundos.
 
-## Validar antes de guardar
+#### Validar antes de guardar
 
 Ejecuta primero la búsqueda manualmente y revisa:
 
@@ -2208,9 +2208,9 @@ Ejecuta primero la búsqueda manualmente y revisa:
 
 ---
 
-# 29. Checklist de consultas
+## 29. Checklist de consultas
 
-## Preparación
+#### Preparación
 
 - [ ] El índice es correcto.
 - [ ] El rango temporal es adecuado.
@@ -2218,7 +2218,7 @@ Ejecuta primero la búsqueda manualmente y revisa:
 - [ ] Las unidades están documentadas.
 - [ ] Se conocen las limitaciones.
 
-## Construcción
+#### Construcción
 
 - [ ] La búsqueda responde una pregunta concreta.
 - [ ] Los campos numéricos se convierten.
@@ -2227,7 +2227,7 @@ Ejecuta primero la búsqueda manualmente y revisa:
 - [ ] Los nombres son descriptivos.
 - [ ] Se limita la cantidad de resultados cuando procede.
 
-## Validación
+#### Validación
 
 - [ ] La consulta se ejecuta manualmente.
 - [ ] Los resultados son razonables.
@@ -2235,7 +2235,7 @@ Ejecuta primero la búsqueda manualmente y revisa:
 - [ ] Se han revisado eventos de ejemplo.
 - [ ] Se han comparado los resultados con el dataset original.
 
-## Publicación
+#### Publicación
 
 - [ ] Tiene título claro.
 - [ ] Tiene descripción.
@@ -2246,7 +2246,7 @@ Ejecuta primero la búsqueda manualmente y revisa:
 
 ---
 
-# 30. Referencias oficiales
+## 30. Referencias oficiales
 
 - [Splunk Enterprise Documentation](https://docs.splunk.com/Documentation/Splunk)
 - [Splunk Search Manual](https://docs.splunk.com/Documentation/Splunk/latest/Search/Aboutthesearchapp)

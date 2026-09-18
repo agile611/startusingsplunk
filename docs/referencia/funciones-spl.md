@@ -47,7 +47,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## 1. Qué es una función SPL
+#### 1. Qué es una función SPL
 
 Una función SPL recibe uno o varios valores y devuelve un resultado.
 
@@ -74,7 +74,7 @@ La función `len()` cuenta la longitud del campo `uri`.
 
 ---
 
-## 2. Estructura general
+#### 2. Estructura general
 
 La estructura habitual es:
 
@@ -104,7 +104,7 @@ En este caso:
 
 ---
 
-## 3. Funciones y tipos de datos
+#### 3. Funciones y tipos de datos
 
 Las funciones SPL trabajan principalmente con:
 
@@ -115,7 +115,7 @@ Las funciones SPL trabajan principalmente con:
 - valores nulos;
 - listas multivalor.
 
-### Texto
+###### Texto
 
 Ejemplo:
 
@@ -123,7 +123,7 @@ Ejemplo:
 /api/users
 ```
 
-### Número
+###### Número
 
 Ejemplo:
 
@@ -131,7 +131,7 @@ Ejemplo:
 500
 ```
 
-### Tiempo epoch
+###### Tiempo epoch
 
 Ejemplo conceptual:
 
@@ -139,7 +139,7 @@ Ejemplo conceptual:
 1770000000
 ```
 
-### Booleano
+###### Booleano
 
 En SPL suele representarse mediante expresiones que devuelven:
 
@@ -148,7 +148,7 @@ true()
 false()
 ```
 
-### Valor nulo
+###### Valor nulo
 
 Indica que un campo no tiene valor.
 
@@ -160,14 +160,14 @@ isnull(campo)
 
 ---
 
-# 4. Funciones de conversión
+## 4. Funciones de conversión
 
 Las funciones de conversión son fundamentales cuando los datos llegan como texto,
 pero deben utilizarse en cálculos numéricos.
 
 ---
 
-## 4.1 `tonumber`
+#### 4.1 `tonumber`
 
 Convierte un valor en número.
 
@@ -177,7 +177,7 @@ index=curso earliest=0 latest=now
 | table status status_num
 ```
 
-### Ejemplo con latencia
+###### Ejemplo con latencia
 
 ```spl
 index=curso earliest=0 latest=now
@@ -185,7 +185,7 @@ index=curso earliest=0 latest=now
 | table uri response_time tiempo_ms
 ```
 
-### Detectar valores que no se pueden convertir
+###### Detectar valores que no se pueden convertir
 
 ```spl
 index=curso earliest=0 latest=now
@@ -194,7 +194,7 @@ index=curso earliest=0 latest=now
 | table _time status uri _raw
 ```
 
-### Buenas prácticas
+###### Buenas prácticas
 
 Utiliza un nombre nuevo en lugar de sobrescribir el campo original:
 
@@ -212,7 +212,7 @@ porque conserva el valor original para diagnosticar problemas de parsing.
 
 ---
 
-## 4.2 `tostring`
+#### 4.2 `tostring`
 
 Convierte un valor en texto.
 
@@ -228,7 +228,7 @@ normalmente realiza conversiones automáticas cuando son compatibles.
 
 ---
 
-## 4.3 `printf`
+#### 4.3 `printf`
 
 Formatea valores utilizando una plantilla.
 
@@ -250,13 +250,13 @@ El carácter `%` debe escaparse como `%%` dentro del formato.
 
 ---
 
-# 5. Funciones de valores nulos
+## 5. Funciones de valores nulos
 
 Los datos reales suelen tener campos vacíos, ausentes o incompletos.
 
 ---
 
-## 5.1 `isnull`
+#### 5.1 `isnull`
 
 Comprueba si un campo es nulo.
 
@@ -266,7 +266,7 @@ index=curso earliest=0 latest=now
 | table _time host uri response_time
 ```
 
-### Crear una bandera de campo ausente
+###### Crear una bandera de campo ausente
 
 ```spl
 index=curso earliest=0 latest=now
@@ -276,7 +276,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## 5.2 `isnotnull`
+#### 5.2 `isnotnull`
 
 Comprueba si un campo tiene valor.
 
@@ -286,7 +286,7 @@ index=curso earliest=0 latest=now
 | table _time host uri
 ```
 
-### Analizar únicamente eventos con latencia
+###### Analizar únicamente eventos con latencia
 
 ```spl
 index=curso earliest=0 latest=now
@@ -297,7 +297,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## 5.3 `coalesce`
+#### 5.3 `coalesce`
 
 Devuelve el primer valor no nulo de una lista de campos.
 
@@ -316,14 +316,14 @@ index=curso earliest=0 latest=now
 | eval latencia=coalesce(response_time, duration, latency)
 ```
 
-### Ventaja práctica
+###### Ventaja práctica
 
 Puedes utilizar una misma búsqueda con datasets que tengan nombres de campos
 diferentes, siempre que representen el mismo concepto.
 
 ---
 
-## 5.4 `null`
+#### 5.4 `null`
 
 Devuelve un valor nulo.
 
@@ -336,7 +336,7 @@ Su uso es avanzado y suele ser útil al construir lógica condicional.
 
 ---
 
-## 5.5 Diferencia entre campo nulo y campo vacío
+#### 5.5 Diferencia entre campo nulo y campo vacío
 
 Un campo puede:
 
@@ -349,7 +349,7 @@ Un campo puede:
 
 Estas situaciones no son idénticas.
 
-### Comprobar varios casos
+###### Comprobar varios casos
 
 ```spl
 index=curso earliest=0 latest=now
@@ -357,7 +357,7 @@ index=curso earliest=0 latest=now
 | table _time uri _raw
 ```
 
-### Detectar valores textuales utilizados como ausencia
+###### Detectar valores textuales utilizados como ausencia
 
 ```spl
 index=curso earliest=0 latest=now
@@ -369,11 +369,11 @@ La interpretación debe documentarse según el formato de la fuente.
 
 ---
 
-# 6. Funciones condicionales
+## 6. Funciones condicionales
 
 ---
 
-## 6.1 `if`
+#### 6.1 `if`
 
 Devuelve un valor cuando la condición es verdadera y otro cuando es falsa.
 
@@ -384,7 +384,7 @@ index=curso earliest=0 latest=now
 | stats count by resultado
 ```
 
-### Clasificar eventos lentos
+###### Clasificar eventos lentos
 
 ```spl
 index=curso earliest=0 latest=now
@@ -397,7 +397,7 @@ index=curso earliest=0 latest=now
 | stats count by rendimiento
 ```
 
-### Evitar divisiones entre cero
+###### Evitar divisiones entre cero
 
 ```spl
 index=curso earliest=0 latest=now
@@ -413,7 +413,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## 6.2 `case`
+#### 6.2 `case`
 
 Evalúa varias condiciones en orden.
 
@@ -432,7 +432,7 @@ index=curso earliest=0 latest=now
 
 La primera condición verdadera determina el resultado.
 
-### Clasificar latencia
+###### Clasificar latencia
 
 ```spl
 index=curso earliest=0 latest=now
@@ -447,7 +447,7 @@ index=curso earliest=0 latest=now
 | stats count by nivel_latencia
 ```
 
-### Importancia del orden
+###### Importancia del orden
 
 Incorrecto:
 
@@ -475,7 +475,7 @@ Correcto:
 
 ---
 
-## 6.3 `validate`
+#### 6.3 `validate`
 
 Devuelve el valor asociado a la primera condición falsa.
 
@@ -498,7 +498,7 @@ Una alternativa más explícita para principiantes es utilizar `case()`.
 
 ---
 
-## 6.4 `true`
+#### 6.4 `true`
 
 Devuelve el valor booleano verdadero.
 
@@ -516,7 +516,7 @@ La última condición actúa como caso por defecto.
 
 ---
 
-## 6.5 `false`
+#### 6.5 `false`
 
 Devuelve el valor booleano falso.
 
@@ -528,11 +528,11 @@ Su uso es menos frecuente que `true()`.
 
 ---
 
-# 7. Funciones de texto
+## 7. Funciones de texto
 
 ---
 
-## 7.1 `len`
+#### 7.1 `len`
 
 Devuelve la longitud de una cadena.
 
@@ -542,7 +542,7 @@ index=curso earliest=0 latest=now
 | table uri longitud_uri
 ```
 
-### Detectar URI demasiado largas
+###### Detectar URI demasiado largas
 
 ```spl
 index=curso earliest=0 latest=now
@@ -553,7 +553,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## 7.2 `lower`
+#### 7.2 `lower`
 
 Convierte el texto a minúsculas.
 
@@ -565,7 +565,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## 7.3 `upper`
+#### 7.3 `upper`
 
 Convierte el texto a mayúsculas.
 
@@ -575,7 +575,7 @@ index=curso earliest=0 latest=now
 | stats count by metodo_normalizado
 ```
 
-### Normalizar métodos HTTP
+###### Normalizar métodos HTTP
 
 ```spl
 index=curso earliest=0 latest=now
@@ -585,7 +585,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## 7.4 `trim`
+#### 7.4 `trim`
 
 Elimina espacios al principio y al final.
 
@@ -595,7 +595,7 @@ index=curso earliest=0 latest=now
 | table uri uri_limpia
 ```
 
-### Limpiar campos antes de convertirlos
+###### Limpiar campos antes de convertirlos
 
 ```spl
 index=curso earliest=0 latest=now
@@ -604,7 +604,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## 7.5 `ltrim`
+#### 7.5 `ltrim`
 
 Elimina espacios iniciales.
 
@@ -615,7 +615,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## 7.6 `rtrim`
+#### 7.6 `rtrim`
 
 Elimina espacios finales.
 
@@ -626,7 +626,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## 7.7 `substr`
+#### 7.7 `substr`
 
 Extrae una parte de una cadena.
 
@@ -636,7 +636,7 @@ index=curso earliest=0 latest=now
 | table uri prefijo_uri
 ```
 
-### Extraer una versión inicial
+###### Extraer una versión inicial
 
 ```spl
 index=curso earliest=0 latest=now
@@ -647,7 +647,7 @@ La posición inicial y la longitud deben probarse con datos reales.
 
 ---
 
-## 7.8 `replace`
+#### 7.8 `replace`
 
 Sustituye coincidencias en una cadena.
 
@@ -657,7 +657,7 @@ index=curso earliest=0 latest=now
 | table uri uri_sin_api
 ```
 
-### Normalizar separadores
+###### Normalizar separadores
 
 ```spl
 index=curso earliest=0 latest=now
@@ -669,7 +669,7 @@ muestra antes de aplicarla a un dashboard o alerta.
 
 ---
 
-## 7.9 `match`
+#### 7.9 `match`
 
 Comprueba si una cadena coincide con una expresión regular.
 
@@ -679,7 +679,7 @@ index=curso earliest=0 latest=now
 | stats sum(es_api) as peticiones_api
 ```
 
-### Detectar URI de administración
+###### Detectar URI de administración
 
 ```spl
 index=curso earliest=0 latest=now
@@ -687,7 +687,7 @@ index=curso earliest=0 latest=now
 | table _time host uri status
 ```
 
-### Validar una IP de forma básica
+###### Validar una IP de forma básica
 
 ```spl
 index=curso earliest=0 latest=now
@@ -704,7 +704,7 @@ entre `0` y `255`.
 
 ---
 
-## 7.10 `like`
+#### 7.10 `like`
 
 Compara un texto con un patrón.
 
@@ -715,7 +715,7 @@ index=curso earliest=0 latest=now
 
 El carácter `%` representa una secuencia de caracteres.
 
-### Detectar métodos de consulta
+###### Detectar métodos de consulta
 
 ```spl
 index=curso earliest=0 latest=now
@@ -726,7 +726,7 @@ Para patrones complejos, suele ser más flexible `match()`.
 
 ---
 
-## 7.11 `split`
+#### 7.11 `split`
 
 Divide una cadena y devuelve un campo multivalor.
 
@@ -736,7 +736,7 @@ index=curso earliest=0 latest=now
 | table uri partes_uri
 ```
 
-### Obtener componentes de una URI
+###### Obtener componentes de una URI
 
 ```spl
 index=curso earliest=0 latest=now
@@ -747,7 +747,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## 7.12 `mvjoin`
+#### 7.12 `mvjoin`
 
 Une valores multivalor en una cadena.
 
@@ -760,7 +760,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## 7.13 `urldecode`
+#### 7.13 `urldecode`
 
 Decodifica valores codificados en una URL.
 
@@ -774,7 +774,7 @@ Su disponibilidad y comportamiento deben comprobarse en la versión instalada.
 
 ---
 
-## 7.14 `printf`
+#### 7.14 `printf`
 
 Formatea texto y números.
 
@@ -791,11 +791,11 @@ index=curso earliest=0 latest=now
 
 ---
 
-# 8. Funciones numéricas
+## 8. Funciones numéricas
 
 ---
 
-## 8.1 `abs`
+#### 8.1 `abs`
 
 Devuelve el valor absoluto.
 
@@ -807,7 +807,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## 8.2 `ceil`
+#### 8.2 `ceil`
 
 Redondea hacia arriba.
 
@@ -820,7 +820,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## 8.3 `floor`
+#### 8.3 `floor`
 
 Redondea hacia abajo.
 
@@ -833,7 +833,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## 8.4 `round`
+#### 8.4 `round`
 
 Redondea un número.
 
@@ -852,7 +852,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## 8.5 `sqrt`
+#### 8.5 `sqrt`
 
 Calcula la raíz cuadrada.
 
@@ -867,7 +867,7 @@ Es una función matemática de uso menos frecuente en el análisis operativo.
 
 ---
 
-## 8.6 `pow`
+#### 8.6 `pow`
 
 Eleva un número a una potencia.
 
@@ -884,7 +884,7 @@ Resultado esperado:
 
 ---
 
-## 8.7 `exp`
+#### 8.7 `exp`
 
 Calcula la función exponencial.
 
@@ -894,7 +894,7 @@ Calcula la función exponencial.
 
 ---
 
-## 8.8 `log`
+#### 8.8 `log`
 
 Calcula un logaritmo.
 
@@ -907,7 +907,7 @@ para un análisis técnico.
 
 ---
 
-## 8.9 `max`
+#### 8.9 `max`
 
 Devuelve el máximo entre valores.
 
@@ -928,7 +928,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## 8.10 `min`
+#### 8.10 `min`
 
 Devuelve el mínimo entre valores.
 
@@ -940,13 +940,13 @@ index=curso earliest=0 latest=now
 
 ---
 
-# 9. Funciones de fecha y hora
+## 9. Funciones de fecha y hora
 
 Los tiempos de Splunk suelen representarse internamente como segundos desde epoch.
 
 ---
 
-## 9.1 `now`
+#### 9.1 `now`
 
 Devuelve el momento actual.
 
@@ -956,7 +956,7 @@ index=curso earliest=0 latest=now
 | table _time antiguedad_segundos
 ```
 
-### Eventos con más de una hora
+###### Eventos con más de una hora
 
 ```spl
 index=curso earliest=0 latest=now
@@ -967,7 +967,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## 9.2 `relative_time`
+#### 9.2 `relative_time`
 
 Calcula un tiempo relativo.
 
@@ -975,14 +975,14 @@ Calcula un tiempo relativo.
 | eval hace_una_hora=relative_time(now(), "-1h")
 ```
 
-### Filtrar dentro de `where`
+###### Filtrar dentro de `where`
 
 ```spl
 index=curso earliest=0 latest=now
 | where _time>=relative_time(now(), "-1h")
 ```
 
-### Redondear al inicio de la hora
+###### Redondear al inicio de la hora
 
 ```spl
 | eval inicio_hora=relative_time(_time, "@h")
@@ -1001,7 +1001,7 @@ Modificadores habituales:
 
 ---
 
-## 9.3 `strftime`
+#### 9.3 `strftime`
 
 Convierte epoch en texto legible.
 
@@ -1011,7 +1011,7 @@ index=curso earliest=0 latest=now
 | table fecha host uri
 ```
 
-### Formato de fecha
+###### Formato de fecha
 
 ```text
 %Y  año con cuatro cifras
@@ -1024,7 +1024,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## 9.4 `strptime`
+#### 9.4 `strptime`
 
 Convierte una fecha textual en epoch.
 
@@ -1035,7 +1035,7 @@ Convierte una fecha textual en epoch.
 )
 ```
 
-### Convertir un campo de fecha propio
+###### Convertir un campo de fecha propio
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1050,7 +1050,7 @@ No sobrescribas `_time` sin comprobar antes el resultado.
 
 ---
 
-## 9.5 `time`
+#### 9.5 `time`
 
 Devuelve el tiempo asociado al evento.
 
@@ -1069,7 +1069,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## 9.6 Extraer componentes de fecha
+#### 9.6 Extraer componentes de fecha
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1091,13 +1091,13 @@ disponibles en la versión correspondiente:
 
 ---
 
-# 10. Funciones multivalor
+## 10. Funciones multivalor
 
 Los campos multivalor contienen más de un valor.
 
 ---
 
-## 10.1 `mvcount`
+#### 10.1 `mvcount`
 
 Cuenta los valores de un campo multivalor.
 
@@ -1110,7 +1110,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## 10.2 `mvindex`
+#### 10.2 `mvindex`
 
 Obtiene un valor por posición.
 
@@ -1121,7 +1121,7 @@ index=curso earliest=0 latest=now
 | table uri partes_uri primer_elemento
 ```
 
-### Obtener el último elemento
+###### Obtener el último elemento
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1132,7 +1132,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## 10.3 `mvjoin`
+#### 10.3 `mvjoin`
 
 Une valores multivalor.
 
@@ -1145,7 +1145,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## 10.4 `mvfind`
+#### 10.4 `mvfind`
 
 Busca un valor dentro de un campo multivalor.
 
@@ -1158,7 +1158,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## 10.5 `mvappend`
+#### 10.5 `mvappend`
 
 Combina valores en una lista multivalor.
 
@@ -1168,7 +1168,7 @@ Combina valores en una lista multivalor.
 
 ---
 
-## 10.6 `mvsort`
+#### 10.6 `mvsort`
 
 Ordena valores multivalor.
 
@@ -1180,7 +1180,7 @@ Ordena valores multivalor.
 
 ---
 
-## 10.7 `mvdedup`
+#### 10.7 `mvdedup`
 
 Elimina duplicados de un campo multivalor.
 
@@ -1192,11 +1192,11 @@ Elimina duplicados de un campo multivalor.
 
 ---
 
-# 11. Funciones de comparación
+## 11. Funciones de comparación
 
 ---
 
-## 11.1 `in`
+#### 11.1 `in`
 
 Comprueba si un valor pertenece a una lista.
 
@@ -1219,7 +1219,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## 11.2 `match`
+#### 11.2 `match`
 
 Comprueba una expresión regular.
 
@@ -1231,7 +1231,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## 11.3 `like`
+#### 11.3 `like`
 
 Compara utilizando comodines.
 
@@ -1242,7 +1242,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## 11.4 `case`
+#### 11.4 `case`
 
 Permite comparar rangos y categorías.
 
@@ -1257,14 +1257,14 @@ index=curso earliest=0 latest=now
 
 ---
 
-# 12. Funciones de agregación estadística
+## 12. Funciones de agregación estadística
 
 Estas funciones suelen utilizarse dentro de `stats`, `eventstats`, `streamstats` y
 `timechart`.
 
 ---
 
-## 12.1 `count`
+#### 12.1 `count`
 
 Cuenta eventos o valores.
 
@@ -1273,7 +1273,7 @@ index=curso earliest=0 latest=now
 | stats count as total_eventos
 ```
 
-### Conteo por host
+###### Conteo por host
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1282,7 +1282,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## 12.2 `dc`
+#### 12.2 `dc`
 
 Cuenta valores distintos.
 
@@ -1291,14 +1291,14 @@ index=curso earliest=0 latest=now
 | stats dc(uri) as uri_distintas
 ```
 
-### Hosts distintos
+###### Hosts distintos
 
 ```spl
 index=curso earliest=0 latest=now
 | stats dc(host) as hosts_distintos
 ```
 
-### Clientes distintos
+###### Clientes distintos
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1309,7 +1309,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## 12.3 `values`
+#### 12.3 `values`
 
 Devuelve valores distintos en formato multivalor.
 
@@ -1320,7 +1320,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## 12.4 `list`
+#### 12.4 `list`
 
 Devuelve una lista de valores, pudiendo conservar repeticiones.
 
@@ -1333,7 +1333,7 @@ Utiliza `list()` con precaución en datasets grandes.
 
 ---
 
-## 12.5 `sum`
+#### 12.5 `sum`
 
 Suma valores numéricos.
 
@@ -1345,7 +1345,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## 12.6 `avg`
+#### 12.6 `avg`
 
 Calcula la media.
 
@@ -1357,7 +1357,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## 12.7 `median`
+#### 12.7 `median`
 
 Calcula la mediana.
 
@@ -1369,7 +1369,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## 12.8 `min`
+#### 12.8 `min`
 
 Calcula el valor mínimo.
 
@@ -1381,7 +1381,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## 12.9 `max`
+#### 12.9 `max`
 
 Calcula el valor máximo.
 
@@ -1393,7 +1393,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## 12.10 `range`
+#### 12.10 `range`
 
 Calcula la diferencia entre el máximo y el mínimo.
 
@@ -1405,7 +1405,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## 12.11 `stdev`
+#### 12.11 `stdev`
 
 Calcula la desviación estándar.
 
@@ -1419,7 +1419,7 @@ Una desviación elevada puede indicar variabilidad en los tiempos de respuesta.
 
 ---
 
-## 12.12 `var`
+#### 12.12 `var`
 
 Calcula la varianza.
 
@@ -1431,7 +1431,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## 12.13 `perc95`
+#### 12.13 `perc95`
 
 Calcula el percentil 95.
 
@@ -1446,7 +1446,7 @@ aproximadamente el 95 % de las observaciones.
 
 ---
 
-## 12.14 `perc99`
+#### 12.14 `perc99`
 
 Calcula el percentil 99.
 
@@ -1460,7 +1460,7 @@ El percentil 99 es útil para estudiar la cola de respuestas más lentas.
 
 ---
 
-## 12.15 `exactperc95`
+#### 12.15 `exactperc95`
 
 Cuando se necesita un cálculo exacto del percentil, puede existir una función
 específica según la versión y el contexto de Splunk.
@@ -1470,11 +1470,11 @@ informe formal.
 
 ---
 
-# 13. Funciones estadísticas condicionales
+## 13. Funciones estadísticas condicionales
 
 ---
 
-## Contar errores
+#### Contar errores
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1482,7 +1482,7 @@ index=curso earliest=0 latest=now
 | stats count(eval(status_num>=400)) as errores
 ```
 
-## Contar HTTP 500
+#### Contar HTTP 500
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1490,7 +1490,7 @@ index=curso earliest=0 latest=now
 | stats count(eval(status_num=500)) as errores_500
 ```
 
-## Contar eventos con latencia alta
+#### Contar eventos con latencia alta
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1498,7 +1498,7 @@ index=curso earliest=0 latest=now
 | stats count(eval(tiempo_ms>1000)) as respuestas_lentas
 ```
 
-## Contar por host
+#### Contar por host
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1509,7 +1509,7 @@ index=curso earliest=0 latest=now
     by host
 ```
 
-## Tasa de error por host
+#### Tasa de error por host
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1528,13 +1528,13 @@ index=curso earliest=0 latest=now
 
 ---
 
-# 14. Funciones para análisis de rendimiento
+## 14. Funciones para análisis de rendimiento
 
 Este apartado requiere un campo de latencia o duración.
 
 ---
 
-## 14.1 Clasificar la latencia
+#### 14.1 Clasificar la latencia
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1551,7 +1551,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## 14.2 Calcular métricas por URI
+#### 14.2 Calcular métricas por URI
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1573,7 +1573,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## 14.3 Detectar valores extremos
+#### 14.3 Detectar valores extremos
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1588,11 +1588,11 @@ Esta búsqueda identifica eventos por encima del percentil 95 global.
 
 ---
 
-# 15. Funciones de análisis de datos web
+## 15. Funciones de análisis de datos web
 
 ---
 
-## 15.1 Identificar URI de API
+#### 15.1 Identificar URI de API
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1602,7 +1602,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## 15.2 Extraer el primer nivel de una URI
+#### 15.2 Extraer el primer nivel de una URI
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1613,7 +1613,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## 15.3 Normalizar parámetros de consulta
+#### 15.3 Normalizar parámetros de consulta
 
 Si las URI contienen parámetros:
 
@@ -1633,7 +1633,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## 15.4 Agrupar métodos HTTP
+#### 15.4 Agrupar métodos HTTP
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1644,7 +1644,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## 15.5 Analizar agentes de usuario
+#### 15.5 Analizar agentes de usuario
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1664,11 +1664,11 @@ Documenta la ausencia en lugar de fabricar una visualización.
 
 ---
 
-# 16. Funciones para validar calidad de datos
+## 16. Funciones para validar calidad de datos
 
 ---
 
-## 16.1 Validar el código HTTP
+#### 16.1 Validar el código HTTP
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1683,7 +1683,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## 16.2 Detectar URI vacías
+#### 16.2 Detectar URI vacías
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1694,7 +1694,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## 16.3 Detectar métodos desconocidos
+#### 16.3 Detectar métodos desconocidos
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1705,7 +1705,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## 16.4 Detectar latencias inválidas
+#### 16.4 Detectar latencias inválidas
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1716,7 +1716,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## 16.5 Resumen de calidad
+#### 16.5 Resumen de calidad
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1742,11 +1742,11 @@ index=curso earliest=0 latest=now
 
 ---
 
-# 17. Funciones para construir indicadores
+## 17. Funciones para construir indicadores
 
 ---
 
-## 17.1 Indicador global de salud
+#### 17.1 Indicador global de salud
 
 Ejemplo didáctico:
 
@@ -1773,7 +1773,7 @@ Los umbrales deben justificarse y adaptarse al contexto real.
 
 ---
 
-## 17.2 Indicador por host
+#### 17.2 Indicador por host
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -1798,7 +1798,7 @@ index=curso earliest=-24h latest=now
 
 ---
 
-## 17.3 Indicador temporal
+#### 17.3 Indicador temporal
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -1827,39 +1827,39 @@ index=curso earliest=-24h latest=now
 
 ---
 
-# 18. Funciones en `where`
+## 18. Funciones en `where`
 
 Las funciones pueden utilizarse directamente dentro de `where`.
 
-## Filtrar URI largas
+#### Filtrar URI largas
 
 ```spl
 index=curso earliest=0 latest=now
 | where len(uri)>100
 ```
 
-## Filtrar métodos concretos
+#### Filtrar métodos concretos
 
 ```spl
 index=curso earliest=0 latest=now
 | where upper(method)="POST"
 ```
 
-## Filtrar por latencia
+#### Filtrar por latencia
 
 ```spl
 index=curso earliest=0 latest=now
 | where tonumber(response_time)>1000
 ```
 
-## Filtrar por patrón
+#### Filtrar por patrón
 
 ```spl
 index=curso earliest=0 latest=now
 | where match(uri, "^/admin/")
 ```
 
-## Filtrar valores de una lista
+#### Filtrar valores de una lista
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1868,11 +1868,11 @@ index=curso earliest=0 latest=now
 
 ---
 
-# 19. Funciones en `stats`
+## 19. Funciones en `stats`
 
 Las funciones se pueden combinar con agregaciones.
 
-## Ejemplo completo
+#### Ejemplo completo
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1884,7 +1884,7 @@ index=curso earliest=0 latest=now
     max(tonumber(response_time)) as latencia_maxima
 ```
 
-## Estadísticas por host
+#### Estadísticas por host
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1901,9 +1901,9 @@ Si `clientip` o `response_time` no existen, la consulta debe adaptarse.
 
 ---
 
-# 20. Diferencia entre funciones de `eval` y funciones estadísticas
+## 20. Diferencia entre funciones de `eval` y funciones estadísticas
 
-## Funciones de evaluación
+#### Funciones de evaluación
 
 Se aplican normalmente evento a evento:
 
@@ -1913,7 +1913,7 @@ Se aplican normalmente evento a evento:
 
 Cada evento recibe su propio valor de `status_num`.
 
-## Funciones estadísticas
+#### Funciones estadísticas
 
 Agregan muchos eventos:
 
@@ -1923,7 +1923,7 @@ Agregan muchos eventos:
 
 El resultado ya no representa cada evento individual, sino una agregación.
 
-## Comparación
+#### Comparación
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1939,9 +1939,9 @@ Flujo:
 
 ---
 
-# 21. Errores frecuentes
+## 21. Errores frecuentes
 
-## Comparar texto con número
+#### Comparar texto con número
 
 Poco recomendable:
 
@@ -1958,7 +1958,7 @@ Recomendado:
 
 ---
 
-## Dividir entre cero
+#### Dividir entre cero
 
 Problemático:
 
@@ -1978,7 +1978,7 @@ Recomendado:
 
 ---
 
-## Calcular latencia sobre valores vacíos
+#### Calcular latencia sobre valores vacíos
 
 Problemático:
 
@@ -1996,7 +1996,7 @@ Recomendado:
 
 ---
 
-## Sobrescribir el valor original
+#### Sobrescribir el valor original
 
 Poco recomendable:
 
@@ -2012,7 +2012,7 @@ Recomendado:
 
 ---
 
-## Orden incorrecto en `case`
+#### Orden incorrecto en `case`
 
 Problemático:
 
@@ -2036,7 +2036,7 @@ Correcto:
 
 ---
 
-## No distinguir cero de ausencia
+#### No distinguir cero de ausencia
 
 Estos valores no siempre significan lo mismo:
 
@@ -2052,7 +2052,7 @@ Documenta el significado de cada uno.
 
 ---
 
-## Usar una función que requiere un campo inexistente
+#### Usar una función que requiere un campo inexistente
 
 Antes de ejecutar:
 
@@ -2068,11 +2068,11 @@ comprueba:
 
 ---
 
-# 22. Ejercicios prácticos
+## 22. Ejercicios prácticos
 
-## Ejercicio 1: conversión de código HTTP
+#### Ejercicio 1: conversión de código HTTP
 
-### Objetivo
+###### Objetivo
 
 Convertir `status` a número y detectar valores inválidos.
 
@@ -2087,7 +2087,7 @@ index=curso earliest=0 latest=now
 | stats count by resultado
 ```
 
-### Preguntas
+###### Preguntas
 
 - ¿Hay valores inválidos?
 - ¿Hay valores vacíos?
@@ -2095,9 +2095,9 @@ index=curso earliest=0 latest=now
 
 ---
 
-## Ejercicio 2: clasificación HTTP
+#### Ejercicio 2: clasificación HTTP
 
-### Objetivo
+###### Objetivo
 
 Agrupar respuestas por familia.
 
@@ -2115,7 +2115,7 @@ index=curso earliest=0 latest=now
 | sort - total
 ```
 
-### Preguntas
+###### Preguntas
 
 - ¿Qué familia es predominante?
 - ¿Hay respuestas `5xx`?
@@ -2123,9 +2123,9 @@ index=curso earliest=0 latest=now
 
 ---
 
-## Ejercicio 3: porcentaje de error
+#### Ejercicio 3: porcentaje de error
 
-### Objetivo
+###### Objetivo
 
 Calcular la tasa global de errores.
 
@@ -2142,7 +2142,7 @@ index=curso earliest=0 latest=now
 )
 ```
 
-### Preguntas
+###### Preguntas
 
 - ¿Cuál es el porcentaje?
 - ¿El porcentaje se calcula sobre todos los eventos?
@@ -2150,9 +2150,9 @@ index=curso earliest=0 latest=now
 
 ---
 
-## Ejercicio 4: porcentaje por host
+#### Ejercicio 4: porcentaje por host
 
-### Objetivo
+###### Objetivo
 
 Comparar hosts con diferente volumen.
 
@@ -2171,7 +2171,7 @@ index=curso earliest=0 latest=now
 | sort - porcentaje_error
 ```
 
-### Preguntas
+###### Preguntas
 
 - ¿El host con más errores es también el de mayor porcentaje?
 - ¿Qué métrica utilizarías para priorizar una investigación?
@@ -2179,9 +2179,9 @@ index=curso earliest=0 latest=now
 
 ---
 
-## Ejercicio 5: análisis de latencia
+#### Ejercicio 5: análisis de latencia
 
-### Objetivo
+###### Objetivo
 
 Calcular métricas de rendimiento por URI.
 
@@ -2199,7 +2199,7 @@ index=curso earliest=0 latest=now
 | sort - p95_ms
 ```
 
-### Preguntas
+###### Preguntas
 
 - ¿Qué URI tiene mayor `p95_ms`?
 - ¿La media es superior o inferior a la mediana?
@@ -2208,9 +2208,9 @@ index=curso earliest=0 latest=now
 
 ---
 
-## Ejercicio 6: calidad del dataset
+#### Ejercicio 6: calidad del dataset
 
-### Objetivo
+###### Objetivo
 
 Medir campos ausentes o inválidos.
 
@@ -2238,9 +2238,9 @@ index=curso earliest=0 latest=now
 
 ---
 
-## Ejercicio 7: normalizar métodos
+#### Ejercicio 7: normalizar métodos
 
-### Objetivo
+###### Objetivo
 
 Detectar métodos escritos con diferencias de mayúsculas o espacios.
 
@@ -2251,7 +2251,7 @@ index=curso earliest=0 latest=now
 | stats count by metodo_original metodo_normalizado
 ```
 
-### Preguntas
+###### Preguntas
 
 - ¿Hay valores como `get`, `GET` o ` GET `?
 - ¿La normalización cambia el resultado?
@@ -2259,9 +2259,9 @@ index=curso earliest=0 latest=now
 
 ---
 
-## Ejercicio 8: construir un indicador operativo
+#### Ejercicio 8: construir un indicador operativo
 
-### Objetivo
+###### Objetivo
 
 Crear un estado de salud sencillo.
 
@@ -2284,7 +2284,7 @@ index=curso earliest=-24h latest=now
 | table total errores porcentaje_error estado
 ```
 
-### Importante
+###### Importante
 
 Los umbrales utilizados son didácticos. En producción deben basarse en:
 
@@ -2297,9 +2297,9 @@ Los umbrales utilizados son didácticos. En producción deben basarse en:
 
 ---
 
-# 23. Ejemplos para dashboards
+## 23. Ejemplos para dashboards
 
-## Indicador de porcentaje de error
+#### Indicador de porcentaje de error
 
 ```spl
 index=curso earliest=$time.earliest$ latest=$time.latest$
@@ -2314,7 +2314,7 @@ index=curso earliest=$time.earliest$ latest=$time.latest$
 )
 ```
 
-## Latencia p95 por URI
+#### Latencia p95 por URI
 
 ```spl
 index=curso earliest=$time.earliest$ latest=$time.latest$
@@ -2325,7 +2325,7 @@ index=curso earliest=$time.earliest$ latest=$time.latest$
 | head 10
 ```
 
-## Distribución por familia HTTP
+#### Distribución por familia HTTP
 
 ```spl
 index=curso earliest=$time.earliest$ latest=$time.latest$
@@ -2344,9 +2344,9 @@ Los tokens exactos dependen del tipo de dashboard utilizado.
 
 ---
 
-# 24. Ejemplos para alertas
+## 24. Ejemplos para alertas
 
-## HTTP 500
+#### HTTP 500
 
 ```spl
 index=curso earliest=-5m latest=now
@@ -2355,7 +2355,7 @@ index=curso earliest=-5m latest=now
 | where errores_500>=5
 ```
 
-## Porcentaje de error elevado
+#### Porcentaje de error elevado
 
 ```spl
 index=curso earliest=-5m latest=now
@@ -2371,7 +2371,7 @@ index=curso earliest=-5m latest=now
 | where porcentaje_error>=10
 ```
 
-## Latencia elevada
+#### Latencia elevada
 
 ```spl
 index=curso earliest=-5m latest=now
@@ -2385,9 +2385,9 @@ prueba.
 
 ---
 
-# 25. Buenas prácticas
+## 25. Buenas prácticas
 
-## Utiliza nombres descriptivos
+#### Utiliza nombres descriptivos
 
 Recomendado:
 
@@ -2405,7 +2405,7 @@ Evita:
 | eval z=...
 ```
 
-## Conserva los campos originales
+#### Conserva los campos originales
 
 Recomendado:
 
@@ -2419,7 +2419,7 @@ Así puedes comparar:
 | table method method_norm
 ```
 
-## Comprueba valores nulos
+#### Comprueba valores nulos
 
 Antes de calcular:
 
@@ -2427,13 +2427,13 @@ Antes de calcular:
 | where isnotnull(response_time)
 ```
 
-## Protege las divisiones
+#### Protege las divisiones
 
 ```spl
 | eval ratio=if(total>0, errores/total, 0)
 ```
 
-## Documenta unidades
+#### Documenta unidades
 
 Si `response_time` está en milisegundos, utiliza nombres como:
 
@@ -2450,12 +2450,12 @@ media_s
 p95_s
 ```
 
-## Comprueba la versión de Splunk
+#### Comprueba la versión de Splunk
 
 La disponibilidad de algunas funciones y el comportamiento de ciertas
 expresiones puede variar entre versiones.
 
-## Prueba con pocos eventos
+#### Prueba con pocos eventos
 
 Comienza con:
 
@@ -2467,50 +2467,50 @@ Después amplía el rango y elimina el límite cuando la lógica sea correcta.
 
 ---
 
-# 26. Plantilla para documentar una función
+## 26. Plantilla para documentar una función
 
 ```markdown
-## Función: nombre_funcion
+#### Función: nombre_funcion
 
-### Finalidad
+###### Finalidad
 
 Explicar qué problema resuelve.
 
-### Sintaxis
+###### Sintaxis
 
 ```spl
 funcion(argumento)
 ```
 
-### Ejemplo
+###### Ejemplo
 
 ```spl
 index=curso earliest=0 latest=now
 | eval nuevo_campo=funcion(campo)
 ```
 
-### Resultado esperado
+###### Resultado esperado
 
 Describir el resultado.
 
-### Campos necesarios
+###### Campos necesarios
 
 - campo
 
-### Limitaciones
+###### Limitaciones
 
 Indicar qué ocurre con valores nulos, inválidos o ausentes.
 
-### Uso en el proyecto
+###### Uso en el proyecto
 
 Explicar si se utiliza en una búsqueda, dashboard o alerta.
 ```
 
 ---
 
-# 27. Lista de comprobación
+## 27. Lista de comprobación
 
-## Antes de utilizar una función
+#### Antes de utilizar una función
 
 - [ ] El campo existe.
 - [ ] El campo tiene el tipo de dato esperado.
@@ -2519,7 +2519,7 @@ Explicar si se utiliza en una búsqueda, dashboard o alerta.
 - [ ] Se ha probado la función con pocos eventos.
 - [ ] El resultado es interpretable.
 
-## Para funciones numéricas
+#### Para funciones numéricas
 
 - [ ] Se ha usado `tonumber()` cuando era necesario.
 - [ ] Se han protegido las divisiones entre cero.
@@ -2527,21 +2527,21 @@ Explicar si se utiliza en una búsqueda, dashboard o alerta.
 - [ ] Se ha indicado la unidad.
 - [ ] Se han redondeado los resultados para presentación.
 
-## Para funciones de texto
+#### Para funciones de texto
 
 - [ ] Se ha comprobado el formato real.
 - [ ] Se ha probado la expresión regular.
 - [ ] Se han documentado los valores transformados.
 - [ ] Se conserva el campo original cuando es útil.
 
-## Para funciones de tiempo
+#### Para funciones de tiempo
 
 - [ ] Se ha comprobado la zona horaria.
 - [ ] `_time` representa el momento correcto.
 - [ ] El formato de fecha está documentado.
 - [ ] El intervalo de búsqueda es adecuado.
 
-## Para funciones estadísticas
+#### Para funciones estadísticas
 
 - [ ] Se ha seleccionado el campo correcto.
 - [ ] Se han excluido valores no válidos.
@@ -2551,7 +2551,7 @@ Explicar si se utiliza en una búsqueda, dashboard o alerta.
 
 ---
 
-# 28. Referencias oficiales
+## 28. Referencias oficiales
 
 - [Splunk Enterprise Documentation](https://docs.splunk.com/Documentation/Splunk)
 - [Splunk Search Manual](https://docs.splunk.com/Documentation/Splunk/latest/Search/Aboutthesearchapp)

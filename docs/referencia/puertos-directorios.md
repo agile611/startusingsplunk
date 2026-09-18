@@ -20,7 +20,7 @@ El objetivo es que los asistentes puedan:
 
 ---
 
-# 1. Entorno de referencia
+## 1. Entorno de referencia
 
 El laboratorio utiliza como referencia:
 
@@ -59,13 +59,13 @@ readlink -f "$(command -v splunk)"
 
 ---
 
-# 2. Diferencia entre puertos y servicios
+## 2. Diferencia entre puertos y servicios
 
 Un puerto es un punto de comunicación utilizado por un proceso.
 
 En Splunk suelen intervenir dos componentes principales:
 
-## Splunk Web
+#### Splunk Web
 
 Interfaz web utilizada por los usuarios.
 
@@ -75,7 +75,7 @@ Ejemplo:
 http://localhost:8000
 ```
 
-## `splunkd`
+#### `splunkd`
 
 Proceso principal de Splunk Enterprise.
 
@@ -95,7 +95,7 @@ administración y API.
 
 ---
 
-# 3. Tabla de puertos principales
+## 3. Tabla de puertos principales
 
 | Puerto | Servicio o función habitual | Protocolo | Uso |
 |---:|---|---|---|
@@ -114,9 +114,9 @@ instancia.
 
 ---
 
-# 4. Puerto 8000: Splunk Web
+## 4. Puerto 8000: Splunk Web
 
-## Finalidad
+#### Finalidad
 
 El puerto `8000` se utiliza habitualmente para acceder a la interfaz web.
 
@@ -134,7 +134,7 @@ https://localhost:8000
 
 La configuración concreta puede utilizar otro puerto.
 
-## Comprobar desde el navegador
+#### Comprobar desde el navegador
 
 Abre:
 
@@ -142,7 +142,7 @@ Abre:
 http://localhost:8000
 ```
 
-## Comprobar desde Ubuntu
+#### Comprobar desde Ubuntu
 
 ```bash
 sudo ss -lntp | grep ':8000'
@@ -154,7 +154,7 @@ Otra opción:
 sudo lsof -nP -iTCP:8000 -sTCP:LISTEN
 ```
 
-## Comprobar con `curl`
+#### Comprobar con `curl`
 
 ```bash
 curl -I http://localhost:8000
@@ -168,9 +168,9 @@ La respuesta puede indicar:
 - error de conexión;
 - error de certificado si se utiliza HTTPS.
 
-## Problemas habituales
+#### Problemas habituales
 
-### El navegador no conecta
+###### El navegador no conecta
 
 Comprueba:
 
@@ -193,7 +193,7 @@ Posibles causas:
 - existe un error de configuración;
 - el navegador utiliza un protocolo incorrecto.
 
-### El puerto escucha, pero no se puede acceder desde otro equipo
+###### El puerto escucha, pero no se puede acceder desde otro equipo
 
 Comprueba la dirección de escucha:
 
@@ -225,9 +225,9 @@ No expongas Splunk Web a redes no confiables sin aplicar controles de seguridad.
 
 ---
 
-# 5. Puerto 8089: Management port
+## 5. Puerto 8089: Management port
 
-## Finalidad
+#### Finalidad
 
 El puerto `8089` se utiliza habitualmente para:
 
@@ -241,7 +241,7 @@ El puerto `8089` se utiliza habitualmente para:
 
 Normalmente utiliza HTTPS.
 
-## Comprobar el puerto
+#### Comprobar el puerto
 
 ```bash
 sudo ss -lntp | grep ':8089'
@@ -251,7 +251,7 @@ sudo ss -lntp | grep ':8089'
 sudo lsof -nP -iTCP:8089 -sTCP:LISTEN
 ```
 
-## Probar la API localmente
+#### Probar la API localmente
 
 ```bash
 curl -k https://localhost:8089/services/server/info
@@ -260,7 +260,7 @@ curl -k https://localhost:8089/services/server/info
 La opción `-k` desactiva la validación del certificado. Utilízala únicamente en
 el laboratorio y no como práctica general de producción.
 
-## Consultar con autenticación
+#### Consultar con autenticación
 
 No escribas contraseñas directamente en el historial de shell.
 
@@ -288,7 +288,7 @@ No incluyas el token en:
 - scripts compartidos;
 - entregas del curso.
 
-## Consultar la API desde SPL
+#### Consultar la API desde SPL
 
 Comprobar el contexto del usuario:
 
@@ -311,7 +311,7 @@ Consultar entradas monitorizadas:
 | table path index sourcetype disabled
 ```
 
-## Problemas habituales
+#### Problemas habituales
 
 Si `8089` no escucha:
 
@@ -342,16 +342,16 @@ index=_internal earliest=-30m latest=now
 
 ---
 
-# 6. Puerto 9997: recepción desde forwarders
+## 6. Puerto 9997: recepción desde forwarders
 
-## Finalidad
+#### Finalidad
 
 El puerto `9997` se utiliza habitualmente para recibir datos enviados por
 forwarders.
 
 Este puerto solo estará operativo si se ha configurado una entrada de recepción.
 
-## Comprobar si escucha
+#### Comprobar si escucha
 
 ```bash
 sudo ss -lntp | grep ':9997'
@@ -363,9 +363,9 @@ sudo lsof -nP -iTCP:9997 -sTCP:LISTEN
 
 Si no aparece, es posible que el receiving port no esté configurado.
 
-## Diferencia entre forwarder y monitor local
+#### Diferencia entre forwarder y monitor local
 
-### Monitor local
+###### Monitor local
 
 Splunk lee un archivo de la propia máquina:
 
@@ -373,7 +373,7 @@ Splunk lee un archivo de la propia máquina:
 /var/log/splunk-curso/eventos_web.csv
 ```
 
-### Forwarder
+###### Forwarder
 
 Un agente instalado en otro equipo envía los datos a Splunk mediante TCP.
 
@@ -381,7 +381,7 @@ Un agente instalado en otro equipo envía los datos a Splunk mediante TCP.
 Forwarder → TCP 9997 → Splunk Enterprise
 ```
 
-## Comprobar entradas de recepción
+#### Comprobar entradas de recepción
 
 Desde Splunk Web revisa la configuración de entradas de recepción.
 
@@ -392,7 +392,7 @@ También puedes utilizar la API REST:
 | table port index sourcetype disabled
 ```
 
-## Comprobar conectividad desde otro equipo
+#### Comprobar conectividad desde otro equipo
 
 Desde el equipo que actúa como forwarder:
 
@@ -419,9 +419,9 @@ comprobar también:
 
 ---
 
-# 7. Puerto 8088: HTTP Event Collector
+## 7. Puerto 8088: HTTP Event Collector
 
-## Finalidad
+#### Finalidad
 
 El puerto `8088` suele utilizarse para HTTP Event Collector, conocido como HEC.
 
@@ -435,7 +435,7 @@ HEC permite enviar eventos mediante HTTP o HTTPS desde:
 - agentes;
 - herramientas externas.
 
-## Comprobar si está configurado
+#### Comprobar si está configurado
 
 ```bash
 sudo ss -lntp | grep ':8088'
@@ -444,7 +444,7 @@ sudo ss -lntp | grep ':8088'
 Desde Splunk puede consultarse la configuración relacionada con HEC mediante la
 administración de entradas y tokens.
 
-## Ejemplo conceptual de envío
+#### Ejemplo conceptual de envío
 
 No utilices tokens reales en ejercicios compartidos.
 
@@ -455,7 +455,7 @@ curl -k https://localhost:8088/services/collector \
   -d '{"event":{"host":"web-01","status":500,"uri":"/api/users"}}'
 ```
 
-## Buenas prácticas
+#### Buenas prácticas
 
 - utilizar HTTPS;
 - proteger el token;
@@ -468,15 +468,15 @@ curl -k https://localhost:8088/services/collector \
 
 ---
 
-# 8. Puertos 514 y 1514: syslog
+## 8. Puertos 514 y 1514: syslog
 
-## Puerto 514
+#### Puerto 514
 
 El puerto `514` se utiliza tradicionalmente para syslog.
 
 Los puertos inferiores a `1024` pueden requerir privilegios especiales en Linux.
 
-## Puerto 1514
+#### Puerto 1514
 
 El puerto `1514` se utiliza a menudo como alternativa para evitar ciertas
 limitaciones del puerto `514`.
@@ -484,7 +484,7 @@ limitaciones del puerto `514`.
 Ninguno de estos puertos debe considerarse habilitado sin comprobar la
 configuración.
 
-## Comprobar puertos
+#### Comprobar puertos
 
 ```bash
 sudo ss -lunp | grep -E ':514|:1514'
@@ -496,7 +496,7 @@ Para TCP:
 sudo ss -lntp | grep -E ':514|:1514'
 ```
 
-## Consideraciones
+#### Consideraciones
 
 - UDP no confirma que el receptor haya procesado el mensaje;
 - TCP permite una conexión más controlada;
@@ -507,7 +507,7 @@ sudo ss -lntp | grep -E ':514|:1514'
 
 ---
 
-# 9. Comprobar todos los puertos habituales
+## 9. Comprobar todos los puertos habituales
 
 ```bash
 sudo ss -lntup | grep -E ':8000|:8088|:8089|:9997|:514|:1514'
@@ -531,7 +531,7 @@ Para consultar solo puertos UDP:
 sudo ss -lunp
 ```
 
-## Utilizando `netstat`
+#### Utilizando `netstat`
 
 Si está instalado:
 
@@ -542,7 +542,7 @@ sudo netstat -lntup
 `ss` suele estar disponible de forma predeterminada en instalaciones modernas de
 Ubuntu.
 
-## Utilizando `lsof`
+#### Utilizando `lsof`
 
 ```bash
 sudo lsof -nP -i
@@ -556,27 +556,27 @@ sudo lsof -nP -iTCP -sTCP:LISTEN
 
 ---
 
-# 10. Comprobar el proceso de Splunk
+## 10. Comprobar el proceso de Splunk
 
-## Estado mediante systemd
+#### Estado mediante systemd
 
 ```bash
 sudo systemctl status Splunkd
 ```
 
-## Iniciar Splunk
+#### Iniciar Splunk
 
 ```bash
 sudo systemctl start Splunkd
 ```
 
-## Detener Splunk
+#### Detener Splunk
 
 ```bash
 sudo systemctl stop Splunkd
 ```
 
-## Reiniciar Splunk
+#### Reiniciar Splunk
 
 ```bash
 sudo systemctl restart Splunkd
@@ -584,19 +584,19 @@ sudo systemctl restart Splunkd
 
 No reinicies Splunk en un entorno compartido sin evaluar el impacto.
 
-## Estado mediante el binario de Splunk
+#### Estado mediante el binario de Splunk
 
 ```bash
 sudo /opt/splunk/bin/splunk status
 ```
 
-## Versión
+#### Versión
 
 ```bash
 sudo /opt/splunk/bin/splunk version
 ```
 
-## Procesos
+#### Procesos
 
 ```bash
 ps aux | grep -i splunk
@@ -610,7 +610,7 @@ pgrep -af splunk
 
 ---
 
-# 11. Directorio principal: `SPLUNK_HOME`
+## 11. Directorio principal: `SPLUNK_HOME`
 
 `SPLUNK_HOME` es la ruta raíz de la instalación de Splunk.
 
@@ -620,7 +620,7 @@ En este laboratorio se espera:
 /opt/splunk
 ```
 
-## Comprobar la variable
+#### Comprobar la variable
 
 ```bash
 echo "$SPLUNK_HOME"
@@ -638,7 +638,7 @@ Si no está definida:
 ls -ld /opt/splunk
 ```
 
-## Estructura general
+#### Estructura general
 
 ```text
 /opt/splunk/
@@ -651,7 +651,7 @@ ls -ld /opt/splunk
 
 ---
 
-# 12. `/opt/splunk/bin`
+## 12. `/opt/splunk/bin`
 
 Contiene ejecutables y herramientas de administración.
 
@@ -661,7 +661,7 @@ Ruta habitual:
 /opt/splunk/bin
 ```
 
-## Comandos importantes
+#### Comandos importantes
 
 ```bash
 /opt/splunk/bin/splunk status
@@ -683,13 +683,13 @@ Ruta habitual:
 /opt/splunk/bin/splunk restart
 ```
 
-## Comprobar ayuda
+#### Comprobar ayuda
 
 ```bash
 /opt/splunk/bin/splunk help
 ```
 
-## Comprobar el ejecutable
+#### Comprobar el ejecutable
 
 ```bash
 ls -l /opt/splunk/bin/splunk
@@ -699,7 +699,7 @@ No ejecutes comandos de modificación de configuración sin comprender el impact
 
 ---
 
-# 13. `/opt/splunk/etc`
+## 13. `/opt/splunk/etc`
 
 Contiene configuración de Splunk.
 
@@ -720,13 +720,13 @@ Incluye, entre otros:
 - certificados;
 - configuraciones locales.
 
-## Listar contenido
+#### Listar contenido
 
 ```bash
 sudo ls -la /opt/splunk/etc
 ```
 
-## Subdirectorios importantes
+#### Subdirectorios importantes
 
 ```text
 /opt/splunk/etc/apps
@@ -736,7 +736,7 @@ sudo ls -la /opt/splunk/etc
 
 ---
 
-# 14. `/opt/splunk/etc/apps`
+## 14. `/opt/splunk/etc/apps`
 
 Contiene aplicaciones de Splunk.
 
@@ -758,19 +758,19 @@ Cada aplicación puede incluir:
 - macros;
 - lookups.
 
-## Listar aplicaciones
+#### Listar aplicaciones
 
 ```bash
 sudo find /opt/splunk/etc/apps -mindepth 1 -maxdepth 1 -type d -printf '%f\n' | sort
 ```
 
-## Ejemplo de aplicación propia
+#### Ejemplo de aplicación propia
 
 ```text
 /opt/splunk/etc/apps/curso_monitorizacion/
 ```
 
-## Estructura conceptual
+#### Estructura conceptual
 
 ```text
 curso_monitorizacion/
@@ -782,7 +782,7 @@ curso_monitorizacion/
 └── README/
 ```
 
-## Aplicación para el laboratorio
+#### Aplicación para el laboratorio
 
 Es recomendable separar los objetos del curso en una aplicación propia.
 
@@ -803,7 +803,7 @@ Esto facilita:
 
 ---
 
-# 15. `/opt/splunk/etc/apps/<app>/default`
+## 15. `/opt/splunk/etc/apps/<app>/default`
 
 Contiene configuración predeterminada de una aplicación.
 
@@ -820,7 +820,7 @@ documentarlo.
 
 ---
 
-# 16. `/opt/splunk/etc/apps/<app>/local`
+## 16. `/opt/splunk/etc/apps/<app>/local`
 
 Contiene configuraciones locales que sobrescriben valores predeterminados.
 
@@ -839,7 +839,7 @@ local/props.conf
 
 La configuración de `local` suele tener prioridad sobre `default`.
 
-## Regla práctica
+#### Regla práctica
 
 - `default`: valores base de la aplicación;
 - `local`: personalizaciones del entorno;
@@ -849,7 +849,7 @@ No copies configuraciones a `local` sin revisar su precedencia y alcance.
 
 ---
 
-# 17. `/opt/splunk/etc/system`
+## 17. `/opt/splunk/etc/system`
 
 Contiene configuración del sistema.
 
@@ -860,7 +860,7 @@ Subdirectorios habituales:
 /opt/splunk/etc/system/local
 ```
 
-## `system/default`
+#### `system/default`
 
 Contiene valores predeterminados proporcionados por Splunk.
 
@@ -870,7 +870,7 @@ No modifiques directamente estos archivos.
 /opt/splunk/etc/system/default
 ```
 
-## `system/local`
+#### `system/local`
 
 Contiene configuraciones globales personalizadas.
 
@@ -891,9 +891,9 @@ propia cuando sea posible.
 
 ---
 
-# 18. Archivos de configuración habituales
+## 18. Archivos de configuración habituales
 
-## `inputs.conf`
+#### `inputs.conf`
 
 Define entradas de datos.
 
@@ -907,7 +907,7 @@ sourcetype = web:csv
 host = web-lab
 ```
 
-## `props.conf`
+#### `props.conf`
 
 Puede intervenir en:
 
@@ -917,7 +917,7 @@ Puede intervenir en:
 - extracción;
 - comportamiento de fuentes.
 
-## `transforms.conf`
+#### `transforms.conf`
 
 Puede utilizarse para:
 
@@ -927,19 +927,19 @@ Puede utilizarse para:
 - sustituciones;
 - extracción avanzada.
 
-## `indexes.conf`
+#### `indexes.conf`
 
 Define aspectos relacionados con índices.
 
-## `server.conf`
+#### `server.conf`
 
 Contiene configuraciones de servidor y componentes.
 
-## `web.conf`
+#### `web.conf`
 
 Contiene configuraciones relacionadas con Splunk Web.
 
-## `authentication.conf`
+#### `authentication.conf`
 
 Contiene configuraciones relacionadas con autenticación.
 
@@ -947,36 +947,36 @@ No almacenes contraseñas ni secretos en documentación del curso.
 
 ---
 
-# 19. Comprobar la configuración efectiva con `btool`
+## 19. Comprobar la configuración efectiva con `btool`
 
 `btool` permite revisar la configuración efectiva teniendo en cuenta la
 precedencia de archivos.
 
-## Revisar `inputs.conf`
+#### Revisar `inputs.conf`
 
 ```bash
 sudo /opt/splunk/bin/splunk btool inputs list --debug
 ```
 
-## Revisar una entrada concreta
+#### Revisar una entrada concreta
 
 ```bash
 sudo /opt/splunk/bin/splunk btool inputs list monitor --debug
 ```
 
-## Revisar `props.conf`
+#### Revisar `props.conf`
 
 ```bash
 sudo /opt/splunk/bin/splunk btool props list --debug
 ```
 
-## Revisar `indexes.conf`
+#### Revisar `indexes.conf`
 
 ```bash
 sudo /opt/splunk/bin/splunk btool indexes list --debug
 ```
 
-## Filtrar resultados
+#### Filtrar resultados
 
 ```bash
 sudo /opt/splunk/bin/splunk btool inputs list --debug | grep -A 10 -B 2 curso
@@ -987,7 +987,7 @@ identificar problemas de precedencia.
 
 ---
 
-# 20. `/opt/splunk/var`
+## 20. `/opt/splunk/var`
 
 Contiene datos de ejecución, logs, índices internos y archivos de trabajo.
 
@@ -1007,7 +1007,7 @@ Subdirectorios relevantes:
 
 ---
 
-# 21. `/opt/splunk/var/log/splunk`
+## 21. `/opt/splunk/var/log/splunk`
 
 Contiene logs internos de Splunk.
 
@@ -1017,13 +1017,13 @@ Ruta:
 /opt/splunk/var/log/splunk
 ```
 
-## Listar logs
+#### Listar logs
 
 ```bash
 sudo ls -lh /opt/splunk/var/log/splunk
 ```
 
-## Ver los logs más recientes
+#### Ver los logs más recientes
 
 ```bash
 sudo find /opt/splunk/var/log/splunk \
@@ -1033,13 +1033,13 @@ sudo find /opt/splunk/var/log/splunk \
   | head -20
 ```
 
-## Revisar `splunkd.log`
+#### Revisar `splunkd.log`
 
 ```bash
 sudo tail -n 100 /opt/splunk/var/log/splunk/splunkd.log
 ```
 
-## Buscar errores
+#### Buscar errores
 
 ```bash
 sudo grep -iE 'error|warn|failed|fatal' \
@@ -1047,7 +1047,7 @@ sudo grep -iE 'error|warn|failed|fatal' \
   | tail -50
 ```
 
-## Revisar desde SPL
+#### Revisar desde SPL
 
 ```spl
 index=_internal earliest=-30m latest=now
@@ -1061,7 +1061,7 @@ la estructura real cuando sea necesario.
 
 ---
 
-# 22. `/opt/splunk/var/lib/splunk`
+## 22. `/opt/splunk/var/lib/splunk`
 
 Contiene datos persistentes de Splunk, incluidos datos relacionados con índices.
 
@@ -1071,13 +1071,13 @@ Ruta:
 /opt/splunk/var/lib/splunk
 ```
 
-## Revisar tamaño
+#### Revisar tamaño
 
 ```bash
 sudo du -sh /opt/splunk/var/lib/splunk
 ```
 
-## Revisar subdirectorios grandes
+#### Revisar subdirectorios grandes
 
 ```bash
 sudo du -h --max-depth=1 /opt/splunk/var/lib/splunk | sort -h
@@ -1097,7 +1097,7 @@ Gestiona la retención mediante la configuración adecuada de Splunk.
 
 ---
 
-# 23. `/opt/splunk/var/run/splunk`
+## 23. `/opt/splunk/var/run/splunk`
 
 Contiene archivos de ejecución y estado temporal.
 
@@ -1107,7 +1107,7 @@ Ruta:
 /opt/splunk/var/run/splunk
 ```
 
-## Revisar contenido
+#### Revisar contenido
 
 ```bash
 sudo ls -la /opt/splunk/var/run/splunk
@@ -1118,9 +1118,9 @@ procedimiento documentado para ello.
 
 ---
 
-# 24. Directorios de Ubuntu relacionados
+## 24. Directorios de Ubuntu relacionados
 
-## `/etc/systemd/system`
+#### `/etc/systemd/system`
 
 Puede contener unidades personalizadas de systemd.
 
@@ -1134,7 +1134,7 @@ Buscar referencias a Splunk:
 sudo grep -Ril splunk /etc/systemd/system 2>/dev/null
 ```
 
-## `/lib/systemd/system`
+#### `/lib/systemd/system`
 
 Puede contener unidades proporcionadas por paquetes.
 
@@ -1142,7 +1142,7 @@ Puede contener unidades proporcionadas por paquetes.
 sudo ls -la /lib/systemd/system | grep -i splunk
 ```
 
-## `/var/log`
+#### `/var/log`
 
 Directorio general de logs del sistema y servicios.
 
@@ -1150,7 +1150,7 @@ Directorio general de logs del sistema y servicios.
 sudo ls -la /var/log
 ```
 
-## `/var/log/syslog`
+#### `/var/log/syslog`
 
 Puede contener mensajes generales del sistema, según la configuración de Ubuntu.
 
@@ -1158,7 +1158,7 @@ Puede contener mensajes generales del sistema, según la configuración de Ubunt
 sudo tail -n 100 /var/log/syslog
 ```
 
-## `/var/log/auth.log`
+#### `/var/log/auth.log`
 
 Puede contener eventos relacionados con autenticación del sistema.
 
@@ -1168,7 +1168,7 @@ sudo tail -n 100 /var/log/auth.log
 
 El acceso a estos archivos depende de los permisos del usuario.
 
-## `journalctl`
+#### `journalctl`
 
 Consultar eventos del servicio:
 
@@ -1190,7 +1190,7 @@ sudo journalctl -u Splunkd -f
 
 ---
 
-# 25. Directorio de datasets del laboratorio
+## 25. Directorio de datasets del laboratorio
 
 Se recomienda utilizar una ruta separada para los archivos de práctica.
 
@@ -1237,7 +1237,7 @@ sudo du -sh /var/log/splunk-curso
 
 ---
 
-# 26. Permisos de directorios y archivos
+## 26. Permisos de directorios y archivos
 
 Para que Splunk monitorice un archivo, el usuario del proceso debe poder:
 
@@ -1246,13 +1246,13 @@ Para que Splunk monitorice un archivo, el usuario del proceso debe poder:
 3. acceder al contenido mientras crece;
 4. mantener el acceso después de rotaciones, si existen.
 
-## Revisar el usuario del proceso
+#### Revisar el usuario del proceso
 
 ```bash
 ps -eo user,pid,cmd | grep -i '[s]plunk'
 ```
 
-## Revisar permisos de la ruta completa
+#### Revisar permisos de la ruta completa
 
 ```bash
 namei -l /var/log/splunk-curso/eventos_web.csv
@@ -1260,19 +1260,19 @@ namei -l /var/log/splunk-curso/eventos_web.csv
 
 Este comando muestra los permisos de cada componente del camino.
 
-## Revisar archivo
+#### Revisar archivo
 
 ```bash
 ls -l /var/log/splunk-curso/eventos_web.csv
 ```
 
-## Revisar directorio
+#### Revisar directorio
 
 ```bash
 ls -ld /var/log/splunk-curso
 ```
 
-## Comprobar lectura como usuario de Splunk
+#### Comprobar lectura como usuario de Splunk
 
 Sustituye `<USUARIO_SPLUNK>` por el usuario real:
 
@@ -1283,7 +1283,7 @@ sudo -u <USUARIO_SPLUNK> \
 
 Si falla, la entrada monitorizada puede no ingerir datos.
 
-## Importante
+#### Importante
 
 No otorgues permisos excesivos como:
 
@@ -1295,33 +1295,33 @@ Utiliza el mínimo permiso necesario para la práctica.
 
 ---
 
-# 27. Comprobación de espacio en disco
+## 27. Comprobación de espacio en disco
 
-## Espacio disponible
+#### Espacio disponible
 
 ```bash
 df -h
 ```
 
-## Inodos disponibles
+#### Inodos disponibles
 
 ```bash
 df -ih
 ```
 
-## Tamaño de la instalación
+#### Tamaño de la instalación
 
 ```bash
 sudo du -sh /opt/splunk
 ```
 
-## Tamaño por subdirectorio
+#### Tamaño por subdirectorio
 
 ```bash
 sudo du -h --max-depth=1 /opt/splunk | sort -h
 ```
 
-## Dataset del curso
+#### Dataset del curso
 
 ```bash
 sudo du -h --max-depth=1 /var/log/splunk-curso | sort -h
@@ -1338,15 +1338,15 @@ El espacio insuficiente puede causar:
 
 ---
 
-# 28. Comprobación de firewall
+## 28. Comprobación de firewall
 
-## Estado de UFW
+#### Estado de UFW
 
 ```bash
 sudo ufw status verbose
 ```
 
-## Permitir Splunk Web desde una red concreta
+#### Permitir Splunk Web desde una red concreta
 
 Ejemplo conceptual:
 
@@ -1354,13 +1354,13 @@ Ejemplo conceptual:
 sudo ufw allow from <RED_AUTORIZADA> to any port 8000 proto tcp
 ```
 
-## Permitir management port desde una red concreta
+#### Permitir management port desde una red concreta
 
 ```bash
 sudo ufw allow from <RED_AUTORIZADA> to any port 8089 proto tcp
 ```
 
-## Permitir receiving port desde una red concreta
+#### Permitir receiving port desde una red concreta
 
 ```bash
 sudo ufw allow from <RED_FORWARDERS> to any port 9997 proto tcp
@@ -1368,7 +1368,7 @@ sudo ufw allow from <RED_FORWARDERS> to any port 9997 proto tcp
 
 No abras estos puertos a Internet sin una justificación y controles adecuados.
 
-## Consultar reglas
+#### Consultar reglas
 
 ```bash
 sudo ufw status numbered
@@ -1376,21 +1376,21 @@ sudo ufw status numbered
 
 ---
 
-# 29. Comprobar conectividad local
+## 29. Comprobar conectividad local
 
-## Web
+#### Web
 
 ```bash
 curl -I http://127.0.0.1:8000
 ```
 
-## Management
+#### Management
 
 ```bash
 curl -k -I https://127.0.0.1:8089
 ```
 
-## HEC
+#### HEC
 
 ```bash
 curl -k -I https://127.0.0.1:8088
@@ -1401,7 +1401,7 @@ requiere autenticación. Eso es diferente de un error de conexión.
 
 ---
 
-# 30. Comprobar conectividad remota
+## 30. Comprobar conectividad remota
 
 Desde otro equipo:
 
@@ -1431,37 +1431,37 @@ ni la ingesta funcionen correctamente.
 
 ---
 
-# 31. Consultar puertos configurados desde Splunk
+## 31. Consultar puertos configurados desde Splunk
 
-## Entradas TCP
+#### Entradas TCP
 
 ```spl
 | rest /services/data/inputs/tcp
 | table port index sourcetype disabled
 ```
 
-## Entradas UDP
+#### Entradas UDP
 
 ```spl
 | rest /services/data/inputs/udp
 | table port index sourcetype disabled
 ```
 
-## Entradas monitor
+#### Entradas monitor
 
 ```spl
 | rest /services/data/inputs/monitor
 | table path index sourcetype host disabled
 ```
 
-## Información del servidor
+#### Información del servidor
 
 ```spl
 | rest /services/server/info
 | table version build serverName os_name os_version
 ```
 
-## Información de Web
+#### Información de Web
 
 ```spl
 | rest /services/server/info
@@ -1472,7 +1472,7 @@ Los endpoints REST disponibles dependen de los permisos y de la versión.
 
 ---
 
-# 32. Relación entre puertos y objetivos del laboratorio
+## 32. Relación entre puertos y objetivos del laboratorio
 
 | Objetivo | Puerto o ruta |
 |---|---|
@@ -1490,9 +1490,9 @@ Los endpoints REST disponibles dependen de los permisos y de la versión.
 
 ---
 
-# 33. Flujo de diagnóstico por síntomas
+## 33. Flujo de diagnóstico por síntomas
 
-## Síntoma: Splunk Web no responde
+#### Síntoma: Splunk Web no responde
 
 1. Comprobar el servicio:
 
@@ -1529,7 +1529,7 @@ index=_internal earliest=-30m latest=now
 
 ---
 
-## Síntoma: la API REST no responde
+#### Síntoma: la API REST no responde
 
 1. Comprobar `8089`:
 
@@ -1553,7 +1553,7 @@ sudo /opt/splunk/bin/splunk status
 
 ---
 
-## Síntoma: no se reciben datos desde un forwarder
+#### Síntoma: no se reciben datos desde un forwarder
 
 1. Comprobar el puerto `9997`:
 
@@ -1584,7 +1584,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## Síntoma: una entrada monitorizada no ingiere archivos
+#### Síntoma: una entrada monitorizada no ingiere archivos
 
 1. Comprobar la ruta:
 
@@ -1635,7 +1635,7 @@ index=_internal earliest=-30m latest=now
 
 ---
 
-## Síntoma: el disco se llena
+#### Síntoma: el disco se llena
 
 1. Revisar espacio:
 
@@ -1671,9 +1671,9 @@ No elimines buckets ni logs manualmente sin un procedimiento validado.
 
 ---
 
-# 34. Ejercicios prácticos
+## 34. Ejercicios prácticos
 
-## Ejercicio 1: identificar los puertos
+#### Ejercicio 1: identificar los puertos
 
 Ejecuta:
 
@@ -1692,7 +1692,7 @@ Documenta:
 
 ---
 
-## Ejercicio 2: validar Splunk Web
+#### Ejercicio 2: validar Splunk Web
 
 Ejecuta:
 
@@ -1716,7 +1716,7 @@ Responde:
 
 ---
 
-## Ejercicio 3: validar el management port
+#### Ejercicio 3: validar el management port
 
 Ejecuta:
 
@@ -1741,7 +1741,7 @@ Documenta:
 
 ---
 
-## Ejercicio 4: localizar directorios
+#### Ejercicio 4: localizar directorios
 
 Ejecuta:
 
@@ -1767,7 +1767,7 @@ Documenta:
 
 ---
 
-## Ejercicio 5: revisar permisos del dataset
+#### Ejercicio 5: revisar permisos del dataset
 
 Ejecuta:
 
@@ -1790,7 +1790,7 @@ Responde:
 
 ---
 
-## Ejercicio 6: revisar configuración efectiva
+#### Ejercicio 6: revisar configuración efectiva
 
 Ejecuta:
 
@@ -1808,7 +1808,7 @@ Localiza:
 
 ---
 
-## Ejercicio 7: relacionar puerto y búsqueda
+#### Ejercicio 7: relacionar puerto y búsqueda
 
 Ejecuta:
 
@@ -1835,21 +1835,21 @@ Explica la relación entre:
 
 ---
 
-# 35. Buenas prácticas de seguridad
+## 35. Buenas prácticas de seguridad
 
-## No exponer innecesariamente Splunk Web
+#### No exponer innecesariamente Splunk Web
 
 Limita el acceso al puerto `8000` a las redes autorizadas.
 
-## Proteger el puerto 8089
+#### Proteger el puerto 8089
 
 El management port no debe exponerse públicamente sin controles estrictos.
 
-## Restringir el puerto 9997
+#### Restringir el puerto 9997
 
 Solo los forwarders autorizados deben poder conectarse.
 
-## Utilizar HTTPS
+#### Utilizar HTTPS
 
 Especialmente para:
 
@@ -1858,12 +1858,12 @@ Especialmente para:
 - HEC;
 - administración remota.
 
-## No utilizar `curl -k` como práctica de producción
+#### No utilizar `curl -k` como práctica de producción
 
 `-k` es útil en un laboratorio con certificados no confiables, pero oculta
 problemas de validación de certificados.
 
-## No guardar contraseñas en comandos
+#### No guardar contraseñas en comandos
 
 Evita:
 
@@ -1878,7 +1878,7 @@ porque puede aparecer en:
 - registros;
 - capturas.
 
-## No utilizar permisos excesivos
+#### No utilizar permisos excesivos
 
 Evita:
 
@@ -1888,7 +1888,7 @@ chmod 777
 
 Aplica el mínimo permiso necesario.
 
-## No modificar archivos `default`
+#### No modificar archivos `default`
 
 Utiliza:
 
@@ -1898,7 +1898,7 @@ Utiliza:
 - copias de seguridad;
 - documentación.
 
-## No borrar manualmente datos de índices
+#### No borrar manualmente datos de índices
 
 No elimines contenido directamente de:
 
@@ -1908,7 +1908,7 @@ No elimines contenido directamente de:
 
 ---
 
-# 36. Checklist de puertos
+## 36. Checklist de puertos
 
 - [ ] Se ha comprobado el puerto de Splunk Web.
 - [ ] Se ha comprobado el puerto `8089`.
@@ -1924,7 +1924,7 @@ No elimines contenido directamente de:
 
 ---
 
-# 37. Checklist de directorios
+## 37. Checklist de directorios
 
 - [ ] Se ha identificado `SPLUNK_HOME`.
 - [ ] Se ha localizado `/opt/splunk/bin`.
@@ -1941,9 +1941,9 @@ No elimines contenido directamente de:
 
 ---
 
-# 38. Referencias oficiales
+## 38. Referencias oficiales
 
-## Splunk
+#### Splunk
 
 - [Splunk Enterprise Documentation](https://docs.splunk.com/Documentation/Splunk)
 - [Splunk Enterprise Admin Manual](https://docs.splunk.com/Documentation/Splunk/latest/Admin/Aboutthismanual)
@@ -1957,7 +1957,7 @@ No elimines contenido directamente de:
 - [`props.conf`](https://help.splunk.com/en/data-management/splunk-enterprise-admin-manual/10.4/configuration-file-reference/10.4.0-configuration-file-reference/props.conf)
 - [`transforms.conf`](https://help.splunk.com/en/data-management/splunk-enterprise-admin-manual/10.4/configuration-file-reference/10.4.0-configuration-file-reference/transforms.conf)
 
-## Ubuntu
+#### Ubuntu
 
 - [Ubuntu Server Documentation](https://documentation.ubuntu.com/server/)
 - [Systemd en Ubuntu](https://documentation.ubuntu.com/server/explanation/systemd/)
@@ -1965,7 +1965,7 @@ No elimines contenido directamente de:
 
 ---
 
-# 39. Nota sobre puertos y versiones
+## 39. Nota sobre puertos y versiones
 
 Los puertos indicados en este documento son valores habituales, no una garantía de
 que todas las instancias utilicen exactamente esa configuración.

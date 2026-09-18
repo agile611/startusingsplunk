@@ -20,7 +20,7 @@ visualización o troubleshooting.
 
 ---
 
-# 1. Cómo utilizar este glosario
+## 1. Cómo utilizar este glosario
 
 Cada término puede contener:
 
@@ -38,9 +38,9 @@ permitan justificar.
 
 ---
 
-# 2. Conceptos fundamentales
+## 2. Conceptos fundamentales
 
-## Admin
+#### Admin
 
 Rol administrativo de Splunk con capacidades elevadas sobre la plataforma.
 
@@ -57,14 +57,14 @@ Un usuario con rol `admin` puede realizar tareas como:
 - ejecutar búsquedas administrativas;
 - utilizar determinados endpoints REST.
 
-### Comprobar el usuario actual
+###### Comprobar el usuario actual
 
 ```spl
 | rest /services/authentication/current-context
 | table username roles
 ```
 
-### Importante
+###### Importante
 
 Tener el rol `admin` en Splunk no significa disponer automáticamente de permisos
 `sudo` en Ubuntu.
@@ -78,7 +78,7 @@ Son dos niveles diferentes:
 
 ---
 
-## Administración de logs
+#### Administración de logs
 
 Conjunto de procesos utilizados para:
 
@@ -106,7 +106,7 @@ En un entorno real deben definirse:
 
 ---
 
-## Aplicación
+#### Aplicación
 
 Sistema que genera eventos, métricas o trazas.
 
@@ -130,7 +130,7 @@ La aplicación puede generar datos sobre:
 
 ---
 
-## Aplicación de Splunk
+#### Aplicación de Splunk
 
 Espacio lógico que agrupa búsquedas, dashboards, reportes, alertas y otros objetos
 de conocimiento.
@@ -152,7 +152,7 @@ La aplicación influye en:
 
 ---
 
-## Aplicación web
+#### Aplicación web
 
 Sistema accesible mediante HTTP o HTTPS.
 
@@ -181,7 +181,7 @@ index=curso earliest=-24h latest=now
 
 ---
 
-## API
+#### API
 
 Interfaz que permite que dos sistemas se comuniquen.
 
@@ -209,9 +209,9 @@ index=curso earliest=0 latest=now
 
 ---
 
-# 3. Datos y eventos
+## 3. Datos y eventos
 
-## Campo
+#### Campo
 
 Atributo extraído de un evento.
 
@@ -233,14 +233,14 @@ Un campo puede ser:
 - añadido mediante un lookup;
 - creado mediante una expresión regular.
 
-### Revisar campos disponibles
+###### Revisar campos disponibles
 
 ```spl
 index=curso earliest=0 latest=now
 | fieldsummary
 ```
 
-### Crear un campo calculado
+###### Crear un campo calculado
 
 ```spl
 index=curso earliest=0 latest=now
@@ -249,7 +249,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## Campo calculado
+#### Campo calculado
 
 Campo creado durante una búsqueda.
 
@@ -264,7 +264,7 @@ en los resultados de la búsqueda.
 
 ---
 
-## Campo interno
+#### Campo interno
 
 Campo generado por Splunk para facilitar la búsqueda y administración.
 
@@ -288,7 +288,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## Campo multivalor
+#### Campo multivalor
 
 Campo que contiene varios valores en un mismo evento.
 
@@ -321,7 +321,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## Evento
+#### Evento
 
 Unidad individual de información que Splunk indexa y permite buscar.
 
@@ -341,7 +341,7 @@ Un evento puede representar:
 - una excepción;
 - un mensaje de sistema.
 
-### Contar eventos
+###### Contar eventos
 
 ```spl
 index=curso earliest=0 latest=now
@@ -350,7 +350,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## Evento de varias líneas
+#### Evento de varias líneas
 
 Evento compuesto por varias líneas de texto.
 
@@ -365,7 +365,7 @@ Puede aparecer en:
 Es importante que Splunk no divida incorrectamente un único evento en varios
 eventos.
 
-### Revisar el número de líneas
+###### Revisar el número de líneas
 
 ```spl
 index=curso earliest=0 latest=now
@@ -375,7 +375,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## Evento sintético
+#### Evento sintético
 
 Evento generado artificialmente para practicar o probar una configuración.
 
@@ -397,7 +397,7 @@ Deben identificarse como sintéticos y no confundirse con datos de producción.
 
 ---
 
-## Evento histórico
+#### Evento histórico
 
 Evento cuyo `_time` pertenece al pasado.
 
@@ -419,7 +419,7 @@ aunque haya sido indexado correctamente.
 
 ---
 
-## Evento reciente
+#### Evento reciente
 
 Evento cuyo `_time` está dentro del intervalo consultado.
 
@@ -434,9 +434,9 @@ la entrada debe estar recibiendo datos.
 
 ---
 
-# 4. Tiempo y fechas
+## 4. Tiempo y fechas
 
-## `_time`
+#### `_time`
 
 Campo interno que representa el tiempo asignado al evento.
 
@@ -449,7 +449,7 @@ Se utiliza para:
 - agrupaciones;
 - cálculo de antigüedad.
 
-### Revisar el tiempo
+###### Revisar el tiempo
 
 ```spl
 index=curso earliest=0 latest=now
@@ -457,7 +457,7 @@ index=curso earliest=0 latest=now
 | head 20
 ```
 
-### Formatear el tiempo
+###### Formatear el tiempo
 
 ```spl
 index=curso earliest=0 latest=now
@@ -467,7 +467,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## `_indextime`
+#### `_indextime`
 
 Momento en que Splunk indexó el evento.
 
@@ -492,13 +492,13 @@ También puede indicar:
 
 ---
 
-## Epoch
+#### Epoch
 
 Representación numérica de una fecha y hora.
 
 Splunk utiliza valores epoch para muchas operaciones temporales.
 
-### Convertir texto a epoch
+###### Convertir texto a epoch
 
 ```spl
 | eval fecha_epoch=strptime(
@@ -507,7 +507,7 @@ Splunk utiliza valores epoch para muchas operaciones temporales.
 )
 ```
 
-### Convertir epoch a texto
+###### Convertir epoch a texto
 
 ```spl
 | eval fecha_legible=strftime(_time, "%Y-%m-%d %H:%M:%S")
@@ -515,7 +515,7 @@ Splunk utiliza valores epoch para muchas operaciones temporales.
 
 ---
 
-## Intervalo temporal
+#### Intervalo temporal
 
 Periodo utilizado por una búsqueda.
 
@@ -538,7 +538,7 @@ La selección del intervalo debe coincidir con el objetivo de la búsqueda.
 
 ---
 
-## Zona horaria
+#### Zona horaria
 
 Configuración que determina cómo se interpretan y presentan las fechas.
 
@@ -559,7 +559,7 @@ Si los datos parecen estar varias horas adelantados o atrasados, revisa:
 
 ---
 
-## Retraso de ingesta
+#### Retraso de ingesta
 
 Diferencia entre el momento del evento y el momento de indexación.
 
@@ -573,9 +573,9 @@ index=curso earliest=0 latest=now
 
 ---
 
-# 5. Metadatos de Splunk
+## 5. Metadatos de Splunk
 
-## Host
+#### Host
 
 Entidad que genera o se asocia al evento.
 
@@ -594,7 +594,7 @@ app-01
 - servidor de indexación;
 - nombre del archivo.
 
-### Peticiones por host
+###### Peticiones por host
 
 ```spl
 index=curso earliest=0 latest=now
@@ -602,7 +602,7 @@ index=curso earliest=0 latest=now
 | sort - peticiones
 ```
 
-### Errores por host
+###### Errores por host
 
 ```spl
 index=curso earliest=0 latest=now
@@ -614,7 +614,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## Source
+#### Source
 
 Indica el origen del evento.
 
@@ -631,7 +631,7 @@ Ejemplo:
 /var/log/splunk-curso/eventos_web.csv
 ```
 
-### Revisar sources
+###### Revisar sources
 
 ```spl
 index=curso earliest=0 latest=now
@@ -641,7 +641,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## Sourcetype
+#### Sourcetype
 
 Describe el tipo de datos y ayuda a Splunk a interpretar los eventos.
 
@@ -655,7 +655,7 @@ json
 syslog
 ```
 
-### Revisar sourcetypes
+###### Revisar sourcetypes
 
 ```spl
 index=curso earliest=0 latest=now
@@ -663,7 +663,7 @@ index=curso earliest=0 latest=now
 | sort - count
 ```
 
-### Por qué es importante
+###### Por qué es importante
 
 Un `sourcetype` coherente facilita:
 
@@ -681,7 +681,7 @@ No utilices nombres diferentes para el mismo formato sin una razón documentada.
 
 ---
 
-## Índice
+#### Índice
 
 Repositorio lógico donde Splunk almacena eventos.
 
@@ -691,14 +691,14 @@ En el laboratorio se utiliza:
 curso
 ```
 
-### Buscar en un índice
+###### Buscar en un índice
 
 ```spl
 index=curso earliest=0 latest=now
 | stats count
 ```
 
-### Consultar información del índice
+###### Consultar información del índice
 
 ```spl
 | rest /services/data/indexes
@@ -708,7 +708,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## Índice interno
+#### Índice interno
 
 Índice utilizado por Splunk para almacenar información propia de la plataforma.
 
@@ -727,7 +727,7 @@ Se utiliza para diagnosticar:
 - problemas de configuración;
 - actividad del sistema.
 
-### Consultar errores internos
+###### Consultar errores internos
 
 ```spl
 index=_internal earliest=-30m latest=now
@@ -740,7 +740,7 @@ No utilices índices internos como sustituto de los índices de negocio.
 
 ---
 
-## `_raw`
+#### `_raw`
 
 Contenido original del evento.
 
@@ -761,9 +761,9 @@ Es fundamental para investigar:
 
 ---
 
-# 6. Ingesta de datos
+## 6. Ingesta de datos
 
-## Ingesta
+#### Ingesta
 
 Proceso mediante el cual Splunk recibe y procesa datos.
 
@@ -785,7 +785,7 @@ Búsqueda
 
 ---
 
-## Entrada
+#### Entrada
 
 Configuración que permite que Splunk reciba datos.
 
@@ -798,7 +798,7 @@ Ejemplos:
 - carga manual;
 - forwarder.
 
-### Revisar entradas monitorizadas
+###### Revisar entradas monitorizadas
 
 ```spl
 | rest /services/data/inputs/monitor
@@ -807,7 +807,7 @@ Ejemplos:
 
 ---
 
-## Monitor
+#### Monitor
 
 Entrada que observa un archivo o directorio.
 
@@ -832,7 +832,7 @@ Splunk debe poder leer la ruta y atravesar los directorios.
 
 ---
 
-## Forwarder
+#### Forwarder
 
 Componente que recopila y envía datos a otra instancia de Splunk.
 
@@ -846,7 +846,7 @@ instancia recibe y procesa los datos.
 
 ---
 
-## HTTP Event Collector
+#### HTTP Event Collector
 
 Mecanismo para enviar eventos a Splunk mediante HTTP o HTTPS.
 
@@ -863,7 +863,7 @@ No deben incluirse tokens reales en documentación compartida.
 
 ---
 
-## Parsing
+#### Parsing
 
 Proceso mediante el cual Splunk interpreta los datos entrantes.
 
@@ -887,7 +887,7 @@ Un error de parsing puede causar:
 
 ---
 
-## Indexación
+#### Indexación
 
 Proceso mediante el cual Splunk almacena los eventos en un índice para que puedan
 ser buscados.
@@ -902,7 +902,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## Reindexación
+#### Reindexación
 
 Proceso de volver a ingerir datos después de corregir una configuración.
 
@@ -925,9 +925,9 @@ Documenta siempre:
 
 ---
 
-# 7. Almacenamiento e índices
+## 7. Almacenamiento e índices
 
-## Bucket
+#### Bucket
 
 Unidad física o lógica de almacenamiento de eventos dentro de un índice.
 
@@ -943,26 +943,26 @@ La configuración concreta depende de la política de almacenamiento.
 
 ---
 
-## Hot bucket
+#### Hot bucket
 
 Bucket que recibe eventos nuevos o está siendo escrito.
 
 ---
 
-## Warm bucket
+#### Warm bucket
 
 Bucket que ya no recibe eventos nuevos, pero sigue disponible para búsquedas
 frecuentes.
 
 ---
 
-## Cold bucket
+#### Cold bucket
 
 Bucket trasladado a almacenamiento secundario o menos activo.
 
 ---
 
-## Frozen data
+#### Frozen data
 
 Datos que han alcanzado una fase de retención avanzada y pueden archivarse o
 eliminarse según la configuración.
@@ -978,7 +978,7 @@ La retención debe definirse de acuerdo con:
 
 ---
 
-## Retención
+#### Retención
 
 Periodo durante el cual los eventos deben conservarse.
 
@@ -994,7 +994,7 @@ No extrapoles automáticamente la política del laboratorio a producción.
 
 ---
 
-## `indexes.conf`
+#### `indexes.conf`
 
 Archivo de configuración relacionado con índices.
 
@@ -1009,9 +1009,9 @@ modificar directamente configuraciones sin control.
 
 ---
 
-# 8. SPL y búsquedas
+## 8. SPL y búsquedas
 
-## SPL
+#### SPL
 
 Lenguaje de búsqueda de Splunk.
 
@@ -1039,7 +1039,7 @@ index=curso earliest=-24h latest=now
 
 ---
 
-## Comando SPL
+#### Comando SPL
 
 Instrucción que transforma los resultados.
 
@@ -1059,7 +1059,7 @@ dedup
 
 ---
 
-## Función SPL
+#### Función SPL
 
 Operación utilizada dentro de un comando.
 
@@ -1082,7 +1082,7 @@ Ejemplo:
 
 ---
 
-## Pipe o tubería
+#### Pipe o tubería
 
 Carácter que conecta comandos SPL:
 
@@ -1102,7 +1102,7 @@ Cada comando recibe los resultados del comando anterior.
 
 ---
 
-## `search`
+#### `search`
 
 Filtra eventos o resultados.
 
@@ -1113,7 +1113,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## `where`
+#### `where`
 
 Filtra utilizando expresiones.
 
@@ -1125,7 +1125,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## `eval`
+#### `eval`
 
 Crea o transforma campos.
 
@@ -1136,7 +1136,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## `stats`
+#### `stats`
 
 Agrega resultados.
 
@@ -1147,7 +1147,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## `timechart`
+#### `timechart`
 
 Crea series temporales.
 
@@ -1158,7 +1158,7 @@ index=curso earliest=-24h latest=now
 
 ---
 
-## `eventstats`
+#### `eventstats`
 
 Calcula estadísticas y las añade a cada evento, conservando el detalle.
 
@@ -1170,7 +1170,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## `streamstats`
+#### `streamstats`
 
 Calcula estadísticas acumuladas según el orden de los eventos.
 
@@ -1183,7 +1183,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## `rex`
+#### `rex`
 
 Extrae datos mediante expresiones regulares.
 
@@ -1195,7 +1195,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## `spath`
+#### `spath`
 
 Extrae campos de estructuras JSON o XML compatibles.
 
@@ -1207,7 +1207,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## `dedup`
+#### `dedup`
 
 Elimina resultados duplicados según uno o varios campos.
 
@@ -1221,7 +1221,7 @@ necesariamente duplicados reales.
 
 ---
 
-## `lookup`
+#### `lookup`
 
 Añade información externa a los eventos.
 
@@ -1233,7 +1233,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## `fieldsummary`
+#### `fieldsummary`
 
 Resume información sobre los campos disponibles.
 
@@ -1246,9 +1246,9 @@ Es una herramienta especialmente útil al comenzar a trabajar con un dataset.
 
 ---
 
-# 9. Análisis de eventos web
+## 9. Análisis de eventos web
 
-## Método HTTP
+#### Método HTTP
 
 Indica la operación solicitada al servidor.
 
@@ -1262,7 +1262,7 @@ Métodos frecuentes:
 - `HEAD`;
 - `OPTIONS`.
 
-### Analizar métodos
+###### Analizar métodos
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1273,7 +1273,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## URI
+#### URI
 
 Ruta solicitada por el cliente.
 
@@ -1287,7 +1287,7 @@ Ejemplos:
 /products?id=10
 ```
 
-### URI con más errores
+###### URI con más errores
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1300,7 +1300,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## Código HTTP
+#### Código HTTP
 
 Código numérico que indica el resultado de una petición.
 
@@ -1314,7 +1314,7 @@ Familias:
 | `4xx` | Error del cliente |
 | `5xx` | Error del servidor |
 
-### Distribución de códigos
+###### Distribución de códigos
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1325,7 +1325,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## HTTP 200
+#### HTTP 200
 
 Indica una respuesta correcta habitual.
 
@@ -1335,7 +1335,7 @@ en el código.
 
 ---
 
-## HTTP 201
+#### HTTP 201
 
 Indica que se ha creado un recurso.
 
@@ -1347,7 +1347,7 @@ POST /api/users
 
 ---
 
-## HTTP 301 y 302
+#### HTTP 301 y 302
 
 Indican redirecciones.
 
@@ -1356,7 +1356,7 @@ URL.
 
 ---
 
-## HTTP 400
+#### HTTP 400
 
 Petición incorrecta.
 
@@ -1369,13 +1369,13 @@ Puede deberse a:
 
 ---
 
-## HTTP 401
+#### HTTP 401
 
 Autenticación requerida o fallida.
 
 ---
 
-## HTTP 403
+#### HTTP 403
 
 Acceso prohibido.
 
@@ -1383,7 +1383,7 @@ La identidad puede ser conocida, pero no tiene permisos suficientes.
 
 ---
 
-## HTTP 404
+#### HTTP 404
 
 Recurso no encontrado.
 
@@ -1397,7 +1397,7 @@ Puede deberse a:
 
 ---
 
-## HTTP 429
+#### HTTP 429
 
 Demasiadas solicitudes.
 
@@ -1411,7 +1411,7 @@ Puede indicar:
 
 ---
 
-## HTTP 500
+#### HTTP 500
 
 Error interno del servidor.
 
@@ -1428,13 +1428,13 @@ index=curso earliest=-5m latest=now
 
 ---
 
-## HTTP 502
+#### HTTP 502
 
 Gateway o proxy recibió una respuesta inválida.
 
 ---
 
-## HTTP 503
+#### HTTP 503
 
 Servicio no disponible.
 
@@ -1448,7 +1448,7 @@ Puede asociarse con:
 
 ---
 
-## HTTP 504
+#### HTTP 504
 
 Timeout de gateway.
 
@@ -1456,9 +1456,9 @@ Puede indicar que una dependencia tardó demasiado en responder.
 
 ---
 
-# 10. Rendimiento y observabilidad
+## 10. Rendimiento y observabilidad
 
-## Latencia
+#### Latencia
 
 Tiempo que tarda una operación en completarse.
 
@@ -1469,7 +1469,7 @@ En el dataset puede aparecer como:
 - `latency`;
 - `elapsed_ms`.
 
-### Media de latencia
+###### Media de latencia
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1480,7 +1480,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## Media
+#### Media
 
 Promedio aritmético.
 
@@ -1494,7 +1494,7 @@ La media puede verse afectada por valores extremos.
 
 ---
 
-## Mediana
+#### Mediana
 
 Valor central de un conjunto ordenado.
 
@@ -1508,7 +1508,7 @@ La mediana suele representar mejor el comportamiento típico cuando hay outliers
 
 ---
 
-## Percentil 95
+#### Percentil 95
 
 Valor por debajo del cual se encuentra aproximadamente el 95 % de las
 observaciones.
@@ -1521,7 +1521,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## Outlier
+#### Outlier
 
 Valor que se aleja considerablemente del comportamiento habitual.
 
@@ -1537,7 +1537,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## Disponibilidad
+#### Disponibilidad
 
 Porcentaje de tiempo durante el cual un servicio está operativo.
 
@@ -1552,7 +1552,7 @@ para medir disponibilidad real. También pueden ser necesarios:
 
 ---
 
-## Tasa de error
+#### Tasa de error
 
 Porcentaje de peticiones consideradas erróneas.
 
@@ -1574,7 +1574,7 @@ de la misma forma.
 
 ---
 
-## Volumen
+#### Volumen
 
 Número de eventos o peticiones durante un periodo.
 
@@ -1585,7 +1585,7 @@ index=curso earliest=-24h latest=now
 
 ---
 
-## Throughput
+#### Throughput
 
 Cantidad de eventos procesados por unidad de tiempo.
 
@@ -1596,7 +1596,7 @@ index=curso earliest=-1h latest=now
 
 ---
 
-## Saturación
+#### Saturación
 
 Grado en que un recurso se aproxima a su capacidad máxima.
 
@@ -1616,7 +1616,7 @@ sí solo la causa raíz.
 
 ---
 
-## Observabilidad
+#### Observabilidad
 
 Capacidad de comprender el estado interno de un sistema a partir de sus señales.
 
@@ -1634,9 +1634,9 @@ sobre eventos.
 
 ---
 
-# 11. Dashboards, reportes y alertas
+## 11. Dashboards, reportes y alertas
 
-## Dashboard
+#### Dashboard
 
 Vista visual compuesta por paneles.
 
@@ -1650,14 +1650,14 @@ Puede mostrar:
 - detalles;
 - estados operativos.
 
-### Panel de peticiones
+###### Panel de peticiones
 
 ```spl
 index=curso earliest=-24h latest=now
 | stats count as peticiones
 ```
 
-### Panel de errores
+###### Panel de errores
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -1667,7 +1667,7 @@ index=curso earliest=-24h latest=now
 
 ---
 
-## Panel
+#### Panel
 
 Componente individual de un dashboard.
 
@@ -1682,7 +1682,7 @@ Ejemplos:
 
 ---
 
-## Filtro
+#### Filtro
 
 Control que modifica el intervalo o los resultados de un dashboard.
 
@@ -1698,7 +1698,7 @@ Filtros habituales:
 
 ---
 
-## Token
+#### Token
 
 Variable utilizada para transmitir el valor seleccionado por un control.
 
@@ -1712,7 +1712,7 @@ La sintaxis exacta depende del tipo de dashboard y de la configuración utilizad
 
 ---
 
-## Reporte
+#### Reporte
 
 Búsqueda guardada que puede ejecutarse manualmente o de forma programada.
 
@@ -1729,7 +1729,7 @@ Un reporte debe documentar:
 
 ---
 
-## Búsqueda guardada
+#### Búsqueda guardada
 
 Consulta SPL almacenada para reutilizarla.
 
@@ -1743,11 +1743,11 @@ Puede utilizarse como:
 
 ---
 
-## Alerta
+#### Alerta
 
 Búsqueda configurada para detectar una condición y ejecutar una acción.
 
-### Alerta del proyecto
+###### Alerta del proyecto
 
 ```spl
 index=curso earliest=-5m latest=now
@@ -1769,7 +1769,7 @@ La alerta debe documentar:
 
 ---
 
-## Throttling
+#### Throttling
 
 Mecanismo para evitar alertas repetitivas durante un periodo.
 
@@ -1782,7 +1782,7 @@ Es especialmente importante cuando:
 
 ---
 
-## Acción de alerta
+#### Acción de alerta
 
 Respuesta que se ejecuta cuando una alerta se activa.
 
@@ -1799,9 +1799,9 @@ Las acciones deben probarse en un entorno controlado.
 
 ---
 
-# 12. Seguridad y permisos
+## 12. Seguridad y permisos
 
-## Capacidad
+#### Capacidad
 
 Permiso granular que permite realizar una acción concreta en Splunk.
 
@@ -1816,7 +1816,7 @@ Ejemplos conceptuales:
 
 ---
 
-## Rol
+#### Rol
 
 Conjunto de capacidades y restricciones asignadas a un usuario.
 
@@ -1829,7 +1829,7 @@ Ejemplos:
 
 ---
 
-## Acceso basado en roles
+#### Acceso basado en roles
 
 Modelo en el que los permisos se conceden mediante roles.
 
@@ -1842,7 +1842,7 @@ Consulta práctica:
 
 ---
 
-## Objeto de conocimiento
+#### Objeto de conocimiento
 
 Elemento reutilizable de Splunk.
 
@@ -1859,7 +1859,7 @@ Ejemplos:
 
 ---
 
-## Propietario
+#### Propietario
 
 Usuario o entidad responsable de un objeto de conocimiento.
 
@@ -1873,7 +1873,7 @@ El propietario debe poder:
 
 ---
 
-## Compartición
+#### Compartición
 
 Alcance con el que un objeto está disponible.
 
@@ -1886,7 +1886,7 @@ Puede ser:
 
 ---
 
-## Mínimo privilegio
+#### Mínimo privilegio
 
 Principio según el cual un usuario debe tener únicamente los permisos necesarios
 para realizar su función.
@@ -1902,7 +1902,7 @@ producción se recomienda separar:
 
 ---
 
-## Datos sensibles
+#### Datos sensibles
 
 Información que requiere protección especial.
 
@@ -1928,7 +1928,7 @@ No incluyas datos sensibles en:
 
 ---
 
-## Enmascaramiento
+#### Enmascaramiento
 
 Proceso de ocultar o transformar información sensible.
 
@@ -1943,9 +1943,9 @@ exponer información o destruir datos necesarios para la investigación.
 
 ---
 
-# 13. Configuración en Splunk
+## 13. Configuración en Splunk
 
-## `inputs.conf`
+#### `inputs.conf`
 
 Define entradas de datos.
 
@@ -1961,7 +1961,7 @@ host = web-lab
 
 ---
 
-## `props.conf`
+#### `props.conf`
 
 Archivo relacionado con parsing, timestamps, campos y comportamiento de fuentes.
 
@@ -1976,7 +1976,7 @@ Puede utilizarse para configurar:
 
 ---
 
-## `transforms.conf`
+#### `transforms.conf`
 
 Archivo utilizado para transformaciones avanzadas y enrutamiento de datos.
 
@@ -1990,7 +1990,7 @@ Puede intervenir en:
 
 ---
 
-## `indexes.conf`
+#### `indexes.conf`
 
 Archivo de configuración relacionado con índices.
 
@@ -1998,7 +1998,7 @@ Debe gestionarse con cuidado y documentarse por aplicación o entorno.
 
 ---
 
-## `server.conf`
+#### `server.conf`
 
 Archivo de configuración de aspectos del servidor Splunk.
 
@@ -2006,7 +2006,7 @@ Su uso depende de la topología y del componente de Splunk.
 
 ---
 
-## Aplicación de configuración
+#### Aplicación de configuración
 
 Conjunto de archivos y objetos que permiten encapsular una configuración.
 
@@ -2021,7 +2021,7 @@ configuración global del sistema.
 
 ---
 
-## Recarga
+#### Recarga
 
 Proceso mediante el cual Splunk vuelve a leer una configuración sin reiniciar
 completamente todos los componentes.
@@ -2030,7 +2030,7 @@ La posibilidad de recargar depende del tipo de configuración.
 
 ---
 
-## Reinicio
+#### Reinicio
 
 Reinicio del servicio de Splunk.
 
@@ -2044,25 +2044,25 @@ No reinicies un entorno compartido sin valorar el impacto.
 
 ---
 
-# 14. Ubuntu y sistema operativo
+## 14. Ubuntu y sistema operativo
 
-## `systemd`
+#### `systemd`
 
 Sistema de gestión de servicios utilizado por Ubuntu.
 
-### Revisar Splunk
+###### Revisar Splunk
 
 ```bash
 sudo systemctl status Splunkd
 ```
 
-### Consultar logs del servicio
+###### Consultar logs del servicio
 
 ```bash
 sudo journalctl -u Splunkd
 ```
 
-### Consultar logs recientes
+###### Consultar logs recientes
 
 ```bash
 sudo journalctl -u Splunkd --since "30 minutes ago"
@@ -2070,7 +2070,7 @@ sudo journalctl -u Splunkd --since "30 minutes ago"
 
 ---
 
-## `sudo`
+#### `sudo`
 
 Permite ejecutar comandos con privilegios elevados.
 
@@ -2084,7 +2084,7 @@ El uso de `sudo` debe limitarse a las tareas necesarias.
 
 ---
 
-## Puerto
+#### Puerto
 
 Punto de comunicación de un servicio.
 
@@ -2096,7 +2096,7 @@ Puertos habituales del entorno:
 | `8089` | Management/API |
 | `9997` | Recepción de forwarders |
 
-### Revisar puertos
+###### Revisar puertos
 
 ```bash
 sudo ss -lntp | grep -E '8000|8089|9997'
@@ -2104,11 +2104,11 @@ sudo ss -lntp | grep -E '8000|8089|9997'
 
 ---
 
-## Proceso
+#### Proceso
 
 Programa en ejecución en Ubuntu.
 
-### Buscar procesos de Splunk
+###### Buscar procesos de Splunk
 
 ```bash
 ps aux | grep splunk
@@ -2116,11 +2116,11 @@ ps aux | grep splunk
 
 ---
 
-## Permiso de archivo
+#### Permiso de archivo
 
 Controla quién puede leer, escribir o ejecutar un archivo.
 
-### Revisar permisos
+###### Revisar permisos
 
 ```bash
 ls -l /var/log/splunk-curso/eventos_web.csv
@@ -2130,17 +2130,17 @@ Para monitorizar un archivo, el proceso de Splunk necesita permisos de lectura.
 
 ---
 
-## Espacio en disco
+#### Espacio en disco
 
 El almacenamiento insuficiente puede impedir la ingesta o afectar al servicio.
 
-### Revisar espacio
+###### Revisar espacio
 
 ```bash
 df -h
 ```
 
-### Revisar tamaño de un directorio
+###### Revisar tamaño de un directorio
 
 ```bash
 du -sh /var/log/splunk-curso
@@ -2148,9 +2148,9 @@ du -sh /var/log/splunk-curso
 
 ---
 
-# 15. Troubleshooting
+## 15. Troubleshooting
 
-## Troubleshooting
+#### Troubleshooting
 
 Proceso sistemático de diagnóstico y resolución de problemas.
 
@@ -2176,7 +2176,7 @@ Objeto
 
 ---
 
-## Diagnóstico: índice
+#### Diagnóstico: índice
 
 ```spl
 index=curso earliest=0 latest=now
@@ -2185,7 +2185,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## Diagnóstico: rango temporal
+#### Diagnóstico: rango temporal
 
 ```spl
 index=curso earliest=0 latest=now
@@ -2194,7 +2194,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## Diagnóstico: eventos
+#### Diagnóstico: eventos
 
 ```spl
 index=curso earliest=0 latest=now
@@ -2204,7 +2204,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## Diagnóstico: campos
+#### Diagnóstico: campos
 
 ```spl
 index=curso earliest=0 latest=now
@@ -2213,7 +2213,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## Diagnóstico: metadatos
+#### Diagnóstico: metadatos
 
 ```spl
 index=curso earliest=0 latest=now
@@ -2222,7 +2222,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## Diagnóstico: retraso
+#### Diagnóstico: retraso
 
 ```spl
 index=curso earliest=0 latest=now
@@ -2234,7 +2234,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## Diagnóstico: configuración de entrada
+#### Diagnóstico: configuración de entrada
 
 ```spl
 | rest /services/data/inputs/monitor
@@ -2243,7 +2243,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## Diagnóstico: logs internos
+#### Diagnóstico: logs internos
 
 ```spl
 index=_internal earliest=-30m latest=now
@@ -2254,7 +2254,7 @@ index=_internal earliest=-30m latest=now
 
 ---
 
-## Problema: no hay resultados
+#### Problema: no hay resultados
 
 Causas posibles:
 
@@ -2270,7 +2270,7 @@ Causas posibles:
 
 ---
 
-## Problema: el campo no existe
+#### Problema: el campo no existe
 
 Comprueba:
 
@@ -2292,7 +2292,7 @@ alternativa.
 
 ---
 
-## Problema: los códigos HTTP no se pueden comparar
+#### Problema: los códigos HTTP no se pueden comparar
 
 Utiliza:
 
@@ -2308,7 +2308,7 @@ Después:
 
 ---
 
-## Problema: todos los eventos tienen el mismo tiempo
+#### Problema: todos los eventos tienen el mismo tiempo
 
 Revisa:
 
@@ -2321,7 +2321,7 @@ Revisa:
 
 ---
 
-## Problema: se han duplicado los eventos
+#### Problema: se han duplicado los eventos
 
 Puede deberse a:
 
@@ -2341,9 +2341,9 @@ index=curso earliest=0 latest=now
 
 ---
 
-# 16. Métricas y análisis
+## 16. Métricas y análisis
 
-## Cardinalidad
+#### Cardinalidad
 
 Número de valores distintos de un campo.
 
@@ -2357,7 +2357,7 @@ algunas visualizaciones.
 
 ---
 
-## Conteo distinto
+#### Conteo distinto
 
 Función `dc()` utilizada para contar valores únicos.
 
@@ -2367,7 +2367,7 @@ Función `dc()` utilizada para contar valores únicos.
 
 ---
 
-## Porcentaje
+#### Porcentaje
 
 Proporción de un subconjunto respecto al total.
 
@@ -2387,7 +2387,7 @@ Protege siempre el caso de total igual a cero:
 
 ---
 
-## Umbral
+#### Umbral
 
 Valor a partir del cual se toma una decisión.
 
@@ -2408,7 +2408,7 @@ index=curso earliest=-5m latest=now
 
 ---
 
-## Baseline
+#### Baseline
 
 Comportamiento normal de referencia.
 
@@ -2423,7 +2423,7 @@ Una alerta es más útil cuando el umbral se compara con:
 
 ---
 
-## Anomalía
+#### Anomalía
 
 Comportamiento que se desvía de lo esperado.
 
@@ -2439,7 +2439,7 @@ Ejemplos:
 
 ---
 
-## Falso positivo
+#### Falso positivo
 
 Alerta activada sin que exista un problema real.
 
@@ -2454,7 +2454,7 @@ Puede producirse por:
 
 ---
 
-## Falso negativo
+#### Falso negativo
 
 Problema real que no activa la alerta.
 
@@ -2469,7 +2469,7 @@ Puede producirse por:
 
 ---
 
-## Ruido
+#### Ruido
 
 Alertas o eventos que dificultan identificar problemas relevantes.
 
@@ -2477,9 +2477,9 @@ El throttling, los filtros y los umbrales ayudan a reducir el ruido.
 
 ---
 
-# 17. Referencias y documentación
+## 17. Referencias y documentación
 
-## Documentación oficial
+#### Documentación oficial
 
 La documentación oficial de Splunk debe ser la fuente principal para comprobar:
 
@@ -2503,14 +2503,14 @@ La documentación oficial de Splunk debe ser la fuente principal para comprobar:
 
 ---
 
-## Documentación de Ubuntu
+#### Documentación de Ubuntu
 
 - [Ubuntu Server Documentation](https://documentation.ubuntu.com/server/)
 - [Systemd en Ubuntu](https://documentation.ubuntu.com/server/explanation/systemd/)
 
 ---
 
-# 18. Glosario rápido
+## 18. Glosario rápido
 
 | Término | Significado breve |
 |---|---|
@@ -2539,31 +2539,31 @@ La documentación oficial de Splunk debe ser la fuente principal para comprobar:
 
 ---
 
-# 19. Ejercicio final de vocabulario aplicado
+## 19. Ejercicio final de vocabulario aplicado
 
-## Objetivo
+#### Objetivo
 
 Utilizar varios conceptos del glosario en una investigación sencilla.
 
-## Situación
+#### Situación
 
 El equipo de operaciones informa de un aumento de errores en la aplicación web.
 
-## Paso 1: revisar el índice
+#### Paso 1: revisar el índice
 
 ```spl
 index=curso earliest=-24h latest=now
 | stats count as total_eventos
 ```
 
-## Paso 2: revisar el rango temporal
+#### Paso 2: revisar el rango temporal
 
 ```spl
 index=curso earliest=0 latest=now
 | stats min(_time) as inicio max(_time) as fin
 ```
 
-## Paso 3: clasificar códigos HTTP
+#### Paso 3: clasificar códigos HTTP
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -2578,7 +2578,7 @@ index=curso earliest=-24h latest=now
 | stats count by familia
 ```
 
-## Paso 4: identificar hosts afectados
+#### Paso 4: identificar hosts afectados
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -2588,7 +2588,7 @@ index=curso earliest=-24h latest=now
 | sort - errores
 ```
 
-## Paso 5: identificar URI afectadas
+#### Paso 5: identificar URI afectadas
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -2599,7 +2599,7 @@ index=curso earliest=-24h latest=now
 | head 10
 ```
 
-## Paso 6: observar la evolución temporal
+#### Paso 6: observar la evolución temporal
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -2608,7 +2608,7 @@ index=curso earliest=-24h latest=now
 | timechart span=5m count by resultado
 ```
 
-## Paso 7: redactar una conclusión
+#### Paso 7: redactar una conclusión
 
 La conclusión debe indicar:
 
@@ -2626,9 +2626,9 @@ No debe afirmar una causa raíz si las consultas solo muestran correlación.
 
 ---
 
-# 20. Lista de comprobación
+## 20. Lista de comprobación
 
-## Datos
+#### Datos
 
 - [ ] Se ha identificado el índice.
 - [ ] Se ha comprobado el rango temporal.
@@ -2638,7 +2638,7 @@ No debe afirmar una causa raíz si las consultas solo muestran correlación.
 - [ ] Se ha revisado `_time`.
 - [ ] Se ha revisado `_indextime`.
 
-## SPL
+#### SPL
 
 - [ ] Las búsquedas incluyen índice.
 - [ ] Las búsquedas incluyen rango temporal.
@@ -2647,7 +2647,7 @@ No debe afirmar una causa raíz si las consultas solo muestran correlación.
 - [ ] Se han protegido las divisiones entre cero.
 - [ ] Se han documentado los resultados.
 
-## Monitorización
+#### Monitorización
 
 - [ ] Se ha calculado el volumen.
 - [ ] Se ha calculado la tasa de error.
@@ -2658,7 +2658,7 @@ No debe afirmar una causa raíz si las consultas solo muestran correlación.
 - [ ] Se ha revisado IP si existe.
 - [ ] Se ha documentado la ausencia de campos.
 
-## Seguridad
+#### Seguridad
 
 - [ ] No se han incluido credenciales.
 - [ ] No se han incluido tokens.
@@ -2667,7 +2667,7 @@ No debe afirmar una causa raíz si las consultas solo muestran correlación.
 - [ ] Se distingue `admin` de usuario final.
 - [ ] Se aplica el principio de mínimo privilegio cuando procede.
 
-## Entrega
+#### Entrega
 
 - [ ] Los términos se utilizan correctamente.
 - [ ] Las consultas pueden reproducirse.
@@ -2677,7 +2677,7 @@ No debe afirmar una causa raíz si las consultas solo muestran correlación.
 - [ ] Las pruebas se han realizado en la instancia.
 ```
 
-## Referencias principales incorporadas
+#### Referencias principales incorporadas
 
 - **Source types y campos predeterminados:** ayudan a explicar la diferencia entre
   `host`, `source`, `sourcetype` y otros metadatos de eventos. [1]

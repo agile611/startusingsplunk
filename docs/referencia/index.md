@@ -33,7 +33,7 @@ Documentar y reproducir la solución
 
 ---
 
-# 1. Objetivos del material
+## 1. Objetivos del material
 
 Al finalizar el laboratorio, los asistentes deberían poder:
 
@@ -61,7 +61,7 @@ Al finalizar el laboratorio, los asistentes deberían poder:
 
 ---
 
-# 2. Entorno de referencia
+## 2. Entorno de referencia
 
 El laboratorio utiliza como referencia:
 
@@ -88,7 +88,7 @@ También puede consultarse desde Splunk Web en la información del producto.
 
 ---
 
-# 3. Diferencia entre administrador de Splunk y administrador de Ubuntu
+## 3. Diferencia entre administrador de Splunk y administrador de Ubuntu
 
 El rol `admin` de Splunk concede capacidades administrativas dentro de la
 plataforma, pero no equivale automáticamente a tener privilegios `sudo` en
@@ -116,11 +116,11 @@ sudo systemctl status Splunkd
 
 ---
 
-# 4. Estructura de la documentación
+## 4. Estructura de la documentación
 
 La documentación se divide en ficheros temáticos.
 
-## 4.1 Bibliografía
+#### 4.1 Bibliografía
 
 Fichero:
 
@@ -141,7 +141,7 @@ Utilízalo cuando necesites justificar una decisión técnica.
 
 ---
 
-## 4.2 Datasets
+#### 4.2 Datasets
 
 Fichero:
 
@@ -165,7 +165,7 @@ Es el punto de partida para preparar los datos del laboratorio.
 
 ---
 
-## 4.3 Enlaces
+#### 4.3 Enlaces
 
 Fichero:
 
@@ -190,7 +190,7 @@ Utilízalo como catálogo de consulta rápida.
 
 ---
 
-## 4.4 Comandos SPL
+#### 4.4 Comandos SPL
 
 Fichero:
 
@@ -215,7 +215,7 @@ Utilízalo cuando necesites saber **qué comando aplicar**.
 
 ---
 
-## 4.5 Funciones SPL
+#### 4.5 Funciones SPL
 
 Fichero:
 
@@ -239,7 +239,7 @@ Utilízalo cuando necesites saber **cómo transformar o calcular un valor**.
 
 ---
 
-## 4.6 Glosario
+#### 4.6 Glosario
 
 Fichero:
 
@@ -262,7 +262,7 @@ Utilízalo cuando aparezca un término técnico que necesites aclarar.
 
 ---
 
-## 4.7 Documentación de referencia
+#### 4.7 Documentación de referencia
 
 Fichero:
 
@@ -274,11 +274,11 @@ Este documento sirve como índice general y guía de navegación del material.
 
 ---
 
-# 5. Itinerario recomendado del laboratorio
+## 5. Itinerario recomendado del laboratorio
 
 Se recomienda seguir el orden siguiente.
 
-## Fase 1: preparar el entorno
+#### Fase 1: preparar el entorno
 
 Antes de ingerir datos, comprueba:
 
@@ -304,7 +304,7 @@ En Splunk Web:
 
 ---
 
-## Fase 2: revisar el índice
+#### Fase 2: revisar el índice
 
 Consulta los índices disponibles:
 
@@ -335,7 +335,7 @@ Documenta:
 
 ---
 
-## Fase 3: preparar el dataset
+#### Fase 3: preparar el dataset
 
 Consulta:
 
@@ -367,11 +367,11 @@ Antes de cargarlo, comprueba:
 
 ---
 
-## Fase 4: ingerir los datos
+#### Fase 4: ingerir los datos
 
 Se pueden utilizar dos métodos principales.
 
-### Carga mediante Splunk Web
+###### Carga mediante Splunk Web
 
 Adecuada para:
 
@@ -380,7 +380,7 @@ Adecuada para:
 - ejercicios puntuales;
 - primeras pruebas.
 
-### Monitorización de archivo
+###### Monitorización de archivo
 
 Adecuada para:
 
@@ -408,13 +408,13 @@ Revisar entradas monitorizadas:
 
 ---
 
-# 6. Primera validación de los datos
+## 6. Primera validación de los datos
 
 Después de ingerir los datos, no crees todavía dashboards ni alertas.
 
 Primero valida la fuente.
 
-## 6.1 Comprobar que existen eventos
+#### 6.1 Comprobar que existen eventos
 
 ```spl
 index=curso earliest=0 latest=now
@@ -439,7 +439,7 @@ Si devuelve cero, revisa:
 
 ---
 
-## 6.2 Comprobar el rango temporal
+#### 6.2 Comprobar el rango temporal
 
 ```spl
 index=curso earliest=0 latest=now
@@ -457,7 +457,7 @@ Esta consulta permite detectar si:
 
 ---
 
-## 6.3 Revisar metadatos
+#### 6.3 Revisar metadatos
 
 ```spl
 index=curso earliest=0 latest=now
@@ -469,7 +469,7 @@ Los valores deben ser coherentes con la entrada configurada.
 
 ---
 
-## 6.4 Revisar campos
+#### 6.4 Revisar campos
 
 ```spl
 index=curso earliest=0 latest=now
@@ -487,7 +487,7 @@ Comprueba la existencia de:
 
 ---
 
-## 6.5 Revisar eventos originales
+#### 6.5 Revisar eventos originales
 
 ```spl
 index=curso earliest=0 latest=now
@@ -505,7 +505,7 @@ Esta consulta es especialmente útil si:
 
 ---
 
-## 6.6 Revisar el retraso de ingesta
+#### 6.6 Revisar el retraso de ingesta
 
 ```spl
 index=curso earliest=0 latest=now
@@ -518,16 +518,16 @@ Si el dataset es histórico, el retraso puede ser elevado de forma esperada.
 
 ---
 
-# 7. Primeras búsquedas SPL
+## 7. Primeras búsquedas SPL
 
-## 7.1 Total de peticiones
+#### 7.1 Total de peticiones
 
 ```spl
 index=curso earliest=0 latest=now
 | stats count as total_peticiones
 ```
 
-## 7.2 Peticiones por host
+#### 7.2 Peticiones por host
 
 ```spl
 index=curso earliest=0 latest=now
@@ -535,7 +535,7 @@ index=curso earliest=0 latest=now
 | sort - peticiones
 ```
 
-## 7.3 Peticiones por método
+#### 7.3 Peticiones por método
 
 ```spl
 index=curso earliest=0 latest=now
@@ -543,7 +543,7 @@ index=curso earliest=0 latest=now
 | sort - peticiones
 ```
 
-## 7.4 Peticiones por URI
+#### 7.4 Peticiones por URI
 
 ```spl
 index=curso earliest=0 latest=now
@@ -552,7 +552,7 @@ index=curso earliest=0 latest=now
 | head 10
 ```
 
-## 7.5 Distribución de códigos HTTP
+#### 7.5 Distribución de códigos HTTP
 
 ```spl
 index=curso earliest=0 latest=now
@@ -561,7 +561,7 @@ index=curso earliest=0 latest=now
 | sort status_num
 ```
 
-## 7.6 Clasificación por familia HTTP
+#### 7.6 Clasificación por familia HTTP
 
 ```spl
 index=curso earliest=0 latest=now
@@ -579,22 +579,22 @@ index=curso earliest=0 latest=now
 
 ---
 
-# 8. Búsquedas requeridas para el proyecto
+## 8. Búsquedas requeridas para el proyecto
 
 El proyecto debe contener al menos cinco búsquedas documentadas.
 
-## 8.1 Volumen de peticiones
+#### 8.1 Volumen de peticiones
 
 ```spl
 index=curso earliest=-24h latest=now
 | stats count as total_peticiones
 ```
 
-### Objetivo
+###### Objetivo
 
 Conocer el volumen total de peticiones en el intervalo seleccionado.
 
-### Interpretación
+###### Interpretación
 
 Un volumen bajo puede significar:
 
@@ -606,7 +606,7 @@ Un volumen bajo puede significar:
 
 ---
 
-## 8.2 Porcentaje de error
+#### 8.2 Porcentaje de error
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -621,18 +621,18 @@ index=curso earliest=-24h latest=now
 )
 ```
 
-### Objetivo
+###### Objetivo
 
 Medir la proporción de respuestas consideradas erróneas.
 
-### Nota
+###### Nota
 
 Debe documentarse si los `4xx` y los `5xx` se consideran errores en el mismo
 indicador.
 
 ---
 
-## 8.3 Errores por URI
+#### 8.3 Errores por URI
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -643,13 +643,13 @@ index=curso earliest=-24h latest=now
 | head 10
 ```
 
-### Objetivo
+###### Objetivo
 
 Identificar recursos con mayor concentración de errores.
 
 ---
 
-## 8.4 Errores HTTP 500
+#### 8.4 Errores HTTP 500
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -659,13 +659,13 @@ index=curso earliest=-24h latest=now
 | sort - errores_500
 ```
 
-### Objetivo
+###### Objetivo
 
 Separar los errores internos del servidor de otros códigos HTTP.
 
 ---
 
-## 8.5 Evolución temporal
+#### 8.5 Evolución temporal
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -674,17 +674,17 @@ index=curso earliest=-24h latest=now
 | timechart span=1m count by resultado
 ```
 
-### Objetivo
+###### Objetivo
 
 Observar la evolución del tráfico y de los errores.
 
 ---
 
-# 9. Análisis opcional por IP y latencia
+## 9. Análisis opcional por IP y latencia
 
 Estos análisis dependen de los campos disponibles.
 
-## 9.1 IP de origen
+#### 9.1 IP de origen
 
 Comprobar primero:
 
@@ -721,7 +721,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## 9.2 Latencia
+#### 9.2 Latencia
 
 Comprobar primero:
 
@@ -759,11 +759,11 @@ URI con más errores
 
 ---
 
-# 10. Dashboard recomendado
+## 10. Dashboard recomendado
 
 El dashboard mínimo debe contener al menos seis paneles.
 
-## Panel 1: total de peticiones
+#### Panel 1: total de peticiones
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -778,7 +778,7 @@ Single value
 
 ---
 
-## Panel 2: total de errores
+#### Panel 2: total de errores
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -794,7 +794,7 @@ Single value
 
 ---
 
-## Panel 3: porcentaje de error
+#### Panel 3: porcentaje de error
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -817,7 +817,7 @@ Single value o gauge
 
 ---
 
-## Panel 4: peticiones por minuto
+#### Panel 4: peticiones por minuto
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -832,7 +832,7 @@ Gráfico de líneas
 
 ---
 
-## Panel 5: errores por código HTTP
+#### Panel 5: errores por código HTTP
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -850,7 +850,7 @@ Barras o columnas
 
 ---
 
-## Panel 6: host con más errores
+#### Panel 6: host con más errores
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -869,7 +869,7 @@ Barras o tabla
 
 ---
 
-## Panel 7: URI con más errores
+#### Panel 7: URI con más errores
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -888,7 +888,7 @@ Tabla o barras
 
 ---
 
-## Panel 8: latencia por URI
+#### Panel 8: latencia por URI
 
 Solo debe añadirse si el dataset contiene `response_time`.
 
@@ -906,14 +906,14 @@ index=curso earliest=-24h latest=now
 
 ---
 
-# 11. Filtros del dashboard
+## 11. Filtros del dashboard
 
 El dashboard debe incluir al menos:
 
 1. un filtro temporal;
 2. un filtro categórico.
 
-## Filtro temporal
+#### Filtro temporal
 
 Ejemplos:
 
@@ -922,7 +922,7 @@ Ejemplos:
 - últimos 7 días;
 - intervalo personalizado.
 
-## Filtro categórico por host
+#### Filtro categórico por host
 
 Valores de ejemplo:
 
@@ -946,7 +946,7 @@ excluir todos los eventos.
 El comportamiento exacto depende de Dashboard Studio o del tipo de dashboard
 utilizado.
 
-## Validación del filtro
+#### Validación del filtro
 
 Cada filtro debe probarse con:
 
@@ -960,11 +960,11 @@ Documenta el resultado de cada prueba.
 
 ---
 
-# 12. Alerta del proyecto
+## 12. Alerta del proyecto
 
 La alerta requerida detecta cinco o más errores HTTP `500` en cinco minutos.
 
-## Consulta operativa
+#### Consulta operativa
 
 ```spl
 index=curso earliest=-5m latest=now
@@ -973,7 +973,7 @@ index=curso earliest=-5m latest=now
 | where errores_500>=5
 ```
 
-## Configuración recomendada
+#### Configuración recomendada
 
 Documenta:
 
@@ -1006,7 +1006,7 @@ Destinatario:
     Completar
 ```
 
-## Prueba histórica
+#### Prueba histórica
 
 ```spl
 index=curso earliest="01/01/2026:00:00:00"
@@ -1020,7 +1020,7 @@ Esta búsqueda valida la lógica con datos históricos.
 
 No demuestra por sí sola que la alerta en tiempo real funcione.
 
-## Prueba con datos recientes
+#### Prueba con datos recientes
 
 Para probar el rango relativo, añade eventos recientes a un archivo monitorizado:
 
@@ -1037,25 +1037,25 @@ Los timestamps deben adaptarse a la fecha y hora actuales del laboratorio.
 
 ---
 
-# 13. Flujo de troubleshooting
+## 13. Flujo de troubleshooting
 
 Cuando una búsqueda no devuelve resultados, sigue siempre este orden.
 
-## Paso 1: índice
+#### Paso 1: índice
 
 ```spl
 index=curso earliest=0 latest=now
 | stats count
 ```
 
-## Paso 2: tiempo
+#### Paso 2: tiempo
 
 ```spl
 index=curso earliest=0 latest=now
 | stats min(_time) as inicio max(_time) as fin
 ```
 
-## Paso 3: eventos
+#### Paso 3: eventos
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1063,28 +1063,28 @@ index=curso earliest=0 latest=now
 | head 20
 ```
 
-## Paso 4: campos
+#### Paso 4: campos
 
 ```spl
 index=curso earliest=0 latest=now
 | fieldsummary
 ```
 
-## Paso 5: metadatos
+#### Paso 5: metadatos
 
 ```spl
 index=curso earliest=0 latest=now
 | stats count by host source sourcetype
 ```
 
-## Paso 6: permisos
+#### Paso 6: permisos
 
 ```spl
 | rest /services/authentication/current-context
 | table username roles
 ```
 
-## Paso 7: SPL
+#### Paso 7: SPL
 
 Reduce la consulta a una versión mínima:
 
@@ -1095,7 +1095,7 @@ index=curso earliest=0 latest=now
 
 Después añade los filtros progresivamente.
 
-## Paso 8: objeto
+#### Paso 8: objeto
 
 Si la búsqueda funciona, pero el dashboard o la alerta no:
 
@@ -1109,65 +1109,65 @@ Si la búsqueda funciona, pero el dashboard o la alerta no:
 
 ---
 
-# 14. Plantilla de documentación de una búsqueda
+## 14. Plantilla de documentación de una búsqueda
 
 Cada búsqueda debe documentarse siguiendo esta estructura:
 
 ```markdown
-## Nombre
+#### Nombre
 
-### Objetivo
+###### Objetivo
 
 Describir la pregunta operativa.
 
-### SPL
+###### SPL
 
 ```spl
 index=curso earliest=-24h latest=now
 | stats count by host
 ```
 
-### Campos utilizados
+###### Campos utilizados
 
 - host
 
-### Intervalo temporal
+###### Intervalo temporal
 
 Últimas 24 horas.
 
-### Resultado esperado
+###### Resultado esperado
 
 Una tabla con el número de eventos por host.
 
-### Resultado observado
+###### Resultado observado
 
 Completar con el resultado real.
 
-### Interpretación
+###### Interpretación
 
 Explicar qué significa.
 
-### Limitaciones
+###### Limitaciones
 
 Indicar qué no puede demostrarse.
 
-### Fecha de validación
+###### Fecha de validación
 
 Completar.
 ```
 
 ---
 
-# 15. Plantilla de documentación de un panel
+## 15. Plantilla de documentación de un panel
 
 ```markdown
-## Panel: URI con más errores
+#### Panel: URI con más errores
 
-### Objetivo
+###### Objetivo
 
 Identificar las URI con mayor número de respuestas erróneas.
 
-### Consulta
+###### Consulta
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -1178,44 +1178,44 @@ index=curso earliest=-24h latest=now
 | head 10
 ```
 
-### Visualización
+###### Visualización
 
 Tabla o gráfico de barras.
 
-### Campos
+###### Campos
 
 - uri
 - status
 
-### Filtro temporal
+###### Filtro temporal
 
 Sí.
 
-### Interpretación
+###### Interpretación
 
 Las URI superiores concentran el mayor número absoluto de errores.
 
-### Limitaciones
+###### Limitaciones
 
 El resultado no mide latencia ni causa raíz.
 
-### Estado de la prueba
+###### Estado de la prueba
 
 Completar.
 ```
 
 ---
 
-# 16. Plantilla de documentación de una alerta
+## 16. Plantilla de documentación de una alerta
 
 ```markdown
-## Alerta: cinco HTTP 500 en cinco minutos
+#### Alerta: cinco HTTP 500 en cinco minutos
 
-### Objetivo
+###### Objetivo
 
 Detectar un volumen elevado de errores internos del servidor.
 
-### Consulta
+###### Consulta
 
 ```spl
 index=curso earliest=-5m latest=now
@@ -1224,40 +1224,40 @@ index=curso earliest=-5m latest=now
 | where errores_500>=5
 ```
 
-### Condición
+###### Condición
 
 errores_500 >= 5
 
-### Frecuencia
+###### Frecuencia
 
 Completar.
 
-### Acción
+###### Acción
 
 Completar.
 
-### Throttling
+###### Throttling
 
 Completar.
 
-### Prueba histórica
+###### Prueba histórica
 
 Indicar la consulta y el resultado.
 
-### Prueba en tiempo real
+###### Prueba en tiempo real
 
 Indicar cómo se generaron los eventos.
 
-### Limitaciones
+###### Limitaciones
 
 Indicar posibles falsos positivos, duplicados o retrasos de ingesta.
 ```
 
 ---
 
-# 17. Buenas prácticas del laboratorio
+## 17. Buenas prácticas del laboratorio
 
-## Utilizar siempre el índice correcto
+#### Utilizar siempre el índice correcto
 
 Recomendado:
 
@@ -1275,7 +1275,7 @@ salvo durante una investigación de diagnóstico justificada.
 
 ---
 
-## Incluir siempre un rango temporal
+#### Incluir siempre un rango temporal
 
 Recomendado:
 
@@ -1293,7 +1293,7 @@ La elección depende del objetivo.
 
 ---
 
-## Convertir los campos numéricos
+#### Convertir los campos numéricos
 
 Recomendado:
 
@@ -1307,7 +1307,7 @@ Recomendado:
 
 ---
 
-## No inventar campos
+#### No inventar campos
 
 Si no existe `clientip`, documenta la ausencia.
 
@@ -1315,7 +1315,7 @@ Si no existe `response_time`, no afirmes que una URI es más lenta.
 
 ---
 
-## Mantener los nombres originales
+#### Mantener los nombres originales
 
 Recomendado:
 
@@ -1327,14 +1327,14 @@ Esto conserva `status` para el diagnóstico.
 
 ---
 
-## Evitar búsquedas innecesariamente amplias
+#### Evitar búsquedas innecesariamente amplias
 
 No ejecutes búsquedas de años completos si solo necesitas los últimos quince
 minutos.
 
 ---
 
-## Documentar el contexto
+#### Documentar el contexto
 
 Cada búsqueda guardada debe indicar:
 
@@ -1347,7 +1347,7 @@ Cada búsqueda guardada debe indicar:
 
 ---
 
-## Probar antes de guardar
+#### Probar antes de guardar
 
 Una búsqueda debe ejecutarse manualmente antes de utilizarse en:
 
@@ -1358,7 +1358,7 @@ Una búsqueda debe ejecutarse manualmente antes de utilizarse en:
 
 ---
 
-## Separar laboratorio y producción
+#### Separar laboratorio y producción
 
 Los datasets de práctica deben identificarse claramente.
 
@@ -1366,9 +1366,9 @@ No envíes alertas reales a destinatarios de producción.
 
 ---
 
-# 18. Orden recomendado de las prácticas
+## 18. Orden recomendado de las prácticas
 
-## Práctica 1: comprobar el entorno
+#### Práctica 1: comprobar el entorno
 
 Objetivo:
 
@@ -1377,7 +1377,7 @@ Objetivo:
 - revisar puertos;
 - revisar versión.
 
-## Práctica 2: revisar el índice
+#### Práctica 2: revisar el índice
 
 Objetivo:
 
@@ -1385,7 +1385,7 @@ Objetivo:
 - comprobar estado;
 - revisar eventos.
 
-## Práctica 3: cargar el dataset
+#### Práctica 3: cargar el dataset
 
 Objetivo:
 
@@ -1394,7 +1394,7 @@ Objetivo:
 - configurar `sourcetype`;
 - validar la vista previa.
 
-## Práctica 4: validar los eventos
+#### Práctica 4: validar los eventos
 
 Objetivo:
 
@@ -1403,7 +1403,7 @@ Objetivo:
 - campos;
 - metadatos.
 
-## Práctica 5: construir búsquedas
+#### Práctica 5: construir búsquedas
 
 Objetivo:
 
@@ -1412,7 +1412,7 @@ Objetivo:
 - utilizar `where`;
 - utilizar `timechart`.
 
-## Práctica 6: analizar errores
+#### Práctica 6: analizar errores
 
 Objetivo:
 
@@ -1420,7 +1420,7 @@ Objetivo:
 - calcular porcentaje;
 - identificar URI y hosts.
 
-## Práctica 7: crear reportes
+#### Práctica 7: crear reportes
 
 Objetivo:
 
@@ -1428,7 +1428,7 @@ Objetivo:
 - definir frecuencia;
 - documentar audiencia.
 
-## Práctica 8: crear el dashboard
+#### Práctica 8: crear el dashboard
 
 Objetivo:
 
@@ -1436,7 +1436,7 @@ Objetivo:
 - configurar filtros;
 - comprobar visualizaciones.
 
-## Práctica 9: crear la alerta
+#### Práctica 9: crear la alerta
 
 Objetivo:
 
@@ -1445,7 +1445,7 @@ Objetivo:
 - probar datos históricos y recientes;
 - aplicar throttling.
 
-## Práctica 10: permisos y documentación
+#### Práctica 10: permisos y documentación
 
 Objetivo:
 
@@ -1456,11 +1456,11 @@ Objetivo:
 
 ---
 
-# 19. Criterios de calidad
+## 19. Criterios de calidad
 
 Una solución correcta debe ser:
 
-## Reproducible
+#### Reproducible
 
 Otra persona debe poder repetir:
 
@@ -1469,7 +1469,7 @@ Otra persona debe poder repetir:
 - la configuración;
 - las pruebas.
 
-## Interpretable
+#### Interpretable
 
 Los resultados deben incluir:
 
@@ -1479,7 +1479,7 @@ Los resultados deben incluir:
 - explicación;
 - contexto temporal.
 
-## Operativa
+#### Operativa
 
 El dashboard y las alertas deben ayudar a responder:
 
@@ -1489,7 +1489,7 @@ El dashboard y las alertas deben ayudar a responder:
 - qué componente está afectado;
 - qué acción investigar.
 
-## Honesta
+#### Honesta
 
 La solución debe diferenciar entre:
 
@@ -1499,7 +1499,7 @@ La solución debe diferenciar entre:
 - hipótesis;
 - causa raíz demostrada.
 
-## Segura
+#### Segura
 
 No debe exponer:
 
@@ -1512,7 +1512,7 @@ No debe exponer:
 
 ---
 
-# 20. Evidencias recomendadas
+## 20. Evidencias recomendadas
 
 Cada asistente debería conservar evidencias de:
 
@@ -1543,9 +1543,9 @@ No incluyas secretos ni datos personales en las capturas.
 
 ---
 
-# 21. Referencias oficiales
+## 21. Referencias oficiales
 
-## Splunk
+#### Splunk
 
 - [Splunk Enterprise Documentation](https://docs.splunk.com/Documentation/Splunk)
 - [Splunk Help](https://help.splunk.com/)
@@ -1563,14 +1563,14 @@ No incluyas secretos ni datos personales en las capturas.
 - [Splunk REST API Reference](https://docs.splunk.com/Documentation/Splunk/latest/RESTREF/RESTprolog)
 - [Troubleshooting](https://docs.splunk.com/Documentation/Splunk/latest/Troubleshooting/Aboutthismanual)
 
-## Ubuntu
+#### Ubuntu
 
 - [Ubuntu Server Documentation](https://documentation.ubuntu.com/server/)
 - [Systemd en Ubuntu](https://documentation.ubuntu.com/server/explanation/systemd/)
 
 ---
 
-# 22. Referencias de configuración
+## 22. Referencias de configuración
 
 - [`inputs.conf`](https://help.splunk.com/en/data-management/splunk-enterprise-admin-manual/10.4/configuration-file-reference/10.4.0-configuration-file-reference/inputs.conf)
 - [`indexes.conf`](https://help.splunk.com/en/data-management/splunk-enterprise-admin-manual/10.4/configuration-file-reference/10.4.0-configuration-file-reference/indexes.conf)
@@ -1582,9 +1582,9 @@ la estructura de aplicaciones existente.
 
 ---
 
-# 23. Lista de comprobación global
+## 23. Lista de comprobación global
 
-## Entorno
+#### Entorno
 
 - [ ] Splunk está instalado.
 - [ ] La versión está documentada.
@@ -1594,7 +1594,7 @@ la estructura de aplicaciones existente.
 - [ ] Los puertos necesarios están comprobados.
 - [ ] Se distingue el rol de Splunk de los permisos de Ubuntu.
 
-## Índice
+#### Índice
 
 - [ ] Existe el índice `curso`.
 - [ ] Está habilitado.
@@ -1602,7 +1602,7 @@ la estructura de aplicaciones existente.
 - [ ] Se conoce su finalidad.
 - [ ] Se ha documentado la retención.
 
-## Datos
+#### Datos
 
 - [ ] El dataset está disponible.
 - [ ] La estructura está documentada.
@@ -1611,7 +1611,7 @@ la estructura de aplicaciones existente.
 - [ ] Los campos obligatorios existen.
 - [ ] Las limitaciones están documentadas.
 
-## Ingesta
+#### Ingesta
 
 - [ ] La entrada está configurada.
 - [ ] El archivo es legible.
@@ -1620,7 +1620,7 @@ la estructura de aplicaciones existente.
 - [ ] No hay duplicación de entradas.
 - [ ] Los eventos aparecen en el índice.
 
-## SPL
+#### SPL
 
 - [ ] Las búsquedas incluyen índice.
 - [ ] Las búsquedas incluyen tiempo.
@@ -1629,7 +1629,7 @@ la estructura de aplicaciones existente.
 - [ ] Las consultas tienen un objetivo.
 - [ ] Los resultados están interpretados.
 
-## Dashboard
+#### Dashboard
 
 - [ ] Tiene al menos seis paneles.
 - [ ] Incluye una vista temporal.
@@ -1640,7 +1640,7 @@ la estructura de aplicaciones existente.
 - [ ] Se ha probado la opción `Todos`.
 - [ ] Se han revisado permisos.
 
-## Alertas
+#### Alertas
 
 - [ ] La consulta se ha probado manualmente.
 - [ ] La ventana temporal es correcta.
@@ -1651,7 +1651,7 @@ la estructura de aplicaciones existente.
 - [ ] Se ha probado con datos recientes.
 - [ ] El throttling está documentado.
 
-## Seguridad
+#### Seguridad
 
 - [ ] No se exponen credenciales.
 - [ ] No se exponen tokens.
@@ -1660,7 +1660,7 @@ la estructura de aplicaciones existente.
 - [ ] Los permisos están justificados.
 - [ ] Se diferencia admin de usuario final.
 
-## Documentación
+#### Documentación
 
 - [ ] Se incluyen consultas SPL.
 - [ ] Se incluyen resultados.
