@@ -46,7 +46,7 @@ asistente debe comprobar que:
 
 ---
 
-#### 1. Objetivos de aprendizaje
+## 1. Objetivos de aprendizaje
 
 Al trabajar con los datasets del curso, el asistente aprenderá a:
 
@@ -71,7 +71,7 @@ Splunk los datos originales en información consultable.
 
 ---
 
-#### 2. Dataset principal
+## 2. Dataset principal
 
 El dataset principal del laboratorio es:
 
@@ -106,7 +106,7 @@ eventos después de cargarlos.
 
 ---
 
-#### 3. Archivos disponibles
+## 3. Archivos disponibles
 
 El repositorio puede incluir los siguientes recursos:
 
@@ -147,7 +147,7 @@ El valor de `source` depende de cómo se haya configurado la entrada.
 
 ---
 
-#### 4. Generar un nuevo CSV de laboratorio
+## 4. Generar un nuevo CSV de laboratorio
 
 El dataset puede regenerarse en cualquier momento mediante Python. Esto permite:
 
@@ -160,7 +160,7 @@ El dataset puede regenerarse en cualquier momento mediante Python. Esto permite:
 La generación es determinista: con el mismo script se obtiene la misma
 estructura de datos.
 
-###### 4.1. Crear el script
+#### 4.1. Crear el script
 
 Desde la raíz del proyecto:
 
@@ -303,7 +303,7 @@ Eventos generados: 500
 Líneas totales: 501
 ```
 
-###### 4.2. Dar permisos de ejecución opcionales
+#### 4.2. Dar permisos de ejecución opcionales
 
 ```bash
 chmod +x tools/generar_eventos_web.py
@@ -317,7 +317,7 @@ También podrás ejecutarlo directamente:
 
 ---
 
-#### 5. Estructura temporal del dataset
+## 5. Estructura temporal del dataset
 
 Los eventos comienzan en:
 
@@ -366,17 +366,17 @@ latest="2026-01-01T09:00:00"
 
 ---
 
-#### 6. Validar el archivo generado
+## 6. Validar el archivo generado
 
 Antes de ingerir el CSV, comprueba que se ha creado correctamente.
 
-###### 6.1. Comprobar que existe
+#### 6.1. Comprobar que existe
 
 ```bash
 ls -lh docs/downloads/eventos_web.csv
 ```
 
-###### 6.2. Comprobar el tipo de archivo
+#### 6.2. Comprobar el tipo de archivo
 
 ```bash
 file docs/downloads/eventos_web.csv
@@ -388,7 +388,7 @@ Resultado aproximado:
 CSV text
 ```
 
-###### 6.3. Comprobar el número total de líneas
+#### 6.3. Comprobar el número total de líneas
 
 ```bash
 wc -l docs/downloads/eventos_web.csv
@@ -412,7 +412,7 @@ Resultado esperado:
 500
 ```
 
-###### 6.4. Revisar la cabecera y las primeras filas
+#### 6.4. Revisar la cabecera y las primeras filas
 
 ```bash
 head -n 10 docs/downloads/eventos_web.csv
@@ -433,7 +433,7 @@ timestamp,host,method,status,uri
 2026-01-01T00:08:00Z,web-01,GET,301,/checkout
 ```
 
-###### 6.5. Revisar las últimas filas
+#### 6.5. Revisar las últimas filas
 
 ```bash
 tail -n 10 docs/downloads/eventos_web.csv
@@ -446,7 +446,7 @@ Esto ayuda a detectar:
 - registros truncados;
 - problemas al final del archivo.
 
-###### 6.6. Buscar líneas vacías
+#### 6.6. Buscar líneas vacías
 
 ```bash
 grep -n '^$' docs/downloads/eventos_web.csv
@@ -456,7 +456,7 @@ Si no aparece ninguna salida, no se han detectado líneas vacías.
 
 ---
 
-#### 7. Validar la estructura con Python
+## 7. Validar la estructura con Python
 
 Puedes utilizar este pequeño script para comprobar que todas las filas tienen
 cinco columnas y que los códigos HTTP son numéricos.
@@ -558,11 +558,11 @@ Todos los códigos HTTP son válidos
 
 ---
 
-#### 8. Revisar la distribución del dataset
+## 8. Revisar la distribución del dataset
 
 Estas comprobaciones permiten conocer el contenido antes de ingerirlo.
 
-###### 8.1. Eventos por host
+#### 8.1. Eventos por host
 
 ```bash
 tail -n +2 docs/downloads/eventos_web.csv \
@@ -571,7 +571,7 @@ tail -n +2 docs/downloads/eventos_web.csv \
   | uniq -c
 ```
 
-###### 8.2. Eventos por método HTTP
+#### 8.2. Eventos por método HTTP
 
 ```bash
 tail -n +2 docs/downloads/eventos_web.csv \
@@ -580,7 +580,7 @@ tail -n +2 docs/downloads/eventos_web.csv \
   | uniq -c
 ```
 
-###### 8.3. Eventos por estado HTTP
+#### 8.3. Eventos por estado HTTP
 
 ```bash
 tail -n +2 docs/downloads/eventos_web.csv \
@@ -589,7 +589,7 @@ tail -n +2 docs/downloads/eventos_web.csv \
   | uniq -c
 ```
 
-###### 8.4. Validar el número de columnas
+#### 8.4. Validar el número de columnas
 
 ```bash
 awk -F',' 'NF != 5 {
@@ -599,7 +599,7 @@ awk -F',' 'NF != 5 {
 
 Si no aparece ninguna salida, todas las filas contienen cinco columnas.
 
-###### 8.5. Revisar con Python
+#### 8.5. Revisar con Python
 
 ```bash
 python3 - <<'PY'
@@ -621,7 +621,7 @@ PY
 
 ---
 
-#### 9. Copiar el dataset al entorno de Splunk
+## 9. Copiar el dataset al entorno de Splunk
 
 Para utilizar el archivo como entrada local, copia una versión de trabajo a una
 ruta destinada a los datos de laboratorio:
@@ -670,11 +670,11 @@ sudo -u splunk head -n 5 \
 
 ---
 
-#### 10. Estrategias de ingesta
+## 10. Estrategias de ingesta
 
 El archivo puede cargarse mediante varios métodos.
 
-###### 10.1. Upload desde Splunk Web
+#### 10.1. Upload desde Splunk Web
 
 Es el método más sencillo para una práctica inicial.
 
@@ -702,7 +702,7 @@ Index: curso
 Sourcetype: curso:web:csv
 ```
 
-###### 10.2. Monitor de archivo
+#### 10.2. Monitor de archivo
 
 El método `Monitor` resulta más apropiado para simular una entrada persistente.
 
@@ -728,7 +728,7 @@ La entrada debe definir:
 - comportamiento ante archivos existentes;
 - permisos de lectura.
 
-###### 10.3. Carga desde configuración
+#### 10.3. Carga desde configuración
 
 En un entorno administrado, la entrada puede configurarse mediante una app de
 Splunk y archivos como:
@@ -766,12 +766,12 @@ sourcetype = curso:web:csv
 
 ---
 
-#### 11. Comprobación de la ingesta
+## 11. Comprobación de la ingesta
 
 Después de cargar el archivo, no continúes directamente con un dashboard.
 Primero valida el resultado.
 
-###### 11.1. Contar eventos
+#### 11.1. Contar eventos
 
 ```spl
 index=curso earliest=0 latest=now
@@ -787,7 +787,7 @@ total_eventos = 500
 Si el resultado es superior a 500, revisa si el archivo se ha cargado más de una
 vez o si existe otra entrada monitorizando la misma ruta.
 
-###### 11.2. Revisar metadatos
+#### 11.2. Revisar metadatos
 
 ```spl
 index=curso earliest=0 latest=now
@@ -795,7 +795,7 @@ index=curso earliest=0 latest=now
 | sort - count
 ```
 
-###### 11.3. Revisar eventos individuales
+#### 11.3. Revisar eventos individuales
 
 ```spl
 index=curso earliest=0 latest=now
@@ -813,14 +813,14 @@ index=curso earliest=0 latest=now
 | head 20
 ```
 
-###### 11.4. Revisar los campos disponibles
+#### 11.4. Revisar los campos disponibles
 
 ```spl
 index=curso earliest=0 latest=now
 | fieldsummary
 ```
 
-###### 11.5. Revisar la distribución de campos
+#### 11.5. Revisar la distribución de campos
 
 ```spl
 index=curso earliest=0 latest=now
@@ -844,16 +844,16 @@ varios códigos HTTP
 
 ---
 
-#### 12. Consultas SPL iniciales
+## 12. Consultas SPL iniciales
 
-###### Contar eventos
+#### Contar eventos
 
 ```spl
 index=curso earliest=0 latest=now
 | stats count
 ```
 
-###### Eventos por host
+#### Eventos por host
 
 ```spl
 index=curso earliest=0 latest=now
@@ -861,7 +861,7 @@ index=curso earliest=0 latest=now
 | sort - count
 ```
 
-###### Eventos por método HTTP
+#### Eventos por método HTTP
 
 ```spl
 index=curso earliest=0 latest=now
@@ -869,7 +869,7 @@ index=curso earliest=0 latest=now
 | sort - count
 ```
 
-###### Eventos por código de estado
+#### Eventos por código de estado
 
 ```spl
 index=curso earliest=0 latest=now
@@ -878,7 +878,7 @@ index=curso earliest=0 latest=now
 | sort status_num
 ```
 
-###### URI más solicitadas
+#### URI más solicitadas
 
 ```spl
 index=curso earliest=0 latest=now
@@ -887,7 +887,7 @@ index=curso earliest=0 latest=now
 | head 10
 ```
 
-###### Errores HTTP
+#### Errores HTTP
 
 ```spl
 index=curso earliest=0 latest=now
@@ -897,7 +897,7 @@ index=curso earliest=0 latest=now
 | sort - errores
 ```
 
-###### URI con más errores
+#### URI con más errores
 
 ```spl
 index=curso earliest=0 latest=now
@@ -908,7 +908,7 @@ index=curso earliest=0 latest=now
 | head 10
 ```
 
-###### Evolución temporal
+#### Evolución temporal
 
 Como el dataset contiene un evento por minuto, utiliza:
 
@@ -926,7 +926,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-#### 13. Comparar el archivo con los eventos indexados
+## 13. Comparar el archivo con los eventos indexados
 
 El número de líneas y el número de eventos no siempre coinciden
 automáticamente. La diferencia puede deberse a:
@@ -987,12 +987,12 @@ index=curso earliest=0 latest=now
 
 ---
 
-#### 14. Control de duplicados
+## 14. Control de duplicados
 
 La carga repetida del mismo archivo puede producir eventos duplicados y alterar
 las estadísticas.
 
-###### 14.1. Buscar duplicados mediante una firma
+#### 14.1. Buscar duplicados mediante una firma
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1020,7 +1020,7 @@ index=curso earliest=0 latest=now
 | head 50
 ```
 
-###### 14.2. Buenas prácticas
+#### 14.2. Buenas prácticas
 
 - registra cuándo se cargó el archivo;
 - utiliza una carpeta de entrada controlada;
@@ -1032,12 +1032,12 @@ index=curso earliest=0 latest=now
 
 ---
 
-#### 15. Registro de la ingesta
+## 15. Registro de la ingesta
 
 Documenta cada carga mediante una plantilla como esta:
 
 ```markdown
-######## Registro de ingesta
+#### Registro de ingesta
 
 - Archivo: eventos_web.csv
 - Fecha de carga:
@@ -1067,51 +1067,51 @@ Este registro es especialmente útil cuando:
 
 ---
 
-#### 16. Flujo recomendado para repetir el laboratorio
+## 16. Flujo recomendado para repetir el laboratorio
 
 Para comenzar una práctica desde cero:
 
-###### Paso 1: regenerar el CSV
+#### Paso 1: regenerar el CSV
 
 ```bash
 python3 tools/generar_eventos_web.py
 ```
 
-###### Paso 2: validarlo
+#### Paso 2: validarlo
 
 ```bash
 python3 tools/validar_eventos_web.py
 ```
 
-###### Paso 3: copiarlo a la entrada de Splunk
+#### Paso 3: copiarlo a la entrada de Splunk
 
 ```bash
 sudo cp docs/downloads/eventos_web.csv \
   /var/lib/splunk-inputs/eventos_web.csv
 ```
 
-###### Paso 4: comprobar permisos
+#### Paso 4: comprobar permisos
 
 ```bash
 sudo -u splunk head -n 3 \
   /var/lib/splunk-inputs/eventos_web.csv
 ```
 
-###### Paso 5: comprobar la entrada
+#### Paso 5: comprobar la entrada
 
 ```bash
 sudo /opt/splunk/bin/splunk btool inputs list --debug \
   | grep -A 15 -B 5 'eventos_web.csv'
 ```
 
-###### Paso 6: validar la ingesta
+#### Paso 6: validar la ingesta
 
 ```spl
 index=curso earliest=0 latest=now
 | stats count by source sourcetype
 ```
 
-###### Paso 7: analizar los datos
+#### Paso 7: analizar los datos
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1122,7 +1122,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-#### 17. Criterios de validación antes de continuar
+## 17. Criterios de validación antes de continuar
 
 Antes de pasar a estadísticas, dashboards o alertas, confirma:
 
