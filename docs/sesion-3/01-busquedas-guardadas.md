@@ -196,9 +196,3 @@ index=curso
 - [Permisos de objetos de conocimiento](https://docs.splunk.com/Documentation/Splunk/latest/Knowledge/Knowledgeobjectpermissions)
 - [Job Inspector](https://docs.splunk.com/Documentation/Splunk/latest/Search/JobInspector)
 - [Buenas prácticas de búsquedas](https://docs.splunk.com/Documentation/Splunk/latest/Search/Writebetterqueries)
-
-## Siguiente paso
-
-Cuando puedas crear, validar y compartir una búsqueda con permisos correctos,
-continúa con [Reportes](02-reportes.md) para convertir sus resultados en una
-salida periódica y fácil de interpretar.

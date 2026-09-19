@@ -260,9 +260,3 @@ Antes de publicar un filtro:
 - [Permisos de objetos de conocimiento](https://docs.splunk.com/Documentation/Splunk/latest/Knowledge/Knowledgeobjectpermissions)
 - [Comando `search`](https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/Search)
 - [Job Inspector](https://docs.splunk.com/Documentation/Splunk/latest/Search/JobInspector)
-
-## Siguiente paso
-
-Cuando puedas conectar controles con búsquedas y validar sus estados, continúa
-con [Alertas](06-alertas.md) para aprender a detectar condiciones que requieren
-una reacción automática o una notificación.

@@ -227,9 +227,3 @@ la instancia. Aplica estas medidas:
 - [Permisos de objetos de conocimiento](https://docs.splunk.com/Documentation/Splunk/latest/Knowledge/Knowledgeobjectpermissions)
 - [Job Inspector](https://docs.splunk.com/Documentation/Splunk/latest/Search/JobInspector)
 - [Buenas prácticas de búsquedas](https://docs.splunk.com/Documentation/Splunk/latest/Search/Writebetterqueries)
-
-## Siguiente paso
-
-Cuando puedas crear un reporte reproducible y elegir su visualización,
-continúa con [Visualizaciones](03-visualizaciones.md) para profundizar en cómo
-comunicar tendencias, comparaciones y excepciones.

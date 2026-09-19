@@ -301,8 +301,3 @@ El laboratorio se considera completado cuando puedes:
 - [Throttling de alertas](https://docs.splunk.com/Documentation/Splunk/latest/Alert/ThrottleAlerts)
 - [Permisos de objetos de conocimiento](https://docs.splunk.com/Documentation/Splunk/latest/Knowledge/Knowledgeobjectpermissions)
 - [Job Inspector](https://docs.splunk.com/Documentation/Splunk/latest/Search/JobInspector)
-
-## Siguiente paso
-
-Cuando hayas completado los laboratorios, continúa con [Repaso](09-repaso.md)
-para comprobar que puedes explicar y defender las decisiones tomadas.

@@ -197,9 +197,3 @@ Estás preparado para el [proyecto final](../proyecto/index.md) si puedes:
 - [Roles y capacidades](https://docs.splunk.com/Documentation/Splunk/latest/Security/Rolesandcapabilities)
 - [Job Inspector](https://docs.splunk.com/Documentation/Splunk/latest/Search/JobInspector)
 - [Buenas prácticas de búsquedas](https://docs.splunk.com/Documentation/Splunk/latest/Search/Writebetterqueries)
-
-## Siguiente paso
-
-Cuando hayas completado esta validación, continúa con el [proyecto
-final](../proyecto/index.md) y aplica el mismo método a un caso de
-monitorización más amplio, con entregables y evaluación independientes.

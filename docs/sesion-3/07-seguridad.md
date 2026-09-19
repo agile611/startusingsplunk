@@ -238,9 +238,4 @@ causa y crear un riesgo mayor.
 - [Índice de auditoría](https://docs.splunk.com/Documentation/Splunk/latest/Security/Auditindex)
 - [Seguridad de dashboards](https://docs.splunk.com/Documentation/Splunk/latest/Viz/ShareDashboards)
 - [Modelo de seguridad de Splunk](https://docs.splunk.com/Documentation/Splunk/latest/Security/AboutSplunksecurity)
-
-## Siguiente paso
-
-Cuando puedas configurar permisos y validar el acceso con distintos roles,
-continúa con [Laboratorios](08-laboratorios.md) para practicar la creación y
 revisión segura de dashboards, reportes y alertas.

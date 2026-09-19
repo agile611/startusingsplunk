@@ -248,9 +248,3 @@ resultados o notificaciones inesperadas.
 - [Throttling de alertas](https://docs.splunk.com/Documentation/Splunk/latest/Alert/ThrottleAlerts)
 - [Permisos de objetos de conocimiento](https://docs.splunk.com/Documentation/Splunk/latest/Knowledge/Knowledgeobjectpermissions)
 - [Job Inspector](https://docs.splunk.com/Documentation/Splunk/latest/Search/JobInspector)
-
-## Siguiente paso
-
-Cuando puedas crear y probar una alerta con una condición clara, continúa con
-[Administración y seguridad](07-seguridad.md) para revisar permisos, roles y
-responsabilidades de los objetos que acabas de publicar.

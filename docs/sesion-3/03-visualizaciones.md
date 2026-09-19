@@ -259,9 +259,3 @@ compartan el mismo filtro.
 - [Comando `chart`](https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/Chart)
 - [Comando `stats`](https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/Stats)
 - [Job Inspector](https://docs.splunk.com/Documentation/Splunk/latest/Search/JobInspector)
-
-## Siguiente paso
-
-Cuando puedas preparar y validar una visualización, continúa con
-[Dashboards](04-dashboards.md) para organizar varios indicadores, gráficos y
-filtros en una vista operativa.

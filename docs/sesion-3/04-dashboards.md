@@ -289,9 +289,3 @@ Los paneles de resumen deben ser coherentes con esta consulta para el mismo
 - [Permisos de objetos de conocimiento](https://docs.splunk.com/Documentation/Splunk/latest/Knowledge/Knowledgeobjectpermissions)
 - [Job Inspector](https://docs.splunk.com/Documentation/Splunk/latest/Search/JobInspector)
 - [Buenas prácticas de búsquedas](https://docs.splunk.com/Documentation/Splunk/latest/Search/Writebetterqueries)
-
-## Siguiente paso
-
-Cuando puedas construir un dashboard con paneles coherentes y filtros válidos,
-continúa con [Filtros y tokens](05-filtros-tokens.md) para profundizar en la
-interacción del usuario con la vista.
