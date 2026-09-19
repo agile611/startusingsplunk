@@ -238,9 +238,3 @@ ha eliminado eventos sin una razón conocida.
 - [Comando `transaction`](https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/Transaction)
 - [Comando `foreach`](https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/Foreach)
 - [Buenas prácticas de búsquedas](https://docs.splunk.com/Documentation/Splunk/latest/Search/Writebetterqueries)
-
-## Siguiente paso
-
-Cuando puedas elegir el comando adecuado y validar su coste, continúa con
-[Rendimiento](10-rendimiento.md). Allí aprenderás a optimizar búsquedas para
-que sean rápidas, reproducibles y adecuadas para un entorno administrado.

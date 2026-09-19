@@ -285,9 +285,3 @@ eventos después de cualquier cambio y documenta el resultado.
 - [Comando `rename`](https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/Rename)
 - [Comando `fillnull`](https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/Fillnull)
 - [Comando `spath`](https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/Spath)
-
-## Siguiente paso
-
-Cuando puedas identificar y validar los campos de un evento, continúa con
-[Filtrado de eventos](05-filtrado.md). El filtrado será más preciso si sabes
-qué campo estás utilizando, de dónde procede y qué valores puede contener.

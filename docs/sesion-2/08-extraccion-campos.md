@@ -232,9 +232,3 @@ aislada sin confirmar el impacto en otras búsquedas y aplicaciones.
 - [Objetos de conocimiento](https://docs.splunk.com/Documentation/Splunk/latest/Knowledge/Aboutknowledgeobjects)
 - [Referencia de `props.conf`](https://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf)
 - [Referencia de `transforms.conf`](https://docs.splunk.com/Documentation/Splunk/latest/Admin/Transformsconf)
-
-## Siguiente paso
-
-Cuando puedas extraer y validar campos de fuentes diferentes, continúa con
-[Comandos avanzados](09-comandos-avanzados.md). Allí podrás enriquecer y
-combinar resultados para investigaciones más completas.

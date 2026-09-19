@@ -267,9 +267,3 @@ de sintaxis o un rango temporal incorrecto.
 - [Comando `rex`](https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/Rex)
 - [Job Inspector](https://docs.splunk.com/Documentation/Splunk/latest/Search/JobInspector)
 - [Buenas prácticas de búsquedas](https://docs.splunk.com/Documentation/Splunk/latest/Search/Writebetterqueries)
-
-## Siguiente paso
-
-Después de este reto, utiliza el [proyecto final](../proyecto/index.md) para
-aplicar el mismo método a un caso más amplio, con entregables y evaluación
-independientes.

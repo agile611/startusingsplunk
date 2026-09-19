@@ -270,9 +270,3 @@ Aplica este método a una consulta lenta:
 - [Comando `stats`](https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/Stats)
 - [Comando `timechart`](https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/Timechart)
 - [Monitorización de búsquedas](https://docs.splunk.com/Documentation/Splunk/latest/Monitor/MonitoringConsole)
-
-## Siguiente paso
-
-Cuando puedas escribir y optimizar búsquedas reproducibles, continúa con
-[Laboratorios](11-laboratorios.md) para practicar el flujo completo sobre los
-datos del curso.

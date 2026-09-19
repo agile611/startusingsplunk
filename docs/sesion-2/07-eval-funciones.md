@@ -297,9 +297,3 @@ index=curso
 - [Funciones de fecha y hora](https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/Dateandtimefunctions)
 - [Funciones matemáticas](https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/MathematicalFunctions)
 - [Comando `where`](https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/Where)
-
-## Siguiente paso
-
-Cuando puedas crear y validar campos calculados, continúa con [Extracción de
-campos](08-extraccion-campos.md). Allí aprenderás a obtener campos desde el
-contenido original cuando Splunk no los haya extraído automáticamente.

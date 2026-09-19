@@ -314,9 +314,3 @@ El laboratorio se considera completado cuando puedes:
 - [Comando `timechart`](https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/Timechart)
 - [Buenas prácticas de búsquedas](https://docs.splunk.com/Documentation/Splunk/latest/Search/Writebetterqueries)
 - [Job Inspector](https://docs.splunk.com/Documentation/Splunk/latest/Search/JobInspector)
-
-## Siguiente paso
-
-Cuando hayas completado estos ejercicios, continúa con el [Reto
-práctico](12-reto.md). Allí tendrás que decidir por ti mismo qué consultas,
-campos y validaciones necesitas para resolver un caso completo.

@@ -313,9 +313,3 @@ de cambiar la función estadística.
 - [Comando `chart`](https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/Chart)
 - [Comando `top`](https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/Top)
 - [Funciones estadísticas](https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/Statisticalfunctions)
-
-## Siguiente paso
-
-Cuando puedas resumir eventos y validar las métricas obtenidas, continúa con
-[Eval y funciones](07-eval-funciones.md). Allí aprenderás a crear campos
-calculados y a preparar expresiones más avanzadas para tus estadísticas.
