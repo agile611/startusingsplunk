@@ -84,16 +84,11 @@ pueden consultar de forma fiable.
 
 ## Referencias y recursos recomendados
 
-- Documentación general de Splunk:
-  https://docs.splunk.com/Documentation/Splunk
-- Guía de administración general:
-  https://docs.splunk.com/Documentation/Splunk/latest/Admin/Welcome-to-Admin
-- Documentación sobre fuentes y entradas:
-  https://docs.splunk.com/Documentation/Splunk/latest/Data/Whatissource
-- Documentación sobre índices:
-  https://docs.splunk.com/Documentation/Splunk/latest/Indexer/Aboutindexes
-- Guía de uso de Splunk Web:
-  https://docs.splunk.com/Documentation/Splunk/latest/User/UsingSplunkWeb
+- [Documentación general de Splunk](https://docs.splunk.com/Documentation/Splunk)
+- [Guía de administración general](https://docs.splunk.com/Documentation/Splunk/latest/Admin/Welcome-to-Admin)
+- [Documentación sobre fuentes y entradas](https://docs.splunk.com/Documentation/Splunk/latest/Data/Whatissource)
+- [Documentación sobre índices](https://docs.splunk.com/Documentation/Splunk/latest/Indexer/Aboutindexes)
+- [Guía de uso de Splunk Web](https://docs.splunk.com/Documentation/Splunk/latest/User/UsingSplunkWeb)
 
 ## Recomendación final
 
