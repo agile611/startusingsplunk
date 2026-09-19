@@ -191,14 +191,10 @@ flujo: buscar, filtrar, resumir, analizar y compartir resultados.
 Para profundizar en la interfaz y en la práctica de administración de Splunk,
 estas son referencias oficiales útiles:
 
-- Información general sobre Splunk Web:
-  https://docs.splunk.com/Documentation/Splunk/latest/User/UsingSplunkWeb
-- Guía de búsqueda y análisis:
-  https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/Overview
-- Configuración y administración:
-  https://docs.splunk.com/Documentation/Splunk/latest/Admin/Welcome-to-Admin
-- Monitorización y estado de la instancia:
-  https://docs.splunk.com/Documentation/Splunk/latest/Admin/MonitoringConsole
+- [Información general sobre Splunk Web](https://docs.splunk.com/Documentation/Splunk/latest/User/UsingSplunkWeb)
+- [Guía de búsqueda y análisis](https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/Overview)
+- [Configuración y administración](https://docs.splunk.com/Documentation/Splunk/latest/Admin/Welcome-to-Admin)
+- [Monitorización y estado de la instancia](https://docs.splunk.com/Documentation/Splunk/latest/Admin/MonitoringConsole)
 
 También puedes relacionar este documento con:
 
