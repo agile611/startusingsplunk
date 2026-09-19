@@ -246,111 +246,7 @@ Cada consulta del curso debe documentar:
 
 ---
 
-## 4. El dataset del curso
-
-En el laboratorio se utiliza principalmente el índice:
-
-```text
-curso
-```
-
-El dataset básico se denomina:
-
-```text
-eventos_web.csv
-```
-
-#### 4.1 Campos mínimos
-
-El dataset mínimo contiene:
-
-```text
-timestamp
-host
-method
-status
-uri
-```
-
-Ejemplo:
-
-```text
-timestamp,host,method,status,uri
-2026-01-01T00:00:00Z,web-01,GET,200,/login
-2026-01-01T00:01:00Z,web-01,GET,404,/missing
-2026-01-01T00:02:00Z,web-02,POST,500,/api/users
-```
-
-#### 4.2 Campos ampliados
-
-Algunas actividades requieren una fuente ampliada con:
-
-```text
-client_ip
-response_time
-user_agent
-bytes
-referer
-```
-
-Ejemplo:
-
-```text
-timestamp,host,method,status,uri,client_ip,response_time,user_agent,bytes,referer
-2026-01-01T00:00:00Z,web-01,GET,200,/,192.0.2.10,120,Mozilla,1536,-
-2026-01-01T00:01:00Z,web-01,GET,404,/missing,192.0.2.11,85,Mozilla,512,-
-2026-01-01T00:02:00Z,web-02,POST,500,/api/users,192.0.2.12,2100,curl,256,-
-```
-
-#### 4.3 Limitaciones del dataset
-
-No se deben inventar métricas que los datos no permitan calcular.
-
-Si no existe `client_ip`, documenta:
-
-> El dataset no contiene una IP de origen. No es posible realizar un análisis
-> fiable por cliente. Se utiliza `host` como dimensión alternativa.
-
-Si no existe `response_time`, documenta:
-
-> El dataset no contiene un tiempo de respuesta. No es posible determinar qué URI
-> es más lenta. Se utiliza como alternativa la URI con más errores.
-
-#### 4.4 Fechas del dataset
-
-El dataset de referencia contiene eventos del:
-
-```text
-1 de enero de 2026
-```
-
-Por tanto, una búsqueda relativa como:
-
-```spl
-index=curso earliest=-24h latest=now
-```
-
-puede no devolver resultados si se ejecuta después de esa fecha.
-
-Para validar el dataset histórico, utiliza:
-
-```spl
-index=curso
-earliest="01/01/2026:00:00:00"
-latest="01/01/2026:23:59:59"
-| stats count
-```
-
-O, para una primera comprobación controlada:
-
-```spl
-index=curso earliest=0 latest=now
-| stats count
-```
-
----
-
-## 5. Flujo principal de trabajo
+## 4. Flujo principal de trabajo
 
 Utiliza esta secuencia en todas las prácticas:
 
@@ -441,7 +337,7 @@ Prueba con el rol final y documenta las limitaciones.
 
 ---
 
-## 6. Programa detallado
+## 5. Programa detallado
 
 #### Sesión 1: fundamentos e ingestión
 
@@ -623,7 +519,7 @@ Convertir las búsquedas en objetos reutilizables y operativos.
 
 ---
 
-## 7. Metodología
+## 6. Metodología
 
 Cada sesión combina:
 
@@ -636,7 +532,7 @@ Cada sesión combina:
 - documentación técnica;
 - proyecto final.
 
-#### 7.1 Demostración
+#### 6.1 Demostración
 
 El instructor mostrará:
 
@@ -647,17 +543,17 @@ El instructor mostrará:
 - los errores habituales;
 - la forma de validar.
 
-#### 7.2 Laboratorio guiado
+#### 6.2 Laboratorio guiado
 
 Los asistentes repetirán el procedimiento en su propia instancia.
 
 Cada práctica debe dejar una evidencia.
 
-#### 7.3 Ejercicio individual
+#### 6.3 Ejercicio individual
 
 El asistente modificará una consulta o resolverá un caso de forma autónoma.
 
-#### 7.4 Reto de análisis
+#### 6.4 Reto de análisis
 
 Se plantea una pregunta operativa sin proporcionar directamente la consulta.
 
@@ -675,7 +571,7 @@ El asistente debe:
 
 ---
 
-## 8. Referencias oficiales
+## 7. Referencias oficiales
 
 #### Documentación general
 
@@ -744,7 +640,7 @@ El asistente debe:
 
 ---
 
-## 9. Nota sobre licencias y versiones
+## 8. Nota sobre licencias y versiones
 
 La disponibilidad de funciones, límites y opciones puede depender de:
 
@@ -768,7 +664,7 @@ oficial.
 
 ---
 
-## 10. Resultado esperado del curso
+## 9. Resultado esperado del curso
 
 Al finalizar, cada asistente debe ser capaz de explicar el recorrido completo de
 un evento:
