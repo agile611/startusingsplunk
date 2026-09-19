@@ -26,9 +26,9 @@ necesitar modificar manualmente la SPL.
 
 ---
 
-# 1. Requisitos de plataforma
+## 1. Requisitos de plataforma
 
-## 1.1 Producto y sistema operativo
+#### 1.1 Producto y sistema operativo
 
 El proyecto requiere:
 
@@ -57,7 +57,7 @@ expresamente en la actividad.
 
 ---
 
-## 1.2 Acceso a Splunk Web
+#### 1.2 Acceso a Splunk Web
 
 Comprueba que Splunk Web responde en:
 
@@ -87,7 +87,7 @@ El acceso a Splunk Web debe permitir, como mínimo:
 
 ---
 
-## 1.3 Usuario y permisos
+#### 1.3 Usuario y permisos
 
 El proyecto recomienda utilizar un usuario con rol `admin` o con capacidades
 equivalentes durante la fase de preparación.
@@ -108,7 +108,7 @@ El usuario de trabajo debe poder realizar, según las necesidades del laboratori
 - revisar usuarios y roles;
 - comprobar permisos de lectura y modificación.
 
-### Diferencia entre los permisos de Ubuntu y Splunk
+###### Diferencia entre los permisos de Ubuntu y Splunk
 
 El rol de Splunk y los permisos del sistema operativo son independientes.
 
@@ -127,11 +127,11 @@ administrativo dentro de Splunk.
 
 ---
 
-# 2. Comprobación de la instancia
+## 2. Comprobación de la instancia
 
 Antes de comenzar el proyecto, comprueba que el servicio de Splunk está disponible.
 
-## 2.1 Comprobar la versión
+#### 2.1 Comprobar la versión
 
 Desde la terminal de Ubuntu:
 
@@ -149,7 +149,7 @@ Ejemplo:
 Splunk Enterprise 10.4.3
 ```
 
-## 2.2 Comprobar el servicio mediante systemd
+#### 2.2 Comprobar el servicio mediante systemd
 
 ```bash
 sudo systemctl status Splunkd
@@ -163,7 +163,7 @@ Si la instalación no utiliza una unidad `systemd` con ese nombre, utiliza:
 sudo /opt/splunk/bin/splunk status
 ```
 
-## 2.3 Comprobar Splunk Web
+#### 2.3 Comprobar Splunk Web
 
 Desde la terminal:
 
@@ -179,7 +179,7 @@ http://localhost:8000
 
 La respuesta debe indicar que Splunk Web está disponible.
 
-## 2.4 Comprobar el puerto de administración
+#### 2.4 Comprobar el puerto de administración
 
 ```bash
 sudo ss -lntp | grep -E '8000|8089|9997'
@@ -201,7 +201,7 @@ operaciones internas de Splunk.
 
 ---
 
-# 3. Comprobación del usuario en Splunk
+## 3. Comprobación del usuario en Splunk
 
 El proyecto debe documentar el usuario o rol utilizado para configurar y validar
 la solución.
@@ -241,9 +241,9 @@ El proyecto debe distinguir entre:
 
 ---
 
-# 4. Índice del proyecto
+## 4. Índice del proyecto
 
-## 4.1 Índice recomendado
+#### 4.1 Índice recomendado
 
 El proyecto utiliza preferentemente el índice:
 
@@ -263,7 +263,7 @@ index=curso
 No se recomienda utilizar `index=*` salvo para diagnósticos puntuales y
 documentados.
 
-## 4.2 Índice alternativo
+#### 4.2 Índice alternativo
 
 Si creas otro índice, por ejemplo:
 
@@ -296,7 +296,7 @@ index=proyecto_web
 
 sin explicar la razón.
 
-## 4.3 Información que debe documentarse
+#### 4.3 Información que debe documentarse
 
 Si utilizas un índice distinto de `curso`, documenta:
 
@@ -311,7 +311,7 @@ Si utilizas un índice distinto de `curso`, documenta:
 - fecha de creación;
 - capacidad de consulta del usuario final.
 
-## 4.4 Comprobar que el índice existe
+#### 4.4 Comprobar que el índice existe
 
 ```spl
 | rest /services/data/indexes
@@ -336,9 +336,9 @@ El índice debe estar disponible y habilitado.
 
 ---
 
-# 5. Requisitos del dataset
+## 5. Requisitos del dataset
 
-## 5.1 Contenido mínimo
+#### 5.1 Contenido mínimo
 
 El dataset debe contener eventos web suficientes para practicar:
 
@@ -365,7 +365,7 @@ Con esta estructura se pueden realizar los análisis básicos de:
 - errores;
 - evolución temporal.
 
-## 5.2 Estructura ampliada
+#### 5.2 Estructura ampliada
 
 Para completar todos los análisis recomendados, se aconseja añadir:
 
@@ -381,7 +381,7 @@ La estructura ampliada permite analizar:
 - IP con más errores;
 - relación entre error y cliente.
 
-## 5.3 Campos opcionales
+#### 5.3 Campos opcionales
 
 Los siguientes campos son recomendables, pero no son obligatorios para que el
 proyecto sea válido:
@@ -399,7 +399,7 @@ El participante no debe inventar valores para campos que no existan.
 Si el dataset no contiene IP o latencia, se debe documentar la limitación y utilizar
 una alternativa válida.
 
-## 5.4 Equivalencia de nombres
+#### 5.4 Equivalencia de nombres
 
 Si el archivo utiliza otros nombres, documenta la equivalencia:
 
@@ -414,7 +414,7 @@ Si el archivo utiliza otros nombres, documenta la equivalencia:
 | Código HTTP | `status`, `status_code`, `http_status` |
 | Agente de usuario | `user_agent`, `http_user_agent` |
 
-## 5.5 Campos necesarios para análisis específicos
+#### 5.5 Campos necesarios para análisis específicos
 
 Los campos `clientip` y `response_time` no son obligatorios para la validación
 básica del proyecto.
@@ -434,7 +434,7 @@ Si no existen:
 - utiliza un análisis alternativo;
 - documenta la ausencia del campo.
 
-### Alternativa si no existe IP
+###### Alternativa si no existe IP
 
 Utiliza:
 
@@ -453,7 +453,7 @@ index=curso earliest=0 latest=now
 | head 10
 ```
 
-### Alternativa si no existe latencia
+###### Alternativa si no existe latencia
 
 Utiliza:
 
@@ -474,7 +474,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-# 6. Ingesta del dataset
+## 6. Ingesta del dataset
 
 El dataset debe estar disponible en Splunk y ser consultable mediante:
 
@@ -493,7 +493,7 @@ La forma concreta de ingerir los datos puede variar según el laboratorio:
 
 Documenta el método utilizado.
 
-## 6.1 Información que debe documentarse
+#### 6.1 Información que debe documentarse
 
 - nombre del archivo;
 - ubicación de la fuente;
@@ -507,14 +507,14 @@ Documenta el método utilizado.
 - rango temporal de los eventos;
 - número de eventos ingeridos.
 
-## 6.2 Validación básica de la ingesta
+#### 6.2 Validación básica de la ingesta
 
 ```spl
 index=curso earliest=0 latest=now
 | stats count min(_time) as inicio max(_time) as fin
 ```
 
-## 6.3 Validación de metadatos
+#### 6.3 Validación de metadatos
 
 ```spl
 index=curso earliest=0 latest=now
@@ -522,7 +522,7 @@ index=curso earliest=0 latest=now
 | sort - count
 ```
 
-## 6.4 Validación del contenido
+#### 6.4 Validación del contenido
 
 ```spl
 index=curso earliest=0 latest=now
@@ -530,7 +530,7 @@ index=curso earliest=0 latest=now
 | head 20
 ```
 
-## 6.5 Validación de campos opcionales
+#### 6.5 Validación de campos opcionales
 
 ```spl
 index=curso earliest=0 latest=now
@@ -540,19 +540,19 @@ index=curso earliest=0 latest=now
 
 ---
 
-# 7. Validación inicial de los datos
+## 7. Validación inicial de los datos
 
 Antes de crear búsquedas guardadas, reportes, dashboards o alertas, debes validar
 los datos.
 
-## 7.1 Número de eventos
+#### 7.1 Número de eventos
 
 ```spl
 index=curso earliest=0 latest=now
 | stats count as total_eventos
 ```
 
-## 7.2 Primer y último evento
+#### 7.2 Primer y último evento
 
 ```spl
 index=curso earliest=0 latest=now
@@ -561,7 +561,7 @@ index=curso earliest=0 latest=now
 | eval ultimo_evento=strftime(ultimo_evento, "%Y-%m-%d %H:%M:%S")
 ```
 
-## 7.3 Comparar `_time` e `_indextime`
+#### 7.3 Comparar `_time` e `_indextime`
 
 ```spl
 index=curso earliest=0 latest=now
@@ -572,7 +572,7 @@ index=curso earliest=0 latest=now
 
 Esta comprobación es especialmente importante cuando se utilizan datos históricos.
 
-## 7.4 Metadatos de ingesta
+#### 7.4 Metadatos de ingesta
 
 ```spl
 index=curso earliest=0 latest=now
@@ -580,7 +580,7 @@ index=curso earliest=0 latest=now
 | sort - count
 ```
 
-## 7.5 Campos principales
+#### 7.5 Campos principales
 
 ```spl
 index=curso earliest=0 latest=now
@@ -588,14 +588,14 @@ index=curso earliest=0 latest=now
 | head 20
 ```
 
-## 7.6 Resumen de campos
+#### 7.6 Resumen de campos
 
 ```spl
 index=curso earliest=0 latest=now
 | fieldsummary
 ```
 
-## 7.7 Valores del código HTTP
+#### 7.7 Valores del código HTTP
 
 ```spl
 index=curso earliest=0 latest=now
@@ -603,7 +603,7 @@ index=curso earliest=0 latest=now
 | sort - count
 ```
 
-## 7.8 Conversión numérica del código HTTP
+#### 7.8 Conversión numérica del código HTTP
 
 ```spl
 index=curso earliest=0 latest=now
@@ -627,13 +627,13 @@ Si estas consultas no devuelven resultados, no continúes con el dashboard. Revi
 
 ---
 
-# 8. Requisitos funcionales
+## 8. Requisitos funcionales
 
 El proyecto debe incluir los siguientes elementos funcionales.
 
 ---
 
-## 8.1 Índice
+#### 8.1 Índice
 
 Utiliza un índice específico para el proyecto:
 
@@ -662,7 +662,7 @@ Comprueba que existe:
 
 ---
 
-## 8.2 Dataset ingerido
+#### 8.2 Dataset ingerido
 
 El dataset debe estar disponible en Splunk y ser consultable mediante:
 
@@ -691,7 +691,7 @@ También debes documentar:
 
 ---
 
-## 8.3 Cinco búsquedas SPL
+#### 8.3 Cinco búsquedas SPL
 
 Cada búsqueda debe incluir:
 
@@ -715,14 +715,14 @@ Se recomienda incluir estas cinco búsquedas:
 4. errores HTTP `500`;
 5. evolución temporal.
 
-### Búsqueda recomendada: volumen
+###### Búsqueda recomendada: volumen
 
 ```spl
 index=curso earliest=0 latest=now
 | stats count as total_peticiones
 ```
 
-### Búsqueda recomendada: porcentaje de error
+###### Búsqueda recomendada: porcentaje de error
 
 ```spl
 index=curso earliest=0 latest=now
@@ -736,7 +736,7 @@ index=curso earliest=0 latest=now
 )
 ```
 
-### Búsqueda recomendada: errores por URI
+###### Búsqueda recomendada: errores por URI
 
 ```spl
 index=curso earliest=0 latest=now
@@ -747,7 +747,7 @@ index=curso earliest=0 latest=now
 | head 10
 ```
 
-### Búsqueda recomendada: errores HTTP 500
+###### Búsqueda recomendada: errores HTTP 500
 
 ```spl
 index=curso earliest=0 latest=now
@@ -757,7 +757,7 @@ index=curso earliest=0 latest=now
 | sort - errores_500
 ```
 
-### Búsqueda recomendada: evolución temporal
+###### Búsqueda recomendada: evolución temporal
 
 ```spl
 index=curso earliest=0 latest=now
@@ -768,7 +768,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## 8.4 Dos reportes
+#### 8.4 Dos reportes
 
 Los reportes deben tener:
 
@@ -784,7 +784,7 @@ Los reportes deben tener:
 - interpretación;
 - limitaciones.
 
-### Reporte recomendado 1: errores por URI
+###### Reporte recomendado 1: errores por URI
 
 ```spl
 index=curso earliest=0 latest=now
@@ -795,7 +795,7 @@ index=curso earliest=0 latest=now
 | head 10
 ```
 
-### Reporte recomendado 2: evolución de peticiones y errores
+###### Reporte recomendado 2: evolución de peticiones y errores
 
 ```spl
 index=curso earliest=0 latest=now
@@ -806,7 +806,7 @@ index=curso earliest=0 latest=now
 
 ---
 
-## 8.5 Dashboard
+#### 8.5 Dashboard
 
 El dashboard debe tener como mínimo seis paneles.
 
@@ -836,14 +836,14 @@ Cada panel debe documentar:
 
 ---
 
-## 8.6 Dos filtros
+#### 8.6 Dos filtros
 
 Debes incluir al menos:
 
 - un filtro temporal;
 - un filtro por host, código HTTP, URI, método o IP.
 
-### Filtro temporal
+###### Filtro temporal
 
 Debe permitir analizar diferentes intervalos.
 
@@ -856,7 +856,7 @@ Ejemplos:
 Intervalo absoluto del laboratorio
 ```
 
-### Filtro adicional
+###### Filtro adicional
 
 Puede ser:
 
@@ -881,7 +881,7 @@ consulta y no conceden acceso a índices, aplicaciones ni objetos.
 
 ---
 
-## 8.7 Una alerta
+#### 8.7 Una alerta
 
 La alerta debe detectar:
 
@@ -915,7 +915,7 @@ Debes documentar:
 
 ---
 
-## 8.8 Explicación
+#### 8.8 Explicación
 
 La documentación debe explicar:
 
@@ -938,7 +938,7 @@ Ejemplo:
 
 ---
 
-# 9. Dataset histórico y datos en tiempo real
+## 9. Dataset histórico y datos en tiempo real
 
 Durante el laboratorio puede utilizarse un rango absoluto:
 
@@ -957,7 +957,7 @@ earliest=-5m latest=now
 
 No mezcles ambos escenarios sin documentarlo.
 
-## 9.1 Búsqueda histórica
+#### 9.1 Búsqueda histórica
 
 Una búsqueda histórica sirve para:
 
@@ -967,7 +967,7 @@ Una búsqueda histórica sirve para:
 - probar visualizaciones;
 - demostrar la lógica de una alerta.
 
-## 9.2 Alerta operativa
+#### 9.2 Alerta operativa
 
 Una alerta operativa necesita:
 
@@ -979,7 +979,7 @@ Una alerta operativa necesita:
 - un destinatario;
 - una política para evitar duplicados.
 
-## 9.3 Diferencia práctica
+#### 9.3 Diferencia práctica
 
 Esta búsqueda:
 
@@ -1009,7 +1009,7 @@ el comportamiento en tiempo real.
 
 ---
 
-# 10. Requisitos de calidad de las búsquedas
+## 10. Requisitos de calidad de las búsquedas
 
 Todas las búsquedas del proyecto deben:
 
@@ -1025,7 +1025,7 @@ Todas las búsquedas del proyecto deben:
 - indicar qué ocurre si no hay resultados;
 - evitar conclusiones que los datos no puedan respaldar.
 
-## Ejemplo adecuado
+#### Ejemplo adecuado
 
 ```spl
 index=curso earliest=-24h latest=now
@@ -1044,7 +1044,7 @@ Esta consulta:
 - agrupa por host y URI;
 - ordena el resultado.
 
-## Ejemplo poco recomendable
+#### Ejemplo poco recomendable
 
 ```spl
 index=*
@@ -1063,7 +1063,7 @@ Problemas de este ejemplo:
 - puede generar resultados difíciles de interpretar;
 - puede incluir datos no relacionados con el proyecto.
 
-## Recomendaciones de rendimiento
+#### Recomendaciones de rendimiento
 
 Siempre que sea posible:
 
@@ -1080,32 +1080,32 @@ Siempre que sea posible:
 
 ---
 
-# 11. Comprobación de calidad antes de entregar
+## 11. Comprobación de calidad antes de entregar
 
 Antes de entregar, verifica las siguientes búsquedas.
 
-## Número total de eventos
+#### Número total de eventos
 
 ```spl
 index=curso earliest=0 latest=now
 | stats count
 ```
 
-## Metadatos
+#### Metadatos
 
 ```spl
 index=curso earliest=0 latest=now
 | stats count by host source sourcetype
 ```
 
-## Campos disponibles
+#### Campos disponibles
 
 ```spl
 index=curso earliest=0 latest=now
 | fieldsummary
 ```
 
-## Códigos HTTP
+#### Códigos HTTP
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1114,7 +1114,7 @@ index=curso earliest=0 latest=now
 | sort status_num
 ```
 
-## Primer y último evento
+#### Primer y último evento
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1123,7 +1123,7 @@ index=curso earliest=0 latest=now
 | eval fin=strftime(fin, "%Y-%m-%d %H:%M:%S")
 ```
 
-## Errores HTTP
+#### Errores HTTP
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1133,7 +1133,7 @@ index=curso earliest=0 latest=now
 | sort - errores
 ```
 
-## Eventos HTTP 500
+#### Eventos HTTP 500
 
 ```spl
 index=curso earliest=0 latest=now
@@ -1155,7 +1155,7 @@ Si alguna búsqueda devuelve cero resultados, documenta si la causa es:
 
 ---
 
-# 12. Requisitos de documentación
+## 12. Requisitos de documentación
 
 La documentación debe contener:
 
@@ -1181,46 +1181,46 @@ La documentación debe contener:
 Cada búsqueda debe incluir:
 
 ```markdown
-## Nombre
+#### Nombre
 
-### Objetivo
+###### Objetivo
 
 Qué pregunta responde.
 
-### SPL
+###### SPL
 
 ```spl
 consulta
 ```
 
-### Índice y tiempo
+###### Índice y tiempo
 
 Qué índice y qué rango utiliza.
 
-### Campos
+###### Campos
 
 Qué campos necesita.
 
-### Resultado esperado
+###### Resultado esperado
 
 Qué debería aparecer.
 
-### Resultado observado
+###### Resultado observado
 
 Qué apareció realmente.
 
-### Interpretación
+###### Interpretación
 
 Qué significa.
 
-### Limitaciones
+###### Limitaciones
 
 Qué no puede concluirse.
 ```
 
 ---
 
-# 13. Requisitos de permisos
+## 13. Requisitos de permisos
 
 La solución debe distinguir entre:
 
@@ -1257,7 +1257,7 @@ Si no puedes crear un usuario adicional, documenta la limitación:
 
 ---
 
-# 14. Criterios mínimos de aceptación
+## 14. Criterios mínimos de aceptación
 
 El proyecto se considera técnicamente válido cuando cumple como mínimo:
 
@@ -1288,9 +1288,9 @@ La ausencia de IP o de latencia no invalida el proyecto si:
 
 ---
 
-# 15. Lista de comprobación de requisitos
+## 15. Lista de comprobación de requisitos
 
-## Plataforma
+#### Plataforma
 
 - [ ] Splunk Enterprise está instalado.
 - [ ] Splunk Enterprise está operativo.
@@ -1299,7 +1299,7 @@ La ausencia de IP o de latencia no invalida el proyecto si:
 - [ ] El navegador está actualizado.
 - [ ] La versión de Splunk está registrada.
 
-## Servicio
+#### Servicio
 
 - [ ] Se ha comprobado el estado de `Splunkd`.
 - [ ] Se ha comprobado el puerto `8000`.
@@ -1307,7 +1307,7 @@ La ausencia de IP o de latencia no invalida el proyecto si:
 - [ ] Se ha revisado el puerto `9997` si se utiliza un forwarder.
 - [ ] Se ha documentado cualquier diferencia respecto al entorno estándar.
 
-## Usuario
+#### Usuario
 
 - [ ] El usuario puede iniciar sesión.
 - [ ] El usuario puede acceder a Search & Reporting.
@@ -1319,7 +1319,7 @@ La ausencia de IP o de latencia no invalida el proyecto si:
 - [ ] Los permisos están documentados.
 - [ ] Se ha distinguido entre rol `admin` y usuario final.
 
-## Índice
+#### Índice
 
 - [ ] El índice `curso` existe.
 - [ ] El índice está habilitado.
@@ -1328,7 +1328,7 @@ La ausencia de IP o de latencia no invalida el proyecto si:
 - [ ] Si se ha creado otro índice, está documentado.
 - [ ] Los permisos sobre el índice están revisados.
 
-## Dataset
+#### Dataset
 
 - [ ] El dataset está preparado.
 - [ ] La fuente está identificada.
@@ -1342,7 +1342,7 @@ La ausencia de IP o de latencia no invalida el proyecto si:
 - [ ] Se ha comprobado si existe latencia.
 - [ ] Los campos alternativos están documentados.
 
-## Ingesta
+#### Ingesta
 
 - [ ] Hay eventos consultables.
 - [ ] Se ha validado el número de eventos.
@@ -1353,7 +1353,7 @@ La ausencia de IP o de latencia no invalida el proyecto si:
 - [ ] Se ha revisado la diferencia entre `_time` e `_indextime`.
 - [ ] Los problemas de ingesta están documentados.
 
-## Búsquedas
+#### Búsquedas
 
 - [ ] Hay cinco búsquedas SPL.
 - [ ] Todas indican el índice.
@@ -1366,7 +1366,7 @@ La ausencia de IP o de latencia no invalida el proyecto si:
 - [ ] Cada búsqueda tiene limitaciones documentadas.
 - [ ] La SPL está disponible como texto editable.
 
-## Reportes
+#### Reportes
 
 - [ ] Hay dos reportes.
 - [ ] Cada reporte tiene nombre.
@@ -1378,7 +1378,7 @@ La ausencia de IP o de latencia no invalida el proyecto si:
 - [ ] Se han revisado los permisos.
 - [ ] Se ha explicado qué decisión ayuda a tomar.
 
-## Dashboard
+#### Dashboard
 
 - [ ] Existe un dashboard.
 - [ ] Tiene al menos seis paneles.
@@ -1394,7 +1394,7 @@ La ausencia de IP o de latencia no invalida el proyecto si:
 - [ ] La captura completa está incluida.
 - [ ] El intervalo temporal inicial está documentado.
 
-## Filtros
+#### Filtros
 
 - [ ] Existe un filtro temporal.
 - [ ] Existe un segundo filtro.
@@ -1407,7 +1407,7 @@ La ausencia de IP o de latencia no invalida el proyecto si:
 - [ ] Se ha documentado el comportamiento con datos vacíos.
 - [ ] Se ha explicado que los tokens no conceden permisos.
 
-## Alerta
+#### Alerta
 
 - [ ] Existe una alerta.
 - [ ] La alerta detecta cinco o más HTTP `500`.
@@ -1421,7 +1421,7 @@ La ausencia de IP o de latencia no invalida el proyecto si:
 - [ ] Se ha explicado la diferencia entre histórico y tiempo real.
 - [ ] Se ha revisado el riesgo de alertas repetidas.
 
-## Documentación
+#### Documentación
 
 - [ ] Existe resumen técnico.
 - [ ] Existe análisis de resultados.
@@ -1437,7 +1437,7 @@ La ausencia de IP o de latencia no invalida el proyecto si:
 
 ---
 
-# 16. Referencias oficiales
+## 16. Referencias oficiales
 
 - [Splunk Enterprise Documentation](https://docs.splunk.com/Documentation/Splunk)
 - [About indexes](https://docs.splunk.com/Documentation/Splunk/latest/Indexer/Aboutindexes)
