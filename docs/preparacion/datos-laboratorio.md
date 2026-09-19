@@ -1146,7 +1146,6 @@ A partir de este punto, el asistente puede continuar con:
 La calidad de las prácticas dependerá de la calidad de esta validación inicial.
 Si el evento está bien ingerido, el resto del análisis resulta mucho más
 sencillo y, sobre todo, reproducible.
-```
 
 #### Observación importante sobre el contenido original
 
