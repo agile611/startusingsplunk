@@ -271,7 +271,7 @@ También conviene relacionar este archivo con el resto del curso:
 - [Ingesta de datos](04-ingesta-datos.md)
 - [Gestión de índices](05-indices.md)
 
-## Resumen de conceptos
+## Glosario de conceptos
 
 | Concepto | Pregunta que responde |
 |---|---|
