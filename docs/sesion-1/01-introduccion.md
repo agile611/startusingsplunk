@@ -197,16 +197,11 @@ La clave es siempre revisar la ruta del dato, la configuración de entrada, el
 Para profundizar en estos conceptos y contrastar la práctica del curso con la
 documentación oficial de Splunk, estas son referencias útiles:
 
-- Documentación general de Splunk:
-  https://docs.splunk.com/Documentation/Splunk
-- Conceptos de fuentes y entradas:
-  https://docs.splunk.com/Documentation/Splunk/latest/Data/Whatsasource
-- Documentación sobre índices:
-  https://docs.splunk.com/Documentation/Splunk/latest/Indexer/Aboutindexes
-- Información sobre search heads:
-  https://docs.splunk.com/Documentation/Splunk/latest/Search/Aboutsearchheads
-- Guía de administración de Splunk:
-  https://docs.splunk.com/Documentation/Splunk/latest/Admin/Welcome-to-Admin
+- [Documentación general de Splunk](https://docs.splunk.com/Documentation/Splunk)
+- [Conceptos de fuentes y entradas](https://docs.splunk.com/Documentation/Splunk/latest/Data/Whatsasource)
+- [Documentación sobre índices](https://docs.splunk.com/Documentation/Splunk/latest/Indexer/Aboutindexes)
+- [Información sobre search heads](https://docs.splunk.com/Documentation/Splunk/latest/Search/Aboutsearchheads)
+- [Guía de administración de Splunk:](https://docs.splunk.com/Documentation/Splunk/latest/Admin/Welcome-to-Admin)
 
 También conviene enlazar esta sesión con el resto del curso:
 
