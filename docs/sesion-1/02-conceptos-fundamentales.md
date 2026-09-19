@@ -257,16 +257,11 @@ resolución de incidencias.
 Para ampliar estos conceptos y comprobar la terminología con la documentación
 oficial de Splunk, estas referencias son útiles:
 
-- Conceptos básicos de Splunk:
-  https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/Overview
-- Documentación sobre índices:
-  https://docs.splunk.com/Documentation/Splunk/latest/Indexer/Aboutindexes
-- Documentación sobre sourcetype y metadatos:
-  https://docs.splunk.com/Documentation/Splunk/latest/Data/Configurecustomsourcetypes
-- Guía de configuración general:
-  https://docs.splunk.com/Documentation/Splunk/latest/Admin/Configurationoverview
-- Administración y mantenimiento general:
-  https://docs.splunk.com/Documentation/Splunk/latest/Admin/Welcome-to-Admin
+- [Conceptos básicos de Splunk](https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/Overview)
+- [Documentación sobre índices](https://docs.splunk.com/Documentation/Splunk/latest/Indexer/Aboutindexes)
+- [Documentación sobre sourcetype y metadatos](https://docs.splunk.com/Documentation/Splunk/latest/Data/Configurecustomsourcetypes)
+- [Guía de configuración general](https://docs.splunk.com/Documentation/Splunk/latest/Admin/Configurationoverview)
+- [Administración y mantenimiento general](https://docs.splunk.com/Documentation/Splunk/latest/Admin/Welcome-to-Admin)
 
 También conviene relacionar este archivo con el resto del curso:
 
