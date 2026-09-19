@@ -238,4 +238,3 @@ causa y crear un riesgo mayor.
 - [Índice de auditoría](https://docs.splunk.com/Documentation/Splunk/latest/Security/Auditindex)
 - [Seguridad de dashboards](https://docs.splunk.com/Documentation/Splunk/latest/Viz/ShareDashboards)
 - [Modelo de seguridad de Splunk](https://docs.splunk.com/Documentation/Splunk/latest/Security/AboutSplunksecurity)
-revisión segura de dashboards, reportes y alertas.
