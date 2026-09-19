@@ -196,14 +196,10 @@ Estos datasets están diseñados para que el asistente pueda validar:
 
 Para profundizar en la ingesta y la configuración de datos en Splunk:
 
-- Conceptos básicos de ingesta y fuentes:
-  https://docs.splunk.com/Documentation/Splunk/latest/Data/Whatissource
-- Documentación sobre tipos de entrada:
-  https://docs.splunk.com/Documentation/Splunk/latest/Data/Aboutdatainputs
-- Guía de configuración de índices y fuentes:
-  https://docs.splunk.com/Documentation/Splunk/latest/Admin/Configurationoverview
-- Administración general:
-  https://docs.splunk.com/Documentation/Splunk/latest/Admin/Welcome-to-Admin
+- [Conceptos básicos de ingesta y fuentes](https://docs.splunk.com/Documentation/Splunk/latest/Data/Whatissource)
+- [Documentación sobre tipos de entrada](https://docs.splunk.com/Documentation/Splunk/latest/Data/Aboutdatainputs)
+- [Guía de configuración de índices y fuentes](https://docs.splunk.com/Documentation/Splunk/latest/Admin/Configurationoverview)
+- [Administración general](https://docs.splunk.com/Documentation/Splunk/latest/Admin/Welcome-to-Admin)
 
 También te puede resultar útil conectar esta parte con otros contenidos:
 
