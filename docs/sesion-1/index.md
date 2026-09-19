@@ -96,12 +96,3 @@ pueden consultar de forma fiable.
     Comprueba el espacio en disco, la salud de la instancia y los puertos antes
     de iniciar una carga masiva de datos. Splunk disfruta de los datos; el disco
     lleno, bastante menos.
-
-## Resumen
-
-La sesión 1 tiene como objetivo sentar la base operativa de Splunk: entender
-qué son los eventos, cómo se ingesta la información, dónde se almacenan, cómo
-se validan y qué pasos seguir para diagnosticar errores de forma efectiva.
-
-Si ya tienes Splunk Enterprise instalado con permisos de administrador, este es
-el punto donde comienzas a operar con criterio y no solo a observar la interfaz.

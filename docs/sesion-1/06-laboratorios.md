@@ -126,16 +126,11 @@ revisó y por qué el resultado final es correcto.
 
 Para complementar los laboratorios de Splunk, estas referencias son útiles:
 
-- Manual de administración general:
-  https://docs.splunk.com/Documentation/Splunk/latest/Admin/Welcome-to-Admin
-- Documentación sobre búsqueda y análisis:
-  https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/Overview
-- Conceptos de fuentes y entradas:
-  https://docs.splunk.com/Documentation/Splunk/latest/Data/Whatissource
-- Documentación sobre índices:
-  https://docs.splunk.com/Documentation/Splunk/latest/Indexer/Aboutindexes
-- Introducción a la interfaz web de Splunk:
-  https://docs.splunk.com/Documentation/Splunk/latest/User/UsingSplunkWeb
+- [Manual de administración general](https://docs.splunk.com/Documentation/Splunk/latest/Admin/Welcome-to-Admin)
+- [Documentación sobre búsqueda y análisis](https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/Overview)
+- [Conceptos de fuentes y entradas](https://docs.splunk.com/Documentation/Splunk/latest/Data/Whatissource)
+- [Documentación sobre índices](https://docs.splunk.com/Documentation/Splunk/latest/Indexer/Aboutindexes)
+- [Introducción a la interfaz web de Splunk](https://docs.splunk.com/Documentation/Splunk/latest/User/UsingSplunkWeb)
 
 También es recomendable revisar estas páginas del curso:
 
