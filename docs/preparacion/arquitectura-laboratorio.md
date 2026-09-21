@@ -172,16 +172,11 @@ descrito aquí para mantener el aprendizaje práctico y enfocarlo en Splunk.
 Para ampliar la teoría y contrastar la práctica del curso, estas son
 referencias oficiales de Splunk:
 
-- Documentación de Splunk sobre indexers:
-  https://docs.splunk.com/Documentation/Splunk/latest/Indexer/Aboutindexers
-- Documentación sobre search heads:
-  https://docs.splunk.com/Documentation/Splunk/latest/Search/Aboutsearchheads
-- Documentación sobre forwarders:
-  https://docs.splunk.com/Documentation/Splunk/latest/Forwarding/Aboutforwarding
-- Visión general de configuración:
-  https://docs.splunk.com/Documentation/Splunk/latest/Admin/Configurationoverview
-- Guía de administración general:
-  https://docs.splunk.com/Documentation/Splunk/latest/Admin/Welcome-to-Admin
+- [Documentación de Splunk sobre indexers](https://docs.splunk.com/Documentation/Splunk/latest/Indexer/Aboutindexers)
+- [Documentación sobre search heads](https://docs.splunk.com/Documentation/Splunk/latest/Search/Aboutsearchheads)
+- [Documentación sobre forwarders](https://docs.splunk.com/Documentation/Splunk/latest/Forwarding/Aboutforwarding)
+- [Visión general de configuración](https://docs.splunk.com/Documentation/Splunk/latest/Admin/Configurationoverview)
+- [Guía de administración general](https://docs.splunk.com/Documentation/Splunk/latest/Admin/Welcome-to-Admin)
 
 También es útil relacionar este documento con el resto del curso:
 
