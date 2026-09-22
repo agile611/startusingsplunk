@@ -1,6 +1,6 @@
 site_name: Curso de Splunk
 site_description: Curso práctico de Splunk Enterprise 10.4.3 en Ubuntu 24.04.5 LTS
-site_author: Equipo de formación
+site_author: Guillem Hernandez Sola
 
 site_url: https://agile611.github.io/startusingsplunk/
 repo_name: agile611/startusingsplunk

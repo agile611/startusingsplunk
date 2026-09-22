@@ -788,6 +788,37 @@ La instalación puede estar correcta aunque la ingesta tenga un problema.
 Comprueba el índice, el intervalo temporal, el `sourcetype` y los permisos.
 Consulta [Los datos no aparecen](../troubleshooting/datos-no-aparecen.md).
 
+### Por si no arranca splunk por un tema de `permission denied`
+
+Si por lo que fuera, splunk arranca por un `permission denied` se debe hacer estos pasos:
+
+Paso 1. Detén cualquier resto que haya quedado
+```bash
+/opt/splunk/bin/splunk stop 2>/dev/null
+pkill -f splunkd
+```
+
+Paso 2. Crea el usuario si no existe
+```bash
+id splunk || useradd -m -r -s /bin/bash splunk
+```
+
+Paso 3. Da la propiedad de TODO el árbol al usuario splunk
+```bash
+chown -R splunk:splunk /opt/splunk
+```
+
+Paso 4. Arranca como ese usuario
+```bash
+sudo -u splunk /opt/splunk/bin/splunk start --accept-license
+```
+
+Paso 5. (Opcional) Deja el servicio configurado correctamente
+```bash
+/opt/splunk/bin/splunk disable boot-start 2>/dev/null
+/opt/splunk/bin/splunk enable boot-start -user splunk -systemd-managed 1
+```
+
 ## Referencias del procedimiento
 
 - [Requisitos de hardware](requisitos-hardware.md).
