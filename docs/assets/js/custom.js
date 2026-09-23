@@ -1,4 +1,7 @@
-// Scripts personalizados del curso
-document.addEventListener('DOMContentLoaded', () => {
-  // Inicialización de scripts del sitio
+/*
+ * JavaScript personalizado del curso de Grafana.
+ */
+
+document.addEventListener("DOMContentLoaded", () => {
+  document.documentElement.classList.add("curso-cargado");
 });
