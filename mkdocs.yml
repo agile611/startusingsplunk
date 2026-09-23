@@ -106,8 +106,6 @@ nav:
       - Destinatarios: curso/destinatarios.md
       - Requisitos: curso/requisitos.md
       - Agenda: curso/agenda.md
-
-  - Preparación:
       - Introducción: preparacion/index.md
       - Requisitos de hardware: preparacion/requisitos-hardware.md
       - Comprobaciones previas: preparacion/comprobaciones-previas.md
@@ -115,6 +113,9 @@ nav:
       - Arquitectura y componentes: preparacion/arquitectura.md
       - Arquitectura del laboratorio: preparacion/arquitectura-laboratorio.md
       - Datos del laboratorio: preparacion/datos-laboratorio.md
+      å- Datasets: recursos/datasets.md
+      - Enlaces: recursos/enlaces.md
+      - Bibliografía: recursos/bibliografia.md
 
   - Fundamentos e ingestión:
       - Resumen: sesion-1/index.md
@@ -174,11 +175,6 @@ nav:
       - No funciona el acceso web: troubleshooting/acceso-web.md
       - Los datos no aparecen: troubleshooting/datos-no-aparecen.md
       - Los campos son incorrectos: troubleshooting/campos-incorrectos.md
-
-  - Recursos:
-      - Datasets: recursos/datasets.md
-      - Enlaces: recursos/enlaces.md
-      - Bibliografía: recursos/bibliografia.md
 
 extra_css:
   - assets/css/custom.css
