@@ -1,19 +1,21 @@
 /* =========================================================
    Agile611 · Curso de Grafana
-   CSS optimizado para Material for MkDocs y GitHub Pages
+   Material for MkDocs
 
-   Diseño:
-   - Escala compacta
-   - Colores corporativos
-   - Tres columnas centradas
-   - Header y footer a todo lo ancho
-   - Contenido interno alineado al área principal
-   - Esquema claro forzado
+   Layout:
+   - Tres columnas estables, sin solapamiento
+   - Izquierda: navegación · Centro: contenido · Derecha: TOC
+   - Ambas columnas laterales fijas durante el scroll
+
+   Diseño lateral:
+   - Cabeceras azules a todo el ancho gris
+   - Anchuras internas uniformes
+   - Sin enlaces duplicados en la sección activa
    ========================================================= */
 
 
 /* =========================================================
-   Variables corporativas y de escala
+   Variables corporativas
    ========================================================= */
 
 :root {
@@ -32,34 +34,35 @@
   --agile-code-border: #dedede;
   --agile-inline-bg: #f1f1f1;
   --agile-inline-border: #e1e1e1;
+  --agile-code-font: "Roboto Mono", "Ubuntu Mono", Consolas, monospace;
 
-  /* Escala general */
-  --agile-font-size: 0.95625rem;
+  /* Tipografía */
+  --agile-font-size: 0.95625rem;       /* texto del contenido        */
+  --agile-ui-font-size: 1.0040625rem;  /* cabecera y footer          */
   --agile-code-font-size: 0.84375rem;
   --agile-code-line-height: 1.55;
 
-  /* Header */
+  /* Cabecera y pestañas (se redefinen en tablet) */
   --agile-header-height: 3.05rem;
   --agile-tabs-height: 2.41875rem;
 
-  /* Layout */
-  --agile-page-width-desktop: 80vw;
-  --agile-page-width-medium: 90vw;
-  --agile-page-width-mobile: 100%;
+  /* Layout (se redefinen en pantallas medianas y móvil) */
+  --agile-page-width: 92vw;
+  --agile-left-width: 13rem;
+  --agile-right-width: 13rem;
+  --agile-gap: 1.25rem;
 
-  --agile-content-gap-desktop: 1.2rem;
-  --agile-content-gap-large: 2rem;
-  --agile-content-gap-medium: 1rem;
-  --agile-content-gap-mobile: 0.8rem;
-
-  /* Barras laterales */
-  --agile-primary-sidebar-width: 12rem;
-  --agile-secondary-sidebar-width: 12rem;
+  /* Columnas sticky: solo la cabecera es fija, las pestañas se van
+     con el scroll. Si activas navigation.tabs.sticky, suma también
+     var(--agile-tabs-height) en --agile-sticky-top. */
+  --agile-sticky-gap: 0.75rem;
+  --agile-sticky-top: calc(var(--agile-header-height) + var(--agile-sticky-gap));
 }
 
 
 /* =========================================================
    Variables de Material for MkDocs
+   (mismo valor en cualquier esquema: el sitio es siempre claro)
    ========================================================= */
 
 :root,
@@ -93,6 +96,10 @@
   --md-shadow-z3: 0 0 0 rgba(0, 0, 0, 0);
 }
 
+[data-md-color-scheme="slate"] {
+  color-scheme: light;
+}
+
 
 /* =========================================================
    Base general
@@ -103,146 +110,102 @@ html {
   font-size: 100%;
 }
 
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+html,
 body,
 .md-main,
 .md-content,
-.md-content__inner {
-  background: var(--agile-white) !important;
-  color: var(--agile-text) !important;
-}
-
-
-/* =========================================================
-   Layout principal
-   ========================================================= */
-
-/*
-   En escritorio el área principal ocupa el 80 % de la ventana,
-   dejando aproximadamente un 10 % de margen a cada lado.
-*/
-
-.md-grid,
-.md-main {
-  width: var(--agile-page-width-desktop) !important;
-  max-width: none !important;
-  margin-right: auto !important;
-  margin-left: auto !important;
-}
-
-.md-grid {
-  box-sizing: border-box !important;
-}
-
-.md-main__inner {
-  width: 100% !important;
-  max-width: none !important;
-  margin-right: auto !important;
-  margin-left: auto !important;
-}
-
-.md-content {
-  width: auto !important;
-  min-width: 0 !important;
-  max-width: none !important;
-}
-
 .md-content__inner,
 .md-typeset {
-  width: auto !important;
-  max-width: none !important;
-}
-
-.md-content__inner {
-  margin-right: var(--agile-content-gap-desktop) !important;
-  margin-left: var(--agile-content-gap-desktop) !important;
-}
-
-.md-typeset {
-  max-width: none !important;
+  background: var(--agile-white);
+  color: var(--agile-text);
 }
 
 
 /* =========================================================
-   Header principal
+   Cabecera principal
    ========================================================= */
 
-/*
-   El fondo ocupa todo el ancho de la ventana.
-   El contenido interior se alinea con las tres columnas.
-*/
-
 .md-header {
-  width: 100% !important;
-  max-width: none !important;
-  min-height: var(--agile-header-height) !important;
-  margin: 0 !important;
-  overflow: visible !important;
+  width: 100%;
+  max-width: none;
+  min-height: var(--agile-header-height);
 
-  background: var(--agile-primary) !important;
-  color: var(--agile-white) !important;
+  margin: 0;
+  overflow: visible;
+
+  background: var(--agile-primary);
+  color: var(--agile-white);
 }
 
 .md-header__inner {
-  width: var(--agile-page-width-desktop) !important;
-  max-width: none !important;
-  min-height: var(--agile-header-height) !important;
-  margin-right: auto !important;
-  margin-left: auto !important;
+  width: var(--agile-page-width);
+  max-width: none;
+  min-height: var(--agile-header-height);
 
-  background: transparent !important;
-  box-sizing: border-box !important;
+  margin-right: auto;
+  margin-left: auto;
+
+  background: transparent;
+  box-sizing: border-box;
 }
 
 .md-header__title,
 .md-header__topic,
 .md-header__button,
 .md-header .md-icon {
-  color: var(--agile-white) !important;
+  color: var(--agile-white);
+}
+
+.md-header__title,
+.md-header__topic,
+.md-header__button,
+.md-header__button .md-icon {
+  font-size: var(--agile-ui-font-size);
 }
 
 .md-header__title,
 .md-header__topic {
-  font-size: 1.0040625rem !important;
-  line-height: 1.2 !important;
+  line-height: 1.2;
 }
 
 .md-header__button {
-  padding: 0.396rem !important;
-  font-size: 1.0040625rem !important;
-}
-
-.md-header__button .md-icon {
-  font-size: 1.0040625rem !important;
+  padding: 0.396rem;
 }
 
 .md-header__button:hover,
 .md-header__button:focus {
-  background: rgba(255, 255, 255, 0.14) !important;
-  color: var(--agile-white) !important;
+  background: rgba(255, 255, 255, 0.14);
+  color: var(--agile-white);
 }
 
 
 /* =========================================================
-   Logo
+   Logotipo
    ========================================================= */
 
 .md-header .md-logo {
-  display: flex !important;
-  align-items: center !important;
+  display: flex;
+  align-items: center;
 
-  margin: 0 !important;
-  padding: 0.2rem 0.55rem !important;
+  margin: 0;
+  padding: 0.2rem 0.55rem;
 }
 
 .md-header .md-logo img,
 .md-header .md-logo svg {
-  display: block !important;
+  display: block;
 
-  width: auto !important;
-  height: 2.55rem !important;
-  max-height: 2.55rem !important;
+  width: auto;
+  height: 2.55rem;
+  max-height: 2.55rem;
 
-  object-fit: contain !important;
+  object-fit: contain;
 }
 
 
@@ -250,18 +213,24 @@ body,
    Pestañas superiores
    ========================================================= */
 
+.md-tabs,
+.md-tabs__container,
+.md-tabs__list,
+.md-tabs__item,
+.md-tabs__link {
+  height: var(--agile-tabs-height);
+}
+
 .md-tabs {
-  width: 100% !important;
-  max-width: none !important;
-  min-height: var(--agile-tabs-height) !important;
-  height: var(--agile-tabs-height) !important;
-  margin: 0 !important;
+  width: 100%;
+  max-width: none;
+  margin: 0;
 
-  overflow-x: auto !important;
-  overflow-y: hidden !important;
+  overflow-x: auto;
+  overflow-y: hidden;
 
-  background: var(--agile-primary) !important;
-  color: var(--agile-white) !important;
+  background: var(--agile-primary);
+  color: var(--agile-white);
 
   scrollbar-width: thin;
   scrollbar-color: rgba(255, 255, 255, 0.55) transparent;
@@ -281,65 +250,58 @@ body,
 }
 
 .md-tabs__container {
-  width: var(--agile-page-width-desktop) !important;
-  max-width: none !important;
-  height: var(--agile-tabs-height) !important;
-  margin-right: auto !important;
-  margin-left: auto !important;
+  width: var(--agile-page-width);
+  max-width: none;
 
-  overflow: visible !important;
-  box-sizing: border-box !important;
+  margin-right: auto;
+  margin-left: auto;
+
+  overflow: visible;
+  box-sizing: border-box;
 }
 
 .md-tabs__list {
-  display: flex !important;
-  align-items: stretch !important;
-  justify-content: flex-start !important;
+  display: flex;
+  align-items: stretch;
+  justify-content: flex-start;
 
-  width: max-content !important;
-  min-width: 100% !important;
-  max-width: none !important;
+  width: max-content;
+  min-width: 100%;
+  max-width: none;
 
-  height: var(--agile-tabs-height) !important;
-  min-height: var(--agile-tabs-height) !important;
+  margin: 0;
+  padding: 0;
 
-  margin: 0 !important;
-  padding: 0 !important;
-
-  white-space: nowrap !important;
+  white-space: nowrap;
 }
 
 .md-tabs__item {
-  flex: 0 0 auto !important;
-
-  height: var(--agile-tabs-height) !important;
-  white-space: nowrap !important;
+  flex: 0 0 auto;
+  white-space: nowrap;
 }
 
 .md-tabs__link {
-  display: flex !important;
-  align-items: center !important;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
 
-  height: var(--agile-tabs-height) !important;
-  box-sizing: border-box !important;
+  margin: 0;
+  padding: 0 0.55rem;
 
-  margin: 0 !important;
-  padding: 0 0.55rem !important;
+  color: var(--agile-white);
+  font-size: 0.921375rem;
+  line-height: 1;
 
-  color: var(--agile-white) !important;
-  font-size: 0.921375rem !important;
-  line-height: 1 !important;
-
-  white-space: nowrap !important;
-  opacity: 1 !important;
+  white-space: nowrap;
+  opacity: 1;
 }
 
 .md-tabs__link:hover,
 .md-tabs__link:focus,
 .md-tabs__link--active {
-  background: rgba(255, 255, 255, 0.14) !important;
-  color: var(--agile-white) !important;
-  opacity: 1 !important;
+  background: rgba(255, 255, 255, 0.14);
+  color: var(--agile-white);
+  opacity: 1;
 }
 
 
@@ -348,25 +310,25 @@ body,
    ========================================================= */
 
 .md-search__form {
-  min-height: 2.025rem !important;
-  background: rgba(255, 255, 255, 0.15) !important;
+  min-height: 2.025rem;
+  background: rgba(255, 255, 255, 0.15);
 }
 
 .md-search__form:hover,
 .md-search__form:focus-within {
-  background: rgba(255, 255, 255, 0.24) !important;
+  background: rgba(255, 255, 255, 0.24);
 }
 
 .md-search__input,
 .md-search__input::placeholder,
 .md-search__icon {
-  color: var(--agile-white) !important;
+  color: var(--agile-white);
 }
 
 .md-search__input,
 .md-search__input::placeholder {
-  font-size: 0.945rem !important;
-  line-height: 1.2 !important;
+  font-size: 0.945rem;
+  line-height: 1.2;
 }
 
 .md-search__input::placeholder {
@@ -375,159 +337,348 @@ body,
 
 
 /* =========================================================
-   Navegación lateral izquierda
+   Layout principal de tres columnas
    ========================================================= */
 
-.md-sidebar--primary {
-  background: var(--agile-sidebar) !important;
+@media screen and (min-width: 60em) {
+  .md-grid,
+  .md-main {
+    width: var(--agile-page-width);
+    max-width: none;
+
+    margin-right: auto;
+    margin-left: auto;
+  }
 }
 
-.md-sidebar--primary .md-sidebar__scrollwrap {
-  background: var(--agile-sidebar) !important;
-  background-image: none !important;
-  box-shadow: none !important;
+@media screen and (min-width: 76em) {
+  .md-main__inner {
+    display: grid;
+
+    grid-template-columns:
+      var(--agile-left-width)
+      minmax(0, 1fr)
+      var(--agile-right-width);
+
+    grid-template-areas:
+      "primary content secondary";
+
+    gap: var(--agile-gap);
+
+    width: 100%;
+    max-width: none;
+
+    margin: 0;
+    padding: 1.25rem 0;
+
+    align-items: start;   /* requisito para que sticky funcione en el grid */
+  }
+
+  .md-main__inner > .md-sidebar--primary   { grid-area: primary; }
+  .md-main__inner > .md-content            { grid-area: content; }
+  .md-main__inner > .md-sidebar--secondary { grid-area: secondary; }
+
+  .md-main__inner > .md-content {
+    width: auto;
+    min-width: 0;
+    max-width: none;
+
+    margin: 0;
+    padding: 0;
+  }
 }
 
-.md-sidebar--primary .md-nav__title {
-  box-sizing: border-box;
+
+/* =========================================================
+   Columnas laterales: estructura común
+   ========================================================= */
+
+.md-sidebar--primary,
+.md-sidebar--secondary {
+  display: block;
+  box-sizing: border-box !important;
+
+  width: var(--agile-left-width);
+  min-width: 0;
+  max-width: 100%;
+
+  margin: 0;
+  padding: 0;
+
+  background: var(--agile-sidebar) !important;
+  color: var(--agile-text) !important;
+}
+
+.md-sidebar--secondary {
+  width: var(--agile-right-width);
+}
+
+/* Contenedores internos y navegaciones: ancho completo, sin espaciados */
+
+.md-sidebar--primary .md-sidebar__inner,
+.md-sidebar--secondary .md-sidebar__inner,
+.md-sidebar--primary .md-sidebar__scrollwrap,
+.md-sidebar--secondary .md-sidebar__scrollwrap,
+.md-sidebar--primary .md-nav,
+.md-sidebar--secondary .md-nav,
+.md-sidebar--primary .md-nav__list,
+.md-sidebar--secondary .md-nav__list,
+.md-sidebar--primary .md-nav__item,
+.md-sidebar--secondary .md-nav__item {
+  display: block;
+  box-sizing: border-box !important;
+
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
 
   margin: 0 !important;
-  padding: 0.61875rem 0.7875rem !important;
+  padding: 0 !important;
+
+  background: var(--agile-sidebar) !important;
+  background-image: none;
+  box-shadow: none;
+}
+
+
+/* =========================================================
+   Columnas laterales: fijas durante el scroll
+   =========================================================
+
+   Se pegan bajo la cabecera y acompañan al contenido central.
+   Si su contenido es más alto que la ventana, hacen scroll
+   interno con una barra fina.
+   ========================================================= */
+
+@media screen and (min-width: 60em) {
+  .md-main,
+  .md-main__inner {
+    overflow: visible !important;   /* ningún ancestro recorta el sticky */
+  }
+
+  .md-sidebar--primary,
+  .md-sidebar--secondary {
+    position: -webkit-sticky !important;
+    position: sticky !important;
+    top: var(--agile-sticky-top) !important;
+
+    align-self: start !important;
+
+    height: auto !important;
+    max-height: calc(100vh - var(--agile-sticky-top) - var(--agile-sticky-gap)) !important;
+
+    overflow: visible !important;
+  }
+
+  .md-sidebar--primary .md-sidebar__scrollwrap,
+  .md-sidebar--secondary .md-sidebar__scrollwrap {
+    position: static !important;
+
+    max-height: calc(100vh - var(--agile-sticky-top) - var(--agile-sticky-gap)) !important;
+
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.25) transparent;
+  }
+
+  .md-sidebar--primary .md-sidebar__scrollwrap::-webkit-scrollbar,
+  .md-sidebar--secondary .md-sidebar__scrollwrap::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  .md-sidebar--primary .md-sidebar__scrollwrap::-webkit-scrollbar-track,
+  .md-sidebar--secondary .md-sidebar__scrollwrap::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .md-sidebar--primary .md-sidebar__scrollwrap::-webkit-scrollbar-thumb,
+  .md-sidebar--secondary .md-sidebar__scrollwrap::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 4px;
+  }
+}
+
+
+/* =========================================================
+   Columnas laterales: cabeceras azules
+   ("Curso de Grafana" y "Tabla de contenidos")
+   ========================================================= */
+
+.md-sidebar--primary .md-nav--primary > .md-nav__title,
+.md-sidebar--secondary .md-nav--secondary > .md-nav__title {
+  display: block !important;
+  box-sizing: border-box !important;
+
+  position: static !important;   /* Material lo hace sticky en el TOC */
+  top: auto !important;
+  z-index: auto !important;
+
+  width: 100% !important;
+  min-width: 100% !important;
+  max-width: 100% !important;
+
+  height: auto;
+  min-height: 0;
+
+  margin: 0 !important;
+  padding: 0.65rem 0.75rem !important;
+
+  overflow: hidden;
+  white-space: normal;
 
   background: var(--agile-primary) !important;
   background-image: none !important;
   color: var(--agile-white) !important;
 
-  font-size: var(--agile-font-size) !important;
-  line-height: 1.45 !important;
+  font-size: 0.9rem;
+  font-weight: 700;
+  line-height: 1.35;
 
   box-shadow: none !important;
+  cursor: default;
 }
 
-.md-sidebar--primary .md-nav__title span {
+.md-sidebar--primary .md-nav--primary > .md-nav__title span:not(.md-nav__icon),
+.md-sidebar--secondary .md-nav--secondary > .md-nav__title span:not(.md-nav__icon) {
+  display: block;
+
+  width: 100%;
+  max-width: 100%;
+
   color: var(--agile-white) !important;
 }
 
-.md-sidebar--primary .md-nav__link {
-  box-sizing: border-box;
+/* La flecha del menú móvil no se muestra en escritorio */
+
+.md-sidebar--primary .md-nav--primary > .md-nav__title .md-nav__icon,
+.md-sidebar--secondary .md-nav--secondary > .md-nav__title .md-nav__icon {
+  display: none !important;
+}
+
+
+/* =========================================================
+   Columna izquierda: elementos duplicados de la sección activa
+   =========================================================
+
+   Con navigation.tabs, la sección activa se renderiza así:
+
+   li.md-nav__item--active
+   ├── label.md-nav__link             ← enlace de la sección
+   └── nav.md-nav
+       ├── label.md-nav__title        ← título interno
+       └── li.md-nav__item--active
+           └── a.md-nav__link--active ← página real
+
+   Se ocultan el título interno y el enlace de la sección
+   cuando dentro hay un enlace activo. :not(.md-nav__container)
+   protege el caso de navigation.indexes.
+   ========================================================= */
+
+@media screen and (min-width: 60em) {
+  .md-sidebar--primary .md-nav__item > .md-nav > .md-nav__title,
+  .md-sidebar--primary
+  .md-nav__item--active:has(> .md-nav .md-nav__link--active)
+  > .md-nav__link:not(.md-nav__container) {
+    display: none !important;
+  }
+}
+
+
+/* =========================================================
+   Columnas laterales: enlaces
+   ========================================================= */
+
+.md-sidebar--primary .md-nav__link,
+.md-sidebar--secondary .md-nav__link {
+  display: block;
+  box-sizing: border-box !important;
+
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
 
   margin: 0 !important;
-  padding: 0.36rem 0.7875rem !important;
+  padding: 0.38rem 0.75rem !important;
 
   background: transparent !important;
   color: var(--agile-text) !important;
 
-  font-size: var(--agile-font-size) !important;
-  line-height: 1.45 !important;
+  font-size: 0.86rem !important;
+  line-height: 1.35 !important;
+
+  white-space: normal !important;
+  overflow-wrap: anywhere !important;
+  word-break: normal;
+
+  box-shadow: none !important;
 }
 
 .md-sidebar--primary .md-nav__link:hover,
 .md-sidebar--primary .md-nav__link:focus,
 .md-sidebar--primary .md-nav__link--active,
-.md-sidebar--primary .md-nav__item--active > .md-nav__link {
-  background: transparent !important;
-  color: var(--agile-primary) !important;
-  font-weight: 700;
-
-  box-shadow: none !important;
-}
-
-
-/* =========================================================
-   Tabla de contenidos derecha
-   ========================================================= */
-
-.md-sidebar--secondary {
-  background: var(--agile-sidebar) !important;
-}
-
-.md-sidebar--secondary .md-sidebar__scrollwrap {
-  background: var(--agile-sidebar) !important;
-  background-image: none !important;
-  box-shadow: none !important;
-}
-
-.md-sidebar--secondary .md-nav__title {
-  box-sizing: border-box;
-
-  margin: 0 !important;
-  padding: 0.61875rem 0.7875rem !important;
-
-  background: var(--agile-primary) !important;
-  background-image: none !important;
-  color: var(--agile-white) !important;
-
-  font-size: var(--agile-font-size) !important;
-  line-height: 1.45 !important;
-
-  box-shadow: none !important;
-}
-
-.md-sidebar--secondary .md-nav__title span {
-  color: var(--agile-white) !important;
-}
-
-.md-sidebar--secondary .md-nav__link {
-  box-sizing: border-box;
-
-  margin: 0 !important;
-  padding: 0.36rem 0.7875rem !important;
-
-  background: transparent !important;
-  color: var(--agile-text) !important;
-
-  font-size: var(--agile-font-size) !important;
-  line-height: 1.45 !important;
-}
-
 .md-sidebar--secondary .md-nav__link:hover,
 .md-sidebar--secondary .md-nav__link:focus,
 .md-sidebar--secondary .md-nav__link--active {
-  background: transparent !important;
   color: var(--agile-primary) !important;
-  font-weight: 700;
-
-  box-shadow: none !important;
+  font-weight: 700 !important;
 }
 
-.md-typeset .headerlink {
-  color: var(--agile-primary) !important;
+/* navigation.indexes: el contenedor no debe sumar padding */
+
+.md-sidebar--primary .md-nav__container {
+  display: flex;
+  padding: 0 !important;
+}
+
+.md-sidebar--primary .md-nav__container > .md-nav__link {
+  flex: 1 1 auto;
 }
 
 
 /* =========================================================
-   Texto principal
+   Contenido central
    ========================================================= */
 
+.md-content,
+.md-content__inner,
 .md-typeset {
-  color: var(--agile-text) !important;
-  font-size: var(--agile-font-size) !important;
-  line-height: 1.55 !important;
+  width: 100%;
+  min-width: 0;
+  max-width: none;
 }
 
+.md-content__inner {
+  margin: 0;
+  padding: 0 0.5rem;
+}
+
+.md-typeset,
 .md-typeset p,
 .md-typeset li,
 .md-typeset td,
 .md-typeset th,
 .md-typeset blockquote {
-  color: var(--agile-text) !important;
-  font-size: var(--agile-font-size) !important;
-  line-height: 1.55 !important;
+  color: var(--agile-text);
+  font-size: var(--agile-font-size);
+  line-height: 1.55;
 }
 
 .md-typeset strong,
 .md-typeset em {
-  color: var(--agile-text) !important;
+  color: var(--agile-text);
 }
 
 .md-typeset a,
-.md-typeset a:visited {
-  color: var(--agile-primary) !important;
+.md-typeset a:visited,
+.md-typeset .headerlink {
+  color: var(--agile-primary);
 }
 
 .md-typeset a:hover,
 .md-typeset a:focus {
-  color: var(--agile-primary-dark) !important;
+  color: var(--agile-primary-dark);
 }
 
 
@@ -541,30 +692,19 @@ body,
 .md-typeset h4,
 .md-typeset h5,
 .md-typeset h6 {
-  color: var(--agile-text) !important;
+  color: var(--agile-text);
   font-weight: 700;
 }
 
-.md-typeset h1 {
-  font-size: 1.85625rem !important;
-  line-height: 1.25 !important;
-}
-
-.md-typeset h2 {
-  font-size: 1.4625rem !important;
-  line-height: 1.3 !important;
-}
-
-.md-typeset h3 {
-  font-size: 1.2375rem !important;
-  line-height: 1.35 !important;
-}
+.md-typeset h1 { font-size: 1.85625rem; line-height: 1.25; }
+.md-typeset h2 { font-size: 1.4625rem;  line-height: 1.3;  }
+.md-typeset h3 { font-size: 1.2375rem;  line-height: 1.35; }
 
 .md-typeset h4,
 .md-typeset h5,
 .md-typeset h6 {
-  font-size: 1.06875rem !important;
-  line-height: 1.4 !important;
+  font-size: 1.06875rem;
+  line-height: 1.4;
 }
 
 
@@ -573,27 +713,22 @@ body,
    ========================================================= */
 
 .md-typeset :not(pre) > code {
-  display: inline !important;
+  display: inline;
   box-sizing: border-box;
 
-  padding: 0.09rem 0.3375rem !important;
+  padding: 0.09rem 0.3375rem;
 
-  background: var(--agile-inline-bg) !important;
-  border: 1px solid var(--agile-inline-border) !important;
+  background: var(--agile-inline-bg);
+  border: 1px solid var(--agile-inline-border);
   border-radius: 4px;
 
-  color: var(--agile-text) !important;
+  color: var(--agile-text);
 
-  font-family:
-    "Roboto Mono",
-    "Ubuntu Mono",
-    Consolas,
-    monospace !important;
+  font-family: var(--agile-code-font);
+  font-size: var(--agile-code-font-size);
+  line-height: inherit;
 
-  font-size: var(--agile-code-font-size) !important;
-  line-height: inherit !important;
-
-  white-space: normal !important;
+  white-space: normal;
 }
 
 
@@ -602,92 +737,88 @@ body,
    ========================================================= */
 
 .md-typeset .highlight {
-  width: 100% !important;
-  max-width: 100% !important;
+  width: 100%;
+  max-width: 100%;
 
-  margin: 0.9rem 0 !important;
-  padding: 0 !important;
+  margin: 0.9rem 0;
+  padding: 0;
 
-  overflow-x: auto !important;
-  overflow-y: hidden !important;
+  overflow-x: auto;
+  overflow-y: hidden;
 
-  background: var(--agile-code-bg) !important;
-  border: 1px solid var(--agile-code-border) !important;
-  border-radius: 6px !important;
+  background: var(--agile-code-bg);
+  border: 1px solid var(--agile-code-border);
+  border-radius: 6px;
 
-  box-shadow: none !important;
+  box-shadow: none;
 }
 
 .md-typeset .highlight pre,
 .md-typeset pre {
-  box-sizing: border-box !important;
+  box-sizing: border-box;
 
-  width: 100% !important;
-  max-width: 100% !important;
+  width: 100%;
+  max-width: 100%;
 
-  margin: 0 !important;
-  padding: 0 !important;
+  margin: 0;
+  padding: 0;
 
-  overflow-x: auto !important;
-  overflow-y: hidden !important;
+  overflow-x: auto;
+  overflow-y: hidden;
 
-  background: var(--agile-code-bg) !important;
-  border: 0 !important;
-  border-radius: 6px !important;
+  background: var(--agile-code-bg);
+  border: 0;
+  border-radius: 6px;
 
-  box-shadow: none !important;
+  box-shadow: none;
+  color: var(--agile-text);
 
-  color: var(--agile-text) !important;
-  font-size: var(--agile-code-font-size) !important;
-  line-height: var(--agile-code-line-height) !important;
+  font-family: var(--agile-code-font);
+  font-size: var(--agile-code-font-size);
+  line-height: var(--agile-code-line-height);
 }
 
 .md-typeset .highlight pre > code,
 .md-typeset pre > code {
-  display: block !important;
-  box-sizing: border-box !important;
+  display: block;
+  box-sizing: border-box;
 
-  width: max-content !important;
-  min-width: 100% !important;
-  max-width: none !important;
+  width: max-content;
+  min-width: 100%;
+  max-width: none;
 
-  margin: 0 !important;
-  padding: 0.7875rem 1.06875rem !important;
+  margin: 0;
+  padding: 0.7875rem 1.06875rem;
 
-  overflow: visible !important;
+  overflow: visible;
 
-  background: transparent !important;
-  color: var(--agile-text) !important;
+  background: transparent;
+  color: var(--agile-text);
 
-  font-family:
-    "Roboto Mono",
-    "Ubuntu Mono",
-    Consolas,
-    monospace !important;
+  font-family: var(--agile-code-font);
+  font-size: var(--agile-code-font-size);
+  line-height: var(--agile-code-line-height);
 
-  font-size: var(--agile-code-font-size) !important;
-  line-height: var(--agile-code-line-height) !important;
-
-  white-space: pre !important;
-  word-break: normal !important;
-  overflow-wrap: normal !important;
+  white-space: pre;
+  word-break: normal;
+  overflow-wrap: normal;
 }
 
 .md-typeset .highlight pre > code *,
 .md-typeset pre > code * {
-  box-sizing: border-box !important;
+  box-sizing: border-box;
 
-  background: transparent !important;
-  border: 0 !important;
-  color: var(--agile-text) !important;
+  background: transparent;
+  border: 0;
+  color: var(--agile-text);
 
-  font-family: inherit !important;
-  font-size: inherit !important;
-  line-height: inherit !important;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
 
-  white-space: inherit !important;
-  word-break: normal !important;
-  overflow-wrap: normal !important;
+  white-space: inherit;
+  word-break: normal;
+  overflow-wrap: normal;
 }
 
 
@@ -696,13 +827,13 @@ body,
    ========================================================= */
 
 .md-clipboard {
-  color: #777777 !important;
+  color: #777777;
 }
 
 .md-clipboard:hover,
 .md-clipboard:focus {
-  background: var(--agile-primary-soft) !important;
-  color: var(--agile-primary) !important;
+  background: var(--agile-primary-soft);
+  color: var(--agile-primary);
 }
 
 
@@ -710,21 +841,18 @@ body,
    Admoniciones
    ========================================================= */
 
-.admonition {
-  background: var(--agile-sidebar) !important;
-  color: var(--agile-text) !important;
-
-  font-size: var(--agile-font-size) !important;
-  line-height: 1.55 !important;
-}
-
+.admonition,
 .admonition p,
 .admonition li,
 .admonition strong,
 .admonition em {
-  color: var(--agile-text) !important;
-  font-size: var(--agile-font-size) !important;
-  line-height: 1.55 !important;
+  color: var(--agile-text);
+  font-size: var(--agile-font-size);
+  line-height: 1.55;
+}
+
+.admonition {
+  background: var(--agile-sidebar);
 }
 
 
@@ -734,22 +862,21 @@ body,
 
 .md-typeset table {
   width: 100%;
+  max-width: 100%;
 
-  border: 1px solid #499497 !important;
   border-collapse: collapse;
-
-  background: var(--agile-sidebar) !important;
-  font-size: var(--agile-font-size) !important;
 }
 
+.md-typeset table,
 .md-typeset table th,
 .md-typeset table td {
-  border: 1px solid #499497 !important;
-  background: var(--agile-sidebar) !important;
-  color: var(--agile-text) !important;
+  border: 1px solid #499497;
 
-  font-size: var(--agile-font-size) !important;
-  line-height: 1.55 !important;
+  background: var(--agile-sidebar);
+  color: var(--agile-text);
+
+  font-size: var(--agile-font-size);
+  line-height: 1.55;
 }
 
 .md-typeset table th {
@@ -762,8 +889,7 @@ body,
    ========================================================= */
 
 .md-typeset blockquote {
-  border-left-color: var(--agile-primary) !important;
-  color: var(--agile-text) !important;
+  border-left-color: var(--agile-primary);
 }
 
 
@@ -771,76 +897,50 @@ body,
    Footer
    ========================================================= */
 
-/*
-   El fondo ocupa todo el ancho.
-   El contenido interior se alinea con las columnas.
-*/
+.md-footer,
+.md-footer-meta {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+
+  font-size: var(--agile-ui-font-size);
+  line-height: 1.55;
+}
 
 .md-footer {
-  width: 100% !important;
-  max-width: none !important;
-  margin: 0 !important;
+  background: var(--agile-primary);
+}
 
-  background: var(--agile-primary) !important;
-  color: var(--agile-white) !important;
-
-  font-size: 1.0040625rem !important;
-  line-height: 1.55 !important;
+.md-footer-meta {
+  background: var(--agile-primary-dark);
 }
 
 .md-footer__inner,
 .md-footer-meta__inner {
-  width: var(--agile-page-width-desktop) !important;
-  max-width: none !important;
-  margin-right: auto !important;
-  margin-left: auto !important;
+  width: var(--agile-page-width);
+  max-width: none;
 
-  box-sizing: border-box !important;
-}
+  margin-right: auto;
+  margin-left: auto;
 
-.md-footer-meta {
-  width: 100% !important;
-  max-width: none !important;
-  margin: 0 !important;
-
-  background: var(--agile-primary-dark) !important;
-
-  font-size: 1.0040625rem !important;
-  line-height: 1.55 !important;
+  box-sizing: border-box;
 }
 
 .md-footer,
 .md-footer-meta,
-.md-footer__link,
-.md-footer__title,
-.md-footer__direction,
 .md-footer-meta__inner,
+.md-footer__link,
+.md-footer__title,
+.md-footer__direction,
 .md-footer .md-icon {
-  color: var(--agile-white) !important;
+  color: var(--agile-white);
 }
 
 .md-footer__link,
 .md-footer__title,
 .md-footer__direction,
 .md-footer .md-icon {
-  font-size: 1.0040625rem !important;
-}
-
-
-/* =========================================================
-   Sidebar en pantallas grandes
-   ========================================================= */
-
-@media screen and (min-width: 76.25em) {
-  .md-sidebar--primary {
-    width: var(--agile-primary-sidebar-width) !important;
-    flex: 0 0 var(--agile-primary-sidebar-width) !important;
-  }
-
-  .md-sidebar--secondary {
-    width: var(--agile-secondary-sidebar-width) !important;
-    flex: 0 0 var(--agile-secondary-sidebar-width) !important;
-  }
+  font-size: var(--agile-ui-font-size);
 }
 
 
@@ -850,15 +950,15 @@ body,
 
 @media screen and (min-width: 100em) {
   .md-content__inner {
-    margin-right: var(--agile-content-gap-large) !important;
-    margin-left: var(--agile-content-gap-large) !important;
+    padding-right: 2rem;
+    padding-left: 2rem;
   }
 
   .md-tabs__link {
-    padding-right: 0.65rem !important;
-    padding-left: 0.65rem !important;
+    padding-right: 0.65rem;
+    padding-left: 0.65rem;
 
-    font-size: 0.86rem !important;
+    font-size: 0.86rem;
   }
 }
 
@@ -867,89 +967,60 @@ body,
    Pantallas medianas
    ========================================================= */
 
-@media screen and (min-width: 60em) and (max-width: 76.24em) {
-  .md-grid,
-  .md-main {
-    width: var(--agile-page-width-medium) !important;
+@media screen and (min-width: 60em) and (max-width: 75.99em) {
+  :root {
+    --agile-page-width: 96vw;
+    --agile-left-width: 11rem;
+    --agile-right-width: 11rem;
+    --agile-gap: 0.75rem;
   }
 
-  .md-header__inner,
-  .md-tabs__container,
-  .md-footer__inner,
-  .md-footer-meta__inner {
-    width: var(--agile-page-width-medium) !important;
+  .md-typeset {
+    font-size: 0.9rem;
   }
 
-  .md-content__inner {
-    margin-right: var(--agile-content-gap-medium) !important;
-    margin-left: var(--agile-content-gap-medium) !important;
-  }
-
-  .md-tabs__link {
-    padding-right: 0.45rem !important;
-    padding-left: 0.45rem !important;
+  .md-sidebar--primary .md-nav__link,
+  .md-sidebar--secondary .md-nav__link {
+    padding-right: 0.5rem !important;
+    padding-left: 0.5rem !important;
 
     font-size: 0.78rem !important;
-  }
-
-  .md-header,
-  .md-tabs,
-  .md-footer {
-    width: 100% !important;
-    margin: 0 !important;
   }
 }
 
 
 /* =========================================================
    Tablets y pantallas estrechas
+   (la cabecera y las pestañas son más bajas; el sticky
+   se recalcula solo a partir de las variables)
    ========================================================= */
 
 @media screen and (max-width: 76.24em) {
-  .md-header {
-    min-height: 2.8rem !important;
-  }
-
-  .md-header__inner {
-    min-height: 2.8rem !important;
+  :root {
+    --agile-header-height: 2.8rem;
+    --agile-tabs-height: 2.25rem;
   }
 
   .md-header .md-logo {
-    padding: 0.15rem 0.45rem !important;
+    padding: 0.15rem 0.45rem;
   }
 
   .md-header .md-logo img,
   .md-header .md-logo svg {
-    height: 2.3rem !important;
-    max-height: 2.3rem !important;
-  }
-
-  .md-tabs,
-  .md-tabs__list,
-  .md-tabs__item,
-  .md-tabs__link {
-    height: 2.25rem !important;
-    min-height: 2.25rem !important;
+    height: 2.3rem;
+    max-height: 2.3rem;
   }
 
   .md-tabs__link {
-    padding-right: 0.63rem !important;
-    padding-left: 0.63rem !important;
+    padding-right: 0.63rem;
+    padding-left: 0.63rem;
 
-    font-size: 0.81rem !important;
+    font-size: 0.81rem;
   }
 
-  .md-typeset h1 {
-    font-size: 1.6875rem !important;
-  }
-
-  .md-typeset h2 {
-    font-size: 1.35rem !important;
-  }
-
-  .md-typeset h3 {
-    font-size: 1.125rem !important;
-  }
+  .md-typeset h1 { font-size: 1.6875rem; }
+  .md-typeset h2 { font-size: 1.35rem;   }
+  .md-typeset h3 { font-size: 1.125rem;  }
 }
 
 
@@ -958,102 +1029,41 @@ body,
    ========================================================= */
 
 @media screen and (max-width: 59.99em) {
-  .md-grid,
-  .md-main {
-    width: var(--agile-page-width-mobile) !important;
-    margin-right: 0 !important;
-    margin-left: 0 !important;
+  :root {
+    --agile-page-width: 100%;
   }
 
-  .md-header__inner,
-  .md-tabs__container,
-  .md-footer__inner,
-  .md-footer-meta__inner {
-    width: var(--agile-page-width-mobile) !important;
-    margin-right: 0 !important;
-    margin-left: 0 !important;
+  .md-main__inner {
+    display: block;
+
+    width: 100%;
+    margin: 0;
+    padding: 0.75rem 0;
+  }
+
+  .md-sidebar--primary,
+  .md-sidebar--secondary {
+    display: none;
+  }
+
+  .md-content {
+    margin: 0;
+    padding: 0;
   }
 
   .md-content__inner {
-    margin-right: var(--agile-content-gap-mobile) !important;
-    margin-left: var(--agile-content-gap-mobile) !important;
+    padding: 0 0.8rem;
   }
 
   .md-tabs__link {
-    padding-right: 0.45rem !important;
-    padding-left: 0.45rem !important;
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
 
-    font-size: 0.78rem !important;
-  }
-
-  .md-header,
-  .md-tabs,
-  .md-footer {
-    width: 100% !important;
-    margin: 0 !important;
-  }
-
-  .md-footer-meta {
-    width: 100% !important;
-    margin: 0 !important;
+    font-size: 0.78rem;
   }
 }
 
 
 /* =========================================================
-   Esquema claro forzado
+   Fin del fichero
    ========================================================= */
-
-[data-md-color-scheme="slate"] {
-  color-scheme: light;
-
-  --md-default-bg-color: var(--agile-white);
-  --md-default-fg-color: var(--agile-text);
-  --md-default-fg-color--light: var(--agile-sidebar);
-
-  --md-typeset-color: var(--agile-text);
-
-  --md-code-bg-color: var(--agile-code-bg);
-  --md-code-fg-color: var(--agile-text);
-
-  --md-primary-fg-color: var(--agile-primary);
-  --md-primary-fg-color--light: var(--agile-primary);
-  --md-primary-fg-color--dark: var(--agile-primary-dark);
-
-  --md-accent-fg-color: var(--agile-primary);
-}
-
-[data-md-color-scheme="slate"] body,
-[data-md-color-scheme="slate"] .md-main,
-[data-md-color-scheme="slate"] .md-content,
-[data-md-color-scheme="slate"] .md-content__inner {
-  background: var(--agile-white) !important;
-  color: var(--agile-text) !important;
-}
-
-[data-md-color-scheme="slate"] .md-typeset,
-[data-md-color-scheme="slate"] .md-typeset p,
-[data-md-color-scheme="slate"] .md-typeset li,
-[data-md-color-scheme="slate"] .md-typeset td,
-[data-md-color-scheme="slate"] .md-typeset th,
-[data-md-color-scheme="slate"] .md-typeset h1,
-[data-md-color-scheme="slate"] .md-typeset h2,
-[data-md-color-scheme="slate"] .md-typeset h3,
-[data-md-color-scheme="slate"] .md-typeset h4,
-[data-md-color-scheme="slate"] .md-typeset h5,
-[data-md-color-scheme="slate"] .md-typeset h6 {
-  color: var(--agile-text) !important;
-}
-
-[data-md-color-scheme="slate"] .md-sidebar--primary,
-[data-md-color-scheme="slate"] .md-sidebar--secondary,
-[data-md-color-scheme="slate"] .md-sidebar--primary .md-sidebar__scrollwrap,
-[data-md-color-scheme="slate"] .md-sidebar--secondary .md-sidebar__scrollwrap {
-  background: var(--agile-sidebar) !important;
-}
-
-[data-md-color-scheme="slate"] .md-typeset .highlight,
-[data-md-color-scheme="slate"] .md-typeset pre {
-  background: var(--agile-code-bg) !important;
-  color: var(--agile-text) !important;
-}
