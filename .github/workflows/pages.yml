@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+
   workflow_dispatch:
 
 permissions:
@@ -12,7 +13,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: pages
+  group: github-pages
   cancel-in-progress: true
 
 jobs:
@@ -27,27 +28,52 @@ jobs:
       - name: Configurar Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.x"
+          python-version: "3.12"
           cache: pip
 
       - name: Instalar dependencias
-        run: pip install -r requirements.txt
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
 
       - name: Configurar GitHub Pages
         uses: actions/configure-pages@v5
 
       - name: Construir documentación
-        run: mkdocs build --strict
+        run: |
+          mkdocs build \
+            --strict \
+            --site-dir site
 
-      - name: Subir artefacto
+      - name: Comprobar sitio generado
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          test -f site/index.html
+          test -f site/sitemap.xml
+          test -f site/search/search_index.json
+          test -f site/assets/css/custom.css
+          test -f site/assets/js/custom.js
+
+          grep -R "custom.css" site
+          ! grep -R "assets/css/style.css" site
+
+          echo "Sitio generado correctamente."
+          echo
+          echo "Archivos principales:"
+          find site -maxdepth 3 -type f | sort | head -100
+
+      - name: Subir artefacto de GitHub Pages
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./site
+          path: site
 
   deploy:
     name: Publicar documentación
     needs: build
     runs-on: ubuntu-latest
+    timeout-minutes: 10
 
     environment:
       name: github-pages
