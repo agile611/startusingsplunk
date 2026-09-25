@@ -3,36 +3,32 @@
 
   const modules = [
     {
-      path: "00-el-curso",
+      path: "curso",
       title: "El curso"
     },
     {
-      path: "01-fundamentos-telemetria",
-      title: "Fundamentos de telemetría"
+      path: "sesion-1",
+      title: "Fundamentos e ingestión"
     },
     {
-      path: "02-grafana",
-      title: "Grafana"
+      path: "sesion-2",
+      title: "Lenguaje SPL"
     },
     {
-      path: "03-prometheus-fuentes-datos",
-      title: "Prometheus y fuentes de datos"
+      path: "sesion-3",
+      title: "Dashboards y alertas"
     },
     {
-      path: "04-dashboards-visualizacion",
-      title: "Dashboards y visualización"
-    },
-    {
-      path: "05-anotaciones-alertas",
-      title: "Anotaciones y alertas"
-    },
-    {
-      path: "06-proyecto-final",
+      path: "proyecto",
       title: "Proyecto final"
     },
     {
-      path: "07-referencia-y-resolucion",
-      title: "Referencia y resolución"
+      path: "referencia",
+      title: "Referencia"
+    },
+    {
+      path: "troubleshooting",
+      title: "Solución de problemas"
     }
   ];
 
@@ -43,7 +39,7 @@
       return path.includes("/" + module.path + "/");
     });
 
-    return selectedModule ? selectedModule.title : "Curso de Grafana";
+    return selectedModule ? selectedModule.title : "Curso de Splunk";
   }
 
   function updateSidebarTitle() {
