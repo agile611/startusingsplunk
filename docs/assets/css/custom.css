@@ -1065,5 +1065,121 @@ body,
 
 
 /* =========================================================
-   Fin del fichero
+   Buscador: caja y resultados
    ========================================================= */
+
+/* Caja del buscador dentro de la cabecera */
+.md-search__form {
+  display: flex;
+  align-items: center;
+  min-height: 2.025rem;
+
+  background: #ffffff !important;
+  border: 1px solid rgba(5, 126, 181, 0.35);
+  border-radius: 0.25rem;
+
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+/* Texto introducido en el campo */
+.md-search__input {
+  color: var(--agile-text) !important;
+  caret-color: var(--agile-primary);
+}
+
+/* Texto de ayuda */
+.md-search__input::placeholder {
+  color: #66727a !important;
+  opacity: 1 !important;
+}
+
+/* Icono de búsqueda */
+.md-search__icon {
+  color: var(--agile-primary) !important;
+}
+
+/* Estado activo de la caja */
+.md-search__form:hover,
+.md-search__form:focus-within {
+  background: #ffffff !important;
+  border-color: var(--agile-primary);
+  box-shadow: 0 0 0 2px var(--agile-primary-soft);
+}
+
+/* Panel desplegable de resultados */
+.md-search__output {
+  background: var(--agile-white) !important;
+  color: var(--agile-text) !important;
+  border: 1px solid #d9e1e5;
+  border-radius: 0 0 0.35rem 0.35rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+}
+
+/* Contenedor con scroll */
+.md-search__scrollwrap {
+  background: var(--agile-white) !important;
+}
+
+/* Lista de resultados */
+.md-search-result,
+.md-search-result__list,
+.md-search-result__item,
+.md-search-result__article {
+  background: var(--agile-white) !important;
+  color: var(--agile-text) !important;
+}
+
+/* Enlaces de los resultados */
+.md-search-result__link {
+  display: block;
+
+  background: transparent !important;
+  color: var(--agile-text) !important;
+}
+
+/* Resultado al pasar el ratón */
+.md-search-result__link:hover,
+.md-search-result__link:focus {
+  background: var(--agile-primary-soft) !important;
+  color: var(--agile-primary-dark) !important;
+}
+
+/* Títulos de los resultados */
+.md-search-result__title {
+  color: var(--agile-text) !important;
+  font-weight: 700;
+}
+
+/* Texto auxiliar, ruta y fragmentos */
+.md-search-result__meta,
+.md-search-result__teaser,
+.md-search-result__article p {
+  color: #59666d !important;
+}
+
+/* Coincidencias encontradas */
+.md-search-result__teaser mark,
+.md-search-result__title mark {
+  background: #ffe58a !important;
+  color: #242424 !important;
+  padding: 0 0.12rem;
+  border-radius: 2px;
+}
+
+/* Mensaje cuando no hay resultados */
+.md-search-result__more,
+.md-search-result__more summary,
+.md-search-result__item--document {
+  color: var(--agile-text) !important;
+  background: var(--agile-white) !important;
+}
+
+/* Separadores entre resultados */
+.md-search-result__item {
+  border-bottom: 1px solid #e5ebee;
+}
+
+/* Overlay que aparece al abrir el buscador */
+.md-search__overlay {
+  background: rgba(0, 0, 0, 0.32) !important;
+}
